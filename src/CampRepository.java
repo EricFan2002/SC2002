@@ -29,17 +29,34 @@ public class CampRepository {
     }
 
     public boolean update(Camp camp, int id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() == id) {
-                list.set(i, camp);
-                return true;
-            }
+        int index = list.indexOf(get(id));
+        if (index != -1) {
+            list.set(index, camp);
         }
-        return false;
     }
 
     public boolean remove(int id) {
         return list.removeIf(camp -> camp.getId() == id);
     }
 
+    @Override
+    public void generateCsvReport(Staff staff) {
+        String csvFile = "performance_reports.csv";
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            writer.append("Student ID,Student Name,Points\n");
+            
+            for (PerformanceReport report : performanceReports) {
+                String line = String.format("%s,%s,%d\n",
+                                            report.getStudent().getID(),
+                                            report.getStudent().getName(),
+                                            report.getPoint());
+                writer.append(line);
+            }
+
+            System.out.println("CSV file was created successfully: " + csvFile);
+
+        } catch (IOException e) {
+            System.out.println("Error while writing CSV file: " + e.getMessage());
+        }
+    }
 }
