@@ -24,6 +24,10 @@ public class CampRepository {
                 .orElse(null); // Returns null if Camp is not found
     }
 
+    public List<Camp> getAllCamps() {
+        return list;
+    }
+
     public boolean update(Camp camp, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId() == id) {

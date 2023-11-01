@@ -81,6 +81,18 @@ public class Camp {
         this.committeeSlots = committeeSlots;
     }
 
+    public int getCommitteeSlots() {
+        return committeeSlots;
+    }
+
+    public Set<Student> getCommittees() {
+        return committees;
+    }
+
+    public Set<Student> getAttendees() {
+        return attendees;
+    }
+
     // Methods to add or remove attendees/committees
     public boolean addAttendee(Student student) {
         if (attendees.size() < attendeeSlots) {

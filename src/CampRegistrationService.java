@@ -41,7 +41,7 @@ public class CampRegistrationService {
 
     public ArrayList<Camp> getCommitteeSlots() {
         ArrayList<Camp> camps = new ArrayList<>();
-        for (Camp camp : campRepository.()) {
+        for (Camp camp : campRepository.getAllCamps()) {
             if (camp.getCommittees().size() < camp.getCommitteeSlots()) {
                 camps.add(camp);
             }
@@ -49,12 +49,11 @@ public class CampRegistrationService {
         return camps;
     }
 
-    public ArrayList<Camp> getJoinedUser(User user) {
+    public ArrayList<Camp> getJoinedCamps(User user) {
         ArrayList<Camp> joinedCamps = new ArrayList<>();
         for (Camp camp : campRepository.getAllCamps()) {
             Set<Student> attendees = camp.getAttendees();
             Set<Student> committees = camp.getCommittees();
-
             if (attendees.contains(user) || committees.contains(user)) {
                 joinedCamps.add(camp);
             }
