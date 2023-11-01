@@ -36,6 +36,11 @@ public class Camp {
     public int getId() {
         return id;
     }
+
+    public int getAttendeeSlots() {
+        return attendeeSlots;
+    }
+
     // Setters
     public void setName(String name) {
         this.name = name;
@@ -77,23 +82,31 @@ public class Camp {
     }
 
     // Methods to add or remove attendees/committees
-    public void addAttendee(Student student) {
+    public boolean addAttendee(Student student) {
         if (attendees.size() < attendeeSlots) {
             attendees.add(student);
+            return true;
         } else {
             System.out.println("Attendee slots are full.");
+            return false;
         }
     }
 
-    public void removeAttendee(Student student) {
-        attendees.remove(student);
+    public boolean removeAttendee(Student student) {
+        if(attendees.contains(student)) {
+            attendees.remove(student);
+            return true;
+        }
+        return false;
     }
 
-    public void addCommittee(Student student) {
+    public boolean addCommittee(Student student) {
         if (committees.size() < committeeSlots) {
             committees.add(student);
+            return true;
         } else {
             System.out.println("Committee slots are full.");
+            return false;
         }
     }
 

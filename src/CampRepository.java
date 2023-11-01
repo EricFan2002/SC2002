@@ -24,17 +24,18 @@ public class CampRepository {
                 .orElse(null); // Returns null if Camp is not found
     }
 
-    public void update(Camp camp, int id) {
+    public boolean update(Camp camp, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId() == id) {
                 list.set(i, camp);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
-    public void remove(int id) {
-        list.removeIf(camp -> camp.getId() == id);
+    public boolean remove(int id) {
+        return list.removeIf(camp -> camp.getId() == id);
     }
 
 }
