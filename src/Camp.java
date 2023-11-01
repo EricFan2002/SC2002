@@ -33,6 +33,9 @@ public class Camp {
         this.committees = new HashSet<>();
     }
 
+    public int getId() {
+        return id;
+    }
     // Setters
     public void setName(String name) {
         this.name = name;
