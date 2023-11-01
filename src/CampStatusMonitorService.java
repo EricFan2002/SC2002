@@ -3,9 +3,11 @@ import java.util.List;
 
 public class CampStatusMonitorService {
     private CampRepository campRepository;
+    private UserRepository userRepository;
 
-    public CampStatusMonitorService(CampRepository campRepository) {
+    public CampStatusMonitorService(CampRepository campRepository, UserRepository userRepository) {
         this.campRepository = campRepository;
+        this.userRepository = userRepository;
     }
 
     public ArrayList<User> getAttendingStudents(int id) {
@@ -24,7 +26,12 @@ public class CampStatusMonitorService {
         // Assuming there's a method to get the performance reports for a camp
         Camp camp = campRepository.get(id);
         if (camp != null) {
-            reports.addAll(camp.getPerformanceReports());
+            for(User user : camp.getCommittees()){
+                if(user instanceof CommitteeStudent) {
+                    CommitteeStudent committeeStudent = (CommitteeStudent)user;
+                    reports.add(committeeStudent.getPerformanceReport());
+                }
+            }
         }
         return reports;
     }
