@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class CampStatusMonitorService {
+    private CampRepository campRepository;
+
+    public CampStatusMonitorService(CampRepository campRepository) {
+        this.campRepository = campRepository;
+    }
+
+    public ArrayList<User> getAttendingStudents(int id) {
+        Camp camp = campRepository.get(id);
+        ArrayList<User> attendingStudents = new ArrayList<>();
+        if (camp != null) {
+            // Assuming Camp has a method to get all attending students
+            attendingStudents.addAll(camp.getAttendees());
+        }
+        return attendingStudents;
+    }
+
+    public ArrayList<PerformanceReport> generatePerformanceReport(int id) {
+        ArrayList<PerformanceReport> reports = new ArrayList<>();
+        // Logic to generate performance report for the camp
+        // Assuming there's a method to get the performance reports for a camp
+        Camp camp = campRepository.get(id);
+        if (camp != null) {
+            reports.addAll(camp.getPerformanceReports());
+        }
+        return reports;
+    }
+}
