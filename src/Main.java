@@ -18,5 +18,43 @@ public class Main {
         // Load student data
         UserRepository.loadDataFromExcel("src/data/student_list.xlsx", userRepo);
 
+        System.out.println("Welcome to Camp Allocation Management System (CAMS)");
+        boolean loginSuccess = false;
+
+        while (loginSuccess == false) {
+            System.out.println("Enter your UserID:");
+            String UserID;
+            System.out.println("Enter your password:");
+            String password;
+            UserID = sc.next();
+
+            password = sc.next();
+
+            // get userById using userRepo,check if valid
+            User usr = userRepo.getUserById(UserID);
+
+            if (usr == null) {
+                System.out.println("User not found");
+            } else {
+                LoginResult logResult = new LoginResult();
+                if (usr instanceof Student) {
+                    Student stud = (Student) usr;
+                    logResult = stud.login(UserID, password, usr);
+                } else if (usr instanceof Staff) {
+                    Staff staf = (Staff) usr;
+                    logResult = staf.login(UserID, password, usr);
+                }
+
+                // check if password is correct
+                if (logResult.getLoginResult() == true) {
+                    loginSuccess = true;
+                    System.out.println("Login Successful");
+                } else {
+                    System.out.println("Login Failed");
+                }
+            }
+
+        }
     }
+
 }
