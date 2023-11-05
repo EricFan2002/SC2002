@@ -1,5 +1,5 @@
 public class Staff extends User {
-    public Staff(String ID, String name, String faculty) {
+	public Staff(String ID, String name, String faculty) {
         super(ID, name, faculty);
     }
 
@@ -11,8 +11,18 @@ public class Staff extends User {
 //    }
 
     @Override
-    public LoginResult login(String name, String password) {
-        // Implementation for Staff login
-        return null;  // Placeholder
+    public LoginResult login(String name, String password,User usr) {
+        LoginResult logResult = new LoginResult();
+        logResult.setLoginResult(false);   // 0 = Staff, 1 = Student   
+        logResult.setUserType(0);
+
+        if (usr.getPassword().equals(password)){
+            logResult.setLoginResult(true);
+        }
+        else{
+            logResult.setLoginResult(false);
+        }
+
+        return logResult;
     }
 }

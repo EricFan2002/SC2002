@@ -1,6 +1,7 @@
 public class Student extends User {
     public Student(String ID, String name, String faculty) {
         super(ID, name, faculty);
+        
     }
 
 //    @Override
@@ -11,9 +12,18 @@ public class Student extends User {
 //    }
 
     @Override
-    public LoginResult login(String name, String password) {
-        // Implementation for Student login
-        // Example: return new Result(status, userType);
-        return null;  // Placeholder
+    public LoginResult login(String name, String password,User usr) {
+        LoginResult logResult = new LoginResult();
+        logResult.setLoginResult(false);   // 0 = Staff, 1 = Student   
+        logResult.setUserType(1);
+
+        if (usr.getPassword().equals(password)){
+            logResult.setLoginResult(true);
+        }
+        else{
+            logResult.setLoginResult(false);
+        }
+
+        return logResult;
     }
 }

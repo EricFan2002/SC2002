@@ -15,9 +15,16 @@ public abstract class User {
         return ID;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     // Abstract methods
 //    public abstract void answer(Enquiry enquiry, String answer);
-    public abstract LoginResult login(String name, String password);
+    public abstract LoginResult login(String name, String password,User usr);
 }
 

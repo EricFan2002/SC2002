@@ -13,16 +13,15 @@ public class UserRepository {
         userList.add(user);
     }
 
-    //below methods no actual use yet
-    
-    /*public User getUserById(String id) {
+    public User getUserById(String id) {
         return userList.stream()
                 .filter(user -> user.getID().equals(id))
                 .findFirst()
                 .orElse(null); // Returns null if User is not found
     }
 
-    public void updateUser(User user) {
+    //below methods no actual use yet
+    /*public void updateUser(User user) {
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getID().equals(user.getID())) {
                 userList.set(i, user);

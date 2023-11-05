@@ -9,7 +9,7 @@ import org.apache.poi.ss.util.CellUtil;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);  
-        UserRepository UserRepo = new UserRepository();
+        UserRepository userRepo = new UserRepository();
 
         //extract excel staff data
         try { 
@@ -41,7 +41,7 @@ public class Main {
                 //System.out.println(staffID + " " + staffName + " " + staffFac);
 
                 User u = new Staff(staffID, staffName, staffFac);
-                UserRepo.addUser(u);
+                userRepo.addUser(u);
                 
             }
             file.close(); 
@@ -80,8 +80,8 @@ public class Main {
                 
                 //System.out.println(studID + " " + studName + " " + studFac);
 
-                User u = new Staff(studID, studName, studFac);
-                UserRepo.addUser(u);
+                User u = new Student(studID, studName, studFac);
+                userRepo.addUser(u);
                 
             }
             file.close(); 
@@ -94,12 +94,7 @@ public class Main {
         System.out.println("Welcome to Camp Allocation Management System (CAMS)");
         boolean loginSuccess = false;
         
-        /*while(loginSuccess==false){
-            System.out.println("Choose your domain: ");
-            System.out.println("1. Student");
-            System.out.println("2. Staff");
-            int domain = sc.nextInt(); 
-
+        while(loginSuccess==false){
             System.out.println("Enter your UserID:");
             String UserID;
             System.out.println("Enter your password:");
@@ -108,15 +103,38 @@ public class Main {
 
             password = sc.next();
 
-            if(domain==1){
-                User u = new Student(UserID, "name", "faculty");
+            //get userById using userRepo,check if valid
+            User usr = userRepo.getUserById(UserID);
 
-            } else if(domain==2){
-                User u = new Staff(UserID, "name", "faculty");
-
-            } else {
-                System.out.println("Invalid input");
+            if (usr ==null){
+                System.out.println("User not found");
             }
-         }*/
+
+            //need to determine user type first
+
+            else{
+                LoginResult logResult = new LoginResult();
+                if (usr instanceof Student) {
+                    Student stud = (Student) usr;
+                    logResult = stud.login(UserID, password, usr);
+                }
+                else if (usr instanceof Staff) {    
+                    Staff staf = (Staff) usr;
+                    logResult = staf.login(UserID, password, usr);
+                }
+                
+
+                //check if password is correct
+                if (logResult.getLoginResult()==true){
+                    loginSuccess = true;
+                    System.out.println("Login Successful");
+                }
+                else{
+                    System.out.println("Login Failed");
+                }
+            }
+            
+            
+         }
     }
 }
