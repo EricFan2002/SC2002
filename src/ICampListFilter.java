@@ -1,3 +1,3 @@
-interface ICampListFilter {
+public interface ICampListFilter {
     CampList filterByVisibility(boolean isVisible);
 }

@@ -27,7 +27,7 @@ public class Camp {
         this.group = group;
         this.location = location;
         this.staffInCharge = staffInCharge;
-        this.attendeeSlots = attendeeSlots;
+        this.attendeeSlots = attendeeSlots;    
         this.committeeSlots = 0; // Initialize to 0
         this.attendees = new HashSet<>();
         this.committees = new HashSet<>();
@@ -60,6 +60,10 @@ public class Camp {
 
     public void setRegistrationCloseDate(Date registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
+    }
+
+    public Date getRegistrationClosingDate(){
+        return registrationClosingDate;
     }
 
     public void setGroup(String group) {

@@ -11,6 +11,11 @@ public abstract class User {
         this.faculty = faculty;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+
     // Abstract methods
 //    public abstract void answer(Enquiry enquiry, String answer);
     public abstract LoginResult login(String name, String password);

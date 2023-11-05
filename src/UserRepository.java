@@ -13,7 +13,9 @@ public class UserRepository {
         userList.add(user);
     }
 
-    public User getUserById(String id) {
+    //below methods no actual use yet
+    
+    /*public User getUserById(String id) {
         return userList.stream()
                 .filter(user -> user.getID().equals(id))
                 .findFirst()
@@ -31,6 +33,6 @@ public class UserRepository {
 
     public void removeUser(String id) {
         userList.removeIf(user -> user.getID().equals(id));
-    }
+    }*/
 
 }
