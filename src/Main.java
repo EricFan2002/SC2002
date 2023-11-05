@@ -20,6 +20,7 @@ public class Main {
 
         System.out.println("Welcome to Camp Allocation Management System (CAMS)");
         boolean loginSuccess = false;
+        User usr = null;
 
         while (loginSuccess == false) {
             System.out.println("Enter your UserID:");
@@ -31,7 +32,7 @@ public class Main {
             password = sc.next();
 
             // get userById using userRepo,check if valid
-            User usr = userRepo.getUserById(UserID);
+            usr = userRepo.getUserById(UserID);
 
             if (usr == null) {
                 System.out.println("User not found");
@@ -53,8 +54,21 @@ public class Main {
                     System.out.println("Login Failed");
                 }
             }
-
         }
+
+        if(loginSuccess==true){
+            if(usr instanceof Student){
+                Student stud = (Student) usr;
+                stud.printMenu();
+            }
+            else if(usr instanceof Staff){
+                Staff staf = (Staff) usr;
+                staf.printMenu();
+            }
+        }
+
+
+
     }
 
 }
