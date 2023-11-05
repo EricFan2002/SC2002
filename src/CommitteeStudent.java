@@ -14,7 +14,7 @@ public class CommitteeStudent extends Student {
     }
 
     
-    public void printCreatedCampsMenu(){
+    public void printMenu(){
         System.out.println("1. View Students' Enquiries");
         System.out.println("2. Reply Students' Enquiries");
         System.out.println("3. View My Suggestions");

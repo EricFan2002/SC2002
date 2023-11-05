@@ -33,9 +33,11 @@ public class Staff extends User {
         System.out.println("4. Toggle Visibility of Camps");
         System.out.println("5. View All Camps");
         System.out.println("6. View Camps Created by You");
+        System.out.println("7. Change Password");
+        System.out.println("8. Logout");
     }
 
-    //triggered by option 6 from above
+    //triggered by option 6 from above, option 7 below goes back to above menu
     public void printCreatedCampsMenu(){
         System.out.println("1. View Enquiries");
         System.out.println("2. Reply Enquiries");
@@ -43,5 +45,6 @@ public class Staff extends User {
         System.out.println("4. Approve/Reject Suggestions");
         System.out.println("5. Genereate Attendance Report");
         System.out.println("6. Generate Performance Report");
+        System.out.println("7. Go Back");
     }
 }

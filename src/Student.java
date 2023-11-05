@@ -37,5 +37,7 @@ public class Student extends User {
         System.out.println("7. Delete Camp Enquiry");//before processed
         System.out.println("8. View Status");//see registered camps and roles
         System.out.println("9. Withdraw From Camp");
+        System.out.println("10. Change Password");
+        System.out.println("11. Logout");
     }
 }
