@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// This class is used to filter the list of camps based on the visibility of the camp to show the students
 public class CampList implements ICampListFilter {
     private List<Camp> camps;
 
@@ -21,7 +22,7 @@ public class CampList implements ICampListFilter {
 
         for (Camp camp : this.camps) {
             // Here, we assume the visibility is determined by whether the camp is still open for registration.
-            if (camp.getRegistrationClosingDate().after(currentDate) == isVisible) {
+            if (camp.getRegistrationClosingDate().after(currentDate) && isVisible) {
                 filteredList.addCamp(camp);
             }
         }

@@ -69,7 +69,9 @@ public class Main {
 
                         switch(choice){
                             case 1:
-                                //
+                                //to create camp, create Camp object, add Camp to CampRepo using CampModificationService,
+
+
                                 break;
                             case 2:
                                 //

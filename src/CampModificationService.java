@@ -1,3 +1,4 @@
+//this class adds/removes camps from Camp Repository
 public class CampModificationService {
     private CampRepository campRepository;
 

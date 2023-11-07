@@ -1,9 +1,17 @@
+/*class 1)inserts camp into camp repo, 
+        2)finds a camp from id 
+        3)gets all camps
+        4)updates camp
+        5)removes camp
+*/
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 //public class CampRepository implements ICommitteeReportGenerator {
+
+//this class contains all the created camps even those not visible
 public class CampRepository {
     private List<Camp> list;
     private Map<Student, Camp> committee;
