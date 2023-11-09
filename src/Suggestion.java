@@ -1,5 +1,9 @@
 import java.util.List;
 
+import entity.Repository;
+import entity.user.Staff;
+import entity.user.Student;
+
 public class Suggestion extends Repository {
     @Override
     public Object getByID(String id) {

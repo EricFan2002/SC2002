@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import entity.UserRepository;
+import entity.user.User;
+
 public class CampStatusMonitorService {
     private CampRepository campRepository;
     private UserRepository userRepository;
@@ -26,9 +29,9 @@ public class CampStatusMonitorService {
         // Assuming there's a method to get the performance reports for a camp
         Camp camp = campRepository.get(id);
         if (camp != null) {
-            for(User user : camp.getCommittees()){
-                if(user instanceof CommitteeStudent) {
-                    CommitteeStudent committeeStudent = (CommitteeStudent)user;
+            for (User user : camp.getCommittees()) {
+                if (user instanceof CommitteeStudent) {
+                    CommitteeStudent committeeStudent = (CommitteeStudent) user;
                     reports.add(committeeStudent.getPerformanceReport());
                 }
             }

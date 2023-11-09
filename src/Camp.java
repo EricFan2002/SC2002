@@ -2,8 +2,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import entity.user.Staff;
+import entity.user.Student;
+
 public class Camp {
-    private String id; //camp Names are the ID
+    private String id; // camp Names are the ID
 
     private String name;
     private String description;
@@ -19,7 +22,8 @@ public class Camp {
     private Set<Student> committees;
     private boolean isVisible = true;
 
-    public Camp(String id, String description, Date startDate, Date endDate, Date registrationClosingDate, String group, String location, Staff staffInCharge, int attendeeSlots) {
+    public Camp(String id, String description, Date startDate, Date endDate, Date registrationClosingDate, String group,
+            String location, Staff staffInCharge, int attendeeSlots) {
         this.id = id;
         this.description = description;
         this.startDate = startDate;
@@ -28,7 +32,7 @@ public class Camp {
         this.group = group;
         this.location = location;
         this.staffInCharge = staffInCharge;
-        this.attendeeSlots = attendeeSlots;    
+        this.attendeeSlots = attendeeSlots;
         this.committeeSlots = 0; // Initialize to 0
         this.attendees = new HashSet<>();
         this.committees = new HashSet<>();
@@ -54,7 +58,8 @@ public class Camp {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    public Date getStartDate(){
+
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -62,7 +67,7 @@ public class Camp {
         this.endDate = endDate;
     }
 
-    public Date getEndDate(){
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -70,7 +75,7 @@ public class Camp {
         this.registrationClosingDate = registrationClosingDate;
     }
 
-    public Date getRegistrationClosingDate(){
+    public Date getRegistrationClosingDate() {
         return registrationClosingDate;
     }
 
@@ -78,7 +83,7 @@ public class Camp {
         this.group = group;
     }
 
-    public String getGroup(){
+    public String getGroup() {
         return group;
     }
 
@@ -86,7 +91,7 @@ public class Camp {
         this.location = location;
     }
 
-    public String getLocation(){
+    public String getLocation() {
         return location;
     }
 
@@ -116,11 +121,12 @@ public class Camp {
     public Set<Student> getAttendees() {
         return attendees;
     }
-    
+
     public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
     }
-    public boolean getVisible(){
+
+    public boolean getVisible() {
         return isVisible;
     }
 
@@ -136,7 +142,7 @@ public class Camp {
     }
 
     public boolean removeAttendee(Student student) {
-        if(attendees.contains(student)) {
+        if (attendees.contains(student)) {
             attendees.remove(student);
             return true;
         }

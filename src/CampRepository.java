@@ -1,3 +1,4 @@
+
 /*class 1)inserts camp into camp repo, 
         2)finds a camp from id 
         3)gets all camps
@@ -5,6 +6,9 @@
         5)removes camp
 */
 import java.util.*;
+
+import entity.Repository;
+import entity.user.Student;
 
 //public class CampRepository implements ICommitteeReportGenerator {
 

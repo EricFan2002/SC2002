@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import entity.user.Student;
+import entity.user.User;
+
 public class CampEnquireService {
     private CampRepository campRepository;
     private List<Enquiry> enquires;
@@ -18,14 +21,14 @@ public class CampEnquireService {
 
     public List<Enquiry> getSubmittedEnquires(int campId, Student student) {
         return enquires.stream()
-                       .filter(enquiry -> enquiry.getSender().equals(student) && 
-                                          campRepository.get(campId) != null)
-                       .collect(Collectors.toList());
+                .filter(enquiry -> enquiry.getSender().equals(student) &&
+                        campRepository.get(campId) != null)
+                .collect(Collectors.toList());
     }
 
     public List<Enquiry> getRespondedEnquires(User user) {
         return enquires.stream()
-                       .filter(enquiry -> enquiry.getAnsweredBy() != null && enquiry.getAnsweredBy().equals(user))
-                       .collect(Collectors.toList());
+                .filter(enquiry -> enquiry.getAnsweredBy() != null && enquiry.getAnsweredBy().equals(user))
+                .collect(Collectors.toList());
     }
 }

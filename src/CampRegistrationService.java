@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import entity.user.Student;
+import entity.user.User;
+
 public class CampRegistrationService {
     private CampRepository campRepository;
 

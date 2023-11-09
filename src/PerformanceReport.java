@@ -1,16 +1,19 @@
-public class PerformanceReport{
+import entity.user.Student;
+
+public class PerformanceReport {
     private Student student;
     private int point;
 
-    public PerformanceReport(Student student, int point){
+    public PerformanceReport(Student student, int point) {
         this.student = student;
         this.point = point;
     }
 
-    public Student getStudent(){
+    public Student getStudent() {
         return student;
     }
-    public int getPoint(){
+
+    public int getPoint() {
         return point;
     }
 }

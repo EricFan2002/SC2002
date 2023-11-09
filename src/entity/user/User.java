@@ -1,3 +1,5 @@
+package entity.user;
+
 public abstract class User {
     protected String ID;
     protected String name;
@@ -34,8 +36,4 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    // Abstract methods
-    // public abstract void answer(Enquiry enquiry, String answer);
-    public abstract LoginResult login(String name, String password, User usr);
 }

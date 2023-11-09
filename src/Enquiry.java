@@ -1,8 +1,12 @@
 import java.util.List;
 
-public class Enquiry extends Repository{
+import entity.Repository;
+import entity.user.Student;
+import entity.user.User;
+
+public class Enquiry extends Repository {
     private Student sender;
-    private User answeredBy;  // This will be null if not replied to
+    private User answeredBy; // This will be null if not replied to
     private String question;
     private String answer;
 
@@ -10,8 +14,8 @@ public class Enquiry extends Repository{
     public Enquiry(Student sender, String question) {
         this.sender = sender;
         this.question = question;
-        this.answeredBy = null;  // Initially, there's no one who answered
-        this.answer = null;      // Initially, there's no answer
+        this.answeredBy = null; // Initially, there's no one who answered
+        this.answer = null; // Initially, there's no answer
     }
 
     // Check if the enquiry has been answered
@@ -73,7 +77,7 @@ public class Enquiry extends Repository{
 
     @Override
     public void update(Object object) {
-        if (!isAnswered()){
+        if (!isAnswered()) {
             setAnswer(answer);
             setAnsweredBy(answeredBy);
         }

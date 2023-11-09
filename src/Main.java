@@ -8,6 +8,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import entity.UserRepository;
+import entity.user.Staff;
+import entity.user.Student;
+import entity.user.User;
+
 import org.apache.poi.ss.util.CellUtil;
 
 public class Main {
@@ -26,7 +32,7 @@ public class Main {
         boolean quit = false;
         User usr = null;
 
-        while(quit==false){
+        while (quit == false) {
             while (loginSuccess == false) {
                 System.out.println("Enter your UserID:");
                 String UserID;
@@ -63,15 +69,15 @@ public class Main {
             boolean logout = false;
             CampRepository campRepo = new CampRepository();
 
-            if(loginSuccess==true){
-                while(logout==false){
+            if (loginSuccess == true) {
+                while (logout == false) {
 
-                    if(usr instanceof Student){
+                    if (usr instanceof Student) {
                         Student stud = (Student) usr;
                         stud.printMenu();
                         int choice = sc.nextInt();
 
-                        switch(choice){
+                        switch (choice) {
                             case 1:
 
                                 break;
@@ -109,14 +115,14 @@ public class Main {
                                 logout = true;
                                 break;
                         }
-                    }
-                    else if(usr instanceof Staff){
+                    } else if (usr instanceof Staff) {
                         Staff staf = (Staff) usr;
                         staf.printMenu();
                         int choice = sc.nextInt();
-                        switch(choice){
+                        switch (choice) {
                             case 1:
-                                //to create camp, create Camp object, add Camp to CampRepo using CampModificationService,
+                                // to create camp, create Camp object, add Camp to CampRepo using
+                                // CampModificationService,
                                 System.out.println("Enter camp ID/name:");
                                 System.out.println("Enter camp description:");
                                 System.out.println("Enter camp start date:");
@@ -126,20 +132,19 @@ public class Main {
                                 System.out.println("Enter camp location:");
                                 System.out.println("Enter staff in charge:");
                                 System.out.println("Enter number of attendee slots:");
-                                
-                                //need to check for uniqueness of camp ID/name
-                                    //if not unique, prompt user to enter again
-                                    //else print everything else
-                                
+
+                                // need to check for uniqueness of camp ID/name
+                                // if not unique, prompt user to enter again
+                                // else print everything else
+
                                 int id = sc.nextInt();
                                 String description = sc.next();
 
                                 Date startDate = null;
-                                 // Prompt the user to enter a date in a specific format
+                                // Prompt the user to enter a date in a specific format
                                 final String INVALID_DATE_FORMAT_MSG = "Invalid date format. Please use yyyy-MM-dd.";
 
-
-                                while(startDate == null){
+                                while (startDate == null) {
                                     System.out.print("Enter a camp start date (yyyy-MM-dd): ");
                                     String userInput = sc.next();
 
@@ -158,10 +163,10 @@ public class Main {
                                         System.out.println(INVALID_DATE_FORMAT_MSG);
                                     }
                                 }
-                                
+
                                 Date endDate = null;
-                                 // Prompt the user to enter a date in a specific format
-                                while(endDate == null){
+                                // Prompt the user to enter a date in a specific format
+                                while (endDate == null) {
                                     System.out.print("Enter a camp end date (yyyy-MM-dd): ");
                                     String userInput = sc.next();
 
@@ -182,8 +187,8 @@ public class Main {
                                 }
 
                                 Date registrationClosingDate = null;
-                                 // Prompt the user to enter a date in a specific format
-                                while(registrationClosingDate == null){
+                                // Prompt the user to enter a date in a specific format
+                                while (registrationClosingDate == null) {
                                     System.out.print("Enter a camp registration closing date (yyyy-MM-dd): ");
                                     String userInput = sc.next();
 
@@ -202,19 +207,15 @@ public class Main {
                                         System.out.println(INVALID_DATE_FORMAT_MSG);
                                     }
                                 }
-                                
-                                
+
                                 String group = sc.next();
                                 String location = sc.next();
-                                
-                                //Staff staffInCharge = new Staff();
-                                
+
+                                // Staff staffInCharge = new Staff();
+
                                 int attendeeSlots = sc.nextInt();
-                                
-                                
 
-                                //Camp camp = new Camp();
-
+                                // Camp camp = new Camp();
 
                                 break;
                             case 2:
@@ -240,21 +241,18 @@ public class Main {
                                 break;
                             case 8:
                                 logout = true;
-                                break;               
+                                break;
                         }
                     }
                 }
             }
             System.out.println("Do you want to quit? (Y/N)");
-            if(sc.next().equals("Y")){
-                quit=true;//
-            }
-            else{
-                loginSuccess=false;
+            if (sc.next().equals("Y")) {
+                quit = true;//
+            } else {
+                loginSuccess = false;
             }
         }
-
-
 
     }
 
