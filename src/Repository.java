@@ -17,6 +17,7 @@ public abstract class Repository {
     public Repository(String filePath) {
         this.filePath = filePath;
         this.empty = true;
+        this.size = 0;
     }
 
     public void add(Object object) {
@@ -28,8 +29,14 @@ public abstract class Repository {
     }
 
     public void remove(Object object) {
+        if (this.empty) {
+            return;
+        }
         all.remove(object);
         this.size--;
+        if (this.size == 0) {
+            this.empty = true;
+        }
     }
 
     public Iterator<Object> iterator() {
@@ -41,6 +48,9 @@ public abstract class Repository {
     }
 
     public void update(Object object) {
+        if (this.empty) {
+            this.empty = false;
+        }
         if (all.contains(object)) {
             all.remove(object);
             all.add(object);
