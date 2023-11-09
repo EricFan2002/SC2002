@@ -1,6 +1,5 @@
 package ui;
 
-import ui.widgets.ICallBack;
 import ui.widgets.TEXT_ALIGNMENT;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetLabel;

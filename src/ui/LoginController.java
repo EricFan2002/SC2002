@@ -1,12 +1,13 @@
 package ui;
 
 import ui.widgets.*;
+import ui.windows.ICallBack;
 import ui.windows.Window;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginController extends Window implements ICallBack{
+public class LoginController extends Window implements ICallBack {
     WidgetLabel widgetLabel;
     WidgetLabel widgetLabel1;
     WidgetTextBox widgetTextBox;
@@ -45,8 +46,8 @@ public class LoginController extends Window implements ICallBack{
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
+    @Override
     public void messageLoop() {
-        super.messageLoop();
         if(loginButton.getPressed()){
             switchToWindow = loginSwitchToWindowIndex;
         }

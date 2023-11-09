@@ -1,9 +1,7 @@
 package ui;
 
-import ui.widgets.ICallBack;
-import ui.widgets.TEXT_ALIGNMENT;
+import ui.windows.ICallBack;
 import ui.widgets.WidgetButton;
-import ui.widgets.WidgetLabel;
 import ui.windows.Window;
 import ui.windows.WindowOverlayClass;
 
@@ -24,12 +22,12 @@ public class OverlayChooseBox extends WindowOverlayClass {
         for(int i = 0 ; i < options.size() ; i++){
             WidgetButton choice = new WidgetButton(1, 2 + i, x - 2, options.get(i));
             addWidget(choice);
+            choices.add(choice);
         }
     }
 
     public void messageLoop() {
-        super.messageLoop();
-        for(int i = 0 ; i < choices.size() * 2 ; i++){
+        for(int i = 0 ; i < choices.size(); i++){
             if(choices.get(i).getPressed()){
                 System.out.println(i);
                 chose = i;
@@ -39,8 +37,8 @@ public class OverlayChooseBox extends WindowOverlayClass {
         }
     }
     public void onExit(){
-        cancelButton.clearPressed();
-        if(callbackWindow instanceof ICallBack){
+        super.onExit();
+        if(callbackWindow instanceof ICallBack) {
             ((ICallBack)callbackWindow).onWindowFinished(chose, choseString);
         }
     }

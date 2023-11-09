@@ -60,6 +60,7 @@ public class Window {
     }
 
     public void messageLoop(){
+//        System.out.println(windowName + ": Error empty message loop.");
     }
 
     public void messageLoopHelper(){
@@ -253,6 +254,7 @@ public class Window {
             }
             else{
                 overlay.clearArea(screen);
+                overlay.onExit();
                 screen.clear();
             }
         }
