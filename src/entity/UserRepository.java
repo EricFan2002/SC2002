@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +11,7 @@ import java.util.List;
 import entity.user.Staff;
 import entity.user.User;
 import entity.user.UserFactory;
+import entity.user.UserList;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -17,15 +19,29 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
 public class UserRepository extends Repository<User> {
+    public UserRepository(String filePath) {
+        super(filePath);
+    }
+
     public boolean load() {
-        super.all.clear();
-        Reader fileReader = null;
+        // Creates file if not exist
+        File source = new File(super.filePath);
         try {
-            fileReader = new FileReader(super.filePath);
+            source.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+
+        UserList cur = new UserList();
+
+        try (Reader fileReader = new FileReader(source)) {
             CSVParser parser = CSVParser.parse(fileReader, CSVFormat.RFC4180);
             List<CSVRecord> tmp = parser.getRecords();
+
             tmp.forEach(record -> {
                 // id, name, password, faculty, type
+
                 String id = record.get(0);
                 String name = record.get(1);
                 String password = record.get(2);
@@ -38,22 +54,17 @@ public class UserRepository extends Repository<User> {
 
                 if (user != null) {
                     user.setPassword(password);
-                    super.all.add(user);
+                    cur.add(user);
                 }
             });
+
+            super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
             return false;
         } catch (IOException eIoException) {
             System.out.println(eIoException.toString());
             return false;
-        } finally {
-            try {
-                fileReader.close();
-            } catch (IOException eIoException) {
-                System.out.println(eIoException.toString());
-                return false;
-            }
         }
         return true;
     }

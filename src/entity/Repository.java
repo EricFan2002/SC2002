@@ -4,6 +4,11 @@ public abstract class Repository<T extends Object> {
     protected String filePath;
     protected RepositoryList<T> all;
 
+    public Repository(String filePath) {
+        this.filePath = filePath;
+        this.all = new RepositoryList<T>();
+    }
+
     public abstract boolean save();
 
     public abstract boolean load();

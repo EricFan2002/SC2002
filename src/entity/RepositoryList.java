@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,11 +11,12 @@ public class RepositoryList<T> implements Iterable<T> {
         this.all = all;
     }
 
-    public Iterator<T> iterator() {
-        return all.iterator();
+    public RepositoryList() {
+        this.all = new ArrayList<T>();
     }
 
-    public RepositoryList() {
+    public Iterator<T> iterator() {
+        return all.iterator();
     }
 
     public T get(int index) {
