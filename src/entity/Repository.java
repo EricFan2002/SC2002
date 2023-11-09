@@ -23,6 +23,10 @@ public abstract class Repository<T extends ITaggedItem> {
         all.add(item);
     }
 
+    public void remove(T item) {
+        all.remove(item);
+    }
+
     protected boolean setAll(RepositoryList<T> all) {
         this.all = all;
         return true;
