@@ -4,6 +4,8 @@ import java.util.Set;
 
 public class Camp {
     private int id; //camp Names are the ID
+
+    private String name;
     private String description;
     private Date startDate;
     private Date endDate;
