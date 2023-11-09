@@ -1,62 +1,39 @@
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class Repository {
+public abstract class Repository<Object> implements Iterable<Object> {
     protected String filePath;
-    protected boolean empty;
     protected List<Object> all;
 
     protected int size;
 
-    abstract public Object getByID(String id);
-
-    abstract public void save();
-
-    abstract public void load();
-
     public Repository(String filePath) {
         this.filePath = filePath;
-        this.empty = true;
         this.size = 0;
     }
 
-    public void add(Object object) {
-        if (this.empty) {
-            this.empty = false;
-        }
-        all.add(object);
-        this.size++;
+    public abstract Object getByID(String id);
+
+    public abstract void save();
+
+    public abstract void load();
+
+    public boolean isEmpty() {
+        return this.size == 0;
     }
 
-    public void remove(Object object) {
-        if (this.empty) {
-            return;
-        }
-        all.remove(object);
-        this.size--;
-        if (this.size == 0) {
-            this.empty = true;
-        }
-    }
+    public abstract void add(Object object);
 
-    public Iterator<Object> iterator() {
-        return all.iterator();
-    }
+    public abstract void update(Object object);
 
     public void updateAll(List<Object> all) {
         this.all = all;
     }
 
-    public void update(Object object) {
-        if (this.empty) {
-            this.empty = false;
-        }
-        if (all.contains(object)) {
-            all.remove(object);
-            all.add(object);
-        } else {
-            all.add(object);
-        }
+    public abstract void remove(Object object);
+
+    public Iterator<Object> iterator() {
+        return all.iterator();
     }
 
     abstract public List<Object> findByFilter(IFilter filter);
@@ -65,8 +42,5 @@ public abstract class Repository {
         return all.contains(object);
     }
 
-    public void clear() {
-        all.clear();
-        this.empty = true;
-    }
+    public abstract void clear();
 }
