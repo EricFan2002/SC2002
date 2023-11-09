@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -11,9 +12,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.CSVPrinter;
 
 public class UserRepository extends Repository<User> {
-    public void load() {
+    public boolean load() {
         super.all.clear();
         Reader fileReader = null;
         try {
@@ -39,15 +41,37 @@ public class UserRepository extends Repository<User> {
             });
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
+            return false;
         } catch (IOException eIoException) {
             System.out.println(eIoException.toString());
+            return false;
         } finally {
             try {
                 fileReader.close();
             } catch (IOException eIoException) {
                 System.out.println(eIoException.toString());
+                return false;
             }
         }
+        return true;
+    }
+
+    public boolean save() {
+        try (CSVPrinter printer = new CSVPrinter(new FileWriter(super.filePath), CSVFormat.DEFAULT)) {
+            super.all.forEach(user -> {
+                try {
+                    String userType = (user instanceof Staff) ? "1" : "0";
+                    printer.printRecord(user.getID(), user.getName(), user.getPassword(), user.getFaculty(), userType);
+                } catch (IOException e) {
+                    System.out.println(e.toString());
+
+                }
+            });
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+        return true;
     }
     /*
      * private List<User> userList;
