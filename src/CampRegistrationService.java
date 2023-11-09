@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import entity.camp.Camp;
 import entity.user.Student;
 import entity.user.User;
+import entity.CampRepository;
 
 public class CampRegistrationService {
     private CampRepository campRepository;
@@ -12,8 +14,8 @@ public class CampRegistrationService {
         this.campRepository = campRepository;
     }
 
-    public boolean addStudent(Student student, int campId) {
-        Camp camp = campRepository.get(campId);
+    public boolean addStudent(Student student, String campId) {
+        Camp camp = campRepository.getAll().filterByID(campId).get(0);
         if (camp != null) {
             return camp.addAttendee(student);
         } else {
@@ -22,8 +24,8 @@ public class CampRegistrationService {
         }
     }
 
-    public boolean addCommitteeStudent(Student student, int campId) {
-        Camp camp = campRepository.get(campId);
+    public boolean addCommitteeStudent(Student student, String campId) {
+        Camp camp = campRepository.getAll().filterByID(campId).get(0);
         if (camp != null) {
             return camp.addCommittee(student);
         } else {
@@ -32,8 +34,8 @@ public class CampRegistrationService {
         }
     }
 
-    public boolean withdrawStudent(Student student, int campId) {
-        Camp camp = campRepository.get(campId);
+    public boolean withdrawStudent(Student student, String campId) {
+        Camp camp = campRepository.getAll().filterByID(campId).get(0);
         if (camp != null) {
             return camp.removeAttendee(student);
         } else {
@@ -44,8 +46,8 @@ public class CampRegistrationService {
 
     public ArrayList<Camp> getCommitteeSlots() {
         ArrayList<Camp> camps = new ArrayList<>();
-        for (Camp camp : campRepository.getAllCamps()) {
-            if (camp.getCommittees().size() < camp.getCommitteeSlots()) {
+        for (Camp camp: campRepository.getAll()) {
+            if (camp.getCommittees().size() < Camp.MAX_COMMITTEE) {
                 camps.add(camp);
             }
         }
@@ -54,7 +56,7 @@ public class CampRegistrationService {
 
     public ArrayList<Camp> getJoinedCamps(User user) {
         ArrayList<Camp> joinedCamps = new ArrayList<>();
-        for (Camp camp : campRepository.getAllCamps()) {
+        for (Camp camp: campRepository.getAll()) {
             Set<Student> attendees = camp.getAttendees();
             Set<Student> committees = camp.getCommittees();
             if (attendees.contains(user) || committees.contains(user)) {

@@ -22,6 +22,8 @@ public class Camp implements ITaggedItem {
     protected Set<Student> attendees;
     protected Set<Student> committees;
 
+    public static final int  MAX_COMMITTEE = 10;
+
     public Camp(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
             String school, String location, Staff staffInCharge) {
@@ -135,19 +137,21 @@ public class Camp implements ITaggedItem {
         this.committees = committees;
     }
 
-    public void addAttendee(Student attendee) {
+    public boolean addAttendee(Student attendee) {
         attendees.add(attendee);
+        return true;
     }
 
-    public void addCommittee(Student committee) {
+    public boolean addCommittee(Student committee) {
         committees.add(committee);
+        return false;
     }
 
-    public void removeAttendee(Student attendee) {
-        attendees.remove(attendee);
+    public boolean removeAttendee(Student attendee) {
+        return attendees.remove(attendee);
     }
 
-    public void removeCommittee(Student committee) {
-        committees.remove(committee);
+    public boolean removeCommittee(Student committee) {
+        return committees.remove(committee);
     }
 }

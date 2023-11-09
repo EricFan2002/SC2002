@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.UserRepository;
+import entity.CampRepository;
+import entity.camp.Camp;
 import entity.user.User;
 
 public class CampStatusMonitorService {
@@ -13,8 +15,8 @@ public class CampStatusMonitorService {
         this.userRepository = userRepository;
     }
 
-    public ArrayList<User> getAttendingStudents(int id) {
-        Camp camp = campRepository.get(id);
+    public ArrayList<User> getAttendingStudents(String id) {
+        Camp camp = campRepository.getAll().filterByID(id).get(0);
         ArrayList<User> attendingStudents = new ArrayList<>();
         if (camp != null) {
             // Assuming Camp has a method to get all attending students
@@ -23,11 +25,11 @@ public class CampStatusMonitorService {
         return attendingStudents;
     }
 
-    public ArrayList<PerformanceReport> generatePerformanceReport(int id) {
+    public ArrayList<PerformanceReport> generatePerformanceReport(String id) {
         ArrayList<PerformanceReport> reports = new ArrayList<>();
         // Logic to generate performance report for the camp
         // Assuming there's a method to get the performance reports for a camp
-        Camp camp = campRepository.get(id);
+        Camp camp = campRepository.getAll().filterByID(id).get(0);
         if (camp != null) {
             for (User user : camp.getCommittees()) {
                 if (user instanceof CommitteeStudent) {
