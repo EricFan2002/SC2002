@@ -13,6 +13,13 @@ public class Enquiry implements ITaggedItem {
     protected Camp camp;
     protected User answeredBy;
 
+    public Enquiry(String ID, Student sender, String question, Camp camp) {
+        this.ID = ID;
+        this.sender = sender;
+        this.question = question;
+        this.camp = camp;
+    }
+
     public Enquiry(String ID, Student sender, String question, String answer, Camp camp, User answeredBy) {
         this.ID = ID;
         this.sender = sender;

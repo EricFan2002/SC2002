@@ -14,6 +14,13 @@ public class Suggestion implements ITaggedItem {
     protected Staff reviewedBy;
     protected SuggestionStatus status;
 
+    public Suggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
+        this.sender = sender;
+        this.suggestion = suggsetion;
+        this.originalCamp = originalCamp;
+        this.status = SuggestionStatus.PENDING;
+    }
+
     public Suggestion(String ID, Student sender, CampDetails suggestion, Camp originalCamp, Staff reviewedBy,
             SuggestionStatus status) {
         this.ID = ID;

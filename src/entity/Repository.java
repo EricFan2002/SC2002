@@ -32,6 +32,18 @@ public abstract class Repository<T extends ITaggedItem> {
         all.add(item);
     }
 
+    public void insert(T[] items) {
+        for (T item : items) {
+            all.add(item);
+        }
+    }
+
+    public void insert(RepositoryList<T> items) {
+        for (T item : items) {
+            all.add(item);
+        }
+    }
+
     public void remove(T item) {
         all.remove(item);
     }
@@ -45,13 +57,6 @@ public abstract class Repository<T extends ITaggedItem> {
             }
         }
         return false;
-    }
-
-    public boolean join(RepositoryList<T> other) {
-        for (T item : other) {
-            all.add(item);
-        }
-        return true;
     }
 
     protected boolean setAll(RepositoryList<T> all) {

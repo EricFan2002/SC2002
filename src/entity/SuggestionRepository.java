@@ -71,26 +71,33 @@ public class SuggestionRepository extends Repository<Suggestion> {
                 String campSuggestionRaw = record.get(2);
 
                 // id;name;desc;visibility
-                // 0/1;startDate;endDate;closeRegDate;school;location;staff;attend;committee
-                String[] campSuggestionArr = campSuggestionRaw.split(";");
+                // 0/1;startDate;endDate;closeRegDate;school;location
+
+                String[] campSuggestionArr = campSuggestionRaw.split(";", -1);
+
                 String campSuggestionID = campSuggestionArr[0];
+                String name = campSuggestionArr[1] != "" ? campSuggestionArr[1] : null;
+                String desc = campSuggestionArr[2] != "" ? campSuggestionArr[2] : null;
                 String visibilityRaw = campSuggestionArr[3];
-                Boolean visibility = visibilityRaw == "0" ? false : true;
-                Date startDate = new Date(Long.parseLong(campSuggestionArr[4]));
-                Date endDate = new Date(Long.parseLong(campSuggestionArr[5]));
+                Boolean visibility = campSuggestionArr[3] != "" ? (visibilityRaw == "0" ? false : true) : null;
+                Date startDate = campSuggestionArr[4] != "" ? new Date(Long.parseLong(campSuggestionArr[4])) : null;
+                Date endDate = campSuggestionArr[5] != "" ? new Date(Long.parseLong(campSuggestionArr[5])) : null;
+                Date closeRegDate = campSuggestionArr[6] != "" ? new Date(Long.parseLong(campSuggestionArr[6])) : null;
+                String school = campSuggestionArr[7] != "" ? campSuggestionArr[7] : null;
+                String location = campSuggestionArr[8] != "" ? campSuggestionArr[8] : null;
 
-                CampDetails campDetails = new CampDetails(campSuggestionID, campSuggestionArr[1], campSuggestionArr[2],
-                        visibility, startDate, endDate, null, campSuggestionArr[7],
-                        campSuggestionArr[8]);
+                CampDetails campDetails = new CampDetails(campSuggestionID, name, desc,
+                        visibility, startDate, endDate, closeRegDate, school,
+                        location);
 
-                String reviewedByID = record.get(4);
+                String reviewedByID = record.get(3);
                 UserList reviewedByTmp = userRepository.getAll().filterByID(reviewedByID);
                 Staff reviewedBy = null;
                 if (reviewedByTmp.size() > 0) {
                     reviewedBy = (Staff) reviewedByTmp.get(0);
                 }
 
-                String statusRaw = record.get(5);
+                String statusRaw = record.get(4);
                 SuggestionStatus status = statusRaw == "0" ? SuggestionStatus.PENDING
                         : statusRaw == "1" ? SuggestionStatus.APPROVED : SuggestionStatus.REJECTED;
 
@@ -117,17 +124,43 @@ public class SuggestionRepository extends Repository<Suggestion> {
             super.all.forEach(camp -> {
                 try {
                     // id, senderID, campSuggestionString, reviewedByID, status 0/1/2
+                    // id;name;desc;visibility
+                    // 0/1;startDate;endDate;closeRegDate;school;location
+
                     String id = camp.getID();
                     String senderID = camp.getSender().getID();
 
+                    // #region campSuggestionString
+
+                    String idString = (camp.getSuggestion().getID() == null) ? "" : camp.getSuggestion().getID();
+                    String nameString = (camp.getSuggestion().getName() == null) ? "" : camp.getSuggestion().getName();
+                    String descString = (camp.getSuggestion().getDescription() == null) ? ""
+                            : camp.getSuggestion().getDescription();
+
                     String visibilityString = camp.getSuggestion().isVisible() ? "1" : "0";
 
-                    String campSuggestionString = camp.getSuggestion().getID() + ";" + camp.getSuggestion().getName()
-                            + ";"
-                            + camp.getSuggestion().getDescription() + ";" + visibilityString + ";"
-                            + camp.getSuggestion().getStartDate().getTime() + ";"
-                            + camp.getSuggestion().getEndDate().getTime()
-                            + ";" + camp.getSuggestion().getSchool() + ";" + camp.getSuggestion().getLocation();
+                    String startDateString = (camp.getSuggestion().getStartDate() == null) ? ""
+                            : Long.toString(camp.getSuggestion().getStartDate().getTime());
+
+                    String endDateString = (camp.getSuggestion().getEndDate() == null) ? ""
+                            : Long.toString(camp.getSuggestion().getEndDate().getTime());
+
+                    String closeRegDateString = (camp.getSuggestion().getCloseRegistrationDate() == null) ? ""
+                            : Long.toString(camp.getSuggestion().getCloseRegistrationDate().getTime());
+
+                    String schoolString = (camp.getSuggestion().getSchool() == null) ? ""
+                            : camp.getSuggestion().getSchool();
+
+                    String locationString = (camp.getSuggestion().getLocation() == null) ? ""
+                            : camp.getSuggestion().getLocation();
+
+                    String[] campSuggestionArray = { idString, nameString,
+                            descString, visibilityString, startDateString, endDateString,
+                            closeRegDateString, schoolString, locationString };
+
+                    String campSuggestionString = String.join(";", campSuggestionArray);
+
+                    // #endregion campSuggestionString
 
                     String reviewedByID = (camp.getReviewedBy() == null) ? "" : camp.getReviewedBy().getID();
 
