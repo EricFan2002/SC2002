@@ -6,7 +6,7 @@ public abstract class Repository {
     protected boolean empty;
     protected List<Object> all;
 
-    private int size;
+    protected int size;
 
     abstract public Object getByID(String id);
 
