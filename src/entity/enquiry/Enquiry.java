@@ -3,6 +3,7 @@ package entity.enquiry;
 import entity.camp.Camp;
 import entity.interfaces.ITaggedItem;
 import entity.user.Student;
+import entity.user.User;
 
 public class Enquiry implements ITaggedItem {
     protected String ID;
@@ -10,9 +11,9 @@ public class Enquiry implements ITaggedItem {
     protected String question;
     protected String answer;
     protected Camp camp;
-    protected Student answeredBy;
+    protected User answeredBy;
 
-    public Enquiry(String ID, Student sender, String question, String answer, Camp camp, Student answeredBy) {
+    public Enquiry(String ID, Student sender, String question, String answer, Camp camp, User answeredBy) {
         this.ID = ID;
         this.sender = sender;
         this.question = question;
@@ -41,7 +42,7 @@ public class Enquiry implements ITaggedItem {
         return camp;
     }
 
-    public Student getAnsweredBy() {
+    public User getAnsweredBy() {
         return answeredBy;
     }
 

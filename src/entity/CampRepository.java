@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import entity.camp.Camp;
 import entity.user.Staff;
@@ -31,8 +29,12 @@ public class CampRepository extends Repository<Camp> {
 
     @Override
     public CampList getAll() {
-        System.out.println(super.getAll().toString());
-        return (CampList) super.getAll();
+        // deep copy
+        CampList all = new CampList();
+        for (Camp item : this.all) {
+            all.add(item);
+        }
+        return all;
     }
 
     public boolean load() {

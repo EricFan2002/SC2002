@@ -11,6 +11,7 @@ import java.util.List;
 import entity.camp.Camp;
 import entity.enquiry.Enquiry;
 import entity.user.Student;
+import entity.user.User;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -23,7 +24,12 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
     @Override
     public EnquiryList getAll() {
-        return (EnquiryList) super.getAll();
+        // deep copy
+        EnquiryList all = new EnquiryList();
+        for (Enquiry item : this.all) {
+            all.add(item);
+        }
+        return all;
     }
 
     public EnquiryRepository(String filePath, UserRepository userRepository, CampRepository campRepository) {
@@ -71,8 +77,8 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
                 String answeredByID = record.get(5);
                 UserList answeredByTmp = userRepository.getAll().filterByID(answeredByID);
-                Student answeredBy = null;
-                if (answeredByTmp.size() > 0 && answeredByTmp.get(0) instanceof Student) {
+                User answeredBy = null;
+                if (answeredByTmp.size() > 0) {
                     answeredBy = (Student) answeredByTmp.get(0);
                 }
 

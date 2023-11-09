@@ -12,7 +12,7 @@ import entity.interfaces.IFilterableBySender;
 import entity.user.User;
 
 public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableByID<Enquiry>,
-        IFilterableByCamp<Enquiry>, IFilterableByStatus<Enquiry>, IFilterableBySender<Enquiry>,
+        IFilterableByCamp<Enquiry>, IFilterableByStatus<Enquiry, Boolean>, IFilterableBySender<Enquiry>,
         IFilterableByAnsweredBy<Enquiry> {
     public EnquiryList(List<Enquiry> all) {
         super(all);
@@ -42,7 +42,7 @@ public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableB
         return result;
     }
 
-    public EnquiryList filterByStatus(boolean status) {
+    public EnquiryList filterByStatus(Boolean status) {
         EnquiryList result = new EnquiryList();
         for (Enquiry enquiry : super.all) {
             if ((enquiry.getAnsweredBy() == null) != status) {
