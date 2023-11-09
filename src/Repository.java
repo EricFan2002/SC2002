@@ -8,6 +8,12 @@ public abstract class Repository {
 
     private int size;
 
+    abstract public Object getByID(String id);
+
+    abstract public void save();
+
+    abstract public void load();
+
     public Repository(String filePath) {
         this.filePath = filePath;
         this.empty = true;
