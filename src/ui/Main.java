@@ -24,10 +24,6 @@ public class Main {
 
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
         Screen screen = null;
-//        InteractionWindow window = new InteractionWindow(20, 50, "new");
-//        InteractionWindow window2 = new InteractionWindow(20, 50, "old");
-
-
 
         try {
             Terminal terminal = defaultTerminalFactory.createTerminal();
@@ -45,11 +41,12 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-
+            Window CreateCampWindow = new CreateCamp();
             Window loginWindow = new LoginController(20, 50, 1,2,3);
             Window loginWindow2 = new StudentMainView(0);
             Window changePasswordWindow = new ChangePasswordView( 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
+            windows.addWindow(CreateCampWindow);
             windows.addWindow(loginWindow);
             windows.addWindow(loginWindow2);
             windows.addWindow(changePasswordWindow);
