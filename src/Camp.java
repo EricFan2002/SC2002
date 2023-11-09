@@ -3,8 +3,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Camp {
-    private int id;
-    private String name;
+    private int id; //camp Names are the ID
     private String description;
     private Date startDate;
     private Date endDate;
@@ -17,9 +16,8 @@ public class Camp {
     private Set<Student> attendees;
     private Set<Student> committees;
 
-    public Camp(int id, String name, String description, Date startDate, Date endDate, Date registrationClosingDate, String group, String location, Staff staffInCharge, int attendeeSlots) {
+    public Camp(int id, String description, Date startDate, Date endDate, Date registrationClosingDate, String group, String location, Staff staffInCharge, int attendeeSlots) {
         this.id = id;
-        this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;

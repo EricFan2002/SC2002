@@ -1,5 +1,8 @@
 import java.util.*;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -58,6 +61,7 @@ public class Main {
                 }
             }
             boolean logout = false;
+            CampRepository campRepo = new CampRepository();
 
             if(loginSuccess==true){
                 while(logout==false){
@@ -69,8 +73,6 @@ public class Main {
 
                         switch(choice){
                             case 1:
-                                //to create camp, create Camp object, add Camp to CampRepo using CampModificationService,
-
 
                                 break;
                             case 2:
@@ -114,7 +116,91 @@ public class Main {
                         int choice = sc.nextInt();
                         switch(choice){
                             case 1:
-                                //
+                                //to create camp, create Camp object, add Camp to CampRepo using CampModificationService,
+                                System.out.println("Enter camp ID/name:");
+                                System.out.println("Enter camp description:");
+                                System.out.println("Enter camp start date:");
+                                System.out.println("Enter camp end date:");
+                                System.out.println("Enter camp registration closing date:");
+                                System.out.println("Enter camp group:");
+                                System.out.println("Enter camp location:");
+                                System.out.println("Enter staff in charge:");
+                                System.out.println("Enter number of attendee slots:");
+                                
+                                //need to check for uniqueness of camp ID/name
+                                    //if not unique, prompt user to enter again
+                                    //else print everything else
+                                
+                                int id = sc.nextInt();
+                                String description = sc.next();
+
+                                Date startDate = null;
+                                 // Prompt the user to enter a date in a specific format
+                                while(startDate == null){
+                                    System.out.print("Enter a date (yyyy-MM-dd): ");
+                                    String userInput = sc.nextLine();
+
+                                    // Define a SimpleDateFormat pattern for the expected date format
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                    try {
+                                        // Parse the user input into a Date object
+                                        startDate = dateFormat.parse(userInput);
+                                        System.out.println("Start Date: " + startDate);
+                                    } catch (ParseException e) {
+                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                    }
+                                }
+                                
+                                Date endDate = null;
+                                 // Prompt the user to enter a date in a specific format
+                                while(endDate == null){
+                                    System.out.print("Enter a date (yyyy-MM-dd): ");
+                                    String userInput = sc.nextLine();
+
+                                    // Define a SimpleDateFormat pattern for the expected date format
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                    try {
+                                        // Parse the user input into a Date object
+                                        endDate = dateFormat.parse(userInput);
+                                        System.out.println("End Date: " + endDate);
+                                    } catch (ParseException e) {
+                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                    }
+                                }
+
+                                Date registrationClosingDate = null;
+                                 // Prompt the user to enter a date in a specific format
+                                while(registrationClosingDate == null){
+                                    System.out.print("Enter a date (yyyy-MM-dd): ");
+                                    String userInput = sc.nextLine();
+
+                                    // Define a SimpleDateFormat pattern for the expected date format
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                    try {
+                                        // Parse the user input into a Date object
+                                        registrationClosingDate = dateFormat.parse(userInput);
+                                        System.out.println("Registration Closing Date: " + registrationClosingDate);
+                                    } catch (ParseException e) {
+                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                    }
+                                }
+                                
+                                
+                                String group = sc.next();
+                                String location = sc.next();
+                                
+                                //Staff staffInCharge = new Staff();
+                                
+                                int attendeeSlots = sc.nextInt();
+                                
+                                
+
+                                //Camp camp = new Camp();
+
+
                                 break;
                             case 2:
                                 //
