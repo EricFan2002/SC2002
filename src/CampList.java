@@ -61,19 +61,6 @@ public class CampList implements ICampListFilter {
         return filteredList;  
 	}
 
-        //see created camps by you
-	@Override
-	public CampList filterByStaff(Staff staff) {
-		CampList filteredList = new CampList();
-        
-        for(Camp camp: this.camps){
-            if(camp.getStaffInCharge().equals(staff)){
-                filteredList.addCamp(camp);
-            }
-        }
-        return filteredList;
-	}
-
     public CampList filterByDate(Date startDate, Date endDate) {
         CampList filteredList = new CampList();
         
@@ -97,7 +84,22 @@ public class CampList implements ICampListFilter {
         return filteredList;
     }
 
+        //see created camps by you
+	@Override
+	public CampList filterByStaff(Staff staff) {
+		CampList filteredList = new CampList();
+        
+        for(Camp camp: this.camps){
+            if(camp.getStaffInCharge().equals(staff)){
+                filteredList.addCamp(camp);
+            }
+        }
+        return filteredList;
+	}
 
+    
+
+    //not sure of its use
 	@Override
 	public CampList filterByAttendees(Set<Student> attendees) {
         CampList filteredList = new CampList();
