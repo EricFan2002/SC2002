@@ -6,7 +6,7 @@ public class CampModificationService {
         this.campRepository = campRepository;
     }
 
-    public int createCamp(Camp camp) {
+    public String createCamp(Camp camp) {
         campRepository.add(camp);
         return camp.getId(); // Assuming the camp's ID is set prior to this call
     }

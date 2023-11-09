@@ -6,9 +6,24 @@
         5)removes camp
 */
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
 
 import entity.Repository;
+import entity.UserList;
+import entity.user.Staff;
 import entity.user.Student;
+import entity.user.User;
+import entity.user.UserFactory;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.CSVPrinter;
 
 //public class CampRepository implements ICommitteeReportGenerator {
 
@@ -26,23 +41,76 @@ public class CampRepository<Camp> extends Repository<Camp> {
         this.committee = new HashMap<>();
     }
 
-    @Override
     public Camp getByID(String id) {
         return all.stream()
-                .filter(camp -> camp.getId().equals(id))
+                .filter(camp -> camp.getID().equals(id))
                 .findFirst()
                 .orElse(null); // Returns null if Camp is not found
     }
 
     public boolean save() {
+        try (CSVPrinter printer = new CSVPrinter(new FileWriter(super.filePath), CSVFormat.DEFAULT)) {
+            super.all.forEach(user -> {
+                try {
+                    String userType = (user instanceof Staff) ? "1" : "0";
+                    printer.printRecord(user.getID(), user.getName(), user.getPassword(), user.getFaculty(), userType);
+                } catch (IOException e) {
+                    System.out.println(e.toString());
 
+                }
+            });
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+        return true;
     }
 
     public boolean load() {
+        File source = new File(super.filePath);
+        try {
+            source.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return false;
+        }
 
+        UserList cur = new UserList();
+
+        try (Reader fileReader = new FileReader(source)) {
+            CSVParser parser = CSVParser.parse(fileReader, CSVFormat.RFC4180);
+            List<CSVRecord> tmp = parser.getRecords();
+
+            tmp.forEach(record -> {
+                // id, name, password, faculty, type
+
+                String id = record.get(0);
+                String name = record.get(1);
+                String password = record.get(2);
+                String faculty = record.get(3);
+                int type = Integer.parseInt(record.get(4));
+
+                String typeName = (type == 0) ? "Staff" : "Student";
+
+                User user = UserFactory.getUser(typeName, id, name, faculty);
+
+                if (user != null) {
+                    user.setPassword(password);
+                    cur.add(user);
+                }
+            });
+
+            super.setAll(cur);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.toString());
+            return false;
+        } catch (IOException eIoException) {
+            System.out.println(eIoException.toString());
+            return false;
+        }
+        return true;
     }
 
-    @Override
     public boolean add(Camp camp) {
         return all.add(camp);
     }
@@ -89,7 +157,7 @@ public class CampRepository<Camp> extends Repository<Camp> {
 
     public Camp get(String id) {
         return all.stream()
-                .filter(camp -> camp.getId().equals(id))
+                .filter(camp -> camp.getID().equals(id))
                 .findFirst()
                 .orElse(null); // Returns null if Camp is not found
     }

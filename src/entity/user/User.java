@@ -42,6 +42,8 @@ public abstract class User implements ITaggedItem {
         return password;
     }
 
+    public String getEmail() { return ID + "@e.ntu.edu.sg"; }
+
     public void setName(String name) {
         this.name = name;
     }

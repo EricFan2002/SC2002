@@ -19,7 +19,7 @@ public class CampEnquireService {
         enquires.add(newEnquiry);
     }
 
-    public List<Enquiry> getSubmittedEnquires(int campId, Student student) {
+    public List<Enquiry> getSubmittedEnquires(String campId, Student student) {
         return enquires.stream()
                 .filter(enquiry -> enquiry.getSender().equals(student) &&
                         campRepository.get(campId) != null)
