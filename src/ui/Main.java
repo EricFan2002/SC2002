@@ -24,10 +24,6 @@ public class Main {
 
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
         Screen screen = null;
-//        InteractionWindow window = new InteractionWindow(20, 50, "new");
-//        InteractionWindow window2 = new InteractionWindow(20, 50, "old");
-
-
 
         try {
             Terminal terminal = defaultTerminalFactory.createTerminal();
