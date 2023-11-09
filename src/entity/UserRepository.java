@@ -50,7 +50,7 @@ public class UserRepository extends Repository<User> {
             List<CSVRecord> tmp = parser.getRecords();
 
             tmp.forEach(record -> {
-                // id, name, password, faculty, type
+                // id, name, password, faculty, type, points
 
                 String id = record.get(0);
                 String name = record.get(1);
@@ -90,7 +90,10 @@ public class UserRepository extends Repository<User> {
             super.all.forEach(user -> {
                 try {
                     String userType = (user instanceof Staff) ? "1" : "0";
-                    printer.printRecord(user.getID(), user.getName(), user.getPassword(), user.getFaculty(), userType);
+                    String pointString = (user instanceof Student) ? Integer.toString(((Student) user).getPoints())
+                            : "0";
+                    printer.printRecord(user.getID(), user.getName(), user.getPassword(), user.getFaculty(), userType,
+                            pointString);
                 } catch (IOException e) {
                     System.out.println(e.toString());
 
