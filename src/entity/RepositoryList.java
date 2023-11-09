@@ -64,6 +64,17 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         return true;
     }
 
+    public boolean update(T object) {
+        for (T item : all) {
+            if (item.getID().equals(object.getID())) {
+                // replace the old one
+                all.set(all.indexOf(item), object);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean clear() {
         all.clear();
         return true;
