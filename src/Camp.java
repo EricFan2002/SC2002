@@ -17,6 +17,7 @@ public class Camp {
     private int committeeSlots;
     private Set<Student> attendees;
     private Set<Student> committees;
+    private boolean isVisible = true;
 
     public Camp(int id, String description, Date startDate, Date endDate, Date registrationClosingDate, String group, String location, Staff staffInCharge, int attendeeSlots) {
         this.id = id;
@@ -53,9 +54,16 @@ public class Camp {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+    public Date getStartDate(){
+        return startDate;
+    }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Date getEndDate(){
+        return endDate;
     }
 
     public void setRegistrationCloseDate(Date registrationClosingDate) {
@@ -70,8 +78,20 @@ public class Camp {
         this.group = group;
     }
 
+    public String getGroup(){
+        return group;
+    }
+
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getLocation(){
+        return location;
+    }
+
+    public Staff getStaffInCharge() {
+        return staffInCharge;
     }
 
     public void setAttendeeSlots(int attendeeSlots) {
@@ -95,6 +115,13 @@ public class Camp {
 
     public Set<Student> getAttendees() {
         return attendees;
+    }
+    
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+    public boolean getVisible(){
+        return isVisible;
     }
 
     // Methods to add or remove attendees/committees
