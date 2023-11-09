@@ -1,4 +1,6 @@
-public class Enquiry {
+import java.util.List;
+
+public class Enquiry extends Repository{
     private Student sender;
     private User answeredBy;  // This will be null if not replied to
     private String question;
@@ -47,5 +49,48 @@ public class Enquiry {
 
     public String getAnswer() {
         return answer;
+    }
+
+    @Override
+    public Object getByID(String id) {
+        return null;
+    }
+
+    @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void add(Object object) {
+
+    }
+
+    @Override
+    public void update(Object object) {
+        if (!isAnswered()){
+            setAnswer(answer);
+            setAnsweredBy(answeredBy);
+        }
+    }
+
+    @Override
+    public void remove(Object object) {
+
+    }
+
+    @Override
+    public List findByFilter(IFilter filter) {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+
     }
 }
