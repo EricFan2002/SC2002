@@ -5,4 +5,8 @@ public class Staff extends User {
         super(ID, name, faculty);
     }
 
+    public Staff() {
+        super();
+    }
+
 }

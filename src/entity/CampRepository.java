@@ -15,8 +15,6 @@ import java.util.Set;
 import entity.camp.Camp;
 import entity.user.Staff;
 import entity.user.Student;
-import entity.user.User;
-import entity.user.UserFactory;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -29,6 +27,12 @@ public class CampRepository extends Repository<Camp> {
     public CampRepository(String filePath, UserRepository userRepository) {
         super(filePath);
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public CampList getAll() {
+        System.out.println(super.getAll().toString());
+        return (CampList) super.getAll();
     }
 
     public boolean load() {
@@ -70,6 +74,7 @@ public class CampRepository extends Repository<Camp> {
 
                 String staffIDRaw = record.get(9);
                 UserList tempStaff = userRepository.getAll().filterByID(staffIDRaw);
+
                 Staff staff;
                 if (tempStaff.size() > 0) {
                     staff = (Staff) tempStaff.get(0);
@@ -77,31 +82,29 @@ public class CampRepository extends Repository<Camp> {
                     staff = new Staff();
                     // do something if not found
                 }
+                Camp camp = new Camp(id, name, desc, visibility, startDate, endDate, closeRegDate, school, location,
+                        staff);
 
                 String[] attendeeIDsRaw = record.get(10).split(";");
-                Set<Student> attendees = new HashSet<>();
                 for (String attendeeIDRaw : attendeeIDsRaw) {
                     UserList tempUser = userRepository.getAll().filterByID(attendeeIDRaw);
                     if (tempUser.size() > 0) {
-                        attendees.add((Student) tempUser.get(0));
+                        camp.addAttendee((Student) tempUser.get(0));
                     } else {
                         // skip
                     }
                 }
 
                 String[] committeeIDsRaw = record.get(11).split(";");
-                Set<Student> committees = new HashSet<Student>();
                 for (String committeeIDRaw : committeeIDsRaw) {
                     UserList tempUser = userRepository.getAll().filterByID(committeeIDRaw);
                     if (tempUser.size() > 0) {
-                        committees.add((Student) tempUser.get(0));
+                        camp.addCommittee((Student) tempUser.get(0));
                     } else {
                         /// skip
                     }
                 }
 
-                Camp camp = new Camp(id, name, desc, visibility, startDate, endDate, closeRegDate, school, location,
-                        staff, attendees, committees);
                 cur.add(camp);
             });
 
@@ -140,6 +143,7 @@ public class CampRepository extends Repository<Camp> {
                         committeeIDsTemp.add(committee.getID());
                     }
                     String committeeIDs = String.join(";", committeeIDsTemp);
+                    System.out.println(committeeIDs);
 
                     printer.printRecord(camp.getID(), camp.getName(), camp.getDescription(), visibility, startDate,
                             endDate, closeRegDate, camp.getSchool(), camp.getLocation(), staffID, attendeeIDs,

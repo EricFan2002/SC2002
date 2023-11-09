@@ -1,6 +1,8 @@
 package entity;
 
-public abstract class Repository<T extends Object> {
+import entity.interfaces.ITaggedItem;
+
+public abstract class Repository<T extends ITaggedItem> {
     protected String filePath;
     protected RepositoryList<T> all;
 
@@ -17,7 +19,11 @@ public abstract class Repository<T extends Object> {
         return all;
     }
 
-    public boolean setAll(RepositoryList<T> all) {
+    public void insert(T item) {
+        all.add(item);
+    }
+
+    protected boolean setAll(RepositoryList<T> all) {
         this.all = all;
         return true;
     }

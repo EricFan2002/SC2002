@@ -8,7 +8,6 @@ import entity.interfaces.IFilterableByDateRange;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableBySchool;
 import entity.interfaces.IFilterableByVisibility;
-import entity.user.User;
 
 public class CampList extends RepositoryList<Camp> implements IFilterableByID<Camp>, IFilterableByDateRange<Camp>,
         IFilterableBySchool<Camp>, IFilterableByVisibility<Camp> {

@@ -2,6 +2,7 @@ package entity;
 
 import java.util.List;
 
+import entity.interfaces.IFilterableByID;
 import entity.user.User;
 
 public class UserList extends RepositoryList<User> implements IFilterableByID<User> {

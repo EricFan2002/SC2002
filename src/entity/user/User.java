@@ -1,6 +1,8 @@
 package entity.user;
 
-public abstract class User {
+import entity.interfaces.ITaggedItem;
+
+public abstract class User implements ITaggedItem {
     protected String ID;
     protected String name;
     protected String password; // default set to 'password'
@@ -26,6 +28,10 @@ public abstract class User {
 
     public String getID() {
         return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getFaculty() {

@@ -1,12 +1,14 @@
 package entity.camp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import entity.interfaces.ITaggedItem;
 import entity.user.Staff;
 import entity.user.Student;
 
-public class Camp {
+public class Camp implements ITaggedItem {
     protected String ID;
     protected String name;
     protected String description;
@@ -22,7 +24,7 @@ public class Camp {
 
     public Camp(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
-            String school, String location, Staff staffInCharge, Set<Student> attendees, Set<Student> committees) {
+            String school, String location, Staff staffInCharge) {
         this.ID = ID;
         this.name = name;
         this.description = description;
@@ -33,8 +35,8 @@ public class Camp {
         this.school = school;
         this.location = location;
         this.staffInCharge = staffInCharge;
-        this.attendees = attendees;
-        this.committees = committees;
+        this.attendees = new HashSet();
+        this.committees = new HashSet();
     }
 
     public String getID() {

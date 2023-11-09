@@ -52,7 +52,7 @@ public class UserRepository extends Repository<User> {
                 String faculty = record.get(3);
                 int type = Integer.parseInt(record.get(4));
 
-                String typeName = (type == 0) ? "Staff" : "Student";
+                String typeName = (type == 1) ? "Staff" : "Student";
 
                 User user = UserFactory.getUser(typeName, id, name, faculty);
 
