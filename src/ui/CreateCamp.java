@@ -1,9 +1,13 @@
 package ui;
 
 import ui.widgets.*;
+import ui.windows.ICallBack;
 import ui.windows.Window;
 
-public class CreateCamp extends Window {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CreateCamp extends Window implements ICallBack {
     WidgetLabel IDLabel;
     WidgetLabel nameLabel;
     WidgetLabel descriptionLabel;
@@ -70,18 +74,29 @@ public class CreateCamp extends Window {
         setPointer(confirmButton);
     }
 
-//    public void messageLoop() {
-//        super.messageLoop();
-//        if(confirmButton.getPressed()){
-//            switchToWindow = loginSwitchToWindowIndex;
-//        }
-//        if(cancelButton.getPressed()){
-//            switchToWindow = loginSwitchToWindowIndex;
-//        }
-//    }
-//    public void onExit(){
-//        confirmButton.clearPressed();
-//        cancelButton.clearPressed();
-//    }
+    public void messageLoop() {
+        super.messageLoop();
+        if (schoolButton.getPressed()) {
+            List<String> options = new ArrayList<String>();
+            options.add("SCSE");
+            options.add("NBS");
+            options.add("MAE");
+            options.add("SSS");
+            options.add("MSE");
+            options.add("SBS");
+            options.add("CEE");
+            OverlayChooseBox overlayChooseBox = new OverlayChooseBox(26, schoolButton.getY(), schoolButton.getX(),  "Choose School", options, this);
+            addOverlay(overlayChooseBox);
+            schoolButton.clearPressed();
+        }
+    }
+    public void onExit(){
+
+    }
+
+    @Override
+    public void onWindowFinished(int chose, String choseString) {
+        schoolButton.setText(choseString);
+    }
 }
 
