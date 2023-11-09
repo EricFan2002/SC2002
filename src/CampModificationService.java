@@ -7,7 +7,7 @@ public class CampModificationService {
     }
 
     public int createCamp(Camp camp) {
-        campRepository.insert(camp);
+        campRepository.add(camp);
         return camp.getId(); // Assuming the camp's ID is set prior to this call
     }
 
@@ -16,6 +16,6 @@ public class CampModificationService {
     }
 
     public boolean editCamp(int id, Camp updatedCamp) {
-        return campRepository.update(updatedCamp, id);
+        return campRepository.update(updatedCamp);
     }
 }

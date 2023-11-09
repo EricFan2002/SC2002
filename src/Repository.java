@@ -14,23 +14,23 @@ public abstract class Repository<Object> implements Iterable<Object> {
 
     public abstract Object getByID(String id);
 
-    public abstract void save();
+    public abstract boolean save();
 
-    public abstract void load();
+    public abstract boolean load();
 
     public boolean isEmpty() {
         return this.size == 0;
     }
 
-    public abstract void add(Object object);
+    public abstract boolean add(Object object);
 
-    public abstract void update(Object object);
+    public abstract boolean update(Object object);
 
-    public void updateAll(List<Object> all) {
+    public boolean updateAll(List<Object> all) {
         this.all = all;
     }
 
-    public abstract void remove(Object object);
+    public abstract boolean remove(Object object);
 
     public Iterator<Object> iterator() {
         return all.iterator();
@@ -42,5 +42,5 @@ public abstract class Repository<Object> implements Iterable<Object> {
         return all.contains(object);
     }
 
-    public abstract void clear();
+    public abstract boolean clear();
 }
