@@ -15,6 +15,22 @@ public class Suggestion {
         this.reviewedBy = null;
     }
 
+    public Student getSender() {
+        return sender;
+    }
+
+    public Staff getReviewedBy() {
+        return reviewedBy;
+    }
+
+    public Camp getSuggestion() {
+        return suggestion;
+    }
+
+    public SuggestionStatus getStatus() {
+        return status;
+    }
+
     public void setSuggestion(Camp camp) {
         this.suggestion = camp;
     }
