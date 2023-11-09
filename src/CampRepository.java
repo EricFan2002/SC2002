@@ -40,19 +40,31 @@ public class CampRepository<Camp> extends Repository<Camp> {
 
     @Override
     public boolean add(Camp camp) {
-        all.add(camp);
+        return all.add(camp);
     }
 
     public boolean update(Camp camp) {
+        if (!all.contains(camp)) {
+            return false;
+        }
         all.set(all.indexOf(camp), camp);
+        return true;
     }
 
     public boolean updateAll(List<Camp> all) {
+        if (all == null) {
+            return false;
+        }
         this.all = all;
+        return true;
     }
 
     public boolean remove(Camp camp) {
+        if (!all.contains(camp)) {
+            return false;
+        }
         all.remove(camp);
+        return true;
     }
 
     public Iterator<Camp> iterator() {
@@ -71,9 +83,9 @@ public class CampRepository<Camp> extends Repository<Camp> {
         all.clear();
     }
 
-    public Camp get(int id) {
+    public Camp get(String id) {
         return all.stream()
-                .filter(camp -> camp.getId() == id)
+                .filter(camp -> camp.getId().equals(id))
                 .findFirst()
                 .orElse(null); // Returns null if Camp is not found
     }
