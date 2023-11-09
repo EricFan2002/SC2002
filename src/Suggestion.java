@@ -1,4 +1,46 @@
-public class Suggestion {
+import java.util.List;
+
+public class Suggestion extends Repository {
+    @Override
+    public Object getByID(String id) {
+        return null;
+    }
+
+    @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void add(Object object) {
+
+    }
+
+    @Override
+    public void update(Object object) {
+
+    }
+
+    @Override
+    public void remove(Object object) {
+
+    }
+
+    @Override
+    public List findByFilter(IFilter filter) {
+        return null;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
     enum SuggestionStatus {
         OPEN, APPROVED, REJECTED
     }
