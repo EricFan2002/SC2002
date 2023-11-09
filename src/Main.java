@@ -136,9 +136,12 @@ public class Main {
 
                                 Date startDate = null;
                                  // Prompt the user to enter a date in a specific format
+                                final String INVALID_DATE_FORMAT_MSG = "Invalid date format. Please use yyyy-MM-dd.";
+
+
                                 while(startDate == null){
-                                    System.out.print("Enter a date (yyyy-MM-dd): ");
-                                    String userInput = sc.nextLine();
+                                    System.out.print("Enter a camp start date (yyyy-MM-dd): ");
+                                    String userInput = sc.next();
 
                                     // Define a SimpleDateFormat pattern for the expected date format
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -146,17 +149,21 @@ public class Main {
                                     try {
                                         // Parse the user input into a Date object
                                         startDate = dateFormat.parse(userInput);
-                                        System.out.println("Start Date: " + startDate);
+                                        if (startDate != null) {
+                                            System.out.println("Start Date: " + startDate);
+                                        } else {
+                                            System.out.println(INVALID_DATE_FORMAT_MSG);
+                                        }
                                     } catch (ParseException e) {
-                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                        System.out.println(INVALID_DATE_FORMAT_MSG);
                                     }
                                 }
                                 
                                 Date endDate = null;
                                  // Prompt the user to enter a date in a specific format
                                 while(endDate == null){
-                                    System.out.print("Enter a date (yyyy-MM-dd): ");
-                                    String userInput = sc.nextLine();
+                                    System.out.print("Enter a camp end date (yyyy-MM-dd): ");
+                                    String userInput = sc.next();
 
                                     // Define a SimpleDateFormat pattern for the expected date format
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,17 +171,21 @@ public class Main {
                                     try {
                                         // Parse the user input into a Date object
                                         endDate = dateFormat.parse(userInput);
-                                        System.out.println("End Date: " + endDate);
+                                        if (endDate != null) {
+                                            System.out.println("End Date: " + endDate);
+                                        } else {
+                                            System.out.println(INVALID_DATE_FORMAT_MSG);
+                                        }
                                     } catch (ParseException e) {
-                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                        System.out.println(INVALID_DATE_FORMAT_MSG);
                                     }
                                 }
 
                                 Date registrationClosingDate = null;
                                  // Prompt the user to enter a date in a specific format
                                 while(registrationClosingDate == null){
-                                    System.out.print("Enter a date (yyyy-MM-dd): ");
-                                    String userInput = sc.nextLine();
+                                    System.out.print("Enter a camp registration closing date (yyyy-MM-dd): ");
+                                    String userInput = sc.next();
 
                                     // Define a SimpleDateFormat pattern for the expected date format
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -182,9 +193,13 @@ public class Main {
                                     try {
                                         // Parse the user input into a Date object
                                         registrationClosingDate = dateFormat.parse(userInput);
-                                        System.out.println("Registration Closing Date: " + registrationClosingDate);
+                                        if (registrationClosingDate != null) {
+                                            System.out.println("Registration Closing Date: " + registrationClosingDate);
+                                        } else {
+                                            System.out.println(INVALID_DATE_FORMAT_MSG);
+                                        }
                                     } catch (ParseException e) {
-                                        System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                                        System.out.println(INVALID_DATE_FORMAT_MSG);
                                     }
                                 }
                                 
