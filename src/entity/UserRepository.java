@@ -9,6 +9,7 @@ import java.io.Reader;
 import java.util.List;
 
 import entity.user.Staff;
+import entity.user.Student;
 import entity.user.User;
 import entity.user.UserFactory;
 
@@ -54,7 +55,12 @@ public class UserRepository extends Repository<User> {
 
                 String typeName = (type == 1) ? "Staff" : "Student";
 
+                String pointsRaw = record.get(5);
+
                 User user = UserFactory.getUser(typeName, id, name, faculty);
+                if (user instanceof Student) {
+                    ((Student) user).setPoints(Integer.parseInt(pointsRaw));
+                }
 
                 if (user != null) {
                     user.setPassword(password);
