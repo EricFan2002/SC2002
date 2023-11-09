@@ -24,7 +24,12 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
     @Override
     public EnquiryList getAll() {
-        return (EnquiryList) super.getAll();
+        // deep copy
+        EnquiryList all = new EnquiryList();
+        for (Enquiry item : this.all) {
+            all.add(item);
+        }
+        return all;
     }
 
     public EnquiryRepository(String filePath, UserRepository userRepository, CampRepository campRepository) {

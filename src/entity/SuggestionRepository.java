@@ -27,7 +27,12 @@ public class SuggestionRepository extends Repository<Suggestion> {
 
     @Override
     public SuggestionList getAll() {
-        return (SuggestionList) super.getAll();
+        // deep copy
+        SuggestionList all = new SuggestionList();
+        for (Suggestion item : this.all) {
+            all.add(item);
+        }
+        return all;
     }
 
     public SuggestionRepository(String filePath, UserRepository userRepository, CampRepository campRepository) {

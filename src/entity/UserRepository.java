@@ -21,7 +21,12 @@ import org.apache.commons.csv.CSVPrinter;
 public class UserRepository extends Repository<User> {
     @Override
     public UserList getAll() {
-        return (UserList) super.getAll();
+        // deep copy
+        UserList all = new UserList();
+        for (User item : this.all) {
+            all.add(item);
+        }
+        return all;
     }
 
     public UserRepository(String filePath) {
