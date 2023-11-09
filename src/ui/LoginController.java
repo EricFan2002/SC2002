@@ -1,9 +1,13 @@
 package ui;
 
 import ui.widgets.*;
+import ui.windows.ICallBack;
 import ui.windows.Window;
 
-public class LoginController extends Window {
+import java.util.ArrayList;
+import java.util.List;
+
+public class LoginController extends Window implements ICallBack {
     WidgetLabel widgetLabel;
     WidgetLabel widgetLabel1;
     WidgetTextBox widgetTextBox;
@@ -42,8 +46,8 @@ public class LoginController extends Window {
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
+    @Override
     public void messageLoop() {
-        super.messageLoop();
         if(loginButton.getPressed()){
             switchToWindow = loginSwitchToWindowIndex;
         }
@@ -51,8 +55,15 @@ public class LoginController extends Window {
             switchToWindow = changePasswordWindowIndex;
         }
         if(forgetPasswordButton.getPressed()){
-//            switchToWindow = forgotPasswordWindowIndex;
-            OverlayTestClass overlayTestClass = new OverlayTestClass(getY(), getX(), 10, 10, "OverlayTest");
+            List<String> options = new ArrayList<String>();
+            options.add("SCSE");
+            options.add("NBS");
+            options.add("MAE");
+            options.add("SSS");
+            options.add("MSE");
+            options.add("SBS");
+            options.add("CEE");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  forgetPasswordButton.getY(), forgetPasswordButton.getX(), "Choose School", options, LoginController.this);
             addOverlay(overlayTestClass);
             forgetPasswordButton.clearPressed();
         }
@@ -61,5 +72,10 @@ public class LoginController extends Window {
         loginButton.clearPressed();
         changePasswordButton.clearPressed();
         forgetPasswordButton.clearPressed();
+    }
+
+    @Override
+    public void onWindowFinished(int chose, String choseString) {
+        forgetPasswordButton.setText(choseString);
     }
 }
