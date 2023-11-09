@@ -18,6 +18,11 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
 public class UserRepository extends Repository<User> {
+    @Override
+    public UserList getAll() {
+        return (UserList) super.getAll();
+    }
+
     public UserRepository(String filePath) {
         super(filePath);
     }
@@ -66,6 +71,7 @@ public class UserRepository extends Repository<User> {
             return false;
         }
         return true;
+
     }
 
     public boolean save() {

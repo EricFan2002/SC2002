@@ -6,6 +6,13 @@ public abstract class User {
     protected String password; // default set to 'password'
     protected String faculty;
 
+    public User() {
+        this.ID = "";
+        this.name = "";
+        this.password = "password";
+        this.faculty = "";
+    }
+
     public User(String ID, String name, String faculty) {
         this.ID = ID;
         this.name = name;

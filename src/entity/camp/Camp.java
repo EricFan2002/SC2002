@@ -10,6 +10,7 @@ public class Camp {
     protected String ID;
     protected String name;
     protected String description;
+    protected boolean visibility;
     protected Date startDate;
     protected Date endDate;
     protected Date closeRegistrationDate;
@@ -19,11 +20,13 @@ public class Camp {
     protected Set<Student> attendees;
     protected Set<Student> committees;
 
-    public Camp(String ID, String name, String description, Date startDate, Date endDate, Date closeRegistrationDate,
+    public Camp(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
+            Date closeRegistrationDate,
             String school, String location, Staff staffInCharge, Set<Student> attendees, Set<Student> committees) {
         this.ID = ID;
         this.name = name;
         this.description = description;
+        this.visibility = visibility;
         this.startDate = startDate;
         this.endDate = endDate;
         this.closeRegistrationDate = closeRegistrationDate;
@@ -44,6 +47,10 @@ public class Camp {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isVisible() {
+        return visibility;
     }
 
     public Date getStartDate() {
@@ -88,6 +95,10 @@ public class Camp {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
     }
 
     public void setStartDate(Date startDate) {
