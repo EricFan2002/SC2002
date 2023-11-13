@@ -104,9 +104,12 @@ public class SuggestionRepository extends Repository<Suggestion> {
                 Camp originalCamp = campRepository.getAll().filterByID(campSuggestionID).get(0);
 
                 Suggestion suggestion = new Suggestion(id, sender, campDetails, originalCamp, reviewedBy, status);
+
+                //add Suggestion to SuggestionList
                 cur.add(suggestion);
             });
 
+            //set SuggestionRepo to SuggestionList
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());

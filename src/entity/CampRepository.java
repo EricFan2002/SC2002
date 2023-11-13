@@ -107,9 +107,11 @@ public class CampRepository extends Repository<Camp> {
                     }
                 }
 
+                //add to CampList which extends RepositoryList
                 cur.add(camp);
             });
 
+            //set CampRepo to CampList,called Repo's function
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
