@@ -5,6 +5,9 @@ import controller.user.UserController;
 import ui.widgets.*;
 import ui.windows.Window;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChangePasswordView extends Window {
     WidgetLabel widgetLabel1;
     WidgetTextBox widgetTextBox;
@@ -55,13 +58,24 @@ public class ChangePasswordView extends Window {
                     if (UserAccountManagementController.changePassword(name, password, newPassword)) {
                         switchToWindow = loginSwitchToWindowIndex;
                     } else {
+                        List<String> options = new ArrayList<String>();
+                        options.add("OK");
+                        OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Error changing the password", options, ChangePasswordView.this);
+                        overlayChooseBox.messageLoop();
                     }
                 } else {
+                    List<String> options = new ArrayList<String>();
+                    options.add("OK");
+                    OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "New password and confirm password do not match", options, ChangePasswordView.this);
+                    overlayChooseBox.messageLoop();
                 }
             } else {
                 // if incorrect, show error message
+                List<String> options = new ArrayList<String>();
+                options.add("OK");
+                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Incorrect username or password", options, ChangePasswordView.this);
+                overlayChooseBox.messageLoop();
             }
-            switchToWindow = loginSwitchToWindowIndex;
         }
         if(cancelButton.getPressed()){
             switchToWindow = loginSwitchToWindowIndex;
