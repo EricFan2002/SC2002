@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import entity.*;
 import ui.windows.Window;
 import ui.windows.WindowsManager;
 
@@ -41,17 +42,15 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 0, 0, 0);
+            Window LoginView = new LoginView(60, 60, 1, 2, 3);
             Window CampListView = new CampListView(0, 0, 0);
             Window campViewer = new CampViewer(40, 40, 0);
-            Window loginWindow = new LoginView(20, 50, 1,2,3);
             Window loginWindow2 = new StudentMainView(0);
-            Window changePasswordWindow = new ChangePasswordView( 0);
+            Window changePasswordWindow = new ChangePasswordView( 2);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
 //            windows.addWindow(campViewer);
             windows.addWindow(LoginView);
             windows.addWindow(CampListView);
-            windows.addWindow(loginWindow);
             windows.addWindow(loginWindow2);
             windows.addWindow(changePasswordWindow);
 
