@@ -20,4 +20,11 @@ public class RepositoryCollection {
         suggestionRepository.load();
     }
 
+    public static void save() {
+        userRepository.save();
+        campRepository.save();
+        enquiryRepository.save();
+        suggestionRepository.save();
+    }
+
 }
