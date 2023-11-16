@@ -1,22 +1,19 @@
 package controller.camp;
 
 import entity.CampRepository;
+import entity.RepositoryCollection;
 import entity.camp.Camp;
 //import entity.camp.CampDetails;
 
 public class CampModificationController {
-    private CampRepository campRepository;
-
-    public CampModificationController(CampRepository campRepository) {
-        this.campRepository = campRepository;
-    }
 
     public void createCamp(Camp camp) {
-        campRepository.insert(camp);
+        RepositoryCollection.getCampRepository().insert(camp);
     }
 
     public void deleteCamp(Camp camp) {
-        campRepository.remove(camp);
+
+        RepositoryCollection.getCampRepository().remove(camp);
     }
 
     // I changed this to Camp instead of CampDetails
@@ -25,6 +22,6 @@ public class CampModificationController {
                 newCD.getStartDate(), newCD.getEndDate(), newCD.getCloseRegistrationDate(), newCD.getSchool(),
                 newCD.getLocation(), newCD.getStaffInCharge());
 
-        campRepository.update(updatedCamp);
+        RepositoryCollection.getCampRepository().update(updatedCamp);
     }
 }

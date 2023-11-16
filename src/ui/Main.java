@@ -42,7 +42,7 @@ public class Main {
                 }
             }
             Window CreateCampWindow = new CreateCamp();
-            Window loginWindow = new LoginController(20, 50, 1,2,3);
+            Window loginWindow = new LoginView(20, 50, 1,2,3);
             Window loginWindow2 = new StudentMainView(0);
             Window changePasswordWindow = new ChangePasswordView( 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);

@@ -12,13 +12,6 @@ import entity.user.User;
 import entity.user.Student;
 
 public class CampStatusMonitorController {
-    private CampRepository campRepository;
-    private UserRepository userRepository;
-
-    public CampStatusMonitorController(CampRepository campRepository, UserRepository userRepository) {
-        this.campRepository = campRepository;
-        this.userRepository = userRepository;
-    }
 
     public ArrayList<User> getAttendingStudents(Camp camp) {
         ArrayList<User> attendingStudents = new ArrayList<>();
