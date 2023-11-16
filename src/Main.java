@@ -1,12 +1,12 @@
 import java.lang.reflect.Array;
 import java.util.Date;
 
-import entity.CampRepository;
-import entity.EnquiryRepository;
+import entity.camp.CampRepository;
+import entity.enquiry.EnquiryRepository;
 import entity.RepositoryCollection;
-import entity.SuggestionRepository;
-import entity.UserList;
-import entity.UserRepository;
+import entity.suggestion.SuggestionRepository;
+import entity.user.UserList;
+import entity.user.UserRepository;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
 import entity.enquiry.Enquiry;
@@ -16,22 +16,12 @@ import entity.user.Student;
 
 public class Main {
     public static void main(String[] args) {
-        UserRepository userRepository = new UserRepository("data/user.csv");
-        userRepository.load();
+        RepositoryCollection.load();
 
-        CampRepository campRepository = new CampRepository("data/camp.csv", userRepository);
-        campRepository.load();
-
-        EnquiryRepository enquiryRepository = new EnquiryRepository("data/enquiry.csv", userRepository, campRepository);
-        SuggestionRepository suggestionRepository = new SuggestionRepository("data/suggestion.csv", userRepository,
-                campRepository);
-        enquiryRepository.load();
-        suggestionRepository.load();
-
-        RepositoryCollection.setCampRepository(campRepository);
-        RepositoryCollection.setUserRepository(userRepository);
-        RepositoryCollection.setEnquiryRepository(enquiryRepository);
-        RepositoryCollection.setSuggestionRepository(suggestionRepository);
+        UserRepository userRepository = RepositoryCollection.userRepository;
+        CampRepository campRepository = RepositoryCollection.campRepository;
+        EnquiryRepository enquiryRepository = RepositoryCollection.enquiryRepository;
+        SuggestionRepository suggestionRepository = RepositoryCollection.suggestionRepository;
 
         // instantiate users
         Student att1 = new Student("1", "John Doe", "NBS");
