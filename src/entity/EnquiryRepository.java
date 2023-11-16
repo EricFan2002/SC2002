@@ -83,9 +83,12 @@ public class EnquiryRepository extends Repository<Enquiry> {
                 }
 
                 Enquiry enquiry = new Enquiry(id, sender, question, answer, camp, answeredBy);
+
+                //add Enquiry to EnquiryList
                 cur.add(enquiry);
             });
 
+            //set EnquiryRepo to EnquiryList,called Repo's function
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());

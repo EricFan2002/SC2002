@@ -6,6 +6,13 @@
       "name": "Main",
       "request": "launch",
       "mainClass": "Main",
+      "projectName": "SC2002_9219e5f2"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
       "projectName": "SC2002_25136c68"
     },
     {

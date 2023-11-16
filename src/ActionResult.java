@@ -1,4 +1,4 @@
-public class LoginResult {
+public class ActionResult {
     private boolean result;
     private int userType;
 
