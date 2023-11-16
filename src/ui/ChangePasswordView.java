@@ -1,5 +1,7 @@
 package ui;
 
+import controller.user.UserAccountManagementController;
+import controller.user.UserController;
 import ui.widgets.*;
 import ui.windows.Window;
 
@@ -42,6 +44,23 @@ public class ChangePasswordView extends Window {
     public void messageLoop() {
         super.messageLoop();
         if(confirmButton.getPressed()){
+            String name = widgetTextBox.getText();
+            String password = widgetTextBox1.getText();
+            String newPassword = widgetTextBox2.getText();
+            String confirmPassword = widgetTextBox2.getText();
+            // check if name and password is correct
+            if(UserController.login(name, password)){
+                // if correct, switch to main menu
+                if(newPassword.equals(confirmPassword)){
+                    if (UserAccountManagementController.changePassword(name, password, newPassword)) {
+                        switchToWindow = loginSwitchToWindowIndex;
+                    } else {
+                    }
+                } else {
+                }
+            } else {
+                // if incorrect, show error message
+            }
             switchToWindow = loginSwitchToWindowIndex;
         }
         if(cancelButton.getPressed()){
