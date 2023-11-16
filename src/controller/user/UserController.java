@@ -24,7 +24,7 @@ public class UserController {
     }
 
     private static User getUserByUsername(String id) {
-        return RepositoryCollection.getUserRepository().getAll().filterByID(id).get(0);
+        return RepositoryCollection.userRepository.getAll().filterByID(id).get(0);
     }
 
 }

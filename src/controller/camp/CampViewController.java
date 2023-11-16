@@ -8,20 +8,20 @@ import entity.user.Student;
 public class CampViewController {
 
     public static Camp[] getCamp(String school) {
-        return RepositoryCollection.getCampRepository().getAll()
+        return RepositoryCollection.campRepository.getAll()
                 .filterBySchool(school).toArray();
     }
 
     public static Camp[] getCamp() {
-        return RepositoryCollection.getCampRepository().getAll().toArray();
+        return RepositoryCollection.campRepository.getAll().toArray();
     }
 
     public static Camp[] getCamp(Staff staff) {
-        return RepositoryCollection.getCampRepository().getAll().filterByStaff(staff).toArray();
+        return RepositoryCollection.campRepository.getAll().filterByStaff(staff).toArray();
     }
 
     public static Camp[] getCamp(Student student) {
-        return RepositoryCollection.getCampRepository().getAll()
+        return RepositoryCollection.campRepository.getAll()
                 .filterByStudent(student).toArray();
     }
 

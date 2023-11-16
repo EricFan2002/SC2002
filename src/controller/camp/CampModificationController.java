@@ -6,11 +6,11 @@ import entity.camp.Camp;
 
 public class CampModificationController {
     public static void createCamp(Camp camp) {
-        RepositoryCollection.getCampRepository().insert(camp);
+        RepositoryCollection.campRepository.insert(camp);
     }
 
     public static void deleteCamp(Camp camp) {
-        RepositoryCollection.getCampRepository().remove(camp);
+        RepositoryCollection.campRepository.remove(camp);
     }
 
     // I changed this to Camp instead of CampDetails
@@ -19,7 +19,7 @@ public class CampModificationController {
                 newCD.getStartDate(), newCD.getEndDate(), newCD.getCloseRegistrationDate(), newCD.getSchool(),
                 newCD.getLocation(), newCD.getStaffInCharge(), newCD.getTotalSlots());
 
-        RepositoryCollection.getCampRepository().update(updatedCamp);
-        RepositoryCollection.getCampRepository().update(updatedCamp);
+        RepositoryCollection.campRepository.update(updatedCamp);
+        RepositoryCollection.campRepository.update(updatedCamp);
     }
 }
