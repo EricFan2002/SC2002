@@ -68,4 +68,10 @@ public class Camp extends CampDetails {
     public boolean removeCommittee(Student committee) {
         return committees.remove(committee);
     }
+
+    public CampDetails createSuggestionPlan() {
+        CampDetails suggestionPlan = new CampDetails();
+        suggestionPlan.setID(this.ID);
+        return suggestionPlan;
+    }
 }
