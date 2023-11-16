@@ -19,8 +19,9 @@ public class ChangePasswordView extends Window {
     WidgetToggle toggle;
     WidgetButton confirmButton;
     WidgetButton cancelButton;
-    private int changePasswordWindowIndex;
-    public ChangePasswordView(int changePasswordWindowIndex){
+    private int loginSwitchToWindowIndex;
+    private int loginViewIndex;
+    public ChangePasswordView(int loginSwitchToWindowIndex, int loginViewIndex){
         super(20, 55, "Password Change");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Change Your Password", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -41,7 +42,8 @@ public class ChangePasswordView extends Window {
         cancelButton = new WidgetButton(2, 14, 49, "Back");
         addWidget(cancelButton);
         setPointer(confirmButton);
-        this.changePasswordWindowIndex = changePasswordWindowIndex;
+        this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
+        this.loginViewIndex = loginViewIndex;
     }
 
     public void messageLoop() {
@@ -56,7 +58,7 @@ public class ChangePasswordView extends Window {
                 // if correct, switch to main menu
                 if(newPassword.equals(confirmPassword)){
                     if (UserAccountManagementController.changePassword(name, password, newPassword)) {
-                        switchToWindow = changePasswordWindowIndex;
+                        switchToWindow = loginSwitchToWindowIndex;
                     } else {
                         List<String> options = new ArrayList<String>();
                         options.add("OK");
@@ -78,7 +80,7 @@ public class ChangePasswordView extends Window {
             }
         }
         if(cancelButton.getPressed()){
-            switchToWindow = changePasswordWindowIndex;
+            switchToWindow = loginViewIndex;
         }
     }
     public void onExit(){

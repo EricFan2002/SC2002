@@ -42,17 +42,17 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 1, 2, 3);
+            Window LoginView = new LoginView(60, 60, 3, 1, 2);
             Window CampListView = new CampListView(0, 0, 0);
             Window campViewer = new CampViewer(40, 40, 0);
             Window loginWindow2 = new StudentMainView(0);
-            Window changePasswordWindow = new ChangePasswordView( 2);
+            Window changePasswordWindow = new ChangePasswordView( 3, 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
 //            windows.addWindow(campViewer);
             windows.addWindow(LoginView);
+            windows.addWindow(changePasswordWindow);
             windows.addWindow(CampListView);
             windows.addWindow(loginWindow2);
-            windows.addWindow(changePasswordWindow);
 
             screen.refresh();
 
