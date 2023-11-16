@@ -52,15 +52,19 @@ public class WidgetButton extends Widget implements IClickable, ITextInput, ISel
     }
     @Override
     public void draw(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
-        drawSelection(buffer, printColor, backColor);
-        drawText(buffer);
-        if(selected){
-            buffer[y][x] = '[';
-            buffer[y][x + getLen() - 1] = ']';
+        if(hide){
+            return;
         }
-        else{
-            buffer[y][x] = ' ';
-            buffer[y][x + getLen() - 1] = ' ';
+        else {
+            drawSelection(buffer, printColor, backColor);
+            drawText(buffer);
+            if (selected) {
+                buffer[y][x] = '[';
+                buffer[y][x + getLen() - 1] = ']';
+            } else {
+                buffer[y][x] = ' ';
+                buffer[y][x + getLen() - 1] = ' ';
+            }
         }
     }
 
