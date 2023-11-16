@@ -46,15 +46,16 @@ public class Main {
             }
             Window LoginView = new LoginView(60, 60, 3, 1, 2);
             Window CampListView = new CampListView(0, 0, 0);
+            Window studentMainView = new StudentMainView(0);
+            Window changePasswordView = new ChangePasswordView(3, 0);
             Window campViewer = new CampViewer(40, 40, 0);
-            Window loginWindow2 = new StudentMainView(0);
-            Window changePasswordWindow = new ChangePasswordView(3, 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
-            // windows.addWindow(campViewer);
+
             windows.addWindow(LoginView);
-            windows.addWindow(changePasswordWindow);
+            windows.addWindow(changePasswordView);
             windows.addWindow(CampListView);
-            windows.addWindow(loginWindow2);
+            windows.addWindow(studentMainView);
+            // windows.addWindow(campViewer);
 
             screen.refresh();
 
