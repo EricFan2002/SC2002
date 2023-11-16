@@ -11,12 +11,13 @@ public class StudentMainView extends Window {
     WidgetLabel widgetLabel;
     WidgetButton viewCampButton;
     WidgetButton registerForCampButton;
-    WidgetButton viewEnquiresButton;
-    WidgetButton changePassword;
+    WidgetButton viewEnquiryButton;
+    WidgetButton changePasswordButton;
     WidgetButton logoutButton;
     private int campListViewIndex;
-    private int loginSwitchToWindowIndex;
-    public StudentMainView(int loginSwitchToWindowIndex, int campListViewIndex){
+    private int loginViewIndex;
+    private int changePasswordWindowIndex;
+    public StudentMainView(int loginViewIndex, int campListViewIndex, int changePasswordWindowIndex){
         super(24, 50, "Landing Page");
         widgetLabel = new WidgetLabel(3, 3,40, "Welcome! " + userName, TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -24,14 +25,15 @@ public class StudentMainView extends Window {
         addWidget(viewCampButton);
         registerForCampButton = new WidgetButton(4, 11, 40, "Register For Camp");
         addWidget(registerForCampButton);
-        viewEnquiresButton = new WidgetButton(4, 13, 40, "View My Enquires");
-        addWidget(viewEnquiresButton);
-        changePassword = new WidgetButton(4, 15, 40, "Reset Password");
-        addWidget(changePassword);
+        viewEnquiryButton = new WidgetButton(4, 13, 40, "View My Enquires");
+        addWidget(viewEnquiryButton);
+        changePasswordButton = new WidgetButton(4, 15, 40, "Reset Password");
+        addWidget(changePasswordButton);
         logoutButton = new WidgetButton(4, 17, 40, "Logout");
         addWidget(logoutButton);
-        this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
+        this.loginViewIndex = loginViewIndex;
         this.campListViewIndex = campListViewIndex;
+        this.changePasswordWindowIndex = changePasswordWindowIndex;
     }
 
     public void setUserName(String userName){
@@ -42,7 +44,10 @@ public class StudentMainView extends Window {
     public void messageLoop() {
         super.messageLoop();
         if(logoutButton.getPressed()){
-            switchToWindow = loginSwitchToWindowIndex;
+            switchToWindow = loginViewIndex;
+        }
+        if(changePasswordButton.getPressed()){
+            switchToWindow = changePasswordWindowIndex;
         }
         if(viewCampButton.getPressed()){
             switchToWindow = campListViewIndex;
