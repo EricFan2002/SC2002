@@ -3,6 +3,7 @@ import java.util.Date;
 
 import entity.CampRepository;
 import entity.EnquiryRepository;
+import entity.RepositoryCollection;
 import entity.SuggestionRepository;
 import entity.UserList;
 import entity.UserRepository;
@@ -26,6 +27,11 @@ public class Main {
                 campRepository);
         enquiryRepository.load();
         suggestionRepository.load();
+
+        RepositoryCollection.setCampRepository(campRepository);
+        RepositoryCollection.setUserRepository(userRepository);
+        RepositoryCollection.setEnquiryRepository(enquiryRepository);
+        RepositoryCollection.setSuggestionRepository(suggestionRepository);
 
         // instantiate users
         Student att1 = new Student("1", "John Doe", "NBS");
