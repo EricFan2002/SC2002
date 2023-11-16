@@ -85,17 +85,17 @@ public class Main {
         // RepositoryCollection.setSuggestionRepository(suggestionRepository);
 
         // instantiate users
-        Student att1 = new Student("1", "John Doe", "NBS");
-        Student att2 = new Student("2", "Jane Doe", "SCSE");
-        Student att3 = new Student("3", "John Smith", "MSE");
-        Student att4 = new Student("4", "Angela Merkel", "SCSE");
-        Student att5 = new Student("5", "Winston Churchill", "SCSE");
+        Student att1 = new Student("att1", "John Doe", "NBS");
+        Student att2 = new Student("att2", "Jane Doe", "SCSE");
+        Student att3 = new Student("att3", "John Smith", "MSE");
+        Student att4 = new Student("att4", "Angela Merkel", "SCSE");
+        Student att5 = new Student("att5", "Winston Churchill", "SCSE");
 
-        Student com = new Student("6", "Alan Walker", "MSE");
-        Student com2 = new Student("7", "Justin Trudeau", "SCSE");
+        Student com = new Student("com", "Alan Walker", "MSE");
+        Student com2 = new Student("com2", "Justin Trudeau", "SCSE");
 
-        Staff staff = new Staff("8", "John Cena", "SPMS");
-        Staff staff2 = new Staff("9", "Donald J. Trump", "SSS");
+        Staff staff = new Staff("staff", "John Cena", "SPMS");
+        Staff staff2 = new Staff("staff2", "Donald J. Trump", "SSS");
 
         // add users to repository
         UserList userList = userRepository.getAll();
@@ -199,14 +199,15 @@ public class Main {
 
         // instantiate suggestion
         CampDetails suggestionPlan = camp1.createSuggestionPlan();
+
         suggestionPlan.setSchool("SCSE");
-        Suggestion suggestion1 = new Suggestion(com, suggestionPlan, camp1);
+        Suggestion suggestion1 = new Suggestion("1", com, suggestionPlan, camp1);
 
         // insert suggestion
+        System.out.println(suggestion1.getOriginalCamp().getID());
         suggestionRepository.insert(suggestion1);
 
         // prints suggestion
-        System.out.println(suggestionRepository.getAll().get(0).getSuggestion().getSchool());
 
         RepositoryCollection.save();
 

@@ -14,7 +14,8 @@ public class Suggestion implements ITaggedItem {
     protected Staff reviewedBy;
     protected SuggestionStatus status;
 
-    public Suggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
+    public Suggestion(String ID, Student sender, CampDetails suggsetion, Camp originalCamp) {
+        this.ID = ID;
         this.sender = sender;
         this.suggestion = suggsetion;
         this.originalCamp = originalCamp;
