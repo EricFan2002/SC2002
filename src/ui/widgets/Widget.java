@@ -9,6 +9,7 @@ public abstract class Widget implements IDrawable {
     TEXT_ALIGNMENT textAlignment;
     private int widgetID;
     protected boolean hide;
+    private boolean skipSelection = false;
 
     public Widget(int x, int y, int len, String text) {
         this.x = x;
@@ -22,6 +23,12 @@ public abstract class Widget implements IDrawable {
 
     public boolean isHide() {
         return hide;
+    }
+    public boolean getSkipSelection(){
+        return skipSelection;
+    }
+    public void setSkipSelection(boolean skipSelection){
+        this.skipSelection = skipSelection;
     }
 
     public void setHide(boolean ifHide){

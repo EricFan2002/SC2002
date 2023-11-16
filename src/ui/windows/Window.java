@@ -94,7 +94,7 @@ public class Window {
         }
         selected += 1;
         selected %= widgets.size();
-        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide()){
+        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide() || widgets.get(selected).getSkipSelection()){
             selected += 1;
             selected %= widgets.size();
         }
@@ -109,7 +109,7 @@ public class Window {
         selected -= 1;
         selected += widgets.size();
         selected %= widgets.size();
-        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide()){
+        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide() || widgets.get(selected).getSkipSelection()){
             selected -= 1;
             selected += widgets.size();
             selected %= widgets.size();

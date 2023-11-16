@@ -44,11 +44,15 @@ public class WidgetPageSelection extends Widget {
         for(int i = 0 ; i < extra ; i++){
             int position = getY() + padding + i;
             WidgetButton button = new WidgetButton(x, position, len, "", TEXT_ALIGNMENT.ALIGN_LEFT);
+            button.setSkipSelection(true);
             selectionsButton.add(button);
             mainWindow.addWidget(button);
         }
         prevButton = new WidgetButton(x, getY() + height - 1, len / 2, "Prev");
-        nextButton = new WidgetButton((x + getLen() / 2), getY() + height - 1, len / 2, "Next");
+        int second = len / 2;
+        if(len % 2 == 1)
+            second++;
+        nextButton = new WidgetButton((x + getLen() / 2), getY() + height - 1, second, "Next");
         mainWindow.addWidget(prevButton);
         mainWindow.addWidget(nextButton);
     }
