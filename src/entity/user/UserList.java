@@ -17,10 +17,15 @@ public class UserList extends RepositoryList<User> implements IFilterableByID<Us
     public UserList filterByID(String id) {
         UserList result = new UserList();
         for (User user : super.all) {
+            // System.out.println(user.getID() + " want " + id);
             if (user.getID().equals(id)) {
                 result.add(user);
             }
         }
         return result;
+    }
+
+    public User[] toArray() {
+        return super.all.toArray(new User[super.all.size()]);
     }
 }

@@ -72,4 +72,8 @@ public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableB
         return result;
     }
 
+    public Enquiry[] toArray() {
+        return super.all.toArray(new Enquiry[super.all.size()]);
+    }
+
 }

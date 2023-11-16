@@ -73,4 +73,7 @@ public class SuggestionList extends RepositoryList<Suggestion> implements IFilte
         return result;
     }
 
+    public Suggestion[] toArray() {
+        return super.all.toArray(new Suggestion[super.all.size()]);
+    }
 }

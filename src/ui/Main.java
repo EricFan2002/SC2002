@@ -44,34 +44,22 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-//            Window CreateCampWindow = new CreateCamp();
+            Window LoginView = new LoginView(60, 60, 1, 1);
+            Window studentMainView = new StudentMainView(0, 3, 2);
+            Window changePasswordView = new ChangePasswordView(3, 1);
             Window CampListView = new CampListView(0, 0, 0);
-            Window campViewer = new CampViewer(40, 40, 0);
-            Window loginWindow = new LoginView(20, 50, 1,2,3);
-            Window studentMainView = new StudentMainView(0, 3);;
-            Window changePasswordView = new ChangePasswordView(3, 0);
+            Window createCampView = new CreateCampView(3);
+            Window campViewer = new CampViewer(40, 40, 3);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
-//            windows.addWindow(CreateCampWindow);
-//            windows.addWindow(campViewer);
+
+
             windows.addWindow(CampListView);
-            windows.addWindow(loginWindow);
+            windows.addWindow(LoginView);
             windows.addWindow(studentMainView);
             windows.addWindow(changePasswordView);
-//            Window LoginView = new LoginView(60, 60, 2, 1, 2);
-//            Window changePasswordView = new ChangePasswordView(3, 0);
-//            Window studentMainView = new StudentMainView(0, 3);
-//            Window CampListView = new CampListView(0, 0, 0);
-//            Window createCampView = new CreateCampView(3);
-//            Window campViewer = new CampViewer(40, 40, 3);
-//            WindowsManager windows = new WindowsManager(screen, 0, 0);
-
-
-//            windows.addWindow(LoginView);
-//            windows.addWindow(changePasswordView);
-//            windows.addWindow(studentMainView);
 //            windows.addWindow(CampListView);
-//            windows.addWindow(createCampView);
-//            windows.addWindow(campViewer);
+            windows.addWindow(createCampView);
+            windows.addWindow(campViewer);
 
             screen.refresh();
 

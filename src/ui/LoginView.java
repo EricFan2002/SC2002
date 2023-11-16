@@ -21,7 +21,7 @@ public class LoginView extends Window implements ICallBack { ;
     private int loginSwitchToWindowIndex;
     private int changePasswordWindowIndex;
     private int forgotPasswordWindowIndex;
-    public LoginView(int y, int x, int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int loginSwitchToWindowIndex, int forgotPasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -43,7 +43,6 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(forgetPasswordButton);
         setPointer(loginButton);
         this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
-        this.changePasswordWindowIndex = changePasswordWindowIndex;
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
@@ -64,9 +63,6 @@ public class LoginView extends Window implements ICallBack { ;
                 addOverlay(overlayTestClass);
             }
         }
-        if(changePasswordButton.getPressed()){
-            switchToWindow = changePasswordWindowIndex;
-        }
         if(forgetPasswordButton.getPressed()){
             switchToWindow = loginSwitchToWindowIndex;
 //            List<String> options = new ArrayList<String>();
@@ -84,7 +80,6 @@ public class LoginView extends Window implements ICallBack { ;
     }
     public void onExit(){
         loginButton.clearPressed();
-        changePasswordButton.clearPressed();
         forgetPasswordButton.clearPressed();
     }
 

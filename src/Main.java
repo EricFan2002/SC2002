@@ -13,6 +13,7 @@ import entity.enquiry.Enquiry;
 import entity.suggestion.Suggestion;
 import entity.user.Staff;
 import entity.user.Student;
+import entity.user.User;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,7 +78,7 @@ public class Main {
          * 
          * // prints suggestion
          */
-        System.out.println(userRepository.getAll().size());
+        System.out.println(userRepository.getAll().toArray()[0].getName());
         System.out.println(userRepository.getAll().filterByID("1").get(0).getName());
 
 //        RepositoryCollection.setCampRepository(campRepository);
