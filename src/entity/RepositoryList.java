@@ -1,5 +1,6 @@
 package entity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,12 +11,12 @@ import entity.interfaces.ITaggedItem;
 public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
     protected List<T> all;
 
-    //size of List
+    // size of List
     public int size() {
-        return all.size(); 
+        return all.size();
     }
 
-    //constructors using different parameters
+    // constructors using different parameters
     public RepositoryList(List<T> all) {
         this.all = all;
     }
@@ -38,17 +39,17 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         }
     }
 
-    //iterator
+    // iterator
     public Iterator<T> iterator() {
         return all.iterator();
     }
 
-    //getter
+    // getter
     public T get(int index) {
         return all.get(index);
     }
 
-    //add 1 item to List
+    // add 1 item to List
     public boolean add(T object) {
         for (T item : all) {
             if (item.getID().equals(object.getID())) {
@@ -60,18 +61,19 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         return all.add(object);
     }
 
-    //remove 1 item from List
+    // remove 1 item from List
     public boolean remove(T object) {
         return all.remove(object);
     }
 
-    //change item at index to input item
+    // change item at index to input item
     public boolean update(T object, int index) {
         all.set(index, object);
         return true;
     }
 
-    //go to List and find item with the same ID as the input item and replace it with the input item
+    // go to List and find item with the same ID as the input item and replace it
+    // with the input item
     public boolean update(T object) {
         for (T item : all) {
             if (item.getID().equals(object.getID())) {
@@ -83,9 +85,13 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         return false;
     }
 
-    //remove all items from List
+    // remove all items from List
     public boolean clear() {
         all.clear();
         return true;
+    }
+
+    public T[] toArray() {
+        return (T[]) all.toArray();
     }
 }

@@ -12,22 +12,22 @@ import entity.user.Student;
 
 public class CampSuggestionController {
 
-    public boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
+    public static boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
         RepositoryCollection.getSuggestionRepository().insert(suggestion);
         sender.addPoints(1);
         return true;
     }
 
-    public boolean updateSuggestion(Suggestion newSuggestion) {
+    public static boolean updateSuggestion(Suggestion newSuggestion) {
         return RepositoryCollection.getSuggestionRepository().update(newSuggestion);
     }
 
-    public boolean deleteSuggestion(Suggestion suggestion) {
+    public static boolean deleteSuggestion(Suggestion suggestion) {
         return RepositoryCollection.getSuggestionRepository().remove(suggestion);
     }
 
-    public boolean approveSuggestion(Suggestion suggestion, Staff staff, boolean isApproved) {
+    public static boolean approveSuggestion(Suggestion suggestion, Staff staff, boolean isApproved) {
         suggestion.setReviewedBy(staff);
         if (isApproved) {
             Student sender = suggestion.getSender();
@@ -58,15 +58,15 @@ public class CampSuggestionController {
         return true;
     }
 
-    public SuggestionList getSuggestions(Camp camp) {
+    public static SuggestionList getSuggestions(Camp camp) {
         return RepositoryCollection.getSuggestionRepository().getAll().filterByCamp(camp);
     }
 
-    public SuggestionList getSuggestions(Staff staff) {
+    public static SuggestionList getSuggestions(Staff staff) {
         return RepositoryCollection.getSuggestionRepository().getAll().filterBySender(staff);
     }
 
-    public SuggestionList getSuggestions(Student student) {
+    public static SuggestionList getSuggestions(Student student) {
         return RepositoryCollection.getSuggestionRepository().getAll().filterBySender(student);
     }
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import controller.user.UserController;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -7,7 +8,7 @@ import ui.windows.Window;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginController extends Window implements ICallBack {
+public class LoginView extends Window implements ICallBack { ;
     WidgetLabel widgetLabel;
     WidgetLabel widgetLabel1;
     WidgetTextBox widgetTextBox;
@@ -20,7 +21,7 @@ public class LoginController extends Window implements ICallBack {
     private int loginSwitchToWindowIndex;
     private int changePasswordWindowIndex;
     private int forgotPasswordWindowIndex;
-    public LoginController(int y, int x, int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -49,7 +50,18 @@ public class LoginController extends Window implements ICallBack {
     @Override
     public void messageLoop() {
         if(loginButton.getPressed()){
-            switchToWindow = loginSwitchToWindowIndex;
+            String name = widgetTextBox.getText();
+            String password = widgetTextBox1.getText();
+            // check if name and password is correct
+            if(UserController.login(name, password)){
+                // if correct, switch to main menu
+                switchToWindow = loginSwitchToWindowIndex;
+            } else {
+                // if incorrect, show error message
+                List<String> options = new ArrayList<String>();
+                options.add("OK");
+                OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  loginButton.getY(), loginButton.getX(), "Wrong username or password", options, LoginView.this);
+            }
         }
         if(changePasswordButton.getPressed()){
             switchToWindow = changePasswordWindowIndex;
@@ -63,7 +75,7 @@ public class LoginController extends Window implements ICallBack {
             options.add("MSE");
             options.add("SBS");
             options.add("CEE");
-            OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  forgetPasswordButton.getY(), forgetPasswordButton.getX(), "Choose School", options, LoginController.this);
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  forgetPasswordButton.getY(), forgetPasswordButton.getX(), "Choose School", options, LoginView.this);
             addOverlay(overlayTestClass);
             forgetPasswordButton.clearPressed();
         }

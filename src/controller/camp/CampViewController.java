@@ -1,44 +1,28 @@
 package controller.camp;
 
 import entity.camp.Camp;
-import entity.CampList;
+import entity.RepositoryCollection;
 import entity.user.Staff;
 import entity.user.Student;
 
-import java.util.List;
-
-
 public class CampViewController {
 
-    private CampList allCamps; // Assuming this holds all camps
-
-    // Constructor to initialize with the list of camps
-    public CampViewController(CampList allCamps) {
-        this.allCamps = allCamps;
+    public static Camp[] getCamp(String school) {
+        return RepositoryCollection.getCampRepository().getAll()
+                .filterBySchool(school).toArray();
     }
 
-    public Camp[] getCamp(String school) {
-        List<Camp> filteredCamps = (List<Camp>) allCamps.filterBySchool(school).getAll();
-        return filteredCamps.toArray(new Camp[filteredCamps.size()]);
+    public static Camp[] getCamp() {
+        return RepositoryCollection.getCampRepository().getAll().toArray();
     }
 
-    public Camp[] getCamp() {
-        List<Camp> allCampsList = (List<Camp>) allCamps.getAll();
-        return allCampsList.toArray(new Camp[allCampsList.size()]);
+    public static Camp[] getCamp(Staff staff) {
+        return RepositoryCollection.getCampRepository().getAll().filterByStaff(staff).toArray();
     }
 
-    public Camp[] getCamp(Staff staff) {
-        List<Camp> filteredCamps = (List<Camp>) allCamps.filterByStaff(staff).getAll();
-        return filteredCamps.toArray(new Camp[filteredCamps.size()]);
+    public static Camp[] getCamp(Student student) {
+        return RepositoryCollection.getCampRepository().getAll()
+                .filterByStudent(student).toArray();
     }
-
-    public Camp[] getCamp(Student student) {
-        List<Camp> filteredCamps = (List<Camp>) allCamps.filterByStudent(student).getAll();
-        return filteredCamps.toArray(new Camp[filteredCamps.size()]);
-    }
-
 
 }
-
-
-
