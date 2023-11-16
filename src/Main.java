@@ -80,7 +80,6 @@ public class Main {
         System.out.println(userRepository.getAll().size());
         System.out.println(userRepository.getAll().filterByID("1").get(0).getName());
 
-<<<<<<< HEAD
 //        RepositoryCollection.setCampRepository(campRepository);
 //        RepositoryCollection.setUserRepository(userRepository);
 //        RepositoryCollection.setEnquiryRepository(enquiryRepository);
@@ -134,8 +133,7 @@ public class Main {
         suggestionRepository.insert(suggestion1);
 
         // prints suggestion
-=======
->>>>>>> 1d4fb001cddba6fae45aa06ba608f380fa4de7ae
+
         System.out.println(suggestionRepository.getAll().get(0).getSuggestion().getSchool());
 
         // RepositoryCollection.save();

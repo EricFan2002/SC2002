@@ -2,6 +2,7 @@ package entity.camp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import entity.RepositoryList;
 import entity.interfaces.IFilterableByDateRange;
@@ -85,4 +86,12 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
         return this;
     }
 
+    public Camp[] toArray() {
+        // Use an ArrayList to store the camps temporarily
+        ArrayList<Camp> tempList = new ArrayList<>(super.all);
+
+        // Convert the ArrayList to an array
+        Camp[] campArray = new Camp[tempList.size()];
+        return tempList.toArray(campArray);
+    }
 }
