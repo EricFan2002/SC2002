@@ -53,7 +53,7 @@ public class Enquiry implements ITaggedItem {
         return answeredBy;
     }
 
-    public void setAnswer(String answer, Student answeredBy) {
+    public void setAnswer(String answer, User answeredBy) {
         this.answer = answer;
         this.answeredBy = answeredBy;
     }

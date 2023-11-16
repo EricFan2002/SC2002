@@ -17,7 +17,7 @@ public class CampPerformanceController {
 
     public Map<String, Integer> generatePerformanceReport(Camp camp) {
         Set<Student> attendees = camp.getAttendees();
-        Map<String, Integer> performanceReports = new HashMap();
+        Map<String, Integer> performanceReports = new HashMap<String, Integer>();
         for (Student attendee : attendees) {
             int points = attendee.getPoints();
             String name = attendee.getName();
