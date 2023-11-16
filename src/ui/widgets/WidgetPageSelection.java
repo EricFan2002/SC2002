@@ -26,6 +26,22 @@ public class WidgetPageSelection extends Widget {
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         this.height = height;
         this.mainWindow = mainWindow;
+        if(selections.size() > 0) {
+            itemHeight = selections.get(0).size();
+        }
+        else{
+            itemHeight = 1;
+        }
+        maxPage = (int)Math.ceil((double)selections.size() / (height - 1) / itemHeight);
+        perPage = (height - 1) / itemHeight;
+        addSelections(selections);
+    }
+
+    public void updateList(ArrayList<ArrayList<String>> selections){
+        selected = -1;
+        this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
+        this.height = height;
+        this.mainWindow = mainWindow;
         if(selections.size() >= 0) {
             itemHeight = selections.get(0).size();
         }
@@ -35,6 +51,7 @@ public class WidgetPageSelection extends Widget {
         maxPage = (int)Math.ceil((double)selections.size() / (height - 1) / itemHeight);
         perPage = (height - 1) / itemHeight;
         addSelections(selections);
+        currentPage = 0;
     }
 
     public void addSelections(ArrayList<ArrayList<String>> selections){
