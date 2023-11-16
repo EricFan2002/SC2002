@@ -114,8 +114,10 @@ public class CreateCampView extends Window implements ICallBack {
             int totalSlots = Integer.parseInt(totalSlotsTextBox.getText());
             Camp camp = new Camp(ID, name, description, true, startDate, endDate, closeRegistrationDate, school, location, (Staff)UserController.getCurrentUser(), totalSlots);
             CampModificationController.createCamp(camp);
+            switchToWindow = campListViewIndex;
         }
         if (cancelButton.getPressed()) {
+            switchToWindow = campListViewIndex;
         }
     }
     public void onExit(){
