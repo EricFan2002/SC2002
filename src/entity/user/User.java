@@ -33,6 +33,7 @@ public abstract class User implements ITaggedItem {
     public void setID(String ID) {
         this.ID = ID;
     }
+
     public void setFaculty(String faculty) {
         this.faculty = faculty;
     }
@@ -45,7 +46,9 @@ public abstract class User implements ITaggedItem {
         return password;
     }
 
-    public String getEmail() { return ID + "@e.ntu.edu.sg"; }
+    public String getEmail() {
+        return ID + "@e.ntu.edu.sg";
+    }
 
     public void setName(String name) {
         this.name = name;

@@ -1,6 +1,8 @@
 package ui;
 
 import controller.user.UserController;
+import entity.user.Staff;
+import entity.user.Student;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -18,10 +20,11 @@ public class LoginView extends Window implements ICallBack { ;
     WidgetButton changePasswordButton;
     WidgetButton forgetPasswordButton;
     WidgetToggle toggle;
-    private int loginSwitchToWindowIndex;
+    private int studentMainViewIndex;
+    private int staffMainViewIndex;
     private int changePasswordWindowIndex;
     private int forgotPasswordWindowIndex;
-    public LoginView(int y, int x, int loginSwitchToWindowIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int forgotPasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -42,7 +45,8 @@ public class LoginView extends Window implements ICallBack { ;
         forgetPasswordButton = new WidgetButton(5 + 20 , 14, 20, "Forgot Password");
         addWidget(forgetPasswordButton);
         setPointer(loginButton);
-        this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
+        this.studentMainViewIndex = studentMainViewIndex;
+        this.staffMainViewIndex = staffMainViewIndex;
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
@@ -54,7 +58,11 @@ public class LoginView extends Window implements ICallBack { ;
             // check if name and password is correct
             if(UserController.login(name, password)){
                 // if correct, switch to main menu
-                switchToWindow = loginSwitchToWindowIndex;
+                if (UserController.getCurrentUser() instanceof Student) {
+                    switchToWindow = studentMainViewIndex;
+                } else if (UserController.getCurrentUser() instanceof Staff){
+                    switchToWindow = staffMainViewIndex;
+                }
             } else {
                 // if incorrect, show error message
                 List<String> options = new ArrayList<String>();
@@ -64,7 +72,7 @@ public class LoginView extends Window implements ICallBack { ;
             }
         }
         if(forgetPasswordButton.getPressed()){
-            switchToWindow = loginSwitchToWindowIndex;
+            switchToWindow = staffMainViewIndex;
 //            List<String> options = new ArrayList<String>();
 //            options.add("SCSE");
 //            options.add("NBS");

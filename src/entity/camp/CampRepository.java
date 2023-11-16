@@ -152,7 +152,6 @@ public class CampRepository extends Repository<Camp> {
                         committeeIDsTemp.add(committee.getID());
                     }
                     String committeeIDs = String.join(";", committeeIDsTemp);
-                    System.out.println(committeeIDs);
 
                     printer.printRecord(camp.getID(), camp.getName(), camp.getDescription(), visibility, startDate,
                             endDate, closeRegDate, camp.getSchool(), camp.getLocation(), staffID, attendeeIDs,
