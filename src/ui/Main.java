@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import entity.RepositoryCollection;
 import ui.windows.Window;
 import ui.windows.WindowsManager;
 
@@ -43,37 +44,34 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-<<<<<<< HEAD
-            Window CreateCampWindow = new CreateCamp();
+//            Window CreateCampWindow = new CreateCamp();
             Window CampListView = new CampListView(0, 0, 0);
             Window campViewer = new CampViewer(40, 40, 0);
             Window loginWindow = new LoginView(20, 50, 1,2,3);
-            Window loginWindow2 = new StudentMainView(0);
-            Window changePasswordWindow = new ChangePasswordView( 0);
+            Window studentMainView = new StudentMainView(0, 3);;
+            Window changePasswordView = new ChangePasswordView(3, 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
 //            windows.addWindow(CreateCampWindow);
 //            windows.addWindow(campViewer);
             windows.addWindow(CampListView);
             windows.addWindow(loginWindow);
-            windows.addWindow(loginWindow2);
-            windows.addWindow(changePasswordWindow);
-=======
-            Window LoginView = new LoginView(60, 60, 2, 1, 2);
-            Window changePasswordView = new ChangePasswordView(3, 0);
-            Window studentMainView = new StudentMainView(0, 3);
-            Window CampListView = new CampListView(0, 0, 0);
-            Window createCampView = new CreateCampView(3);
-            Window campViewer = new CampViewer(40, 40, 3);
-            WindowsManager windows = new WindowsManager(screen, 0, 0);
-
-
-            windows.addWindow(LoginView);
-            windows.addWindow(changePasswordView);
             windows.addWindow(studentMainView);
-            windows.addWindow(CampListView);
-            windows.addWindow(createCampView);
-            windows.addWindow(campViewer);
->>>>>>> 1d4fb001cddba6fae45aa06ba608f380fa4de7ae
+            windows.addWindow(changePasswordView);
+//            Window LoginView = new LoginView(60, 60, 2, 1, 2);
+//            Window changePasswordView = new ChangePasswordView(3, 0);
+//            Window studentMainView = new StudentMainView(0, 3);
+//            Window CampListView = new CampListView(0, 0, 0);
+//            Window createCampView = new CreateCampView(3);
+//            Window campViewer = new CampViewer(40, 40, 3);
+//            WindowsManager windows = new WindowsManager(screen, 0, 0);
+
+
+//            windows.addWindow(LoginView);
+//            windows.addWindow(changePasswordView);
+//            windows.addWindow(studentMainView);
+//            windows.addWindow(CampListView);
+//            windows.addWindow(createCampView);
+//            windows.addWindow(campViewer);
 
             screen.refresh();
 
