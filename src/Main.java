@@ -98,10 +98,11 @@ public class Main {
         Staff staff2 = new Staff("staff2", "Donald J. Trump", "SSS");
 
         // add users to repository
-        UserList userList = userRepository.getAll();
-        userList.add(att1);
-        userList.add(att2);
+        userRepository.insert(att1);
+        userRepository.insert(att2);
         userRepository.insert(att3);
+        userRepository.insert(att4);
+        userRepository.insert(att5);
         userRepository.insert(com);
         userRepository.insert(staff);
         userRepository.insert(staff2);

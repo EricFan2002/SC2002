@@ -14,7 +14,17 @@ public class Suggestion implements ITaggedItem {
     protected Staff reviewedBy;
     protected SuggestionStatus status;
 
+    public Suggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
+        // id is current timestamp in string
+        this.ID = Long.toString(System.currentTimeMillis());
+        this.sender = sender;
+        this.suggestion = suggsetion;
+        this.originalCamp = originalCamp;
+        this.status = SuggestionStatus.PENDING;
+    }
+
     public Suggestion(String ID, Student sender, CampDetails suggsetion, Camp originalCamp) {
+        // id is current timestamp in string
         this.ID = ID;
         this.sender = sender;
         this.suggestion = suggsetion;
