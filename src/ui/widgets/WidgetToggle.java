@@ -45,6 +45,9 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
                 backColor[y][x + i] = TextColor.ANSI.BLACK_BRIGHT;
                 printColor[y][x + i] = TextColor.ANSI.WHITE_BRIGHT;
             }
+            if(pressed){
+                printColor[y][x + i] = TextColor.ANSI.CYAN_BRIGHT;
+            }
         }
     }
     @Override

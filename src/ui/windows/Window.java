@@ -167,8 +167,16 @@ public class Window {
         widgets.add(widget);
         widget.setWidgetID(widgetID);
         widgetID += 1;
-        return widgetID - 1;
+        return widgetID;
     }
+
+    public int addWidgetAfter(Widget widget, int afterWhich) {
+        widgets.add(afterWhich, widget);
+        widget.setWidgetID(widgetID);
+        widgetID += 1;
+        return widgetID;
+    }
+
 
     public void setClear(){
 //        needClear = 2;

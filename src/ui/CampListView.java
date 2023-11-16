@@ -8,55 +8,67 @@ import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CampListView extends Window implements ICallBack {
+    private String formLine(String part1, String part2, int length){
+        int padding = length / 2 - part1.length();
+        String res = part1;
+        for(int i = 0 ; i < padding ; i ++){
+            res += " ";
+        }
+        res += "│ ";
+        res += part2;
+        return res;
+    }
+
+    protected WidgetLabel filterLabel1 = new WidgetLabel(1, 2, 19, "Filter 1:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+    protected WidgetTextBox filter1 = new WidgetTextBox(20, 2, getLenX() / 2 - 20, "");
+    protected WidgetLabel filterLabel2 = new WidgetLabel(1, 3, 19, "Filter 2:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+    protected WidgetTextBox filter2 = new WidgetTextBox(20, 3, getLenX() / 2 - 20, "");
+    protected WidgetLabel filterLabel3 = new WidgetLabel(1, 4, 19, "Filter 3:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+    protected WidgetTextBox filter3 = new WidgetTextBox(20, 4, getLenX() / 2 - 20, "");
+    protected WidgetLabel filterLabel4 = new WidgetLabel(1, 5, 19, "Filter 4:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+    protected WidgetTextBox filter4 = new WidgetTextBox(20, 5, getLenX() / 2 - 20, "");
+    protected WidgetPageSelection widgetPageSelection;
+    protected int filter4Index = 0;
+
     public CampListView(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
         super(55, 190, "Party View");
         WidgetLabel widgetLabel = new WidgetLabel(1, 1,40, "Filters:", TEXT_ALIGNMENT.ALIGN_LEFT);
+        addWidget(widgetLabel);
         for(int i = 1 ; i < getY() ; i++){
             WidgetLabel widgetTmp = new WidgetLabel(getX()/2, i, 2, "┃");
             addWidget(widgetTmp);
         }
-        addWidget(widgetLabel);
-        WidgetLabel filterLabel1 = new WidgetLabel(1, 2, 19, "Filter 1:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(filterLabel1);
-        WidgetTextBox filter1 = new WidgetTextBox(20, 2, getLenX() / 2 - 20, "");
         addWidget(filter1);
-        WidgetLabel filterLabel2 = new WidgetLabel(1, 3, 19, "Filter 2:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(filterLabel2);
-        WidgetTextBox filter2 = new WidgetTextBox(20, 3, getLenX() / 2 - 20, "");
         addWidget(filter2);
-        WidgetLabel filterLabel3 = new WidgetLabel(1, 4, 19, "Filter 3:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(filterLabel3);
-        WidgetTextBox filter3 = new WidgetTextBox(20, 4, getLenX() / 2 - 20, "");
         addWidget(filter3);
-        WidgetLabel filterLabel4 = new WidgetLabel(1, 5, 19, "Filter 4:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(filterLabel4);
-        WidgetTextBox filter4 = new WidgetTextBox(20, 5, getLenX() / 2 - 20, "");
-        addWidget(filter4);
+        filter4Index = addWidget(filter4);
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add("Camp: " + camp.getName());
-            tmp.add("    " + camp.getStartDate().toString() + " To " + camp.getEndDate().toString());
-            tmp.add("    Participants: " + camp.getAttendees().size() + ", Committee: " + camp.getCommittees().size());
-            tmp.add("    Creator: " + camp.getStaffInCharge().getName() + ", Close at: " + camp.getCloseRegistrationDate().toString());
-            options.add(tmp);
-        }
-//        ArrayList<ArrayList<String>> options = new ArrayList<>();
-        for(int i = 0 ; i < 20 ; i ++){
-            ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add("Camp: " + i);
-            for(int j = 0 ; j < 3 ; j++){
-                tmp.add("    Details: " + j);
+            tmp.add(camp.getName() + " Camp");
+            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+            tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),  "Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            tmp.add("    " + formLine("Participants: " + camp.getAttendees().size(),  "Committee: " + camp.getCommittees().size(), getX() / 2 - 14));
+            tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(),  "", getX() / 2 - 14));
+            String line = "";
+            for(int j = 0 ; j < getX() / 2 - 3 ; j ++){
+                line += "─";
             }
+            tmp.add(line);
             options.add(tmp);
         }
-        WidgetPageSelection widgetPageSelection = new WidgetPageSelection(1, 7, getX() / 2 -2, getY() - 10, "PartyList", options, CampListView.this);
+        widgetPageSelection = new WidgetPageSelection(1, 10, getX() / 2 -2, getY() - 14, "PartyList", options, CampListView.this);
         addWidget(widgetPageSelection);
     }
 

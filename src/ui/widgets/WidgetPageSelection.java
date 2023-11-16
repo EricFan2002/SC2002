@@ -32,7 +32,7 @@ public class WidgetPageSelection extends Widget {
         else{
             itemHeight = 1;
         }
-        maxPage = (int)Math.ceil((double)selections.size() / (height - 1) / itemHeight);
+        maxPage = selections.size() * itemHeight / (height - 1);
         perPage = (height - 1) / itemHeight;
         addSelections(selections);
     }
