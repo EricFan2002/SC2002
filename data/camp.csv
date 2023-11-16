@@ -1,2 +1,10 @@
-abc,Camp Nou,Soccer camp for young students!,1,1,1,1,1,1,5,3;2,4,12
-cde,Old Trafford,Summer camp soccer training,1,1,1,1,1,1,5,1,4,15
+C001,Soccer Match,Night Soccer Scrimmage,1,1702734600000,1702741800000,1697464267000,NTU,Camp Nou,8,2;3,6,12
+C002,Christmas Party,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,NTU,SCSE Lounge,8,1,6,15
+C003,Chinese New Year,Official 2024 Chinese New Year Celebration,1,1707534000000,1707541200000,1704862800000,NTU,Gaia,8,4;5,7,15
+C004,1792 United States Presidential Election,The second election after we won against those Brits,1,-5587873200000,-5587786800000,-5588132400000,NTU,Washington,8,4;5,7,1500
+C005,Christmas Party 0th SCSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,SCSE,AIA Canopy,8,4;5,7,50
+C006,Christmas Party 1st SCSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,MSE,Lee Wee Nam Library,8,4;5,7,10
+C007,Christmas Party MSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,SCSE,Lee Wee Nam Library,8,3,6,50
+C008,Christmas Party 2nd Round SCSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,NTU,1,8,4;5,7,10
+C009,Sad Empty Christmas Party,No one is here,1,1703512200000,1703523000000,1707541200000,NTU,1,8,4;5,7,12
+C010,Christmas Party X++,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,NTU,1,8,4;5,7,10
