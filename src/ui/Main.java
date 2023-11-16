@@ -41,15 +41,15 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window CreateCampWindow = new CreateCamp();
+            Window LoginView = new LoginView(60, 60, 0, 0, 0);
             Window CampListView = new CampListView(0, 0, 0);
             Window campViewer = new CampViewer(40, 40, 0);
             Window loginWindow = new LoginView(20, 50, 1,2,3);
             Window loginWindow2 = new StudentMainView(0);
             Window changePasswordWindow = new ChangePasswordView( 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
-//            windows.addWindow(CreateCampWindow);
 //            windows.addWindow(campViewer);
+            windows.addWindow(LoginView);
             windows.addWindow(CampListView);
             windows.addWindow(loginWindow);
             windows.addWindow(loginWindow2);
