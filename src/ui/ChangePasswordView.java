@@ -20,8 +20,8 @@ public class ChangePasswordView extends Window {
     WidgetButton confirmButton;
     WidgetButton cancelButton;
     private int loginSwitchToWindowIndex;
-    private int loginViewIndex;
-    public ChangePasswordView(int loginSwitchToWindowIndex, int loginViewIndex){
+    private int studentMainViewIndex;
+    public ChangePasswordView(int loginSwitchToWindowIndex, int studentMainViewIndex){
         super(20, 55, "Password Change");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Change Your Password", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -43,7 +43,7 @@ public class ChangePasswordView extends Window {
         addWidget(cancelButton);
         setPointer(confirmButton);
         this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
-        this.loginViewIndex = loginViewIndex;
+        this.studentMainViewIndex = studentMainViewIndex;
     }
 
     public void messageLoop() {
@@ -80,7 +80,7 @@ public class ChangePasswordView extends Window {
             }
         }
         if(cancelButton.getPressed()){
-            switchToWindow = loginViewIndex;
+            switchToWindow = studentMainViewIndex;
         }
     }
     public void onExit(){
