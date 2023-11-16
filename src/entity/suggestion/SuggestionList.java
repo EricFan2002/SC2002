@@ -1,14 +1,13 @@
-package entity;
+package entity.suggestion;
 
 import java.util.List;
 
+import entity.RepositoryList;
 import entity.camp.Camp;
 import entity.interfaces.IFilterableByAnsweredBy;
 import entity.interfaces.IFilterableByCamp;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableByStatus;
-import entity.suggestion.Suggestion;
-import entity.suggestion.SuggestionStatus;
 import entity.interfaces.IFilterableBySender;
 import entity.user.User;
 

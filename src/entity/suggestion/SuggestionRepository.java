@@ -1,4 +1,4 @@
-package entity;
+package entity.suggestion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,12 +9,14 @@ import java.io.Reader;
 import java.util.Date;
 import java.util.List;
 
+import entity.Repository;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
-import entity.suggestion.Suggestion;
-import entity.suggestion.SuggestionStatus;
+import entity.camp.CampRepository;
 import entity.user.Staff;
 import entity.user.Student;
+import entity.user.UserList;
+import entity.user.UserRepository;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;

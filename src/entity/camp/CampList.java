@@ -1,9 +1,9 @@
-package entity;
+package entity.camp;
 
 import java.util.Date;
 import java.util.List;
 
-import entity.camp.Camp;
+import entity.RepositoryList;
 import entity.interfaces.IFilterableByDateRange;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableBySchool;
@@ -84,6 +84,5 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
     public CampList getAll() {
         return this;
     }
-
 
 }
