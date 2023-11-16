@@ -50,8 +50,8 @@ public abstract class Repository<T extends ITaggedItem> {
     }
 
     //remove 1 item from RepositoryList
-    public void remove(T item) {
-        all.remove(item);
+    public boolean remove(T item) {
+        return all.remove(item);
     }
 
     //go to RepositoryList then to List and find item with the same ID as the input item and replace it with the input item
