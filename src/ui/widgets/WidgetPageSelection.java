@@ -10,7 +10,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class WidgetPageSelection extends Widget {
-    private int selected = -1;
+    private int selectedOption = -1;
     List<List<WidgetButton>> selectionsButton = new ArrayList<>();
     WidgetButton nextButton;
     WidgetButton prevButton;
@@ -22,7 +22,7 @@ public class WidgetPageSelection extends Widget {
     private int itemHeight = 0;
     public WidgetPageSelection(int x, int y, int len, int height, String text, ArrayList<ArrayList<String>> selections, Window mainWindow) {
         super(x, y, len, text);
-        selected = -1;
+        selectedOption = -1;
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         this.height = height;
         this.mainWindow = mainWindow;
@@ -38,7 +38,7 @@ public class WidgetPageSelection extends Widget {
     }
 
     public void updateList(ArrayList<ArrayList<String>> selections){
-        selected = -1;
+        selectedOption = -1;
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         this.height = height;
         this.mainWindow = mainWindow;
@@ -52,6 +52,18 @@ public class WidgetPageSelection extends Widget {
         perPage = (height - 1) / itemHeight;
         addSelections(selections);
         currentPage = 0;
+    }
+
+    public int getSelectedOption(){
+        return selectedOption;
+    }
+
+    public void clearSelectedOption(){
+        selectedOption = -1;
+    }
+
+    public List<List<WidgetButton>> getSelectionsButton() {
+        return selectionsButton;
     }
 
     public void addSelections(ArrayList<ArrayList<String>> selections){
@@ -132,6 +144,10 @@ public class WidgetPageSelection extends Widget {
                 for(WidgetButton button : buttons){
                     button.unselect();
                 }
+            }
+            if(buttons.get(0).getPressed()){
+                buttons.get(0).clearPressed();
+                selectedOption = i;
             }
         }
     }

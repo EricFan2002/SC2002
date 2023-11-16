@@ -1,5 +1,6 @@
 package ui;
 
+import entity.camp.CampList;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -15,4 +16,21 @@ public class CampListViewStudent extends CampListView{
         addWidgetAfter(toggleCommittee, filter4Index);
         addWidgetAfter(toggleJoinedCamp, filter4Index);
     }
+
+    @Override
+    public void messageLoop() {
+        if(widgetPageSelection.getSelectedOption() != -1){
+            WidgetButton button = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
+            button.clearPressed();
+            OverlayCampListViewStudentCampActions overlayCampListViewStudentCampActions = new OverlayCampListViewStudentCampActions(50,  button.getY(), button.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStudent.this);
+            addOverlay(overlayCampListViewStudentCampActions);
+            widgetPageSelection.clearSelectedOption();
+        }
+    }
+
+    @Override
+    public void onWindowFinished(int chose, String choseString) {
+
+    }
+
 }
