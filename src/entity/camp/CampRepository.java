@@ -79,7 +79,7 @@ public class CampRepository extends Repository<Camp> {
                 String staffIDRaw = record.get(9);
                 UserList tempStaff = userRepository.getAll().filterByID(staffIDRaw);
 
-                String totalSlotsRaw = record.get(10);
+                String totalSlotsRaw = record.get(12);
                 int totalSlots = Integer.parseInt(totalSlotsRaw);
 
                 Staff staff;
