@@ -19,11 +19,12 @@ public class CampModificationController {
         campRepository.remove(camp);
     }
 
-    //I changed this to Camp instead of CampDetails
+    // I changed this to Camp instead of CampDetails
     public void editCamp(Camp oldCD, Camp newCD) {
-        Camp updatedCamp = new Camp(oldCD.getID(), newCD.getName(), newCD.getDescription(), newCD.isVisible(), newCD.getStartDate(), newCD.getEndDate(), newCD.getCloseRegistrationDate(), newCD.getSchool(), newCD.getLocation(), newCD.getStaffInCharge());
+        Camp updatedCamp = new Camp(oldCD.getID(), newCD.getName(), newCD.getDescription(), newCD.isVisible(),
+                newCD.getStartDate(), newCD.getEndDate(), newCD.getCloseRegistrationDate(), newCD.getSchool(),
+                newCD.getLocation(), newCD.getStaffInCharge());
 
         campRepository.update(updatedCamp);
     }
 }
-

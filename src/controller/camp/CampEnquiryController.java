@@ -29,7 +29,7 @@ public class CampEnquiryController {
         return RepositoryCollection.getEnquiryRepository().getAll().filterBySender(user);
     }
 
-    public boolean updateEnquiry(Enquiry oldEnquiry, Enquiry newEnquiry) {
+    public boolean updateEnquiry(Enquiry newEnquiry) {
         return RepositoryCollection.getEnquiryRepository().update(newEnquiry);
     }
 
