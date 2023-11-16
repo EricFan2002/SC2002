@@ -1,7 +1,8 @@
+package controller.camp;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import entity.UserRepository;
@@ -10,17 +11,16 @@ import entity.camp.Camp;
 import entity.user.User;
 import entity.user.Student;
 
-public class CampStatusMonitorService {
+public class CampStatusMonitorController {
     private CampRepository campRepository;
     private UserRepository userRepository;
 
-    public CampStatusMonitorService(CampRepository campRepository, UserRepository userRepository) {
+    public CampStatusMonitorController(CampRepository campRepository, UserRepository userRepository) {
         this.campRepository = campRepository;
         this.userRepository = userRepository;
     }
 
-    public ArrayList<User> getAttendingStudents(String id) {
-        Camp camp = campRepository.getAll().filterByID(id).get(0);
+    public ArrayList<User> getAttendingStudents(Camp camp) {
         ArrayList<User> attendingStudents = new ArrayList<>();
         if (camp != null) {
             // Assuming Camp has a method to get all attending students

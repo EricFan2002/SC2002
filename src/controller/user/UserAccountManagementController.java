@@ -1,6 +1,8 @@
+package controller.user;
+
 import entity.UserRepository;
 
-public class AccountManagementService {
+public class UserAccountManagementController {
     private UserRepository userRepository;
 
     public boolean changePassword(String username, String oldPassword, String newPassword) {
