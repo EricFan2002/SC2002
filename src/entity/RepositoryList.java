@@ -46,7 +46,12 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
 
     // getter
     public T get(int index) {
-        return all.get(index);
+        if (index >= 0 && index < all.size()) {
+            return all.get(index);
+        } else {
+            // Handle the invalid index, e.g., by returning null or throwing a custom exception
+            return null;
+        }
     }
 
     // add 1 item to List

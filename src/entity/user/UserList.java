@@ -28,4 +28,8 @@ public class UserList extends RepositoryList<User> implements IFilterableByID<Us
     public User[] toArray() {
         return super.all.toArray(new User[super.all.size()]);
     }
+
+    public boolean isEmpty() {
+        return super.all.isEmpty();
+    }
 }

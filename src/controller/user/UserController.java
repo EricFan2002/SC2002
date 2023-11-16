@@ -26,7 +26,13 @@ public class UserController {
     }
 
     private static User getUserByUsername(String id) {
-        return RepositoryCollection.userRepository.getAll().filterByID(id).get(0);
+        var userList = RepositoryCollection.userRepository.getAll().filterByID(id);
+        if (!userList.isEmpty()) {
+            return userList.get(0);
+        } else {
+            // Handle case where user is not found
+            return null;
+        }
     }
 
     public static User getCurrentUser() {
