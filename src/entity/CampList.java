@@ -8,6 +8,8 @@ import entity.interfaces.IFilterableByDateRange;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableBySchool;
 import entity.interfaces.IFilterableByVisibility;
+import entity.user.Staff;
+import entity.user.Student;
 
 public class CampList extends RepositoryList<Camp> implements IFilterableByID<Camp>, IFilterableByDateRange<Camp>,
         IFilterableBySchool<Camp>, IFilterableByVisibility<Camp> {
@@ -58,4 +60,30 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
         }
         return result;
     }
+
+    public CampList filterByStudent(Student student) {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            if (camp.getAttendees().contains(student)) {
+                result.add(camp);
+            }
+        }
+        return result;
+    }
+
+    public CampList filterByStaff(Staff staff) {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            if (camp.getStaffInCharge().equals(staff)) {
+                result.add(camp);
+            }
+        }
+        return result;
+    }
+
+    public CampList getAll() {
+        return this;
+    }
+
+
 }

@@ -33,6 +33,9 @@ public abstract class User implements ITaggedItem {
     public void setID(String ID) {
         this.ID = ID;
     }
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
 
     public String getFaculty() {
         return faculty;
