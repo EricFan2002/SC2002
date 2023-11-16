@@ -2,6 +2,8 @@ package ui;
 
 import controller.user.UserAccountManagementController;
 import controller.user.UserController;
+import entity.user.Staff;
+import entity.user.Student;
 import ui.widgets.*;
 import ui.windows.Window;
 
@@ -80,7 +82,11 @@ public class ChangePasswordView extends Window {
             }
         }
         if(cancelButton.getPressed()){
-            switchToWindow = studentMainViewIndex;
+            if (UserController.getCurrentUser() instanceof Staff) {
+                switchToWindow = loginSwitchToWindowIndex;
+            } else if (UserController.getCurrentUser() instanceof Student){
+                switchToWindow = studentMainViewIndex;
+            }
         }
     }
     public void onExit(){
