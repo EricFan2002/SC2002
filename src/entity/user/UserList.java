@@ -1,9 +1,9 @@
-package entity;
+package entity.user;
 
 import java.util.List;
 
+import entity.RepositoryList;
 import entity.interfaces.IFilterableByID;
-import entity.user.User;
 
 public class UserList extends RepositoryList<User> implements IFilterableByID<User> {
     public UserList(List<User> all) {

@@ -1,4 +1,4 @@
-package entity;
+package entity.enquiry;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,14 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+import entity.Repository;
 import entity.camp.Camp;
-import entity.enquiry.Enquiry;
+import entity.camp.CampList;
+import entity.camp.CampRepository;
 import entity.user.Student;
 import entity.user.User;
+import entity.user.UserList;
+import entity.user.UserRepository;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -84,11 +88,11 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
                 Enquiry enquiry = new Enquiry(id, sender, question, answer, camp, answeredBy);
 
-                //add Enquiry to EnquiryList
+                // add Enquiry to EnquiryList
                 cur.add(enquiry);
             });
 
-            //set EnquiryRepo to EnquiryList,called Repo's function
+            // set EnquiryRepo to EnquiryList,called Repo's function
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());

@@ -1,9 +1,9 @@
-package entity;
+package entity.enquiry;
 
 import java.util.List;
 
+import entity.RepositoryList;
 import entity.camp.Camp;
-import entity.enquiry.Enquiry;
 import entity.interfaces.IFilterableByAnsweredBy;
 import entity.interfaces.IFilterableByCamp;
 import entity.interfaces.IFilterableByID;

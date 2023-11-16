@@ -1,7 +1,12 @@
 package ui;
 
+import controller.user.UserAccountManagementController;
+import controller.user.UserController;
 import ui.widgets.*;
 import ui.windows.Window;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChangePasswordView extends Window {
     WidgetLabel widgetLabel1;
@@ -14,8 +19,8 @@ public class ChangePasswordView extends Window {
     WidgetToggle toggle;
     WidgetButton confirmButton;
     WidgetButton cancelButton;
-    private int loginSwitchToWindowIndex;
-    public ChangePasswordView(int loginSwitchToWindowIndex){
+    private int changePasswordWindowIndex;
+    public ChangePasswordView(int changePasswordWindowIndex){
         super(20, 55, "Password Change");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Change Your Password", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -36,16 +41,44 @@ public class ChangePasswordView extends Window {
         cancelButton = new WidgetButton(2, 14, 49, "Back");
         addWidget(cancelButton);
         setPointer(confirmButton);
-        this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
+        this.changePasswordWindowIndex = changePasswordWindowIndex;
     }
 
     public void messageLoop() {
         super.messageLoop();
         if(confirmButton.getPressed()){
-            switchToWindow = loginSwitchToWindowIndex;
+            String name = widgetTextBox.getText();
+            String password = widgetTextBox1.getText();
+            String newPassword = widgetTextBox2.getText();
+            String confirmPassword = widgetTextBox2.getText();
+            // check if name and password is correct
+            if(UserController.login(name, password)){
+                // if correct, switch to main menu
+                if(newPassword.equals(confirmPassword)){
+                    if (UserAccountManagementController.changePassword(name, password, newPassword)) {
+                        switchToWindow = changePasswordWindowIndex;
+                    } else {
+                        List<String> options = new ArrayList<String>();
+                        options.add("OK");
+                        OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Error changing the password", options, ChangePasswordView.this);
+                        overlayChooseBox.messageLoop();
+                    }
+                } else {
+                    List<String> options = new ArrayList<String>();
+                    options.add("OK");
+                    OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "New password and confirm password do not match", options, ChangePasswordView.this);
+                    overlayChooseBox.messageLoop();
+                }
+            } else {
+                // if incorrect, show error message
+                List<String> options = new ArrayList<String>();
+                options.add("OK");
+                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Incorrect username or password", options, ChangePasswordView.this);
+                overlayChooseBox.messageLoop();
+            }
         }
         if(cancelButton.getPressed()){
-            switchToWindow = loginSwitchToWindowIndex;
+            switchToWindow = changePasswordWindowIndex;
         }
     }
     public void onExit(){

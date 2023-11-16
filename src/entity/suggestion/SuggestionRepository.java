@@ -1,4 +1,4 @@
-package entity;
+package entity.suggestion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,12 +9,14 @@ import java.io.Reader;
 import java.util.Date;
 import java.util.List;
 
+import entity.Repository;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
-import entity.suggestion.Suggestion;
-import entity.suggestion.SuggestionStatus;
+import entity.camp.CampRepository;
 import entity.user.Staff;
 import entity.user.Student;
+import entity.user.UserList;
+import entity.user.UserRepository;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -85,10 +87,11 @@ public class SuggestionRepository extends Repository<Suggestion> {
                 Date closeRegDate = campSuggestionArr[6] != "" ? new Date(Long.parseLong(campSuggestionArr[6])) : null;
                 String school = campSuggestionArr[7] != "" ? campSuggestionArr[7] : null;
                 String location = campSuggestionArr[8] != "" ? campSuggestionArr[8] : null;
+                int totalSlots = campSuggestionArr[9] != "" ? Integer.parseInt(campSuggestionArr[9]) : null;
 
                 CampDetails campDetails = new CampDetails(campSuggestionID, name, desc,
                         visibility, startDate, endDate, closeRegDate, school,
-                        location);
+                        location, totalSlots);
 
                 String reviewedByID = record.get(3);
                 UserList reviewedByTmp = userRepository.getAll().filterByID(reviewedByID);
@@ -105,11 +108,11 @@ public class SuggestionRepository extends Repository<Suggestion> {
 
                 Suggestion suggestion = new Suggestion(id, sender, campDetails, originalCamp, reviewedBy, status);
 
-                //add Suggestion to SuggestionList
+                // add Suggestion to SuggestionList
                 cur.add(suggestion);
             });
 
-            //set SuggestionRepo to SuggestionList
+            // set SuggestionRepo to SuggestionList
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
@@ -157,9 +160,12 @@ public class SuggestionRepository extends Repository<Suggestion> {
                     String locationString = (camp.getSuggestion().getLocation() == null) ? ""
                             : camp.getSuggestion().getLocation();
 
+                    String totalSlotsString = (camp.getSuggestion().getTotalSlots() == null) ? ""
+                            : Integer.toString(camp.getSuggestion().getTotalSlots());
+
                     String[] campSuggestionArray = { idString, nameString,
                             descString, visibilityString, startDateString, endDateString,
-                            closeRegDateString, schoolString, locationString };
+                            closeRegDateString, schoolString, locationString, totalSlotsString };
 
                     String campSuggestionString = String.join(";", campSuggestionArray);
 

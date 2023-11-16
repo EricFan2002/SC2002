@@ -8,16 +8,17 @@ public class CampDetails implements ITaggedItem {
     protected String ID;
     protected String name;
     protected String description;
-    protected boolean visibility;
+    protected Boolean visibility;
     protected Date startDate;
     protected Date endDate;
     protected Date closeRegistrationDate;
     protected String school;
     protected String location;
+    protected Integer totalSlots;
 
     public CampDetails(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
-            String school, String location) {
+            String school, String location, int totalSlots) {
         this.ID = ID;
         this.name = name;
         this.description = description;
@@ -27,6 +28,7 @@ public class CampDetails implements ITaggedItem {
         this.closeRegistrationDate = closeRegistrationDate;
         this.school = school;
         this.location = location;
+        this.totalSlots = totalSlots;
     }
 
     public CampDetails() {
@@ -53,7 +55,7 @@ public class CampDetails implements ITaggedItem {
         return description;
     }
 
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visibility;
     }
 
@@ -77,6 +79,10 @@ public class CampDetails implements ITaggedItem {
         return location;
     }
 
+    public Integer getTotalSlots() {
+        return totalSlots;
+    }
+
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -90,6 +96,10 @@ public class CampDetails implements ITaggedItem {
     }
 
     public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
+    }
+
+    public void setVisibility(Boolean visibility) {
         this.visibility = visibility;
     }
 
@@ -111,6 +121,10 @@ public class CampDetails implements ITaggedItem {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setTotalSlots(int totalSlots) {
+        this.totalSlots = totalSlots;
     }
 
 }

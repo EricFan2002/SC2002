@@ -50,9 +50,9 @@ public class Main {
 
         // instantiate camp
         Camp camp1 = new Camp("abc", "Camp Nou", "Soccer camp for young students!", true, new Date(1), new Date(1),
-                new Date(1), "1", "1", staff);
+                new Date(1), "1", "1", staff, 12);
         Camp camp2 = new Camp("cde", "Old Trafford", "Summer camp soccer training", true, new Date(1), new Date(1),
-                new Date(1), "1", "1", staff);
+                new Date(1), "1", "1", staff, 15);
 
         campRepository.insert(camp1);
         campRepository.insert(camp2);

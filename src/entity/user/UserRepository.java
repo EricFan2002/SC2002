@@ -1,4 +1,4 @@
-package entity;
+package entity.user;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,14 +8,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-import entity.user.Staff;
-import entity.user.Student;
-import entity.user.User;
-import entity.user.UserFactory;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
+import entity.Repository;
+
 import org.apache.commons.csv.CSVPrinter;
 
 public class UserRepository extends Repository<User> {
@@ -70,11 +68,11 @@ public class UserRepository extends Repository<User> {
                 if (user != null) {
                     user.setPassword(password);
                     cur.add(user);
-                    //add to UserList which extends Repository List
+                    // add to UserList which extends Repository List
                 }
             });
 
-            //set UserRepo to UserList,called Repo's function
+            // set UserRepo to UserList,called Repo's function
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());

@@ -17,7 +17,7 @@ public class CampModificationController {
     public static void editCamp(Camp newCD) {
         Camp updatedCamp = new Camp(newCD.getID(), newCD.getName(), newCD.getDescription(), newCD.isVisible(),
                 newCD.getStartDate(), newCD.getEndDate(), newCD.getCloseRegistrationDate(), newCD.getSchool(),
-                newCD.getLocation(), newCD.getStaffInCharge());
+                newCD.getLocation(), newCD.getStaffInCharge(), newCD.getTotalSlots());
 
         RepositoryCollection.getCampRepository().update(updatedCamp);
         RepositoryCollection.getCampRepository().update(updatedCamp);
