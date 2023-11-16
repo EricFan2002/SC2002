@@ -73,10 +73,7 @@ public class Main {
         // prints suggestion
         System.out.println(suggestionRepository.getAll().get(0).getSuggestion().getSchool());
 
-        campRepository.save();
-        userRepository.save();
-        enquiryRepository.save();
-        suggestionRepository.save();
+        RepositoryCollection.save();
 
     }
 }
