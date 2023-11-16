@@ -15,7 +15,7 @@ public class Camp extends CampDetails {
 
     public static final int MAX_COMMITTEE = 10;
 
-    public Camp(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
+    public Camp(String ID, String name, String description, Boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
             String school, String location, Staff staffInCharge, int totalSlots) {
         super(ID, name, description, visibility, startDate, endDate, closeRegistrationDate, school, location,
