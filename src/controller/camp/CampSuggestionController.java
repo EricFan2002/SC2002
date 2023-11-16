@@ -1,8 +1,8 @@
 package controller.camp;
 
-import entity.CampList;
+import entity.camp.CampList;
 import entity.RepositoryCollection;
-import entity.SuggestionList;
+import entity.suggestion.SuggestionList;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
 import entity.suggestion.Suggestion;
@@ -14,17 +14,17 @@ public class CampSuggestionController {
 
     public static boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
-        RepositoryCollection.getSuggestionRepository().insert(suggestion);
+        RepositoryCollection.suggestionRepository.insert(suggestion);
         sender.addPoints(1);
         return true;
     }
 
     public static boolean updateSuggestion(Suggestion newSuggestion) {
-        return RepositoryCollection.getSuggestionRepository().update(newSuggestion);
+        return RepositoryCollection.suggestionRepository.update(newSuggestion);
     }
 
     public static boolean deleteSuggestion(Suggestion suggestion) {
-        return RepositoryCollection.getSuggestionRepository().remove(suggestion);
+        return RepositoryCollection.suggestionRepository.remove(suggestion);
     }
 
     public static boolean approveSuggestion(Suggestion suggestion, Staff staff, boolean isApproved) {
@@ -34,7 +34,7 @@ public class CampSuggestionController {
             sender.addPoints(1);
             suggestion.setStatus(SuggestionStatus.APPROVED);
             String editingID = suggestion.getID();
-            CampList editingCamps = RepositoryCollection.getCampRepository().getAll().filterByID(editingID);
+            CampList editingCamps = RepositoryCollection.campRepository.getAll().filterByID(editingID);
             if (editingCamps.size() == 0)
                 return false;
             Camp editingCamp = editingCamps.get(0);
@@ -59,14 +59,14 @@ public class CampSuggestionController {
     }
 
     public static SuggestionList getSuggestions(Camp camp) {
-        return RepositoryCollection.getSuggestionRepository().getAll().filterByCamp(camp);
+        return RepositoryCollection.suggestionRepository.getAll().filterByCamp(camp);
     }
 
     public static SuggestionList getSuggestions(Staff staff) {
-        return RepositoryCollection.getSuggestionRepository().getAll().filterBySender(staff);
+        return RepositoryCollection.suggestionRepository.getAll().filterBySender(staff);
     }
 
     public static SuggestionList getSuggestions(Student student) {
-        return RepositoryCollection.getSuggestionRepository().getAll().filterBySender(student);
+        return RepositoryCollection.suggestionRepository.getAll().filterBySender(student);
     }
 }
