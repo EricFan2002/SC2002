@@ -44,7 +44,7 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 1, 2,1);
+            Window LoginView = new LoginView(60, 60, 1, 2, 1);
             Window studentMainView = new StudentMainView(0, 4, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(4, 1);
@@ -151,6 +151,7 @@ public class Main {
                      * which was done in
                      * the call to startScreen(), and also restore things like echo mode and intr
                      */
+                    RepositoryCollection.save();
                     screen.close();
                 } catch (IOException e) {
                     e.printStackTrace();
