@@ -85,4 +85,8 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
         return this;
     }
 
+    public Camp[] toArray() {
+        return super.all.toArray(new Camp[super.all.size()]);
+    }
+
 }
