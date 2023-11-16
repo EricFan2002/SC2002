@@ -1,5 +1,9 @@
 package ui;
 
+import entity.RepositoryCollection;
+import entity.camp.Camp;
+import entity.camp.CampList;
+import entity.camp.CampRepository;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -32,8 +36,27 @@ public class CampListView extends Window implements ICallBack {
         addWidget(filterLabel4);
         WidgetTextBox filter4 = new WidgetTextBox(20, 5, getLenX() / 2 - 20, "");
         addWidget(filter4);
-        ArrayList<String> tmp = new ArrayList<>();
-        WidgetPageSelection widgetPageSelection = new WidgetPageSelection(1, 7, getX() / 2 -2, getY() - 10, "PartyList", tmp, CampListView.this);
+        ArrayList<ArrayList<String>> options = new ArrayList<>();
+        CampList camps = RepositoryCollection.campRepository.getAll();
+        for(int i = 0 ; i < camps.size() ; i ++){
+            Camp camp = camps.get(i);
+            ArrayList<String> tmp = new ArrayList<String>();
+            tmp.add("Camp: " + camp.getName());
+            tmp.add("    " + camp.getStartDate().toString() + " To " + camp.getEndDate().toString());
+            tmp.add("    Participants: " + camp.getAttendees().size() + ", Committee: " + camp.getCommittees().size());
+            tmp.add("    Creator: " + camp.getStaffInCharge().getName() + ", Close at: " + camp.getCloseRegistrationDate().toString());
+            options.add(tmp);
+        }
+//        ArrayList<ArrayList<String>> options = new ArrayList<>();
+        for(int i = 0 ; i < 20 ; i ++){
+            ArrayList<String> tmp = new ArrayList<String>();
+            tmp.add("Camp: " + i);
+            for(int j = 0 ; j < 3 ; j++){
+                tmp.add("    Details: " + j);
+            }
+            options.add(tmp);
+        }
+        WidgetPageSelection widgetPageSelection = new WidgetPageSelection(1, 7, getX() / 2 -2, getY() - 10, "PartyList", options, CampListView.this);
         addWidget(widgetPageSelection);
     }
 

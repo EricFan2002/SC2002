@@ -90,8 +90,4 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         all.clear();
         return true;
     }
-
-    public T[] toArray() {
-        return (T[]) all.toArray();
-    }
 }

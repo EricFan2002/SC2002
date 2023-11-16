@@ -13,9 +13,14 @@ public class CampViewer extends Window {
     private int loginSwitchToWindowIndex;
     public CampViewer(int y, int x, int loginSwitchToWindowIndex){
         super(y, x, "Camp Viewer");
-        ArrayList<String> options = new ArrayList<>();
+        ArrayList<ArrayList<String>> options = new ArrayList<>();
         for(int i = 0 ; i < 20 ; i ++){
-            options.add("Camp: " + i);
+            ArrayList<String> tmp = new ArrayList<String>();
+            tmp.add("Camp: " + i);
+            for(int j = 0 ; j < 3 ; j++){
+                tmp.add("    Details: " + j);
+            }
+            options.add(tmp);
         }
         WidgetPageSelection widgetPageSelection = new WidgetPageSelection(2, 2, 20, 10, "Selection", options, CampViewer.this);
         addWidget(widgetPageSelection);
