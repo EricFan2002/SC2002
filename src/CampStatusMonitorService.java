@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import entity.UserRepository;
 import entity.CampRepository;
 import entity.camp.Camp;
 import entity.user.User;
+import entity.user.Student;
 
 public class CampStatusMonitorService {
     private CampRepository campRepository;
@@ -25,19 +29,12 @@ public class CampStatusMonitorService {
         return attendingStudents;
     }
 
-    public ArrayList<PerformanceReport> generatePerformanceReport(String id) {
-        ArrayList<PerformanceReport> reports = new ArrayList<>();
-        // Logic to generate performance report for the camp
-        // Assuming there's a method to get the performance reports for a camp
-        Camp camp = campRepository.getAll().filterByID(id).get(0);
-        if (camp != null) {
-            for (User user : camp.getCommittees()) {
-                if (user instanceof CommitteeStudent) {
-                    CommitteeStudent committeeStudent = (CommitteeStudent) user;
-                    reports.add(committeeStudent.getPerformanceReport());
-                }
-            }
+    public Map<String, Integer> generatePerformanceReport(Camp camp) {
+        Map<String, Integer> performanceReport = new HashMap<>();
+        Set<Student> students = camp.getCommittees();
+        for (Student student : students) {
+            performanceReport.put(student.getName(), student.getPoints());
         }
-        return reports;
+        return performanceReport;
     }
 }
