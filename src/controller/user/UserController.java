@@ -1,4 +1,7 @@
 package controller.user;
+import entity.RepositoryCollection;
+import entity.UserRepository;
+import entity.UserList;
 import entity.user.User;
 
 public class UserController {
@@ -21,8 +24,8 @@ public class UserController {
         oldUser.setFaculty(newUser.getFaculty());
     }
 
-    private User getUserByUsername(String username) {
-        return null;
+    private User getUserByUsername(String id) {
+        return RepositoryCollection.getUserRepository().getAll().filterByID(id).get(0);
     }
 
 

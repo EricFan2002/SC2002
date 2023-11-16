@@ -20,5 +20,6 @@ public class CampModificationController {
                 newCD.getLocation(), newCD.getStaffInCharge());
 
         RepositoryCollection.getCampRepository().update(updatedCamp);
+        RepositoryCollection.getCampRepository().update(updatedCamp);
     }
 }
