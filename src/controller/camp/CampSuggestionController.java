@@ -1,6 +1,7 @@
 package controller.camp;
 
 
+import entity.CampList;
 import entity.RepositoryCollection;
 import entity.SuggestionList;
 import entity.camp.Camp;
@@ -32,7 +33,10 @@ public class CampSuggestionController {
         if(isApproved){
             suggestion.setStatus(SuggestionStatus.APPROVED);
             String editingID = suggestion.getID();
-            Camp editingCamp = RepositoryCollection.getCampRepository().getAll().filterByID(editingID).get(0);
+            CampList editingCamps = RepositoryCollection.getCampRepository().getAll().filterByID(editingID);
+            if(editingCamps.size() == 0)
+                return false;
+            Camp editingCamp = editingCamps.get(0);
             if(suggestion.getSuggestion().getDescription() != null)
                 editingCamp.setDescription(suggestion.getSuggestion().getDescription());
             if(suggestion.getSuggestion().getEndDate() != null)
