@@ -44,9 +44,10 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 1, 1);
-            Window studentMainView = new StudentMainView(0, 3, 2);
-            Window changePasswordView = new ChangePasswordView(3, 1);
+            Window LoginView = new LoginView(60, 60, 1, 2,1);
+            Window studentMainView = new StudentMainView(0, 4, 3);
+            Window staffMainView = new StaffMainView(0, 4, 3);
+            Window changePasswordView = new ChangePasswordView(4, 1);
             Window CampListView = new CampListView(0, 0, 0);
             Window createCampView = new CreateCampView(3);
             Window campViewer = new CampViewer(40, 40, 3);
@@ -54,6 +55,7 @@ public class Main {
 
             windows.addWindow(LoginView);
             windows.addWindow(studentMainView);
+            windows.addWindow(staffMainView);
             windows.addWindow(changePasswordView);
             windows.addWindow(CampListView);
             windows.addWindow(createCampView);
