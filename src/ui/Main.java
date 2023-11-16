@@ -42,11 +42,13 @@ public class Main {
                 }
             }
             Window CreateCampWindow = new CreateCamp();
+            Window campViewer = new CampViewer(40, 40, 0);
             Window loginWindow = new LoginController(20, 50, 1,2,3);
             Window loginWindow2 = new StudentMainView(0);
             Window changePasswordWindow = new ChangePasswordView( 0);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
-            windows.addWindow(CreateCampWindow);
+//            windows.addWindow(CreateCampWindow);
+//            windows.addWindow(campViewer);
             windows.addWindow(loginWindow);
             windows.addWindow(loginWindow2);
             windows.addWindow(changePasswordWindow);

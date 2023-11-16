@@ -29,6 +29,7 @@ public class Window {
     private int y;
     private int x;
     private int widgetID;
+    private int needClear = 0;
 
     public Window(int y, int x, String windowName) {
         buffer = new char[y][x];
@@ -93,7 +94,7 @@ public class Window {
         }
         selected += 1;
         selected %= widgets.size();
-        while(!(widgets.get(selected) instanceof ISelectable)){
+        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide()){
             selected += 1;
             selected %= widgets.size();
         }
@@ -108,7 +109,7 @@ public class Window {
         selected -= 1;
         selected += widgets.size();
         selected %= widgets.size();
-        while(!(widgets.get(selected) instanceof ISelectable)){
+        while(!(widgets.get(selected) instanceof ISelectable) || widgets.get(selected).isHide()){
             selected -= 1;
             selected += widgets.size();
             selected %= widgets.size();
@@ -169,7 +170,15 @@ public class Window {
         return widgetID - 1;
     }
 
+    public void setClear(){
+//        needClear = 2;
+    }
+
     public void draw(Screen screen, int x, int y, double transparency) {
+        if(needClear > 0){
+            screen.clear();
+            needClear -= 1;
+        }
         if(widgets.get(selected) instanceof ISelectable) {
             ((ISelectable)widgets.get(selected)).select();
         }

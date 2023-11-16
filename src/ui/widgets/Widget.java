@@ -8,6 +8,7 @@ public abstract class Widget implements IDrawable {
     protected String text;
     TEXT_ALIGNMENT textAlignment;
     private int widgetID;
+    protected boolean hide;
 
     public Widget(int x, int y, int len, String text) {
         this.x = x;
@@ -15,7 +16,16 @@ public abstract class Widget implements IDrawable {
         this.text = text;
         this.len = len;
         this.widgetID = -1;
+        this.hide = false;
         textAlignment = TEXT_ALIGNMENT.ALIGN_LEFT;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean ifHide){
+        hide = ifHide;
     }
     public int getLen() {
         return len;
@@ -41,6 +51,8 @@ public abstract class Widget implements IDrawable {
     }
 
     public void drawText(char[][] buffer){
+        if(hide)
+            return;
         int blank = 1;
         if(textAlignment == TEXT_ALIGNMENT.ALIGN_MID){
             blank = (getLen() - text.length()) / 2;
