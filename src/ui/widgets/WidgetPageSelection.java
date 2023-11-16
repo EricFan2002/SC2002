@@ -1,8 +1,6 @@
 package ui.widgets;
 
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import ui.windows.Window;
 
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ import static java.lang.Math.min;
 
 public class WidgetPageSelection extends Widget {
     private int selected = -1;
-    List<WidgetButton> selectionsButton = new ArrayList<>();
+    List<List<WidgetButton>> selectionsButton = new ArrayList<>();
     WidgetButton nextButton;
     WidgetButton prevButton;
     private int height;
@@ -21,32 +19,55 @@ public class WidgetPageSelection extends Widget {
     private int currentPage = 0;
     private int maxPage = 0;
     private int perPage = 0;
-    public WidgetPageSelection(int x, int y, int len, int height, String text, List<String> selections, Window mainWindow) {
+    private int itemHeight = 0;
+    public WidgetPageSelection(int x, int y, int len, int height, String text, ArrayList<ArrayList<String>> selections, Window mainWindow) {
         super(x, y, len, text);
         selected = -1;
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         this.height = height;
         this.mainWindow = mainWindow;
-        maxPage = (int)Math.ceil((double)selections.size() / (height - 1));
-        perPage = height - 1;
+        if(selections.size() >= 0) {
+            itemHeight = selections.get(0).size();
+        }
+        else{
+            itemHeight = 1;
+        }
+        maxPage = (int)Math.ceil((double)selections.size() / (height - 1) / itemHeight);
+        perPage = (height - 1) / itemHeight;
         addSelections(selections);
     }
 
-    public void addSelections(List<String> selections){
+    public void addSelections(ArrayList<ArrayList<String>> selections){
         for(int i = 0 ; i < selections.size() ; i++){
-            int position = getY() + ((i) % (perPage));
-            WidgetButton button = new WidgetButton(x, position, len, selections.get(i), TEXT_ALIGNMENT.ALIGN_LEFT);
-            selectionsButton.add(button);
+            int position = getY() + ((i % (perPage))) * itemHeight;
+            List<WidgetButton> buttons = new ArrayList<>();
+            WidgetButton button = new WidgetButton(x, position, len, selections.get(i).get(0), TEXT_ALIGNMENT.ALIGN_LEFT);
+            buttons.add(button);
             mainWindow.addWidget(button);
+            for(int j = 1 ; j < itemHeight ; j++) {
+                button = new WidgetButton(x, position + j, len, selections.get(i).get(j), TEXT_ALIGNMENT.ALIGN_LEFT);
+                button.setSkipSelection(true);
+                buttons.add(button);
+                mainWindow.addWidget(button);
+            }
+            selectionsButton.add(buttons);
         }
-        int padding = (selections.size()) % (perPage);
+        int padding = ((selections.size()) % (perPage)) * itemHeight;
         int extra = perPage - ((selections.size()) % (perPage));
         for(int i = 0 ; i < extra ; i++){
-            int position = getY() + padding + i;
+            int position = getY() + padding + i * itemHeight;
+            List<WidgetButton> buttons = new ArrayList<>();
             WidgetButton button = new WidgetButton(x, position, len, "", TEXT_ALIGNMENT.ALIGN_LEFT);
             button.setSkipSelection(true);
-            selectionsButton.add(button);
+            buttons.add(button);
             mainWindow.addWidget(button);
+            for(int j = 1 ; j < itemHeight ; j++) {
+                button = new WidgetButton(x, position + j, len, "", TEXT_ALIGNMENT.ALIGN_LEFT);
+                button.setSkipSelection(true);
+                buttons.add(button);
+                mainWindow.addWidget(button);
+            }
+            selectionsButton.add(buttons);
         }
         prevButton = new WidgetButton(x, getY() + height - 1, len / 2, "Prev");
         int second = len / 2;
@@ -75,10 +96,26 @@ public class WidgetPageSelection extends Widget {
             end = selectionsButton.size();
         }
         for(int i = 0 ; i < selectionsButton.size() ; i++){
-            selectionsButton.get(i).setHide(true);
+            List<WidgetButton> buttons = selectionsButton.get(i);
+            for(WidgetButton button : buttons){
+                button.setHide(true);
+            }
         }
         for(int i = start; i < end ; i++){
-            selectionsButton.get(i).setHide(false);
+            List<WidgetButton> buttons = selectionsButton.get(i);
+            for(WidgetButton button : buttons){
+                button.setHide(false);
+            }
+            if(buttons.get(0).selected){
+                for(WidgetButton button : buttons){
+                    button.select();
+                }
+            }
+            else{
+                for(WidgetButton button : buttons){
+                    button.unselect();
+                }
+            }
         }
     }
 }

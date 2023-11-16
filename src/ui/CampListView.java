@@ -32,8 +32,16 @@ public class CampListView extends Window implements ICallBack {
         addWidget(filterLabel4);
         WidgetTextBox filter4 = new WidgetTextBox(20, 5, getLenX() / 2 - 20, "");
         addWidget(filter4);
-        ArrayList<String> tmp = new ArrayList<>();
-        WidgetPageSelection widgetPageSelection = new WidgetPageSelection(1, 7, getX() / 2 -2, getY() - 10, "PartyList", tmp, CampListView.this);
+        ArrayList<ArrayList<String>> options = new ArrayList<>();
+        for(int i = 0 ; i < 20 ; i ++){
+            ArrayList<String> tmp = new ArrayList<String>();
+            tmp.add("Camp: " + i);
+            for(int j = 0 ; j < 3 ; j++){
+                tmp.add("    Details: " + j);
+            }
+            options.add(tmp);
+        }
+        WidgetPageSelection widgetPageSelection = new WidgetPageSelection(1, 7, getX() / 2 -2, getY() - 10, "PartyList", options, CampListView.this);
         addWidget(widgetPageSelection);
     }
 
