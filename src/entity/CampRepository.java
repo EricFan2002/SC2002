@@ -77,6 +77,9 @@ public class CampRepository extends Repository<Camp> {
                 String staffIDRaw = record.get(9);
                 UserList tempStaff = userRepository.getAll().filterByID(staffIDRaw);
 
+                String totalSlotsRaw = record.get(10);
+                int totalSlots = Integer.parseInt(totalSlotsRaw);
+
                 Staff staff;
                 if (tempStaff.size() > 0) {
                     staff = (Staff) tempStaff.get(0);
@@ -85,7 +88,7 @@ public class CampRepository extends Repository<Camp> {
                     // do something if not found
                 }
                 Camp camp = new Camp(id, name, desc, visibility, startDate, endDate, closeRegDate, school, location,
-                        staff);
+                        staff, totalSlots);
 
                 String[] attendeeIDsRaw = record.get(10).split(";");
                 for (String attendeeIDRaw : attendeeIDsRaw) {
@@ -107,11 +110,11 @@ public class CampRepository extends Repository<Camp> {
                     }
                 }
 
-                //add to CampList which extends RepositoryList
+                // add to CampList which extends RepositoryList
                 cur.add(camp);
             });
 
-            //set CampRepo to CampList,called Repo's function
+            // set CampRepo to CampList,called Repo's function
             super.setAll(cur);
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
@@ -151,7 +154,7 @@ public class CampRepository extends Repository<Camp> {
 
                     printer.printRecord(camp.getID(), camp.getName(), camp.getDescription(), visibility, startDate,
                             endDate, closeRegDate, camp.getSchool(), camp.getLocation(), staffID, attendeeIDs,
-                            committeeIDs);
+                            committeeIDs, camp.getTotalSlots());
                 } catch (IOException e) {
                     System.out.println(e.toString());
 
