@@ -15,6 +15,7 @@ public class CampSuggestionController {
     public boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
         RepositoryCollection.getSuggestionRepository().insert(suggestion);
+        sender.addPoints(1);
         return true;
     }
 
@@ -29,6 +30,8 @@ public class CampSuggestionController {
     public boolean approveSuggestion(Suggestion suggestion, Staff staff, boolean isApproved) {
         suggestion.setReviewedBy(staff);
         if (isApproved) {
+            Student sender = suggestion.getSender();
+            sender.addPoints(1);
             suggestion.setStatus(SuggestionStatus.APPROVED);
             String editingID = suggestion.getID();
             CampList editingCamps = RepositoryCollection.getCampRepository().getAll().filterByID(editingID);

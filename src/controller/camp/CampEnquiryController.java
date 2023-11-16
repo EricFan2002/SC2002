@@ -37,8 +37,11 @@ public class CampEnquiryController {
         return RepositoryCollection.getEnquiryRepository().remove(enquiry);
     }
 
-    public boolean answerEnquiry(Enquiry enquiry, Student answeringUser, String answer) {
+    public boolean answerEnquiry(Enquiry enquiry, User answeringUser, String answer) {
         enquiry.setAnswer(answer, answeringUser);
+        if (answeringUser instanceof Student answeringStudent) {
+            answeringStudent.addPoints(1);
+        }
         return RepositoryCollection.getEnquiryRepository().update(enquiry);
     }
 }
