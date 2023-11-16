@@ -4,12 +4,14 @@ import entity.RepositoryCollection;
 import entity.user.User;
 
 public class UserController {
+    private static User currentUser;
 
     public static boolean login(String username, String password) {
         User user = getUserByUsername(username);
 
         // Validate user's password
         if (user != null && user.getPassword().equals(password)) {
+            currentUser = user;
             return true; // Login successful
         } else {
             return false; // Login failed
@@ -27,4 +29,7 @@ public class UserController {
         return RepositoryCollection.userRepository.getAll().filterByID(id).get(0);
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
 }

@@ -17,10 +17,12 @@ import java.io.IOException;
 
 /**
  * The third tutorial, introducing the Screen interface
+ * 
  * @author Martin
  */
 public class Main {
     public static void main(String[] args) {
+        RepositoryCollection.load();
 
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
         Screen screen = null;
@@ -33,14 +35,15 @@ public class Main {
             screen.setCursorPosition(null);
 
             TerminalSize terminalSize = screen.getTerminalSize();
-            for(int column = 0; column < terminalSize.getColumns(); column++) {
-                for(int row = 0; row < terminalSize.getRows(); row++) {
+            for (int column = 0; column < terminalSize.getColumns(); column++) {
+                for (int row = 0; row < terminalSize.getRows(); row++) {
                     screen.setCharacter(column, row, new TextCharacter(
                             ' ',
                             TextColor.ANSI.DEFAULT,
                             TextColor.ANSI.DEFAULT));
                 }
             }
+<<<<<<< HEAD
             Window CreateCampWindow = new CreateCamp();
             Window CampListView = new CampListView(0, 0, 0);
             Window campViewer = new CampViewer(40, 40, 0);
@@ -54,20 +57,37 @@ public class Main {
             windows.addWindow(loginWindow);
             windows.addWindow(loginWindow2);
             windows.addWindow(changePasswordWindow);
+=======
+            Window LoginView = new LoginView(60, 60, 2, 1, 2);
+            Window changePasswordView = new ChangePasswordView(3, 0);
+            Window studentMainView = new StudentMainView(0, 3);
+            Window CampListView = new CampListView(0, 0, 0);
+            Window createCampView = new CreateCampView(3);
+            Window campViewer = new CampViewer(40, 40, 3);
+            WindowsManager windows = new WindowsManager(screen, 0, 0);
+
+
+            windows.addWindow(LoginView);
+            windows.addWindow(changePasswordView);
+            windows.addWindow(studentMainView);
+            windows.addWindow(CampListView);
+            windows.addWindow(createCampView);
+            windows.addWindow(campViewer);
+>>>>>>> 1d4fb001cddba6fae45aa06ba608f380fa4de7ae
 
             screen.refresh();
 
-
-            while(true) {
+            while (true) {
                 KeyStroke keyStroke = screen.pollInput();
-                if(keyStroke != null && (keyStroke.getKeyType() == KeyType.Escape || keyStroke.getKeyType() == KeyType.EOF)) {
+                if (keyStroke != null
+                        && (keyStroke.getKeyType() == KeyType.Escape || keyStroke.getKeyType() == KeyType.EOF)) {
                     break;
                 }
-                if(keyStroke != null)
+                if (keyStroke != null)
                     windows.keyStroke(keyStroke);
 
                 TerminalSize newSize = screen.doResizeIfNecessary();
-                if(newSize != null) {
+                if (newSize != null) {
                     screen.clear();
                     terminalSize = newSize;
                 }
@@ -75,13 +95,15 @@ public class Main {
                 String sizeLabel = "Terminal Size: " + terminalSize;
                 TerminalPosition labelBoxTopLeft = new TerminalPosition(1, 1);
                 TerminalSize labelBoxSize = new TerminalSize(sizeLabel.length() + 2, 3);
-                TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns() - 1);
+                TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft
+                        .withRelativeColumn(labelBoxSize.getColumns() - 1);
                 TextGraphics textGraphics = screen.newTextGraphics();
-                //This isn't really needed as we are overwriting everything below anyway, but just for demonstrative purpose
+                // This isn't really needed as we are overwriting everything below anyway, but
+                // just for demonstrative purpose
                 textGraphics.fillRectangle(labelBoxTopLeft, labelBoxSize, ' ');
 
                 /*
-                Draw horizontal lines, first upper then lower
+                 * Draw horizontal lines, first upper then lower
                  */
                 textGraphics.drawLine(
                         labelBoxTopLeft.withRelativeColumn(1),
@@ -93,51 +115,58 @@ public class Main {
                         Symbols.DOUBLE_LINE_HORIZONTAL);
 
                 /*
-                Manually do the edges and (since it's only one) the vertical lines, first on the left then on the right
+                 * Manually do the edges and (since it's only one) the vertical lines, first on
+                 * the left then on the right
                  */
                 textGraphics.setCharacter(labelBoxTopLeft, Symbols.DOUBLE_LINE_TOP_LEFT_CORNER);
                 textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
                 textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
                 textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER);
                 textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
-                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
+                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2),
+                        Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
 
                 /*
-                Finally put the text inside the box
+                 * Finally put the text inside the box
                  */
                 textGraphics.putString(labelBoxTopLeft.withRelative(1, 1), sizeLabel);
 
                 /*
-                Ok, we are done and can display the change. Let's also be nice and allow the OS to schedule other
-                threads so we don't clog up the core completely.
+                 * Ok, we are done and can display the change. Let's also be nice and allow the
+                 * OS to schedule other
+                 * threads so we don't clog up the core completely.
                  */
                 windows.draw(0, 0);
                 screen.refresh();
                 Thread.yield();
 
                 /*
-                Every time we call refresh, the whole terminal is NOT re-drawn. Instead, the Screen will compare the
-                back and front buffers and figure out only the parts that have changed and only update those. This is
-                why in the code drawing the size information box above, we write it out every time we loop but it's
-                actually not sent to the terminal except for the first time because the Screen knows the content is
-                already there and has not changed. Because of this, you should never use the underlying Terminal object
-                when working with a Screen because that will cause modifications that the Screen won't know about.
+                 * Every time we call refresh, the whole terminal is NOT re-drawn. Instead, the
+                 * Screen will compare the
+                 * back and front buffers and figure out only the parts that have changed and
+                 * only update those. This is
+                 * why in the code drawing the size information box above, we write it out every
+                 * time we loop but it's
+                 * actually not sent to the terminal except for the first time because the
+                 * Screen knows the content is
+                 * already there and has not changed. Because of this, you should never use the
+                 * underlying Terminal object
+                 * when working with a Screen because that will cause modifications that the
+                 * Screen won't know about.
                  */
             }
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            if(screen != null) {
+        } finally {
+            if (screen != null) {
                 try {
                     /*
-                    The close() call here will restore the terminal by exiting from private mode which was done in
-                    the call to startScreen(), and also restore things like echo mode and intr
+                     * The close() call here will restore the terminal by exiting from private mode
+                     * which was done in
+                     * the call to startScreen(), and also restore things like echo mode and intr
                      */
                     screen.close();
-                }
-                catch(IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
