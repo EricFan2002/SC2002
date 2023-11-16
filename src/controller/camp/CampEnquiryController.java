@@ -39,6 +39,7 @@ public class CampEnquiryController {
 
     public boolean answerEnquiry(Enquiry enquiry, Student answeringUser, String answer) {
         enquiry.setAnswer(answer, answeringUser);
+        answeringUser.addPoints(1);
         return RepositoryCollection.getEnquiryRepository().update(enquiry);
     }
 }
