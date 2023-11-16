@@ -167,8 +167,16 @@ public class Window {
         widgets.add(widget);
         widget.setWidgetID(widgetID);
         widgetID += 1;
-        return widgetID - 1;
+        return widgetID;
     }
+
+    public int addWidgetAfter(Widget widget, int afterWhich) {
+        widgets.add(afterWhich, widget);
+        widget.setWidgetID(widgetID);
+        widgetID += 1;
+        return widgetID;
+    }
+
 
     public void setClear(){
 //        needClear = 2;
@@ -208,8 +216,8 @@ public class Window {
                 }
             }
         }
-        for (int j = 0; j < 3; j++) {
-            for (int i = 0; i < buffer.length; i++) {
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < buffer.length + 1; i++) {
                 int modY = y + i;
                 int modX = buffer[0].length + x + j;
                 TerminalPosition cellToModify = new TerminalPosition(modX, modY);
@@ -222,8 +230,8 @@ public class Window {
                 }
             }
         }
-        for (int j = 0; j < 3; j++) {
-            for (int i = 0; i < buffer[0].length; i++) {
+        for (int j = 0; j < 1; j++) {
+            for (int i = 0; i < buffer[0].length + 1; i++) {
                 int modY = buffer.length + y + j;
                 int modX = x + i;
                 TerminalPosition cellToModify = new TerminalPosition(modX, modY);
