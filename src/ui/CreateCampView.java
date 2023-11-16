@@ -1,13 +1,19 @@
 package ui;
 
+import controller.camp.CampModificationController;
+import controller.user.UserController;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 
+import entity.camp.Camp;
+import entity.user.Staff;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class CreateCamp extends Window implements ICallBack {
+public class CreateCampView extends Window implements ICallBack {
     WidgetLabel IDLabel;
     WidgetLabel nameLabel;
     WidgetLabel descriptionLabel;
@@ -18,6 +24,7 @@ public class CreateCamp extends Window implements ICallBack {
     WidgetLabel schoolLabel;
     WidgetButton schoolButton;
     WidgetLabel locationLabel;
+    WidgetLabel totalSlotsLabel;
 
     WidgetTextBox IDTextBox;
 
@@ -28,10 +35,11 @@ public class CreateCamp extends Window implements ICallBack {
     WidgetTextBox endDateTextBox;
     WidgetTextBox closeRegistrationDateTextBox;
     WidgetTextBox locationTextBox;
+    WidgetTextBox totalSlotsTextBox;
     WidgetButton confirmButton;
     WidgetButton cancelButton;
-    private int loginSwitchToWindowIndex;
-    public CreateCamp(){
+    private int campListViewIndex;
+    public CreateCampView(int campListViewIndex){
         super(30, 80, "Create Camp");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Create Camp", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -67,11 +75,16 @@ public class CreateCamp extends Window implements ICallBack {
         addWidget(locationLabel);
         locationTextBox = new WidgetTextBox(29, 19,29, "", TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(locationTextBox);
+        totalSlotsLabel = new WidgetLabel(1, 21,19, "totalSlots:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        addWidget(totalSlotsLabel);
+        totalSlotsTextBox = new WidgetTextBox(29, 21,29, "", TEXT_ALIGNMENT.ALIGN_LEFT);
+        addWidget(totalSlotsTextBox);
         confirmButton = new WidgetButton(4, 22, 49, "Confirm");
         addWidget(confirmButton);
         cancelButton = new WidgetButton(4, 24, 49, "Back");
         addWidget(cancelButton);
         setPointer(confirmButton);
+        this.campListViewIndex = campListViewIndex;
     }
 
     public void messageLoop() {
@@ -88,6 +101,21 @@ public class CreateCamp extends Window implements ICallBack {
             OverlayChooseBox overlayChooseBox = new OverlayChooseBox(26, schoolButton.getY(), schoolButton.getX(),  "Choose School", options, this);
             addOverlay(overlayChooseBox);
             schoolButton.clearPressed();
+        }
+        if (confirmButton.getPressed()) {
+            String ID = IDTextBox.getText();
+            String name = nameTextBox.getText();
+            String description = descriptionTextBox.getText();
+            Date startDate = new Date(startDateTextBox.getText());
+            Date endDate = new Date(endDateTextBox.getText());
+            Date closeRegistrationDate = new Date(closeRegistrationDateTextBox.getText());
+            String location = locationTextBox.getText();
+            String school = schoolButton.getText();
+            int totalSlots = Integer.parseInt(totalSlotsTextBox.getText());
+            Camp camp = new Camp(ID, name, description, true, startDate, endDate, closeRegistrationDate, school, location, (Staff)UserController.getCurrentUser(), totalSlots);
+            CampModificationController.createCamp(camp);
+        }
+        if (cancelButton.getPressed()) {
         }
     }
     public void onExit(){
