@@ -77,6 +77,8 @@ public class SuggestionRepository extends Repository<Suggestion> {
 
                 String[] campSuggestionArr = campSuggestionRaw.split(";", -1);
 
+                System.out.println(campSuggestionArr[8]);
+
                 String campSuggestionID = campSuggestionArr[0];
                 String name = campSuggestionArr[1] != "" ? campSuggestionArr[1] : null;
                 String desc = campSuggestionArr[2] != "" ? campSuggestionArr[2] : null;
@@ -87,7 +89,7 @@ public class SuggestionRepository extends Repository<Suggestion> {
                 Date closeRegDate = campSuggestionArr[6] != "" ? new Date(Long.parseLong(campSuggestionArr[6])) : null;
                 String school = campSuggestionArr[7] != "" ? campSuggestionArr[7] : null;
                 String location = campSuggestionArr[8] != "" ? campSuggestionArr[8] : null;
-                int totalSlots = campSuggestionArr[9] != "" ? Integer.parseInt(campSuggestionArr[9]) : null;
+                Integer totalSlots = campSuggestionArr[9] != "" ? Integer.parseInt(campSuggestionArr[9]) : null;
 
                 CampDetails campDetails = new CampDetails(campSuggestionID, name, desc,
                         visibility, startDate, endDate, closeRegDate, school,

@@ -18,7 +18,7 @@ public class CampDetails implements ITaggedItem {
 
     public CampDetails(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
-            String school, String location, int totalSlots) {
+            String school, String location, Integer totalSlots) {
         this.ID = ID;
         this.name = name;
         this.description = description;
