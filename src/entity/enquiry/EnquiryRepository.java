@@ -22,10 +22,19 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
+/**
+ * Handles the storage, retrieval, and manipulation of enquiry data.
+ * This class extends the Repository class for Enquiry objects and manages enquiry data through CSV files.
+ */
 public class EnquiryRepository extends Repository<Enquiry> {
     UserRepository userRepository;
     CampRepository campRepository;
 
+    /**
+     * Retrieves all enquiries as an EnquiryList. This method performs a deep copy of enquiries.
+     *
+     * @return A new EnquiryList containing copies of all enquiries in the repository.
+     */
     @Override
     public EnquiryList getAll() {
         // deep copy
@@ -36,12 +45,25 @@ public class EnquiryRepository extends Repository<Enquiry> {
         return all;
     }
 
+    /**
+     * Constructs a new EnquiryRepository with specified file paths for CSV files and repositories for user and camp data.
+     *
+     * @param filePath        The path to the CSV file where enquiry data is stored.
+     * @param userRepository  The repository for user data.
+     * @param campRepository  The repository for camp data.
+     */
     public EnquiryRepository(String filePath, UserRepository userRepository, CampRepository campRepository) {
         super(filePath);
         this.userRepository = userRepository;
         this.campRepository = campRepository;
     }
 
+    /**
+     * Loads enquiry data from the CSV file.
+     * This method parses the CSV file and populates the repository with Enquiry objects.
+     *
+     * @return true if the data was loaded successfully, false otherwise.
+     */
     public boolean load() {
         // Creates file if not exist
         File source = new File(super.filePath);
@@ -113,6 +135,12 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
     }
 
+    /**
+     * Saves all enquiry data to the CSV file.
+     * This method writes the current state of the repository to the CSV file.
+     *
+     * @return true if the data was saved successfully, false otherwise.
+     */
     public boolean save() {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(super.filePath), CSVFormat.DEFAULT)) {
             super.all.forEach(camp -> {

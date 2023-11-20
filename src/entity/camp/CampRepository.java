@@ -21,14 +21,29 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
+/**
+ * Handles the storage, retrieval, and manipulation of camp data.
+ * This class extends the Repository class for Camp objects and manages camp data through CSV files.
+ */
 public class CampRepository extends Repository<Camp> {
     private UserRepository userRepository;
 
+    /**
+     * Constructs a new CampRepository with a given file path for the CSV file and a UserRepository for user data.
+     *
+     * @param filePath       The path to the CSV file where camp data is stored.
+     * @param userRepository The repository for user data which will be used to link staff and students to camps.
+     */
     public CampRepository(String filePath, UserRepository userRepository) {
         super(filePath);
         this.userRepository = userRepository;
     }
 
+    /**
+     * Retrieves all camps as a CampList. This method performs a deep copy of camps.
+     *
+     * @return A new CampList containing copies of all camps in the repository.
+     */
     @Override
     public CampList getAll() {
         // deep copy
@@ -39,6 +54,12 @@ public class CampRepository extends Repository<Camp> {
         return all;
     }
 
+    /**
+     * Loads camp data from the CSV file.
+     * This method parses the CSV file and populates the repository with Camp objects.
+     *
+     * @return true if the data was loaded successfully, false otherwise.
+     */
     public boolean load() {
         // Creates file if not exist
         File source = new File(super.filePath);
@@ -140,6 +161,12 @@ public class CampRepository extends Repository<Camp> {
         return true;
     }
 
+    /**
+     * Saves all camp data to the CSV file.
+     * This method writes the current state of the repository to the CSV file.
+     *
+     * @return true if the data was saved successfully, false otherwise.
+     */
     public boolean save() {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(super.filePath), CSVFormat.DEFAULT)) {
             super.all.forEach(camp -> {

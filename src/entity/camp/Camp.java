@@ -118,6 +118,12 @@ public class Camp extends CampDetails {
         return true;
     }
 
+    /**
+     * Adds a student as a committee member of the camp.
+     *
+     * @param committee The student to be added as a committee member.
+     * @return boolean True if the student is successfully added.
+     */
     public boolean addCommittee(Student committee) {
         if (this.committees.size() >= MAX_COMMITTEE) {
             return false;
@@ -126,6 +132,12 @@ public class Camp extends CampDetails {
         return true;
     }
 
+    /**
+     * Removes a student from the list of attendees.
+     *
+     * @param attendee The student to be removed.
+     * @return boolean True if the student is successfully removed.
+     */
     public boolean removeAttendee(Student attendee) {
         return attendees.remove(attendee);
     }
@@ -147,34 +159,75 @@ public class Camp extends CampDetails {
         return suggestionPlan;
     }
 
+    /**
+     * Retrieves the list of suggestions for the camp.
+     *
+     * @return The list of suggestions.
+     */
     public ArrayList<Suggestion> getSuggestionList() {
         return suggestionList;
     }
 
+    /**
+     * Retrieves the list of enquiries for the camp.
+     *
+     * @return The list of enquiries.
+     */
     public ArrayList<Enquiry> getEnquiryList() {
         return enquiryList;
     }
 
+    /**
+     * Adds a suggestion to the list of suggestions.
+     *
+     * @param suggestion The suggestion to be added.
+     */
     public void addSuggestion(Suggestion suggestion) {
         suggestionList.add(suggestion);
     }
 
+    /**
+     * Adds an enquiry to the list of enquiries.
+     *
+     * @param enquiry The enquiry to be added.
+     */
     public void addEnquiry(Enquiry enquiry) {
         enquiryList.add(enquiry);
     }
 
+    /**
+     * Removes a suggestion from the list of suggestions.
+     *
+     * @param suggestion The suggestion to be removed.
+     */
     public void removeSuggestion(Suggestion suggestion) {
         suggestionList.remove(suggestion);
     }
 
+    /**
+     * Removes an enquiry from the list of enquiries.
+     *
+     * @param enquiry The enquiry to be removed.
+     */
     public void removeEnquiry(Enquiry enquiry) {
         enquiryList.remove(enquiry);
     }
 
+    /**
+     * Checks if a student is registered in the camp.
+     *
+     * @param student The student to check for registration.
+     * @return True if the student is registered, false otherwise.
+     */
     public boolean isStudentRegistered(Student student) {
         return registeredStudents.contains(student);
     }
 
+    /**
+     * Adds a student to the list of registered students.
+     *
+     * @param student The student to be added.
+     */
     public void addRegisteredStudent(Student student) {
         registeredStudents.add(student);
     }

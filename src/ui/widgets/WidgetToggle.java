@@ -4,15 +4,38 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
+/**
+ * WidgetToggle represents a toggle button in a user interface.
+ * It can be pressed or unpressed, changing its state and appearance.
+ */
 public class WidgetToggle extends Widget implements IClickable, ITextInput, ISelectable{
     private boolean pressed;
     String rawText;
+
+    /**
+     * Constructs a WidgetToggle with a specified text and default alignment.
+     *
+     * @param x The x-coordinate of the widget.
+     * @param y The y-coordinate of the widget.
+     * @param len The length of the widget.
+     * @param text The text displayed next to the toggle.
+     */
     public WidgetToggle(int x, int y, int len, String text) {
         super(x, y, len, "✖ " + text);
         rawText = text;
         pressed = false;
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
     }
+
+    /**
+     * Constructs a WidgetToggle with a specified text and alignment.
+     *
+     * @param x The x-coordinate of the widget.
+     * @param y The y-coordinate of the widget.
+     * @param len The length of the widget.
+     * @param text The text displayed next to the toggle.
+     * @param textAlignment The alignment of the text within the widget.
+     */
     public WidgetToggle(int x, int y, int len, String text, TEXT_ALIGNMENT textAlignment) {
         super(x, y, len, "✖ " + text);
         rawText = text;
@@ -20,20 +43,48 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
         this.textAlignment = textAlignment;
     }
 
+    /**
+     * Sets the toggle to a selected state.
+     */
     public void select(){
         selected = true;
     }
+
+    /**
+     * Sets the toggle to an unselected state.
+     */
     public void unselect(){
         selected = false;
     }
 
+    /**
+     * Returns the pressed state of the toggle.
+     *
+     * @return true if the toggle is pressed, false otherwise.
+     */
     public boolean getPressed(){
         return pressed;
     }
+
+    /**
+     * Clears the pressed state of the toggle, setting it to unpressed.
+     */
     public void clearPressed(){
         pressed = false;
     }
+
+    /**
+     * Sets the toggle to a pressed state.
+     */
     public void setPressed(){ pressed = true; }
+
+    /**
+     * Draws the selection state of the toggle on the provided buffer.
+     *
+     * @param buffer The character buffer for drawing the widget.
+     * @param printColor The color buffer for text color.
+     * @param backColor The color buffer for background color.
+     */
     @Override
     public void drawSelection(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
         for (int i = 0; i < getLen(); i++) {
@@ -51,6 +102,14 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
             }
         }
     }
+
+    /**
+     * Draws the toggle widget on the provided buffer.
+     *
+     * @param buffer The character buffer for drawing the widget.
+     * @param printColor The color buffer for text color.
+     * @param backColor The color buffer for background color.
+     */
     @Override
     public void draw(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
         drawSelection(buffer, printColor, backColor);
@@ -65,6 +124,11 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
         }
     }
 
+    /**
+     * Handles a key stroke input for the toggle.
+     *
+     * @param keyStroke The key stroke input.
+     */
     public void keyStroke(KeyStroke keyStroke){
         if(keyStroke.getKeyType() == KeyType.Enter){
             pressed = !pressed;

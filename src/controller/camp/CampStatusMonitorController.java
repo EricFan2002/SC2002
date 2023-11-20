@@ -33,7 +33,7 @@ public class CampStatusMonitorController {
      *
      * @param camp The {@link Camp} for which the list of attending students is
      *             requested.
-     * @return ArrayList<User> A list of students attending the specified camp.
+     * @return An {@link ArrayList} of {@link User} objects representing the students attending the camp.
      */
     public static ArrayList<User> getAttendingStudents(Camp camp) {
         ArrayList<User> attendingStudents = new ArrayList<>();
@@ -54,8 +54,7 @@ public class CampStatusMonitorController {
      *
      * @param camp The {@link Camp} for which the performance report is to be
      *             generated.
-     * @return Map<String, Integer> A map containing the names and points of
-     *         students in the camp committees.
+     * @return A {@link Map} containing the names and points of students in the camp committees.
      */
     public static Map<String, Integer> generatePerformanceReport(Camp camp) {
         Map<String, Integer> performanceReport = new HashMap<>();
