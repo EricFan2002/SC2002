@@ -8,98 +8,77 @@ import entity.user.Student;
 
 import javax.swing.*;
 
+/**
+ * The {@code CampRegistrationController} class is responsible for handling the
+ * registration and deregistration
+ * of students for camps. This class acts as a controller for camp registration
+ * operations, leveraging its
+ * inner class {@code CampRegistrationService} for specific actions.
+ * 
+ * <p>
+ * It provides an interface to manage the addition and removal of students as
+ * attendees in various camp events.
+ */
 public class CampRegistrationController {
-    public class CampRegistrationService {
-        public static boolean checkConflict(Camp camp, Student student){
-            CampList camps = RepositoryCollection.campRepository.getAll().filterByStudent(student);
-            for(Camp oneCamp : camps){
-                if(oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime() || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()){
-                    return false;
-                }
-            }
-            return true;
-        }
-        public static OperationResult registerCamp(Camp camp, Student student) {
-            if(checkConflict(camp, student)){
-                return new OperationResult(false, "Time Conflict!");
-            }
-            else if(camp.getAttendees().size() == camp.getTotalSlots()){
-                return new OperationResult(false, "No more slots");
-            }
-            else if(camp.getAttendees().contains(student)){
-                return new OperationResult(false, "Already Joined");
-            }
-            camp.addAttendee(student);
-            return new OperationResult(true, "Camp Joined!");
-        }
+    /**
+     * The {@code CampRegistrationService} class provides services for registering
+     * and deregistering students
+     * in camps. It contains methods to add or remove a student from the list of
+     * attendees in a given camp.
+     * 
+     * <p>
+     * Key functionalities include:
+     * <ul>
+     * <li>Registering a student for a camp.
+     * <li>Deregistering a student from a camp.
+     * </ul>
+     * 
+     * @see entity.camp.Camp
+     * @see entity.user.Student
+     */
 
-        public static OperationResult deregisterCamp(Camp camp, Student student) {
-            boolean result = camp.removeAttendee(student);
-            return new OperationResult(result, "Quited");
+    /**
+     * Registers a student to a camp by adding them to the camp's list of attendees.
+     * This method is used to add a {@link Student} to the attendee list of a
+     * specified {@link Camp}.
+     *
+     * @param camp    The {@link Camp} to which the student is to be registered.
+     * @param student The {@link Student} to be registered for the camp.
+     */
+    public static boolean checkConflict(Camp camp, Student student){
+        CampList camps = RepositoryCollection.campRepository.getAll().filterByStudent(student);
+        for(Camp oneCamp : camps){
+            if(oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime() || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()){
+                return false;
+            }
         }
+        return true;
+    }
+    public static OperationResult registerCamp(Camp camp, Student student) {
+        if(checkConflict(camp, student)){
+            return new OperationResult(false, "Time Conflict!");
+        }
+        else if(camp.getAttendees().size() >= camp.getTotalSlots()){
+            return new OperationResult(false, "No more slots");
+        }
+        else if(camp.getAttendees().contains(student)){
+            return new OperationResult(false, "Already Joined");
+        }
+        camp.addAttendee(student);
+        return new OperationResult(true, "Camp Joined");
+    }
 
+    /**
+     * Deregisters a student from a camp by removing them from the camp's list of
+     * attendees.
+     * This method is used to remove a {@link Student} from the attendee list of a
+     * specified {@link Camp}.
+     *
+     * @param camp    The {@link Camp} from which the student is to be deregistered.
+     * @param student The {@link Student} to be deregistered from the camp.
+     */
+    public static OperationResult deregisterCamp(Camp camp, Student student) {
+        boolean result = camp.removeAttendee(student);
+        return new OperationResult(result, "Quited");
     }
 }
-
-// code below from previous version, not sure if needed
-/*
- * public class CampRegistrationService {
- * private CampRepository campRepository;
- * 
- * public CampRegistrationService(CampRepository campRepository) {
- * this.campRepository = campRepository;
- * }
- * 
- * public boolean addStudent(Student student, String campId) {
- * Camp camp = campRepository.getAll().filterByID(campId).get(0);
- * if (camp != null) {
- * return camp.addAttendee(student);
- * } else {
- * // Handle the situation where the camp is full or not found
- * return false;
- * }
- * }
- * 
- * public boolean addCommitteeStudent(Student student, String campId) {
- * Camp camp = campRepository.getAll().filterByID(campId).get(0);
- * if (camp != null) {
- * return camp.addCommittee(student);
- * } else {
- * // Handle the situation where the camp is full or not found
- * return false;
- * }
- * }
- * 
- * public boolean withdrawStudent(Student student, String campId) {
- * Camp camp = campRepository.getAll().filterByID(campId).get(0);
- * if (camp != null) {
- * return camp.removeAttendee(student);
- * } else {
- * // Handle the situation where the camp is not found
- * return false;
- * }
- * }
- * 
- * public ArrayList<Camp> getCommitteeSlots() {
- * ArrayList<Camp> camps = new ArrayList<>();
- * for (Camp camp: campRepository.getAll()) {
- * if (camp.getCommittees().size() < Camp.MAX_COMMITTEE) {
- * camps.add(camp);
- * }
- * }
- * return camps;
- * }
- * 
- * public ArrayList<Camp> getJoinedCamps(User user) {
- * ArrayList<Camp> joinedCamps = new ArrayList<>();
- * for (Camp camp: campRepository.getAll()) {
- * Set<Student> attendees = camp.getAttendees();
- * Set<Student> committees = camp.getCommittees();
- * if (attendees.contains(user) || committees.contains(user)) {
- * joinedCamps.add(camp);
- * }
- * }
- * return joinedCamps;
- * }
- * }
- */

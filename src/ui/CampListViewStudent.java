@@ -46,7 +46,7 @@ public class CampListViewStudent extends CampListView{
         else if(chose == 1 && choseString.equals("Join Camp")){ // join
             if(UserController.getCurrentUser() instanceof Student) {
                 Student student = (Student)UserController.getCurrentUser();
-                OperationResult result = CampRegistrationController.CampRegistrationService.registerCamp(selectedCamp, student);
+                OperationResult result = CampRegistrationController.registerCamp(selectedCamp, student);
                 OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
             }
