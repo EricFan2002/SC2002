@@ -17,6 +17,9 @@ public class CampListViewStudent extends CampListView{
     protected WidgetToggle toggleCommitteeAvailableC = new WidgetToggle(getLenX() / 4 + 1, 8, getLenX() / 4 - 1, "Available As Committee");
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiries overlayCampInfoDisplayEnquiries;
+    protected OverlayCampInfoDisplayEnquiriesCommittee overlayCampInfoDisplayEnquiriesCommittee;
+
+    protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
     public CampListViewStudent(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex) {
         super(loginSwitchToWindowIndex, changePasswordWindowIndex, forgotPasswordWindowIndex);
         addWidgetAfter(toggleCommitteeAvailableC, filter4Index);
@@ -90,6 +93,24 @@ public class CampListViewStudent extends CampListView{
             chose = -1;
             choseString = "";
         }
+        else if(chose == 4 && choseString.equals("Reply Enquiry")){ // Enquiry
+            if(UserController.getCurrentUser() instanceof Student) {
+                Student student = (Student)UserController.getCurrentUser();
+                overlayCampInfoDisplayEnquiriesCommittee = new OverlayCampInfoDisplayEnquiriesCommittee(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, student, CampListViewStudent.this);
+                addOverlay(overlayCampInfoDisplayEnquiriesCommittee);
+            }
+            chose = -1;
+            choseString = "";
+        }
+        else if(chose == 5 && choseString.equals("Suggestions")){ // Create Suggestion
+            if(UserController.getCurrentUser() instanceof Student) {
+                Student student = (Student)UserController.getCurrentUser();
+                overlayCampAllSuggestionView = new OverlayCampAllSuggestionView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Create Suggestion To Camp", selectedCamp, student, CampListViewStudent.this);
+                addOverlay(overlayCampAllSuggestionView);
+            }
+            chose = -1;
+            choseString = "";
+        }
     }
 //        options.add("View Details");
 //        options.add("Join Camp");
@@ -105,6 +126,12 @@ public class CampListViewStudent extends CampListView{
         this.choseString = choseString;
         if(overlayCampInfoDisplayEnquiries != null && overlayCampInfoDisplayEnquiries.getDestroy() != true){
             overlayCampInfoDisplayEnquiries.onWindowFinished(chose, choseString);
+        }
+        if(overlayCampInfoDisplayEnquiriesCommittee != null && overlayCampInfoDisplayEnquiriesCommittee.getDestroy() != true){
+            overlayCampInfoDisplayEnquiriesCommittee.onWindowFinished(chose, choseString);
+        }
+        if(overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true){
+            overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
         }
     }
 

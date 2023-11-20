@@ -12,6 +12,7 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
 
     Camp camp;
     protected WidgetButton exitButton;
+    protected WidgetTextBox textBoxCName;
     protected WidgetTextBox textBoxDescription;
     protected WidgetTextBox textBoxDStart;
     protected WidgetTextBox textBoxDEnd;
@@ -27,8 +28,14 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
 
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        WidgetLabel widgetLabel = new WidgetLabel(3, 2, getLenX() - 10, "Camp Detail About: " + camp.getName(), TEXT_ALIGNMENT.ALIGN_MID);
-        addWidget(widgetLabel);
+//        WidgetLabel widgetLabel = new WidgetLabel(3, 2, getLenX() - 10, "Camp Detail About: " + camp.getName(), TEXT_ALIGNMENT.ALIGN_MID);
+//        addWidget(widgetLabel);
+
+        // Description
+        WidgetLabel labelName = new WidgetLabel(3, 3, 15, "Name:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        addWidget(labelName);
+        textBoxCName = new WidgetTextBox(19, 3, getLenX() - 24, camp.getName());
+        addWidget(textBoxCName);
 
         // Description
         WidgetLabel labelDescription = new WidgetLabel(3, 4, 15, "Description:", TEXT_ALIGNMENT.ALIGN_RIGHT);
@@ -84,6 +91,9 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
         textBoxVis = new WidgetToggle(19, 12, getLenX() - 24, "Visible");
         if(camp.isVisible()){
             textBoxVis.setPressed();
+        }
+        else{
+            textBoxVis.clearPressed();
         }
         addWidget(textBoxVis);
 

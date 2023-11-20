@@ -6,8 +6,8 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.screen.Screen;
 
 public class WindowOverlayClass extends Window{
-    private int offsetX;
-    private int offsetY;
+    protected int offsetX;
+    protected int offsetY;
     private boolean destroy;
     public WindowOverlayClass(int y, int x, int offsetY, int offsetX, String windowName) {
         super(y, x, windowName);

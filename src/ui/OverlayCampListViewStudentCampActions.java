@@ -25,7 +25,7 @@ public class OverlayCampListViewStudentCampActions extends WindowOverlayClass {
         options.add("Quit Camp");
         options.add("Enquiry");
         options.add("Reply Enquiry");
-        options.add("Create Suggestion");
+        options.add("Suggestions");
 
         choices = new ArrayList<>();
         this.callbackWindow = callbackWindow;

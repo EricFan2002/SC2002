@@ -24,6 +24,7 @@ public class OverlayCampInfoDisplayStudentView extends OverlayCampInfoDisplay {
         textBoxSlots.setSkipSelection(true);
         textBoxSlotsC.setSkipSelection(true);
         textBoxVis.setSkipSelection(true);
+        textBoxCName.setSkipSelection(true);
     }
 
     public void messageLoop() {

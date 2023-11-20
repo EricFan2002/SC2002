@@ -44,7 +44,7 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 4, 2, 1);
+            Window LoginView = new LoginView(20, 54, 4, 2, 1);
             Window studentMainView = new StudentMainView(0, 4, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(4, 1, 2);
