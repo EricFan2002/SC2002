@@ -13,6 +13,12 @@ import ui.widgets.WidgetTextBox;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a basic window in a user interface.
+ * This class provides a foundation for creating windows in a user interface with text-based graphics.
+ * It includes methods for adding, removing, and managing widgets within the window, handling user input,
+ * and rendering the window's content on a screen.
+ */
 public class Window {
 
     protected char[][] buffer;
@@ -31,6 +37,13 @@ public class Window {
     private int widgetID;
     private int needClear = 0;
 
+    /**
+     * Constructor for Window class.
+     *
+     * @param y The Y position of the window.
+     * @param x The X position of the window.
+     * @param windowName The name of the window.
+     */
     public Window(int y, int x, String windowName) {
         buffer = new char[y][x];
         printColor = new TextColor[y][x];
@@ -52,18 +65,34 @@ public class Window {
         widgetID = 0;
     }
 
+    /**
+     * Gets the Y position of the window.
+     *
+     * @return The Y position.
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Gets the X position of the window.
+     *
+     * @return The X position.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * The main loop for processing window messages. This method should be overridden by subclasses to define specific behavior.
+     */
     public void messageLoop(){
 //        System.out.println(windowName + ": Error empty message loop.");
     }
 
+    /**
+     * The helper method for processing window messages. This method should be overridden by subclasses to define specific behavior.
+     */
     public void messageLoopHelper(){
         if(overlays.size() != 0){
             overlays.get(overlays.size() - 1).messageLoop();
@@ -73,21 +102,42 @@ public class Window {
         }
     }
 
+    /**
+     * onExit method for the window. This method should be overridden by subclasses to define specific behavior.
+     */
     public void onExit(){
     }
 
+    /**
+     * switchToWindow method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @return The window to switch to.
+     */
     public int getSwitchToWindow() {
         return switchToWindow;
     }
 
+    /**
+     * Gets the length of the window in the X direction.
+     *
+     * @return The length of the window in the X direction.
+     */
     public int getLenX() {
         return lenX;
     }
 
+    /**
+     * Gets the length of the window in the Y direction.
+     *
+     * @return The length of the window in the Y direction.
+     */
     public int getLenY() {
         return lenY;
     }
 
+    /**
+     * Selects the next selectable widget in the window.
+     */
     public void selectNext(){
         if(widgets.get(selected) instanceof ISelectable) {
             ((ISelectable)widgets.get(selected)).unselect();
@@ -102,6 +152,9 @@ public class Window {
         selectedWidget.select();
     }
 
+    /**
+     * Selects the previous selectable widget in the window.
+     */
     public void selectPrev(){
         if(widgets.get(selected) instanceof ISelectable) {
             ((ISelectable)widgets.get(selected)).unselect();
@@ -118,6 +171,11 @@ public class Window {
         selectedWidget.select();
     }
 
+    /**
+     * keyStroke method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param keyStroke The key stroke to process.
+     */
     public void keyStroke(KeyStroke keyStroke){
         if(keyStroke.getKeyType() == KeyType.ArrowRight || keyStroke.getKeyType() == KeyType.ArrowDown || keyStroke.getKeyType() == KeyType.Tab){
             selectNext();
@@ -132,6 +190,11 @@ public class Window {
         }
     }
 
+    /**
+     * keyStrokeHelper method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param keyStroke The key stroke to process.
+     */
     public void keyStrokeHelper(KeyStroke keyStroke){
         if(overlays.size() != 0){
             overlays.get(overlays.size() - 1).keyStroke(keyStroke);
@@ -141,6 +204,17 @@ public class Window {
         }
     }
 
+    /**
+     * switchFrom method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param oldWindow The window to switch from.
+     * @param screen The screen to draw on.
+     * @param x The X position of the window.
+     * @param y The Y position of the window.
+     * @param percentage The percentage of the transition.
+     * @param directionX The X direction of the transition.
+     * @param directionY The Y direction of the transition.
+     */
     public void switchFrom(Window oldWindow, Screen screen, int x, int y, double percentage, double directionX, double directionY){
         percentage = Math.tanh((percentage - 0.5) * 4) / 1.928 + 0.5;
         clearArea(screen, x, x + oldWindow.getLenX()*2, y, y + oldWindow.getLenY()*2);
@@ -148,6 +222,15 @@ public class Window {
         draw(screen, (int)(x + oldWindow.getLenX() * directionX - oldWindow.getLenX() * percentage * directionX), (int)(y + oldWindow.getLenY() * directionY - oldWindow.getLenY() * percentage * directionY), percentage);
     }
 
+    /**
+     * clearArea method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param screen The screen to draw on.
+     * @param startX The X position of the start of the area to clear.
+     * @param endX The X position of the end of the area to clear.
+     * @param startY The Y position of the start of the area to clear.
+     * @param endY The Y position of the end of the area to clear.
+     */
     public void clearArea(Screen screen, int startX, int endX, int startY, int endY){
         for(int i = startX ; i <= endX ; i ++){
             for(int j = startY ; j <= endY ; j++){
@@ -163,6 +246,12 @@ public class Window {
         }
     }
 
+    /**
+     * Adds a widget to the window.
+     *
+     * @param widget The widget to be added.
+     * @return The ID assigned to the widget.
+     */
     public int addWidget(Widget widget) {
         widgets.add(widget);
         widget.setWidgetID(widgetID);
@@ -170,16 +259,38 @@ public class Window {
         return widgetID;
     }
 
+    /**
+     * getWidgetIndex method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param widget The widget to get the index of.
+     *
+     * @return The index of the widget.
+     */
     public int getWidgetIndex(Widget widget) {
         return widgets.indexOf(widget);
     }
 
+    /**
+     * removeWidget method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param widget The widget to remove.
+     *
+     * @return The ID of the widget.
+     */
     public int removeWidget(Widget widget){
         widgetID -= 1;
         widgets.remove(widget);
         return widgetID;
     }
 
+    /**
+     * addWidgetAfter method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param widget The widget to add.
+     * @param afterWhich The index of the widget to add after.
+     *
+     * @return The ID of the widget.
+     */
     public int addWidgetAfter(Widget widget, int afterWhich) {
         widgets.add(afterWhich, widget);
         widget.setWidgetID(widgetID);
@@ -187,10 +298,13 @@ public class Window {
         return widgetID;
     }
 
-
+    /**
+     * setClear method for the window. This method should be overridden by subclasses to define specific behavior.
+     */
     public void setClear(){
 //        needClear = 2;
     }
+
 
     public void draw(Screen screen, int x, int y, double transparency) {
         if(needClear > 0){
@@ -292,9 +406,20 @@ public class Window {
         String sizeLabel = windowName;
     }
 
+    /**
+     * setPointer method for the window. This method should be overridden by subclasses to define specific behavior.
+     *
+     * @param widget The widget to set as the pointer.
+     */
     public void setPointer(Widget widget) {
         this.pointer = widget;
     }
+
+    /**
+     * Adds an overlay to the window.
+     *
+     * @param windowOverlayClass The overlay to be added.
+     */
     public void addOverlay(WindowOverlayClass windowOverlayClass){
         this.overlays.add(windowOverlayClass);
     }
