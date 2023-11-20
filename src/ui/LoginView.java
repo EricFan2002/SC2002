@@ -30,7 +30,7 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(widgetLabel);
         widgetLabel1 = new WidgetLabel(2, 5,9, "User:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(widgetLabel1);
-        widgetTextBox = new WidgetTextBox(14, 5,30, "att1");
+        widgetTextBox = new WidgetTextBox(14, 5,30, "staff");
         addWidget(widgetTextBox);
         widgetLabel2 = new WidgetLabel(2, 7,9, "Password:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(widgetLabel2);

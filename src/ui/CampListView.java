@@ -96,6 +96,7 @@ public class CampListView extends Window implements ICallBack {
     String lastFilter = "";
     @Override
     public void messageLoop() {
+        super.messageLoop();
 //        System.out.println("Message loop");
         String newFilter = "";
         ArrayList<ArrayList<String>> options = new ArrayList<>();
