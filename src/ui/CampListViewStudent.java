@@ -8,6 +8,8 @@ import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
+import java.util.ArrayList;
+
 public class CampListViewStudent extends CampListView{
     protected WidgetToggle toggleJoinedCamp = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Joined Camps");
     protected WidgetToggle toggleCommittee = new WidgetToggle(getLenX() / 4 + 1, 7, getLenX() / 4 - 1, "As Committee");
@@ -22,19 +24,21 @@ public class CampListViewStudent extends CampListView{
         addWidgetAfter(toggleJoinedCamp, filter4Index);
     }
 
+    private WidgetButton buttonPosition;
+
     @Override
     public void messageLoop() {
         super.messageLoop();
         if(widgetPageSelection.getSelectedOption() != -1){
             selectedCamp = displayCamps.get(widgetPageSelection.getSelectedOption());
-            WidgetButton button = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
-            button.clearPressed();
-            OverlayCampListViewStudentCampActions overlayCampListViewStudentCampActions = new OverlayCampListViewStudentCampActions(50,  button.getY(), button.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStudent.this);
+            buttonPosition = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
+            buttonPosition.clearPressed();
+            OverlayCampListViewStudentCampActions overlayCampListViewStudentCampActions = new OverlayCampListViewStudentCampActions(50,  buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStudent.this);
             addOverlay(overlayCampListViewStudentCampActions);
             widgetPageSelection.clearSelectedOption();
         }
         if(chose == 0 && choseString.equals("View Details")){ // view details
-            OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplay(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
+            OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
         }
@@ -45,10 +49,34 @@ public class CampListViewStudent extends CampListView{
         }
         else if(chose == 1 && choseString.equals("Join Camp")){ // join
             if(UserController.getCurrentUser() instanceof Student) {
+                ArrayList<String> options = new ArrayList<>();
+                options.add("Join As Participant");
+                options.add("Join As Committee");
+                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 15), "Join As?", options, CampListViewStudent.this);
+                addOverlay(overlayChooseBox);
+            }
+        }
+        else if(choseString.equals("Join As Participant")){ // join
+            if(UserController.getCurrentUser() instanceof Student) {
                 Student student = (Student)UserController.getCurrentUser();
                 OperationResult result = CampRegistrationController.registerCamp(selectedCamp, student);
                 OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
+            }
+        }
+        else if(choseString.equals("Join As Committee")){ // join
+            if(UserController.getCurrentUser() instanceof Student) {
+                Student student = (Student)UserController.getCurrentUser();
+                OperationResult result = CampRegistrationController.registerCampAsCommittee(selectedCamp, student);
+                OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
+                addOverlay(overlayNotification);
+            }
+        }
+        else if(chose == 3 && choseString.equals("Enquiry")){ // Enquiry
+            if(UserController.getCurrentUser() instanceof Student) {
+                Student student = (Student)UserController.getCurrentUser();
+                OverlayCampInfoDisplayEnquiries overlayCampInfoDisplayEnquiries = new OverlayCampInfoDisplayEnquiries(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, student);
+                addOverlay(overlayCampInfoDisplayEnquiries);
             }
         }
     }

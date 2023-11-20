@@ -59,13 +59,46 @@ public class CampRegistrationController {
             return new OperationResult(false, "Time Conflict!");
         }
         else if(camp.getAttendees().size() >= camp.getTotalSlots()){
-            return new OperationResult(false, "No more slots");
+            return new OperationResult(false, "No More Slots");
         }
         else if(camp.getAttendees().contains(student)){
             return new OperationResult(false, "Already Joined");
         }
+        else if(camp.getCommittees().contains(student)){
+            return new OperationResult(false, "Already Joined As Committee");
+        }
         camp.addAttendee(student);
         return new OperationResult(true, "Camp Joined");
+    }
+
+    public static boolean checkJoinedAsCommittee(Student student){
+        CampList camps = RepositoryCollection.campRepository.getAll();
+        for(Camp camp : camps){
+            if(camp.getCommittees().contains(student)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static OperationResult registerCampAsCommittee(Camp camp, Student student) {
+        if(checkConflict(camp, student)){
+            return new OperationResult(false, "Time Conflict!");
+        }
+        else if(camp.getCommittees().size() >= 10){
+            return new OperationResult(false, "No More Committee Slots");
+        }
+        else if(camp.getAttendees().contains(student)){
+            return new OperationResult(false, "Already Joined As Participant");
+        }
+        else if(camp.getCommittees().contains(student)){
+            return new OperationResult(false, "Already Joined As Committee");
+        }
+        else if(checkJoinedAsCommittee(student)){
+            return new OperationResult(false, "Committee In Another Camp");
+        }
+        camp.addCommittee(student);
+        return new OperationResult(true, "Joined As Committee");
     }
 
     /**
