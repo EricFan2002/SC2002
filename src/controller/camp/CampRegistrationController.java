@@ -1,12 +1,9 @@
 package controller.camp;
 
-import controller.user.ActionResult;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Student;
-
-import javax.swing.*;
 
 /**
  * The {@code CampRegistrationController} class is responsible for handling the
@@ -45,59 +42,50 @@ public class CampRegistrationController {
      * @param camp    The {@link Camp} to which the student is to be registered.
      * @param student The {@link Student} to be registered for the camp.
      */
-    public static boolean checkConflict(Camp camp, Student student){
+    public static boolean checkConflict(Camp camp, Student student) {
         CampList camps = RepositoryCollection.campRepository.getAll().filterByStudent(student);
-        for(Camp oneCamp : camps){
-            if(oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime() || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()){
+        for (Camp oneCamp : camps) {
+            if (oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()) {
                 return false;
             }
         }
         return true;
     }
+
     public static OperationResult registerCamp(Camp camp, Student student) {
-        if(checkConflict(camp, student)){
+        if (checkConflict(camp, student)) {
             return new OperationResult(false, "Time Conflict!");
-        }
-        else if(camp.getAttendees().size() >= camp.getTotalSlots()){
+        } else if (camp.getAttendees().size() >= camp.getTotalSlots()) {
             return new OperationResult(false, "No More Slots");
-        }
-        else if(camp.getAttendees().contains(student)){
+        } else if (camp.getAttendees().contains(student)) {
             return new OperationResult(false, "Already Joined");
-        }
-        else if(camp.getCommittees().contains(student)){
+        } else if (camp.getCommittees().contains(student)) {
             return new OperationResult(false, "Already Joined As Committee");
         }
         camp.addAttendee(student);
         return new OperationResult(true, "Camp Joined");
     }
 
-    public static boolean checkJoinedAsCommittee(Student student){
-        CampList camps = RepositoryCollection.campRepository.getAll();
-        for(Camp camp : camps){
-            if(camp.getCommittees().contains(student)){
-                return true;
-            }
-        }
-        return false;
+    public static boolean checkJoinedAsCommittee(Student student) {
+        return student.getCommitteeCampList().size() > 0;
     }
 
     public static OperationResult registerCampAsCommittee(Camp camp, Student student) {
-        if(checkConflict(camp, student)){
+        if (checkConflict(camp, student)) {
             return new OperationResult(false, "Time Conflict!");
-        }
-        else if(camp.getCommittees().size() >= 10){
+        } else if (camp.getCommittees().size() >= 10) {
             return new OperationResult(false, "No More Committee Slots");
-        }
-        else if(camp.getAttendees().contains(student)){
+        } else if (camp.getAttendees().contains(student)) {
             return new OperationResult(false, "Already Joined As Participant");
-        }
-        else if(camp.getCommittees().contains(student)){
+        } else if (camp.getCommittees().contains(student)) {
             return new OperationResult(false, "Already Joined As Committee");
-        }
-        else if(checkJoinedAsCommittee(student)){
+        } else if (checkJoinedAsCommittee(student)) {
             return new OperationResult(false, "Committee In Another Camp");
         }
         camp.addCommittee(student);
+        student.addCommitteeCamp(camp);
+
         return new OperationResult(true, "Joined As Committee");
     }
 
@@ -111,7 +99,9 @@ public class CampRegistrationController {
      * @param student The {@link Student} to be deregistered from the camp.
      */
     public static OperationResult deregisterCamp(Camp camp, Student student) {
+        student.removeAttendedCamp(camp);
         boolean result = camp.removeAttendee(student);
+
         return new OperationResult(result, "Quited");
     }
 }

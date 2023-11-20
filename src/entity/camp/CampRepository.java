@@ -118,6 +118,18 @@ public class CampRepository extends Repository<Camp> {
 
             // set CampRepo to CampList,called Repo's function
             super.setAll(cur);
+
+            // create connection to user repository
+            super.getAll().forEach(camp -> {
+                camp.getAttendees().forEach(attendee -> {
+                    attendee.addAttendedCamp(camp);
+                });
+                camp.getCommittees().forEach(committee -> {
+                    committee.addCommitteeCamp(camp);
+                });
+                camp.getStaffInCharge().addOrganizedCamp(camp);
+            });
+
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
             return false;
