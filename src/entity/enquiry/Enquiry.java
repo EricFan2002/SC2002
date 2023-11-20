@@ -18,6 +18,8 @@ public class Enquiry implements ITaggedItem {
         this.sender = sender;
         this.question = question;
         this.camp = camp;
+        this.answeredBy = null; // assume not yet answered if it is null
+        this.answer = null;
     }
 
     public Enquiry(String ID, Student sender, String question, String answer, Camp camp, User answeredBy) {
