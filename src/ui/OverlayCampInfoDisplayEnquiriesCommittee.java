@@ -93,6 +93,7 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
             if(selectedEnq != null) {
                 ArrayList<String> options = new ArrayList<>();
                 options.add("Reply Enquiry");
+                options.add("Cancel");
                 WidgetButton buttonPosition = participantsView.getSelectionsButton().get(participantsView.getSelectedOption()).get(0);
                 OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options, OverlayCampInfoDisplayEnquiriesCommittee.this);
                 mainWindow.addOverlay(overlayChooseBox);

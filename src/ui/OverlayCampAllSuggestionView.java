@@ -23,6 +23,7 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
     protected WidgetButton exitButton;
     protected WidgetButton createSuggestionButton;
     protected Window mainWindow;
+    protected ArrayList<Suggestion> suggestionArrayList;
 
     public OverlayCampAllSuggestionView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Student student, Window mainWindow) {
         super(y , x, offsetY, offsetX, windowName);
@@ -31,9 +32,12 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
         this.student = student;
         this.mainWindow = mainWindow;
 
+        suggestionArrayList = new ArrayList<>();
+
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
         SuggestionList suggestions = RepositoryCollection.suggestionRepository.getAll().filterByCamp(camp).filterBySender(student);
         for(Suggestion suggestion : suggestions){
+            suggestionArrayList.add(suggestion);
             ArrayList<String> tmp = new ArrayList<String>();
             String status = "";
             if(suggestion.getStatus() == SuggestionStatus.PENDING){
@@ -100,8 +104,19 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
         SuggestionList suggestions = RepositoryCollection.suggestionRepository.getAll().filterByCamp(camp).filterBySender(student);
         for(Suggestion suggestion : suggestions){
+            suggestionArrayList.add(suggestion);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add("Suggestion: " + suggestion.getSuggestion().getID());
+            String status = "";
+            if(suggestion.getStatus() == SuggestionStatus.PENDING){
+                status = " ( PENDING )";
+            }
+            else if(suggestion.getStatus() == SuggestionStatus.APPROVED){
+                status = " ( APPROVED )";
+            }
+            else if(suggestion.getStatus() == SuggestionStatus.REJECTED){
+                status = " ( REJECTED )";
+            }
+            tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
             if(suggestion.getSuggestion().getLocation() != null){
                 changed += "Location, ";

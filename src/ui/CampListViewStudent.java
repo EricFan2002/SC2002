@@ -58,6 +58,7 @@ public class CampListViewStudent extends CampListView{
                 ArrayList<String> options = new ArrayList<>();
                 options.add("Join As Participant");
                 options.add("Join As Committee");
+                options.add("Cancel");
                 OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 15), "Join As?", options, CampListViewStudent.this);
                 addOverlay(overlayChooseBox);
             }
