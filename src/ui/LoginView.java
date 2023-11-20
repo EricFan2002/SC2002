@@ -69,6 +69,7 @@ public class LoginView extends Window implements ICallBack { ;
                 options.add("OK");
                 OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  loginButton.getY(), loginButton.getX(), "Wrong username or password", options, LoginView.this);
                 addOverlay(overlayTestClass);
+                loginButton.clearPressed();
             }
         }
         if(forgetPasswordButton.getPressed()){
