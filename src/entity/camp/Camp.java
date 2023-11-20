@@ -38,6 +38,7 @@ public class Camp extends CampDetails {
     protected Staff staffInCharge;
     protected Set<Student> attendees;
     protected Set<Student> committees;
+    protected Set<Student> registeredStudents;
     private ArrayList<Suggestion> suggestionList;
     private ArrayList<Enquiry> enquiryList;
 
@@ -66,6 +67,7 @@ public class Camp extends CampDetails {
         this.staffInCharge = staffInCharge;
         this.attendees = new HashSet<Student>();
         this.committees = new HashSet<Student>();
+        this.registeredStudents = new HashSet<Student>();
         this.suggestionList = new ArrayList<Suggestion>();
         this.enquiryList = new ArrayList<Enquiry>();
     }
@@ -167,5 +169,13 @@ public class Camp extends CampDetails {
 
     public void removeEnquiry(Enquiry enquiry) {
         enquiryList.remove(enquiry);
+    }
+
+    public boolean isStudentRegistered(Student student) {
+        return registeredStudents.contains(student);
+    }
+
+    public void addRegisteredStudent(Student student) {
+        registeredStudents.add(student);
     }
 }

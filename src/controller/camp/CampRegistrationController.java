@@ -59,11 +59,14 @@ public class CampRegistrationController {
         } else if (camp.getAttendees().size() >= camp.getTotalSlots()) {
             return new OperationResult(false, "No More Slots");
         } else if (camp.getAttendees().contains(student)) {
-            return new OperationResult(false, "Already Joined");
+            return new OperationResult(false, "Already joined as an attendee.");
         } else if (camp.getCommittees().contains(student)) {
-            return new OperationResult(false, "Already Joined As Committee");
+            return new OperationResult(false, "Already joined as a committee.");
+        } else if (camp.isStudentRegistered(student)) {
+            return new OperationResult(false, "Cannot re-register after unregistering.");
         }
         camp.addAttendee(student);
+        camp.addRegisteredStudent(student);
         return new OperationResult(true, "Camp Joined");
     }
 
