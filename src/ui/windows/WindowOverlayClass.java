@@ -11,8 +11,8 @@ import com.googlecode.lanterna.screen.Screen;
  * and control its destruction.
  */
 public class WindowOverlayClass extends Window{
-    private int offsetX;
-    private int offsetY;
+    protected int offsetX;
+    protected int offsetY;
     private boolean destroy;
 
     /**

@@ -73,6 +73,9 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
         textBoxSlotsC.setSkipSelection(true);
         textBoxVis.setSkipSelection(true);
 
+        removeWidget(exitButton);
+        addWidget(exitButton);
+
     }
 
     public void updateEnquiries(){
@@ -86,7 +89,7 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
             if(enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
                 tmp.add("    Not Answer Yet.");
             else
-                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
+                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + " )");
             enqList.add(tmp);
         }
         participantsView.updateList(enqList);
@@ -97,7 +100,7 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
         if(participantsView.getSelectedOption() != -1){
             selectedEnq = enquiryList.get(participantsView.getSelectedOption());
             if(selectedEnq != null) {
-                if (selectedEnq.getAnswer().equals("") || selectedEnq.getAnswer() == null) {
+                if (selectedEnq.getAnswer() == null || selectedEnq.getAnswer().equals("")) {
                     ArrayList<String> options = new ArrayList<>();
                     options.add("Delete Enquiry");
                     options.add("Edit Enquiry");
