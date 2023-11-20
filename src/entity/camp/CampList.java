@@ -70,6 +70,16 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
         return result;
     }
 
+    public CampList filterByRegistrationDate(Date currentDate) {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            if (camp.getCloseRegistrationDate().compareTo(currentDate) >= 0) {
+                result.add(camp);
+            }
+        }
+        return result;
+    }
+
     public CampList filterByStudent(Student student) {
         CampList result = new CampList();
         for (Camp camp : super.all) {
