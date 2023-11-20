@@ -1,5 +1,6 @@
 package entity.camp;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -8,11 +9,19 @@ import entity.interfaces.IFilterableByDateRange;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableBySchool;
 import entity.interfaces.IFilterableByVisibility;
+import entity.interfaces.ISortableByEndDate;
+import entity.interfaces.ISortableByID;
+import entity.interfaces.ISortableByLocation;
+import entity.interfaces.ISortableByName;
+import entity.interfaces.ISortableByRegistrationCloseDate;
+import entity.interfaces.ISortableByStartingDate;
 import entity.user.Staff;
 import entity.user.Student;
 
 public class CampList extends RepositoryList<Camp> implements IFilterableByID<Camp>, IFilterableByDateRange<Camp>,
-        IFilterableBySchool<Camp>, IFilterableByVisibility<Camp> {
+        IFilterableBySchool<Camp>, IFilterableByVisibility<Camp>, ISortableByEndDate<Camp>, ISortableByID<Camp>,
+        ISortableByLocation<Camp>, ISortableByName<Camp>, ISortableByRegistrationCloseDate<Camp>,
+        ISortableByStartingDate<Camp> {
     public CampList(List<Camp> all) {
         super(all);
     }
@@ -78,6 +87,102 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
                 result.add(camp);
             }
         }
+        return result;
+    }
+
+    public CampList sortByName() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        };
+        result.all.sort(comparator);
+
+        return result;
+    }
+
+    public CampList sortByRegistrationCloseDate() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getCloseRegistrationDate().compareTo(o2.getCloseRegistrationDate());
+            }
+        };
+        result.all.sort(comparator);
+
+        return result;
+    }
+
+    public CampList sortByStartingDate() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getStartDate().compareTo(o2.getStartDate());
+            }
+        };
+        result.all.sort(comparator);
+
+        return result;
+    }
+
+    public CampList sortByEndDate() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getEndDate().compareTo(o2.getEndDate());
+            }
+        };
+        result.all.sort(comparator);
+
+        return result;
+    }
+
+    public CampList sortByLocation() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getLocation().compareTo(o2.getLocation());
+            }
+        };
+        result.all.sort(comparator);
+
+        return result;
+    }
+
+    public CampList sortByID() {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            result.add(camp);
+        }
+        Comparator<Camp> comparator = new Comparator<Camp>() {
+            @Override
+            public int compare(Camp o1, Camp o2) {
+                return o1.getID().compareTo(o2.getID());
+            }
+        };
+        result.all.sort(comparator);
+
         return result;
     }
 
