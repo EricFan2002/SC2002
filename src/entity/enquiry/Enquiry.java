@@ -111,6 +111,8 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param answer The answer to the enquiry.
+     * @param answeredBy The user who answered the enquiry.
      */
     public void setAnswer(String answer, User answeredBy) {
         this.answer = answer;
@@ -120,6 +122,7 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param ID The unique identifier of the enquiry.
      */
     public void setID(String ID) {
         this.ID = ID;
@@ -128,6 +131,7 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param sender The student who sent the enquiry.
      */
     public void setSender(Student sender) {
         this.sender = sender;
@@ -136,6 +140,7 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param question The question asked in the enquiry.
      */
     public void setQuestion(String question) {
         this.question = question;
@@ -144,6 +149,7 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param camp The camp related to the enquiry.
      */
     public void setCamp(Camp camp) {
         this.camp = camp;
@@ -152,6 +158,7 @@ public class Enquiry implements ITaggedItem {
     /**
      * Returns whether the enquiry has been answered.
      *
+     * @param answeredBy The user who answered the enquiry.
      */
     public void setAnsweredBy(Student answeredBy) {
         this.answeredBy = answeredBy;
