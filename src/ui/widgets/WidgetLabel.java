@@ -17,8 +17,8 @@ public class WidgetLabel extends Widget {
     @Override
     public void draw(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
         drawText(buffer);
-        for (int i = 0; i < text.length(); i++) {
-            printColor[x + i][y] = ANSI.WHITE_BRIGHT;
-        }
+//        for (int i = 0; i < getLen(); i++) {
+//            printColor[y][x + i] = ANSI.WHITE_BRIGHT;
+//        }
     }
 }

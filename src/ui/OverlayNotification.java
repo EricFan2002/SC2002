@@ -18,10 +18,10 @@ public class OverlayNotification extends WindowOverlayClass {
     protected WidgetButton exitButton;
 
     public OverlayNotification(int x, int offsetY, int offsetX, String windowName, String notification, Window callbackWindow) {
-        super(18, x, offsetY, offsetX, windowName);
-        WidgetLabel widgetLabel = new WidgetLabel(3, 3, 40, notification);
+        super(12, x, offsetY, offsetX, windowName);
+        WidgetLabel widgetLabel = new WidgetLabel(3, 3, 30, notification);
         addWidget(widgetLabel);
-        exitButton = new WidgetButton(3, 5, getLenX() - 10, "OK");
+        exitButton = new WidgetButton(3, 5, getLenX() - 4, "OK");
         addWidget(exitButton);
         this.callbackWindow = callbackWindow;
     }
