@@ -53,7 +53,7 @@ public class Main {
             Window campViewer = new CampViewer(40, 40, 3);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
 
-//            windows.addWindow(CampListView);
+            windows.addWindow(CampListView);
             windows.addWindow(LoginView);
             windows.addWindow(studentMainView);
             windows.addWindow(staffMainView);

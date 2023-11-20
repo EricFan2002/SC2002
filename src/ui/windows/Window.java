@@ -170,6 +170,16 @@ public class Window {
         return widgetID;
     }
 
+    public int getWidgetIndex(Widget widget) {
+        return widgets.indexOf(widget);
+    }
+
+    public int removeWidget(Widget widget){
+        widgetID -= 1;
+        widgets.remove(widget);
+        return widgetID;
+    }
+
     public int addWidgetAfter(Widget widget, int afterWhich) {
         widgets.add(afterWhich, widget);
         widget.setWidgetID(widgetID);

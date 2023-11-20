@@ -11,8 +11,10 @@ public class CampViewer extends Window {
     WidgetLabel widgetLabel1;
     ArrayList<WidgetTextBox> widgetTextBoxes;
     private int loginSwitchToWindowIndex;
+    private int addAt;
     public CampViewer(int y, int x, int loginSwitchToWindowIndex){
         super(y, x, "Camp Viewer");
+        this.addAt = addAt;
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         for(int i = 0 ; i < 20 ; i ++){
             ArrayList<String> tmp = new ArrayList<String>();

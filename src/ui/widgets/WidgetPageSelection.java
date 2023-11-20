@@ -3,6 +3,7 @@ package ui.widgets;
 import com.googlecode.lanterna.TextColor;
 import ui.windows.Window;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,11 @@ public class WidgetPageSelection extends Widget {
     private int maxPage = 0;
     private int perPage = 0;
     private int itemHeight = 0;
+    private int updateAt = 0;
+    private int addCounter = 0;
     public WidgetPageSelection(int x, int y, int len, int height, String text, ArrayList<ArrayList<String>> selections, Window mainWindow) {
         super(x, y, len, text);
+        addCounter = 0;
         selectedOption = -1;
         this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         this.height = height;
@@ -34,20 +38,34 @@ public class WidgetPageSelection extends Widget {
         }
         maxPage = selections.size() * itemHeight / (height - 1);
         perPage = (height - 1) / itemHeight;
+
+        prevButton = new WidgetButton(x, getY() + height - 1, len / 2, "Prev");
+        int second = len / 2;
+        if(len % 2 == 1)
+            second++;
+        nextButton = new WidgetButton((x + getLen() / 2), getY() + height - 1, second, "Next");
         addSelections(selections);
     }
 
     public void updateList(ArrayList<ArrayList<String>> selections){
-        selectedOption = -1;
-        this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
-        this.height = height;
-        this.mainWindow = mainWindow;
-        if(selections.size() >= 0) {
+        mainWindow.removeWidget(prevButton);
+        mainWindow.removeWidget(nextButton);
+        addCounter = 0;
+        for(List<WidgetButton> list : selectionsButton){
+            for(WidgetButton button: list){
+                mainWindow.removeWidget(button);
+            }
+        }
+        selectionsButton = new ArrayList<>();
+        updateAt = mainWindow.getWidgetIndex(prevButton);
+        if(selections.size() > 0) {
             itemHeight = selections.get(0).size();
         }
         else{
             itemHeight = 1;
         }
+        selectedOption = -1;
+        this.textAlignment = TEXT_ALIGNMENT.ALIGN_MID;
         maxPage = (int)Math.ceil((double)selections.size() / (height - 1) / itemHeight);
         perPage = (height - 1) / itemHeight;
         addSelections(selections);
@@ -80,6 +98,7 @@ public class WidgetPageSelection extends Widget {
                 mainWindow.addWidget(button);
             }
             selectionsButton.add(buttons);
+            addCounter += 1;
         }
         int padding = ((selections.size()) % (perPage)) * itemHeight;
         int extra = perPage - ((selections.size()) % (perPage));
@@ -97,12 +116,8 @@ public class WidgetPageSelection extends Widget {
                 mainWindow.addWidget(button);
             }
             selectionsButton.add(buttons);
+            addCounter += 1;
         }
-        prevButton = new WidgetButton(x, getY() + height - 1, len / 2, "Prev");
-        int second = len / 2;
-        if(len % 2 == 1)
-            second++;
-        nextButton = new WidgetButton((x + getLen() / 2), getY() + height - 1, second, "Next");
         mainWindow.addWidget(prevButton);
         mainWindow.addWidget(nextButton);
     }
@@ -124,6 +139,7 @@ public class WidgetPageSelection extends Widget {
         if(end > selectionsButton.size()){
             end = selectionsButton.size();
         }
+//        System.out.println(start + " - " + end);
         for(int i = 0 ; i < selectionsButton.size() ; i++){
             List<WidgetButton> buttons = selectionsButton.get(i);
             for(WidgetButton button : buttons){
