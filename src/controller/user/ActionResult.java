@@ -4,6 +4,10 @@ public class ActionResult {
     private boolean result;
     private int userType;
 
+
+    public ActionResult(){
+    }
+
     public boolean getLoginResult(){
         return result;
     }

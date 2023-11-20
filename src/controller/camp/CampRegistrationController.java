@@ -1,16 +1,41 @@
 package controller.camp;
 
+import controller.user.ActionResult;
+import entity.RepositoryCollection;
 import entity.camp.Camp;
+import entity.camp.CampList;
 import entity.user.Student;
+
+import javax.swing.*;
 
 public class CampRegistrationController {
     public class CampRegistrationService {
-        public static void registerCamp(Camp camp, Student student) {
+        public static boolean checkConflict(Camp camp, Student student){
+            CampList camps = RepositoryCollection.campRepository.getAll().filterByStudent(student);
+            for(Camp oneCamp : camps){
+                if(oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime() || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()){
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static OperationResult registerCamp(Camp camp, Student student) {
+            if(checkConflict(camp, student)){
+                return new OperationResult(false, "Time Conflict!");
+            }
+            else if(camp.getAttendees().size() == camp.getTotalSlots()){
+                return new OperationResult(false, "No more slots");
+            }
+            else if(camp.getAttendees().contains(student)){
+                return new OperationResult(false, "Already Joined");
+            }
             camp.addAttendee(student);
+            return new OperationResult(true, "Camp Joined!");
         }
 
-        public static void deregisterCamp(Camp camp, Student student) {
-            camp.removeAttendee(student);
+        public static OperationResult deregisterCamp(Camp camp, Student student) {
+            boolean result = camp.removeAttendee(student);
+            return new OperationResult(result, "Quited");
         }
 
     }

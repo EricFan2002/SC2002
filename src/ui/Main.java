@@ -44,7 +44,7 @@ public class Main {
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(60, 60, 1, 2, 1);
+            Window LoginView = new LoginView(60, 60, 4, 2, 1);
             Window studentMainView = new StudentMainView(0, 4, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(4, 1, 2);
@@ -53,7 +53,7 @@ public class Main {
             Window campViewer = new CampViewer(40, 40, 3);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
 
-            windows.addWindow(CampListView);
+//            windows.addWindow(CampListView);
             windows.addWindow(LoginView);
             windows.addWindow(studentMainView);
             windows.addWindow(staffMainView);

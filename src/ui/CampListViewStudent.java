@@ -1,6 +1,10 @@
 package ui;
 
+import controller.camp.CampRegistrationController;
+import controller.camp.OperationResult;
+import controller.user.UserController;
 import entity.camp.Camp;
+import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -29,10 +33,23 @@ public class CampListViewStudent extends CampListView{
             addOverlay(overlayCampListViewStudentCampActions);
             widgetPageSelection.clearSelectedOption();
         }
-        if(chose == 0){ // view details
+        if(chose == 0 && choseString.equals("View Details")){ // view details
             OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplay(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
+        }
+        else if(chose == 0 && choseString.equals("CFM")){ // view details
+            OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplay(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
+            addOverlay(overlayCampInfoDisplay);
+            chose = -1;
+        }
+        else if(chose == 1 && choseString.equals("Join Camp")){ // join
+            if(UserController.getCurrentUser() instanceof Student) {
+                Student student = (Student)UserController.getCurrentUser();
+                OperationResult result = CampRegistrationController.CampRegistrationService.registerCamp(selectedCamp, student);
+                OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
+                addOverlay(overlayNotification);
+            }
         }
     }
 //        options.add("View Details");
@@ -42,9 +59,11 @@ public class CampListViewStudent extends CampListView{
 //        options.add("Reply Enquiry");
 //        options.add("Create Suggestion");
     private int chose = -1;
+    private String choseString = "";
     @Override
     public void onWindowFinished(int chose, String choseString) {
         this.chose = chose;
+        this.choseString = choseString;
     }
 
 }
