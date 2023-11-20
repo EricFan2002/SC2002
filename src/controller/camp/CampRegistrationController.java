@@ -85,6 +85,8 @@ public class CampRegistrationController {
             return new OperationResult(false, "Already Joined As Committee");
         } else if (checkJoinedAsCommittee(student)) {
             return new OperationResult(false, "Committee In Another Camp");
+        } else if (camp.isStudentRegistered(student)) {
+            return new OperationResult(false, "Cannot re-register after unregistering.");
         }
         camp.addCommittee(student);
         student.addCommitteeCamp(camp);
