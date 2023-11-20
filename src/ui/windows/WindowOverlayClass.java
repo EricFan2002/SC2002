@@ -24,6 +24,17 @@ public class WindowOverlayClass extends Window{
     public boolean getDestroy(){
         return destroy;
     }
+
+    @Override
+    public void messageLoop() {
+        if(overlays.size() != 0){
+            overlays.get(overlays.size() - 1).messageLoop();
+        }
+        else {
+            super.messageLoop();
+        }
+    }
+
     public void setDestroy(){
         destroy = true;
     }

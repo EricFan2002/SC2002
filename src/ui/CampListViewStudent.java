@@ -16,6 +16,7 @@ public class CampListViewStudent extends CampListView{
     protected WidgetToggle toggleAvailable = new WidgetToggle(1, 8, getLenX() / 4 - 1, "Available As Participant");
     protected WidgetToggle toggleCommitteeAvailableC = new WidgetToggle(getLenX() / 4 + 1, 8, getLenX() / 4 - 1, "Available As Committee");
     protected Camp selectedCamp;
+    protected OverlayCampInfoDisplayEnquiries overlayCampInfoDisplayEnquiries;
     public CampListViewStudent(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex) {
         super(loginSwitchToWindowIndex, changePasswordWindowIndex, forgotPasswordWindowIndex);
         addWidgetAfter(toggleCommitteeAvailableC, filter4Index);
@@ -38,14 +39,16 @@ public class CampListViewStudent extends CampListView{
             widgetPageSelection.clearSelectedOption();
         }
         if(chose == 0 && choseString.equals("View Details")){ // view details
-            OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
+            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
+            choseString = "";
         }
         else if(chose == 0 && choseString.equals("CFM")){ // view details
-            OverlayCampInfoDisplay overlayCampInfoDisplay = new OverlayCampInfoDisplay(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
+            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
+            choseString = "";
         }
         else if(chose == 1 && choseString.equals("Join Camp")){ // join
             if(UserController.getCurrentUser() instanceof Student) {
@@ -55,6 +58,8 @@ public class CampListViewStudent extends CampListView{
                 OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 15), "Join As?", options, CampListViewStudent.this);
                 addOverlay(overlayChooseBox);
             }
+            chose = -1;
+            choseString = "";
         }
         else if(choseString.equals("Join As Participant")){ // join
             if(UserController.getCurrentUser() instanceof Student) {
@@ -63,6 +68,8 @@ public class CampListViewStudent extends CampListView{
                 OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
             }
+            chose = -1;
+            choseString = "";
         }
         else if(choseString.equals("Join As Committee")){ // join
             if(UserController.getCurrentUser() instanceof Student) {
@@ -71,13 +78,17 @@ public class CampListViewStudent extends CampListView{
                 OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
             }
+            chose = -1;
+            choseString = "";
         }
         else if(chose == 3 && choseString.equals("Enquiry")){ // Enquiry
             if(UserController.getCurrentUser() instanceof Student) {
                 Student student = (Student)UserController.getCurrentUser();
-                OverlayCampInfoDisplayEnquiries overlayCampInfoDisplayEnquiries = new OverlayCampInfoDisplayEnquiries(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, student);
+                overlayCampInfoDisplayEnquiries = new OverlayCampInfoDisplayEnquiries(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, student, CampListViewStudent.this);
                 addOverlay(overlayCampInfoDisplayEnquiries);
             }
+            chose = -1;
+            choseString = "";
         }
     }
 //        options.add("View Details");
@@ -92,6 +103,9 @@ public class CampListViewStudent extends CampListView{
     public void onWindowFinished(int chose, String choseString) {
         this.chose = chose;
         this.choseString = choseString;
+        if(overlayCampInfoDisplayEnquiries != null && overlayCampInfoDisplayEnquiries.getDestroy() != true){
+            overlayCampInfoDisplayEnquiries.onWindowFinished(chose, choseString);
+        }
     }
 
 }

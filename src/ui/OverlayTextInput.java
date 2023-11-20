@@ -2,27 +2,30 @@ package ui;
 
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetLabel;
+import ui.widgets.WidgetTextBox;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 import ui.windows.WindowOverlayClass;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class OverlayNotification extends WindowOverlayClass {
+public class OverlayTextInput extends WindowOverlayClass {
     WidgetButton cancelButton;
     private int chose;
     private String choseString;
     List<WidgetButton> choices;
     Window callbackWindow;
     protected WidgetButton exitButton;
+    protected WidgetTextBox textInput;
 
-    public OverlayNotification(int x, int offsetY, int offsetX, String windowName, String notification, Window callbackWindow) {
+    public OverlayTextInput(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow) {
         super(12, x, offsetY, offsetX, windowName);
-        WidgetLabel widgetLabel = new WidgetLabel(3, 3, 30, notification);
+        WidgetLabel widgetLabel = new WidgetLabel(3, 3, x-10, prompt);
         addWidget(widgetLabel);
-        exitButton = new WidgetButton(3, 8, getLenX() - 4, "OK");
+        exitButton = new WidgetButton(3, 10, getLenX() - 4, "Enter");
         addWidget(exitButton);
+        textInput = new WidgetTextBox(3,5, getLenX() - 4, "");
+        addWidget(textInput);
         this.callbackWindow = callbackWindow;
     }
 
@@ -35,7 +38,7 @@ public class OverlayNotification extends WindowOverlayClass {
     public void onExit(){
         super.onExit();
         if(callbackWindow instanceof ICallBack) {
-            ((ICallBack)callbackWindow).onWindowFinished(0, "CFM");
+            ((ICallBack)callbackWindow).onWindowFinished(255, textInput.getText());
         }
     }
 }
