@@ -25,7 +25,8 @@ import org.apache.commons.csv.CSVPrinter;
 
 /**
  * Handles the storage, retrieval, and manipulation of suggestion data.
- * This class extends the Repository class for Suggestion objects and manages suggestion data through CSV files.
+ * This class extends the Repository class for Suggestion objects and manages
+ * suggestion data through CSV files.
  */
 public class SuggestionRepository extends Repository<Suggestion> {
     UserRepository userRepository;
@@ -49,7 +50,7 @@ public class SuggestionRepository extends Repository<Suggestion> {
     /**
      * Gets all suggestions that match the given filter.
      *
-     * @param filePath the file path of the CSV file to load from.
+     * @param filePath       the file path of the CSV file to load from.
      * @param userRepository the user repository to use.
      * @param campRepository the camp repository to use.
      */
@@ -124,12 +125,13 @@ public class SuggestionRepository extends Repository<Suggestion> {
                 }
 
                 String statusRaw = record.get(4);
-                SuggestionStatus status = statusRaw == "0" ? SuggestionStatus.PENDING
-                        : statusRaw == "1" ? SuggestionStatus.APPROVED : SuggestionStatus.REJECTED;
+                SuggestionStatus status = statusRaw.equals("0") ? SuggestionStatus.PENDING
+                        : statusRaw.equals("1") ? SuggestionStatus.APPROVED : SuggestionStatus.REJECTED;
 
                 Camp originalCamp = campRepository.getAll().filterByID(campSuggestionID).get(0);
-
+                System.out.println(statusRaw);
                 Suggestion suggestion = new Suggestion(id, sender, campDetails, originalCamp, reviewedBy, status);
+                System.out.println(suggestion.getStatus());
 
                 // add Suggestion to SuggestionList
                 cur.add(suggestion);
