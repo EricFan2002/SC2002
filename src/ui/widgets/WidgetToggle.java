@@ -33,6 +33,7 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
     public void clearPressed(){
         pressed = false;
     }
+    public void setPressed(){ pressed = true; }
     @Override
     public void drawSelection(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
         for (int i = 0; i < getLen(); i++) {
