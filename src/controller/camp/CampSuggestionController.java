@@ -40,7 +40,7 @@ public class CampSuggestionController {
      * The method awards points to the student who made the suggestion.
      *
      * @param sender       The {@link Student} who is sending the suggestion.
-     * @param suggestion   The {@link CampDetails} containing the suggestion
+     * @param suggsetion   The {@link CampDetails} containing the suggestion
      *                     details.
      * @param originalCamp The original {@link Camp} for which the suggestion is
      *                     made.
