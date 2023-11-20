@@ -1,9 +1,14 @@
 package entity.camp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import entity.enquiry.Enquiry;
+import entity.enquiry.EnquiryList;
+import entity.suggestion.Suggestion;
+import entity.suggestion.SuggestionList;
 import entity.user.Staff;
 import entity.user.Student;
 
@@ -33,6 +38,8 @@ public class Camp extends CampDetails {
     protected Staff staffInCharge;
     protected Set<Student> attendees;
     protected Set<Student> committees;
+    private ArrayList<Suggestion> suggestionList;
+    private ArrayList<Enquiry> enquiryList;
 
     public static final int MAX_COMMITTEE = 10;
 
@@ -59,6 +66,8 @@ public class Camp extends CampDetails {
         this.staffInCharge = staffInCharge;
         this.attendees = new HashSet<Student>();
         this.committees = new HashSet<Student>();
+        this.suggestionList = new ArrayList<Suggestion>();
+        this.enquiryList = new ArrayList<Enquiry>();
     }
 
     // Example for one getter and one setter
@@ -134,5 +143,29 @@ public class Camp extends CampDetails {
         CampDetails suggestionPlan = new CampDetails();
         suggestionPlan.setID(this.ID);
         return suggestionPlan;
+    }
+
+    public SuggestionList getSuggestionList() {
+        return new SuggestionList(suggestionList);
+    }
+
+    public EnquiryList getEnquiryList() {
+        return new EnquiryList(enquiryList);
+    }
+
+    public void addSuggestion(Suggestion suggestion) {
+        suggestionList.add(suggestion);
+    }
+
+    public void addEnquiry(Enquiry enquiry) {
+        enquiryList.add(enquiry);
+    }
+
+    public void removeSuggestion(Suggestion suggestion) {
+        suggestionList.remove(suggestion);
+    }
+
+    public void removeEnquiry(Enquiry enquiry) {
+        enquiryList.remove(enquiry);
     }
 }
