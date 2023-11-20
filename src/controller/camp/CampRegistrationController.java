@@ -43,7 +43,7 @@ public class CampRegistrationController {
      * @param student The {@link Student} to be registered for the camp.
      */
     public static boolean checkConflict(Camp camp, Student student) {
-        CampList camps = RepositoryCollection.campRepository.getAll().filterByStudent(student);
+        CampList camps = new CampList(student.getAttendedCampList());
         for (Camp oneCamp : camps) {
             if (oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime()
                     || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()) {

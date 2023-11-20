@@ -49,7 +49,8 @@ public class CampSuggestionController {
     public static boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
         RepositoryCollection.suggestionRepository.insert(suggestion);
-        sender.addPoints(1);
+        sender.addSuggestion(suggestion);
+        originalCamp.addSuggestion(suggestion);
         return true;
     }
 
@@ -60,7 +61,13 @@ public class CampSuggestionController {
      * @return boolean True if the suggestion is successfully updated.
      */
     public static boolean updateSuggestion(Suggestion newSuggestion) {
-        return RepositoryCollection.suggestionRepository.update(newSuggestion);
+        // deep copy
+        Suggestion oldSuggestion = RepositoryCollection.suggestionRepository.getAll()
+                .filterByID(newSuggestion.getID()).get(0); // get the old suggestion
+        if (oldSuggestion.getStatus() != SuggestionStatus.PENDING)
+            return false;
+        oldSuggestion.setSuggestion(newSuggestion.getSuggestion());
+        return true;
     }
 
     /**
@@ -70,7 +77,10 @@ public class CampSuggestionController {
      * @return boolean True if the suggestion is successfully deleted.
      */
     public static boolean deleteSuggestion(Suggestion suggestion) {
-        return RepositoryCollection.suggestionRepository.remove(suggestion);
+        suggestion.getSender().removeSuggestion(suggestion);
+        suggestion.getOriginalCamp().removeSuggestion(suggestion);
+        RepositoryCollection.suggestionRepository.remove(suggestion);
+        return true;
     }
 
     /**
@@ -108,6 +118,7 @@ public class CampSuggestionController {
                 editingCamp.setName(suggestion.getSuggestion().getName());
             if (suggestion.getSuggestion().getLocation() != null)
                 editingCamp.setLocation(suggestion.getSuggestion().getLocation());
+            sender.addPoints(1);
         } else {
             suggestion.setStatus(SuggestionStatus.REJECTED);
         }

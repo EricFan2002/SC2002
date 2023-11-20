@@ -59,12 +59,12 @@ public class Student extends User {
         attendedCampList.remove(camp);
     }
 
-    public CampList getAttendedCampList() {
-        return new CampList(attendedCampList);
+    public ArrayList<Camp> getAttendedCampList() {
+        return attendedCampList;
     }
 
-    public CampList getCommitteeCampList() {
-        return new CampList(committeeCampList);
+    public ArrayList<Camp> getCommitteeCampList() {
+        return committeeCampList;
     }
 
     public void addEnquiry(Enquiry enquiry) {

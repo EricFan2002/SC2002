@@ -145,12 +145,12 @@ public class Camp extends CampDetails {
         return suggestionPlan;
     }
 
-    public SuggestionList getSuggestionList() {
-        return new SuggestionList(suggestionList);
+    public ArrayList<Suggestion> getSuggestionList() {
+        return suggestionList;
     }
 
-    public EnquiryList getEnquiryList() {
-        return new EnquiryList(enquiryList);
+    public ArrayList<Enquiry> getEnquiryList() {
+        return enquiryList;
     }
 
     public void addSuggestion(Suggestion suggestion) {

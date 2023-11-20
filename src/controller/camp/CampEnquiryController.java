@@ -47,6 +47,8 @@ public class CampEnquiryController {
      */
     public static boolean createEnquiry(Enquiry enquiry) {
         RepositoryCollection.enquiryRepository.insert(enquiry);
+        enquiry.getSender().addEnquiry(enquiry);
+        enquiry.getCamp().addEnquiry(enquiry);
         return true;
     }
 
@@ -80,7 +82,7 @@ public class CampEnquiryController {
      * @return EnquiryList A list of enquiries related to the specified camp.
      */
     public static EnquiryList getEnquiries(Camp camp) {
-        return RepositoryCollection.enquiryRepository.getAll().filterByCamp(camp);
+        return new EnquiryList(camp.getEnquiryList());
     }
 
     /**
@@ -90,8 +92,8 @@ public class CampEnquiryController {
      * 
      * @return EnquiryList A list of enquiries made by the specified user.
      */
-    public static EnquiryList getEnquiries(User user) {
-        return RepositoryCollection.enquiryRepository.getAll().filterBySender(user);
+    public static EnquiryList getEnquiries(Student user) {
+        return new EnquiryList(user.getEnquiryList());
     }
 
     /**
@@ -102,7 +104,16 @@ public class CampEnquiryController {
      * @return boolean True if the update operation is successful.
      */
     public static boolean updateEnquiry(Enquiry newEnquiry) {
-        return RepositoryCollection.enquiryRepository.update(newEnquiry);
+        Enquiry oldEnquiry = getEnquiry(newEnquiry.getID());
+        if (oldEnquiry.getAnsweredBy() != null) {
+            return false;
+        }
+        oldEnquiry.setAnswer(newEnquiry.getAnswer(), newEnquiry.getAnsweredBy());
+        oldEnquiry.setCamp(newEnquiry.getCamp());
+        oldEnquiry.setSender(newEnquiry.getSender());
+        oldEnquiry.setQuestion(newEnquiry.getQuestion());
+
+        return true;
     }
 
     /**
@@ -113,7 +124,10 @@ public class CampEnquiryController {
      * @return boolean True if the deletion is successful.
      */
     public static boolean deleteEnquiry(Enquiry enquiry) {
-        return RepositoryCollection.enquiryRepository.remove(enquiry);
+        enquiry.getSender().removeEnquiry(enquiry);
+        enquiry.getCamp().removeEnquiry(enquiry);
+        RepositoryCollection.enquiryRepository.remove(enquiry);
+        return true;
     }
 
     /**

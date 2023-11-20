@@ -3,6 +3,7 @@ package controller.camp;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
+import entity.user.Staff;
 
 /**
  * The {@code CampModificationController} class is responsible for handling the
@@ -36,8 +37,16 @@ public class CampModificationController {
      *
      * @param camp The {@link Camp} object to be inserted.
      */
-    public static void createCamp(Camp camp) {
+    public static boolean createCamp(Camp camp) {
+        Staff staff = camp.getStaffInCharge();
+
+        // Ensure that the staff have not created any other camps
+        if (staff.getOrganizedCampList().size() > 0) {
+            return false;
+        }
+        staff.addOrganizedCamp(camp);
         RepositoryCollection.campRepository.insert(camp);
+        return true;
     }
 
     /**
@@ -47,8 +56,16 @@ public class CampModificationController {
      *
      * @param camp The {@link Camp} object to be removed.
      */
-    public static void deleteCamp(Camp camp) {
+    public static boolean deleteCamp(Camp camp) {
+
+        // Ensure that the camp does not have any attendees before deleting
+        if (camp.getAttendees().size() > 0 || camp.getCommittees().size() > 0) {
+            return false;
+        }
+        camp.getStaffInCharge().removeOrganizedCamp(camp);
         RepositoryCollection.campRepository.remove(camp);
+
+        return false;
     }
 
     /**
