@@ -23,10 +23,19 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
+/**
+ * Handles the storage, retrieval, and manipulation of suggestion data.
+ * This class extends the Repository class for Suggestion objects and manages suggestion data through CSV files.
+ */
 public class SuggestionRepository extends Repository<Suggestion> {
     UserRepository userRepository;
     CampRepository campRepository;
 
+    /**
+     * Gets all suggestions.
+     *
+     * @return a SuggestionList containing all suggestions.
+     */
     @Override
     public SuggestionList getAll() {
         // deep copy
@@ -37,12 +46,24 @@ public class SuggestionRepository extends Repository<Suggestion> {
         return all;
     }
 
+    /**
+     * Gets all suggestions that match the given filter.
+     *
+     * @param filePath the file path of the CSV file to load from.
+     * @param userRepository the user repository to use.
+     * @param campRepository the camp repository to use.
+     */
     public SuggestionRepository(String filePath, UserRepository userRepository, CampRepository campRepository) {
         super(filePath);
         this.userRepository = userRepository;
         this.campRepository = campRepository;
     }
 
+    /**
+     * Loads suggestion data from the CSV file.
+     *
+     * @return true if the data was loaded successfully, false otherwise.
+     */
     public boolean load() {
         // Creates file if not exist
         File source = new File(super.filePath);
@@ -139,6 +160,11 @@ public class SuggestionRepository extends Repository<Suggestion> {
 
     }
 
+    /**
+     * Saves all suggestion data to the CSV file.
+     *
+     * @return true if the data was saved successfully, false otherwise.
+     */
     public boolean save() {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(super.filePath), CSVFormat.DEFAULT)) {
             super.all.forEach(camp -> {
