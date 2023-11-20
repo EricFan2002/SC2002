@@ -4,6 +4,11 @@ import java.util.Date;
 
 import entity.interfaces.ITaggedItem;
 
+/**
+ * Represents the details of a camp, including its ID, name, description, visibility,
+ * start and end dates, registration closure date, school, location, and the total number of slots.
+ * This class implements the ITaggedItem interface.
+ */
 public class CampDetails implements ITaggedItem {
     protected String ID;
     protected String name;
@@ -16,6 +21,20 @@ public class CampDetails implements ITaggedItem {
     protected String location;
     protected Integer totalSlots;
 
+    /**
+     * Constructs a new CampDetails object with specified details.
+     *
+     * @param ID                   The unique identifier of the camp.
+     * @param name                 The name of the camp.
+     * @param description          A description of the camp.
+     * @param visibility           The visibility status of the camp.
+     * @param startDate            The start date of the camp.
+     * @param endDate              The end date of the camp.
+     * @param closeRegistrationDate The last date to register for the camp.
+     * @param school               The school associated with the camp.
+     * @param location             The location of the camp.
+     * @param totalSlots           The total number of slots available in the camp.
+     */
     public CampDetails(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
             String school, String location, Integer totalSlots) {
@@ -31,6 +50,9 @@ public class CampDetails implements ITaggedItem {
         this.totalSlots = totalSlots;
     }
 
+    /**
+     * Constructs a new CampDetails object with default values.
+     */
     public CampDetails() {
         this.ID = null;
         this.name = null;
@@ -43,6 +65,14 @@ public class CampDetails implements ITaggedItem {
         this.location = null;
     }
 
+    // Getters and setters for each property with appropriate Javadoc comments.
+    // For example:
+
+    /**
+     * Returns the ID of the camp.
+     *
+     * @return The camp's unique identifier.
+     */
     public String getID() {
         return ID;
     }
