@@ -10,6 +10,10 @@ import java.util.List;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+/**
+ * WidgetPageSelection represents a paginated selection widget in a UI.
+ * This widget allows displaying a list of options spread across multiple pages.
+ */
 public class WidgetPageSelection extends Widget {
     private int selectedOption = -1;
     List<List<WidgetButton>> selectionsButton = new ArrayList<>();
@@ -23,6 +27,17 @@ public class WidgetPageSelection extends Widget {
     private int itemHeight = 0;
     private int updateAt = 0;
     private int addCounter = 0;
+    /**
+     * Constructor for creating a WidgetPageSelection.
+     *
+     * @param x The x-coordinate of the widget.
+     * @param y The y-coordinate of the widget.
+     * @param len Length of the widget.
+     * @param height Height of the widget.
+     * @param text Text associated with the widget.
+     * @param selections List of selection options.
+     * @param mainWindow The main window in which the widget is displayed.
+     */
     public WidgetPageSelection(int x, int y, int len, int height, String text, ArrayList<ArrayList<String>> selections, Window mainWindow) {
         super(x, y, len, text);
         addCounter = 0;
@@ -47,6 +62,11 @@ public class WidgetPageSelection extends Widget {
         addSelections(selections);
     }
 
+    /**
+     * Updates the list of selections in the widget.
+     *
+     * @param selections New list of selections to be updated.
+     */
     public void updateList(ArrayList<ArrayList<String>> selections){
         mainWindow.removeWidget(prevButton);
         mainWindow.removeWidget(nextButton);
@@ -72,18 +92,36 @@ public class WidgetPageSelection extends Widget {
         currentPage = 0;
     }
 
+    /**
+     * Gets the index of the currently selected option.
+     *
+     * @return Index of selected option.
+     */
     public int getSelectedOption(){
         return selectedOption;
     }
 
+    /**
+     * Clears the currently selected option.
+     */
     public void clearSelectedOption(){
         selectedOption = -1;
     }
 
+    /**
+     * Gets the list of buttons in the widget.
+     *
+     * @return List of buttons in the widget.
+     */
     public List<List<WidgetButton>> getSelectionsButton() {
         return selectionsButton;
     }
 
+    /**
+     * Adds the list of selections to the widget.
+     *
+     * @param selections List of selections to be added.
+     */
     public void addSelections(ArrayList<ArrayList<String>> selections){
         for(int i = 0 ; i < selections.size() ; i++){
             int position = getY() + ((i % (perPage))) * itemHeight;
@@ -122,6 +160,13 @@ public class WidgetPageSelection extends Widget {
         mainWindow.addWidget(nextButton);
     }
 
+    /**
+     * Draws the widget on the screen.
+     *
+     * @param buffer Buffer to draw on.
+     * @param printColor Color of the text.
+     * @param backColor Color of the background.
+     */
     @Override
     public void draw(char[][] buffer, TextColor[][] printColor, TextColor[][] backColor) {
         if(prevButton.getPressed()){
