@@ -94,6 +94,14 @@ public class EnquiryRepository extends Repository<Enquiry> {
 
             // set EnquiryRepo to EnquiryList,called Repo's function
             super.setAll(cur);
+
+            // create connection to user and camp repository
+            super.getAll().forEach(enquiry -> {
+                if (enquiry.camp != null)
+                    enquiry.camp.addEnquiry(enquiry);
+                if (enquiry.sender != null)
+                    enquiry.sender.addEnquiry(enquiry);
+            });
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
             return false;

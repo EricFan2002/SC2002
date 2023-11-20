@@ -116,6 +116,18 @@ public class SuggestionRepository extends Repository<Suggestion> {
 
             // set SuggestionRepo to SuggestionList
             super.setAll(cur);
+
+            // create connection to user repository
+            super.getAll().forEach(suggestion -> {
+                if (suggestion.getSender() != null) {
+                    suggestion.getSender().addSuggestion(suggestion);
+                }
+
+                if (suggestion.getOriginalCamp() != null) {
+                    suggestion.getOriginalCamp().addSuggestion(suggestion);
+                }
+            });
+
         } catch (FileNotFoundException e) {
             System.out.println(e.toString());
             return false;
