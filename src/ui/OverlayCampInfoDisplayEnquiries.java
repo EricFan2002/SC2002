@@ -104,6 +104,7 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
                     ArrayList<String> options = new ArrayList<>();
                     options.add("Delete Enquiry");
                     options.add("Edit Enquiry");
+                    options.add("Cancel");
                     WidgetButton buttonPosition = participantsView.getSelectionsButton().get(participantsView.getSelectedOption()).get(0);
                     OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options, OverlayCampInfoDisplayEnquiries.this);
                     mainWindow.addOverlay(overlayChooseBox);
