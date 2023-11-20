@@ -1,6 +1,5 @@
 package entity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +48,8 @@ public class RepositoryList<T extends ITaggedItem> implements Iterable<T> {
         if (index >= 0 && index < all.size()) {
             return all.get(index);
         } else {
-            // Handle the invalid index, e.g., by returning null or throwing a custom exception
+            // Handle the invalid index, e.g., by returning null or throwing a custom
+            // exception
             return null;
         }
     }
