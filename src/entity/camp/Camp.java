@@ -162,7 +162,7 @@ public class Camp extends CampDetails {
     /**
      * Retrieves the list of suggestions for the camp.
      *
-     * @return ArrayList<Suggestion> The list of suggestions.
+     * @return The list of suggestions.
      */
     public ArrayList<Suggestion> getSuggestionList() {
         return suggestionList;
@@ -171,7 +171,7 @@ public class Camp extends CampDetails {
     /**
      * Retrieves the list of enquiries for the camp.
      *
-     * @return ArrayList<Enquiry> The list of enquiries.
+     * @return The list of enquiries.
      */
     public ArrayList<Enquiry> getEnquiryList() {
         return enquiryList;
@@ -214,9 +214,10 @@ public class Camp extends CampDetails {
     }
 
     /**
-     * Retrieves the list of registered students.
+     * Checks if a student is registered in the camp.
      *
-     * @return Set<Student> The list of registered students.
+     * @param student The student to check for registration.
+     * @return True if the student is registered, false otherwise.
      */
     public boolean isStudentRegistered(Student student) {
         return registeredStudents.contains(student);
