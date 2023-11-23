@@ -249,7 +249,7 @@ public class Main {
             midHorizontalPos = (screenWidth - longestLineLength) / 2;
             midVerticalPos = (screenHeight - titleHeight) / 2;
             bounceHeight = 2; // Height of the bounce
-            numBounces = 3; // Number of times the title bounces
+            numBounces = 1; // Number of times the title bounces
 
             // Animation from top to middle
             for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
@@ -270,7 +270,7 @@ public class Main {
                         textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
                     }
                     animationScreen.refresh();
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 }
                 // Move down
                 for (int vPos = midVerticalPos - bounceHeight; vPos <= midVerticalPos; vPos++) {
@@ -279,7 +279,7 @@ public class Main {
                         textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
                     }
                     animationScreen.refresh();
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 }
             }
 
