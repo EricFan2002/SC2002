@@ -49,6 +49,7 @@ public class CampListView extends Window implements ICallBack {
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
+    private OverlayTextInput overlayTextInput;
 
     public CampListView() {
         super(55, 190, "Camp View");
@@ -106,7 +107,8 @@ public class CampListView extends Window implements ICallBack {
         addWidget(backButton);
     }
 
-    String lastFilter = "";
+    protected String lastFilter = "";
+    protected int lastSize = -1;
 
     protected CampList CustomFilter(CampList list) {
         return list;
@@ -157,18 +159,34 @@ public class CampListView extends Window implements ICallBack {
             }
             camps = res;
         }
-        int b4 = camps.size();
+        camps = camps.sortByName();
         camps = CustomFilter(camps);
         for (Camp c : camps) {
             newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
         }
-        int af = camps.size();
         displayCamps.clear();
         for (int i = 0; i < camps.size(); i++) {
             Camp camp = camps.get(i);
             displayCamps.add(camp);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add(camp.getName() + " Camp");
+            String campTitle = camp.getName() + " Camp";
+            if (UserController.getCurrentUser() != null) {
+                if (UserController.getCurrentUser() instanceof Student) {
+                    Student student = (Student) UserController.getCurrentUser();
+                    if (camp.getCommittees().contains(student)) {
+                        campTitle += " (Committee)";
+                    } else if (camp.getAttendees().contains(student)) {
+                        campTitle += " (Joined)";
+                    }
+                }
+                if (UserController.getCurrentUser() instanceof Staff) {
+                    Staff staff = (Staff) UserController.getCurrentUser();
+                    if (camp.getStaffInCharge().equals(staff)) {
+                        campTitle += " (In Charge)";
+                    }
+                }
+            }
+            tmp.add(campTitle);
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(), "School: " + camp.getSchool(),
                     getX() / 2 - 14));
@@ -188,6 +206,7 @@ public class CampListView extends Window implements ICallBack {
         if (!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
+            lastSize = camps.size();
         }
     }
 
@@ -204,5 +223,22 @@ public class CampListView extends Window implements ICallBack {
 
     @Override
     public void onWindowFinished(int chose, String choseString) {
+        if (choseString.equals("Camp Report")) {
+            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+                    "Save [Camps Participant Report] to File Name:", CampListView.this, 220);
+        } else if (choseString.equals("Performance Report")) {
+            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+                    "Save [Performance Report] to File Name:", CampListView.this, 221);
+        } else if (choseString.equals("Enquiries Report")) {
+            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+                    "Save [Enquiries Report] to File Name:", CampListView.this, 222);
+        }
+        if (chose == 220) {
+            // Camp Report
+        } else if (chose == 221) {
+            // Performance Report
+        } else if (chose == 222) {
+            // Enquiries Report
+        }
     }
 }

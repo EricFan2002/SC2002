@@ -1,5 +1,6 @@
 package ui;
 
+import controller.user.UserController;
 import ui.widgets.TEXT_ALIGNMENT;
 import ui.widgets.Widget;
 import ui.widgets.WidgetButton;
@@ -43,6 +44,10 @@ public class StaffMainView extends Window {
 
     public void messageLoop() {
         super.messageLoop();
+        if(UserController.getCurrentUser() != null){
+            userName = UserController.getCurrentUser().getName();
+            widgetLabel.setText("Welcome! " + userName);
+        }
         if(logoutButton.getPressed()){
             switchToWindow = loginViewIndex;
         }

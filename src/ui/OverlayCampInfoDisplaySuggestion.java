@@ -33,6 +33,51 @@ public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
         addWidget(submitButton);
         removeWidget(exitButton);
         addWidget(exitButton);
+        if (suggestion != null && suggestion.getSuggestion() != null) {
+            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+            // Name
+            if (suggestion.getSuggestion().getName() != null) {
+                textBoxCName.setText(suggestion.getSuggestion().getName());
+            }
+
+            // Description
+            if (suggestion.getSuggestion().getDescription() != null) {
+                textBoxDescription.setText(suggestion.getSuggestion().getDescription());
+            }
+
+            // Start Date
+            if (suggestion.getSuggestion().getStartDate() != null) {
+                textBoxDStart.setText(ft.format(suggestion.getSuggestion().getStartDate()));
+            }
+
+            // End Date
+            if (suggestion.getSuggestion().getEndDate() != null) {
+                textBoxDEnd.setText(ft.format(suggestion.getSuggestion().getEndDate()));
+            }
+
+            // Registration Close
+            if (suggestion.getSuggestion().getCloseRegistrationDate() != null) {
+                textBoxDClose.setText(ft.format(suggestion.getSuggestion().getCloseRegistrationDate()));
+            }
+
+            // Faculty (School)
+            if (suggestion.getSuggestion().getSchool() != null) {
+                textBoxSchool.setText(suggestion.getSuggestion().getSchool());
+            }
+
+            // Location
+            if (suggestion.getSuggestion().getLocation() != null) {
+                textBoxLocation.setText(suggestion.getSuggestion().getLocation());
+            }
+
+            // Slots
+            if (suggestion.getSuggestion().getTotalSlots() != null) {
+                textBoxSlots.setText(suggestion.getSuggestion().getTotalSlots().toString());
+            }
+
+        }
+
     }
 
     public void messageLoop() {
@@ -45,6 +90,9 @@ public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
             submitButton.clearPressed();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             CampDetails suggestion = camp.createSuggestionPlan();
+            if(editSuggestion != null) {
+                suggestion = editSuggestion.getSuggestion();
+            }
             suggestion.setDescription(textBoxDescription.getText());
             try {
                 suggestion.setStartDate(ft.parse(textBoxDescription.getText()));

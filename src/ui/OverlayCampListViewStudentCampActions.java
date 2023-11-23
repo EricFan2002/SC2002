@@ -1,5 +1,7 @@
 package ui;
 
+import entity.camp.Camp;
+import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -14,20 +16,37 @@ public class OverlayCampListViewStudentCampActions extends WindowOverlayClass {
     private String choseString;
     List<WidgetButton> choices;
     Window callbackWindow;
+    Student student;
+    Camp camp;
 
     public final static int optionCount = 6;
 
-    public OverlayCampListViewStudentCampActions(int x, int offsetY, int offsetX, String windowName, Window callbackWindow) {
+    public OverlayCampListViewStudentCampActions(int x, int offsetY, int offsetX, String windowName, Window callbackWindow, Student student, Camp camp) {
         super(3 + optionCount, x, offsetY, offsetX, windowName);
+
+        this.student = student;
+        this.camp = camp;
+
         List<String> options = new ArrayList<>();
 
         options.add("View Details");
-        options.add("Join Camp");
-        options.add("Quit Camp");
-        options.add("Enquiry");
-        options.add("Reply Enquiry");
-        options.add("Suggestions");
+        if((!camp.getAttendees().contains(student)) && (!camp.getCommittees().contains(student)))
+            options.add("Join Camp");
+        if(camp.getAttendees().contains(student))
+            options.add("Quit Camp");
+        if(camp.getAttendees().contains(student))
+            options.add("Enquiry");
+        if(camp.getCommittees().contains(student))
+            options.add("Reply Enquiry");
+        if(camp.getCommittees().contains(student))
+            options.add("Suggestions");
+        if(camp.getCommittees().contains(student))
+            options.add("Generate Student List");
+        if(camp.getCommittees().contains(student))
+            options.add("Generate Enquires List");
         options.add("Cancel");
+
+        setY(options.size() + 3);
 
         choices = new ArrayList<>();
         this.callbackWindow = callbackWindow;

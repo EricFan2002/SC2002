@@ -21,19 +21,28 @@ public class CampReport extends Report {
         camp.forEach((curCamp) -> {
             this.camp.add(curCamp);
         });
-        this.exportOption = 0;
+
+        exportOption = 0;
         if (includeCommittees) {
-            this.exportOption |= 1;
+            exportOption |= 1;
         }
         if (includeAttendees) {
-            this.exportOption |= 2;
+            exportOption |= 2;
         }
     }
 
-    public CampReport(Camp camp, int option) {
+    public CampReport(Camp camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         this.camp = new CampList();
         this.camp.add(camp);
+
+        exportOption = 0;
+        if (includeCommittees) {
+            exportOption |= 1;
+        }
+        if (includeAttendees) {
+            exportOption |= 2;
+        }
     }
 
     public final ArrayList<ArrayList<String>> serialize() {

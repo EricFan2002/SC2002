@@ -87,9 +87,10 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (suggestion.getSuggestion().getTotalSlots() != null) {
                 changed += "Slots, ";
             }
-            if (changed == "") {
+            if (changed.equals("")) {
                 tmp.add("    Nothing Changed.");
             } else {
+                changed = changed.substring(0, changed.length() - 2);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
@@ -175,6 +176,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (changed == "") {
                 tmp.add("    Nothing Changed.");
             } else {
+                changed = changed.substring(0, changed.length() - 2);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
