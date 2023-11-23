@@ -43,7 +43,7 @@ public class Main {
             int titleHeight = titleLines.length;
             int midHorizontalPos = (screenWidth - longestLineLength) / 2;
             int midVerticalPos = (screenHeight - titleHeight) / 2;
-            int bounceHeight = 2; // Height of the bounce
+            int bounceHeight = 8; // Height of the bounce
             int numBounces = 3; // Number of times the title bounces
 
             // Animation from top to middle
@@ -64,6 +64,7 @@ public class Main {
                     for (int line = 0; line < titleLines.length; line++) {
                         textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
                     }
+                    bounceHeight /= 2;
                     animationScreen.refresh();
                     Thread.sleep(100);
                 }
