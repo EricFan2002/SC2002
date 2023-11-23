@@ -31,13 +31,13 @@ public class OverlayCampInfoDisplay extends OverlayCampInfoDisplayRaw {
             participants.add(tmp);
         }
 
-        WidgetLabel labelParticipants = new WidgetLabel(3, 15, 15, "Participants:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        WidgetLabel labelParticipants = new WidgetLabel(3, 15, getLenX() - 10, "Participants: " + camp.getAttendees().size() + " / " + camp.getTotalSlots(), TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(labelParticipants);
 
         WidgetPageSelection participantsView = new WidgetPageSelection(3, 16, getLenX() - 8, getLenY() / 4, "Participants", participants, OverlayCampInfoDisplay.this);
         addWidget(participantsView);
 
-        WidgetLabel labelCommittee = new WidgetLabel(3, 17 + getLenY() / 4, 15, "Committees:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        WidgetLabel labelCommittee = new WidgetLabel(3, 17 + getLenY() / 4, getLenX() - 10, "Committees: " + camp.getCommittees().size() + " / 10", TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(labelCommittee);
 
         WidgetPageSelection committeesView = new WidgetPageSelection(3, 18 + getLenY() / 4, getLenX() - 8, getLenY() / 4, "Committees", committees, OverlayCampInfoDisplay.this);

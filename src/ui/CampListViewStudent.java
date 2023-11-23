@@ -4,6 +4,7 @@ import controller.camp.CampRegistrationController;
 import controller.camp.OperationResult;
 import controller.user.UserController;
 import entity.camp.Camp;
+import entity.user.Staff;
 import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
@@ -20,8 +21,10 @@ public class CampListViewStudent extends CampListView{
     protected OverlayCampInfoDisplayEnquiriesCommittee overlayCampInfoDisplayEnquiriesCommittee;
 
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
-    public CampListViewStudent(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex) {
-        super(loginSwitchToWindowIndex, changePasswordWindowIndex, forgotPasswordWindowIndex);
+    private int studentMainViewIndex;
+    public CampListViewStudent(int studentMainViewIndex) {
+        super();
+        this.studentMainViewIndex = studentMainViewIndex;
         addWidgetAfter(toggleCommitteeAvailableC, filter4Index);
         addWidgetAfter(toggleAvailable, filter4Index);
         addWidgetAfter(toggleCommittee, filter4Index);
@@ -111,6 +114,11 @@ public class CampListViewStudent extends CampListView{
             }
             chose = -1;
             choseString = "";
+        }
+        if(backButton.getPressed()){
+            System.out.println("Back button pressed in CampListView");
+            backButton.clearPressed();
+            switchToWindow = studentMainViewIndex;
         }
     }
 //        options.add("View Details");

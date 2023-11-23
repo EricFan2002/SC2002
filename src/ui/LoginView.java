@@ -24,7 +24,7 @@ public class LoginView extends Window implements ICallBack { ;
     private int staffMainViewIndex;
     private int changePasswordWindowIndex;
     private int forgotPasswordWindowIndex;
-    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -36,17 +36,14 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(widgetLabel2);
         widgetTextBox1 = new WidgetTextBox(14, 7,30, "password");
         addWidget(widgetTextBox1);
-        toggle = new WidgetToggle(5, 10, 40, "Save Password?");
-        addWidget(toggle);
-        loginButton = new WidgetButton(5, 12, 40, "Login");
+        loginButton = new WidgetButton(5, 10, 40, "Login");
         addWidget(loginButton);
-        changePasswordButton = new WidgetButton(5, 14, 19, "Change Password");
-        addWidget(changePasswordButton);
-        forgetPasswordButton = new WidgetButton(5 + 20 , 14, 20, "Forgot Password");
+        forgetPasswordButton = new WidgetButton(5 , 12, 40, "Forgot Password");
         addWidget(forgetPasswordButton);
         setPointer(loginButton);
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
+        this.changePasswordWindowIndex = changePasswordWindowIndex;
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
@@ -57,8 +54,12 @@ public class LoginView extends Window implements ICallBack { ;
             String password = widgetTextBox1.getText();
             // check if name and password is correct
             if(UserController.login(name, password)){
+                // if default password, switch to change password
+                if (UserController.getCurrentUser().getPassword().equals("password")) {
+                    switchToWindow = changePasswordWindowIndex;
+                }
                 // if correct, switch to main menu
-                if (UserController.getCurrentUser() instanceof Student) {
+                else if (UserController.getCurrentUser() instanceof Student) {
                     switchToWindow = studentMainViewIndex;
                 } else if (UserController.getCurrentUser() instanceof Staff){
                     switchToWindow = staffMainViewIndex;

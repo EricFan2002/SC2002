@@ -1,10 +1,12 @@
 package ui;
 
+import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.camp.CampRepository;
 import entity.user.Staff;
+import entity.user.Student;
 import entity.user.User;
 import entity.user.UserList;
 import ui.widgets.*;
@@ -47,8 +49,9 @@ public class CampListView extends Window implements ICallBack {
     protected WidgetPageSelection widgetPageSelection;
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
+    protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
 
-    public CampListView(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
+    public CampListView(){
         super(55, 190, "Camp View");
         displayCamps = new ArrayList<>();
         WidgetLabel widgetLabel = new WidgetLabel(1, 1,40, "Filters:", TEXT_ALIGNMENT.ALIGN_LEFT);
@@ -57,6 +60,7 @@ public class CampListView extends Window implements ICallBack {
             WidgetLabel widgetTmp = new WidgetLabel(getX()/2, i, 2, "┃");
             addWidget(widgetTmp);
         }
+
         addWidget(filterLabel1);
         addWidget(filter1Start);
         addWidget(filter1Comment);
@@ -70,6 +74,9 @@ public class CampListView extends Window implements ICallBack {
         addWidget(filter3Enable);
         addWidget(filterLabel4);
         addWidget(filter4);
+        addWidget(filter4Enable);
+
+        backButton.setSkipSelection(false);
         filter4Index = addWidget(filter4Enable);
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
@@ -91,13 +98,16 @@ public class CampListView extends Window implements ICallBack {
         }
         widgetPageSelection = new WidgetPageSelection(1, 10, getX() / 2 -2, getY() - 14, "PartyList", options, CampListView.this);
         addWidget(widgetPageSelection);
+        addWidget(backButton);
     }
 
     String lastFilter = "";
-    @Override
-    public void messageLoop() {
-        super.messageLoop();
-//        System.out.println("Message loop");
+
+    protected CampList CustomFilter(CampList list){
+        return list;
+    }
+
+    public void refreshList(boolean forceRefresh){
         String newFilter = "";
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
@@ -142,6 +152,12 @@ public class CampListView extends Window implements ICallBack {
             }
             camps = res;
         }
+        int b4 = camps.size();
+        camps = CustomFilter(camps);
+        for(Camp c : camps){
+            newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
+        }
+        int af = camps.size();
         displayCamps.clear();
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
@@ -159,10 +175,17 @@ public class CampListView extends Window implements ICallBack {
             tmp.add(line);
             options.add(tmp);
         }
-        if(!newFilter.equals(lastFilter)) {
+        if(!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
         }
+    }
+    @Override
+    public void messageLoop() {
+        super.messageLoop();
+        refreshList(false);
+//        System.out.println("Message loop");
+
     }
     public void onExit(){
     }

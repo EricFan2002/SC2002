@@ -34,11 +34,14 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
     }
 
     public void messageLoop() {
-        super.messageLoop();
         if(exitButton.getPressed()){
             exitButton.clearPressed();
             setDestroy();
+            if(mainWindow instanceof ICallBack){
+                ((ICallBack)mainWindow).onWindowFinished(254, "cancel");
+            }
         }
+        super.messageLoop();
         if(submitButton.getPressed()){
             submitButton.clearPressed();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -49,6 +52,13 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
                 suggestion.setEndDate(ft.parse(textBoxDEnd.getText()));
                 suggestion.setCloseRegistrationDate(ft.parse(textBoxDClose.getText()));
             } catch (ParseException e) {
+            }
+            if(!textBoxSlots.getText().equals(camp.getTotalSlots().toString())){
+                try{
+                    suggestion.setTotalSlots(Integer.parseInt(textBoxSlots.getText()));
+                }
+                catch (Exception e){
+                }
             }
             if(!textBoxCName.getText().equals(camp.getName()))
                 suggestion.setName(textBoxCName.getText());

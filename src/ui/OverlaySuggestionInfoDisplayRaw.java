@@ -1,17 +1,15 @@
 package ui;
 
 import entity.camp.Camp;
-import entity.user.Student;
+import entity.suggestion.Suggestion;
 import ui.widgets.*;
-import ui.windows.ICallBack;
 import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
+public class OverlaySuggestionInfoDisplayRaw extends WindowOverlayClass {
 
-    Camp camp;
+    Suggestion suggestion;
     protected WidgetButton exitButton;
     protected WidgetTextBox textBoxCName;
     protected WidgetTextBox textBoxDescription;
@@ -24,7 +22,7 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
     protected WidgetToggle textBoxVis;
     protected WidgetTextBox textBoxSlots;
 
-    public OverlayCampInfoDisplayRaw(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
+    public OverlaySuggestionInfoDisplayRaw(int x, int y, int offsetY, int offsetX, String windowName, Suggestion suggestion) {
         super(y , x, offsetY, offsetX, windowName);
 
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -35,49 +33,53 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
         // Description
         WidgetLabel labelName = new WidgetLabel(3, 3, 15, "Name:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelName);
-        textBoxCName = new WidgetTextBox(19, 3, getLenX() - 24, camp.getName());
+        if(suggestion.getSuggestion().getName() == null)
+            textBoxCName = new WidgetTextBox(19, 3, getLenX() - 24, "Not Changed.");
+        else
+            textBoxCName = new WidgetTextBox(19, 3, getLenX() - 24, suggestion.getSuggestion().getName());
         addWidget(textBoxCName);
+        textBoxCName.setSkipSelection(true);
 
         // Description
         WidgetLabel labelDescription = new WidgetLabel(3, 4, 15, "Description:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelDescription);
-        textBoxDescription = new WidgetTextBox(19, 4, getLenX() - 24, camp.getDescription());
+        textBoxDescription = new WidgetTextBox(19, 4, getLenX() - 24, suggestion.getSuggestion().getDescription());
         addWidget(textBoxDescription);
 
         // Start Date
         WidgetLabel labelDStart = new WidgetLabel(3, 5, 15, "Start Date:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelDStart);
-        textBoxDStart = new WidgetTextBox(19, 5, getLenX() - 24, ft.format(camp.getStartDate()));
+        textBoxDStart = new WidgetTextBox(19, 5, getLenX() - 24, ft.format(suggestion.getSuggestion().getStartDate()));
         addWidget(textBoxDStart);
 
         // End Date
         WidgetLabel labelDEnd = new WidgetLabel(3, 6, 15, "End Date:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelDEnd);
-        textBoxDEnd = new WidgetTextBox(19, 6, getLenX() - 24, ft.format(camp.getEndDate()));
+        textBoxDEnd = new WidgetTextBox(19, 6, getLenX() - 24, ft.format(suggestion.getSuggestion().getEndDate()));
         addWidget(textBoxDEnd);
 
         // Registration Close
         WidgetLabel labelDClose = new WidgetLabel(3, 7, 15, "Reg Close:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelDClose);
-        textBoxDClose = new WidgetTextBox(19, 7, getLenX() - 24, ft.format(camp.getCloseRegistrationDate()));
+        textBoxDClose = new WidgetTextBox(19, 7, getLenX() - 24, ft.format(suggestion.getSuggestion().getCloseRegistrationDate()));
         addWidget(textBoxDClose);
 
         // Faculty
         WidgetLabel labelSchool = new WidgetLabel(3, 8, 15, "Faculty:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSchool);
-        textBoxSchool = new WidgetTextBox(19, 8, getLenX() - 24, camp.getSchool() );
+        textBoxSchool = new WidgetTextBox(19, 8, getLenX() - 24, suggestion.getSuggestion().getSchool() );
         addWidget(textBoxSchool);
 
         // Location
         WidgetLabel labelLocation = new WidgetLabel(3, 9, 15, "Location:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelLocation);
-        textBoxLocation = new WidgetTextBox(19, 9, getLenX() - 24, camp.getLocation());
+        textBoxLocation = new WidgetTextBox(19, 9, getLenX() - 24, suggestion.getSuggestion().getLocation());
         addWidget(textBoxLocation);
 
         // Slots
         WidgetLabel labelSlots = new WidgetLabel(3, 10, 15, "Slots:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSlots);
-        textBoxSlots = new WidgetTextBox(19, 10, getLenX() - 24,  camp.getTotalSlots().toString());
+        textBoxSlots = new WidgetTextBox(19, 10, getLenX() - 24,  suggestion.getSuggestion().getTotalSlots().toString());
         addWidget(textBoxSlots);
 
         // Slots Committee
@@ -91,7 +93,7 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
         WidgetLabel labelVis = new WidgetLabel(3, 12, 15, "Visibility:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelVis);
         textBoxVis = new WidgetToggle(19, 12, getLenX() - 24, "Visible");
-        if(camp.isVisible()){
+        if(suggestion.getSuggestion().isVisible()){
             textBoxVis.setPressed();
         }
         else{

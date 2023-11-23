@@ -21,10 +21,10 @@ public class ChangePasswordView extends Window {
     WidgetToggle toggle;
     WidgetButton confirmButton;
     WidgetButton cancelButton;
-    private int loginSwitchToWindowIndex;
+    private int loginView;
     private int studentMainViewIndex;
     private int staffMainViewIndex;
-    public ChangePasswordView(int loginSwitchToWindowIndex, int studentMainViewIndex, int staffMainViewIndex){
+    public ChangePasswordView(int loginView, int studentMainViewIndex, int staffMainViewIndex){
         super(20, 55, "Password Change");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Change Your Password", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -45,7 +45,7 @@ public class ChangePasswordView extends Window {
         cancelButton = new WidgetButton(2, 14, 49, "Back");
         addWidget(cancelButton);
         setPointer(confirmButton);
-        this.loginSwitchToWindowIndex = loginSwitchToWindowIndex;
+        this.loginView = loginView;
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
     }
@@ -62,7 +62,7 @@ public class ChangePasswordView extends Window {
                 // if correct, switch to main menu
                 if(newPassword.equals(confirmPassword)){
                     if (UserAccountManagementController.changePassword(name, password, newPassword)) {
-                        switchToWindow = loginSwitchToWindowIndex;
+                        switchToWindow = loginView;
                     } else {
                         List<String> options = new ArrayList<String>();
                         options.add("OK");
@@ -84,10 +84,13 @@ public class ChangePasswordView extends Window {
             }
         }
         if(cancelButton.getPressed()){
+            cancelButton.clearPressed();
             if (UserController.getCurrentUser() instanceof Staff) {
                 switchToWindow = staffMainViewIndex;
             } else if (UserController.getCurrentUser() instanceof Student){
                 switchToWindow = studentMainViewIndex;
+            } else {
+                switchToWindow = loginView;
             }
         }
     }
