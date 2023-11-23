@@ -1,18 +1,13 @@
 package ui;
 
-import controller.report.ExportCSVController;
 import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
-<<<<<<< HEAD
-import entity.camp.CampRepository;
 import entity.report.CampReport;
 import entity.report.EnquiryReport;
 import entity.report.PerformanceReport;
 import entity.report.Report;
-=======
->>>>>>> 000c98e19fb53d6e05ed9107a05857bbe8bcd7e1
 import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
@@ -20,6 +15,7 @@ import entity.user.UserList;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
+import utils.CSV;
 
 import java.io.Console;
 import java.text.ParseException;
@@ -176,12 +172,8 @@ public class CampListView extends Window implements ICallBack {
             newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
         }
         displayCamps.clear();
-<<<<<<< HEAD
         campListForExport.clear();
         for(int i = 0 ; i < camps.size() ; i ++){
-=======
-        for (int i = 0; i < camps.size(); i++) {
->>>>>>> 000c98e19fb53d6e05ed9107a05857bbe8bcd7e1
             Camp camp = camps.get(i);
             campListForExport.add(camp);
             displayCamps.add(camp);
@@ -250,7 +242,6 @@ public class CampListView extends Window implements ICallBack {
             overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Enquiries Report] to File Name:", CampListView.this, 222);
         }
-<<<<<<< HEAD
         else if(choseString.equals("Performance Report")){
             overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
         }
@@ -265,13 +256,13 @@ public class CampListView extends Window implements ICallBack {
                         Student student = (Student) UserController.getCurrentUser();
                         CampList forExport = campListForExport.filterByCampCommittee(student);
                         Report report = new CampReport(forExport, true, true);
-                        ExportCSVController.exportReportToCSV(choseString, report);
+                        CSV.exportToCSV(choseString, report);
                     }
                     if (UserController.getCurrentUser() instanceof Staff) {
                         Staff staff = (Staff) UserController.getCurrentUser();
                         CampList forExport = campListForExport.filterByStaff(staff);
                         Report report = new CampReport(forExport, true, true);
-                        ExportCSVController.exportReportToCSV(choseString, report);
+                        CSV.exportToCSV(choseString, report);
                     }
                 }
             } else if (chose == 221) {
@@ -279,7 +270,7 @@ public class CampListView extends Window implements ICallBack {
                     Staff staff = (Staff) UserController.getCurrentUser();
                     CampList forExport = campListForExport.filterByStaff(staff);
                     Report report = new PerformanceReport(forExport);
-                    ExportCSVController.exportReportToCSV(choseString, report);
+                    CSV.exportToCSV(choseString, report);
                 }
                 // Performance Report
             } else if (chose == 222) {
@@ -288,25 +279,17 @@ public class CampListView extends Window implements ICallBack {
                         Student student = (Student) UserController.getCurrentUser();
                         CampList forExport = campListForExport.filterByCampCommittee(student);
                         Report report = new EnquiryReport(forExport);
-                        ExportCSVController.exportReportToCSV(choseString, report);
+                        CSV.exportToCSV(choseString, report);
                     }
                     if (UserController.getCurrentUser() instanceof Staff) {
                         Staff staff = (Staff) UserController.getCurrentUser();
                         CampList forExport = campListForExport.filterByStaff(staff);
                         Report report = new EnquiryReport(forExport);
-                        ExportCSVController.exportReportToCSV(choseString, report);
+                        CSV.exportToCSV(choseString, report);
                     }
                 }
                 // Enquiries Report
             }
-=======
-        if (chose == 220) {
-            // Camp Report
-        } else if (chose == 221) {
-            // Performance Report
-        } else if (chose == 222) {
-            // Enquiries Report
->>>>>>> 000c98e19fb53d6e05ed9107a05857bbe8bcd7e1
         }
     }
 }
