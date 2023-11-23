@@ -182,6 +182,7 @@ public class CampListView extends Window implements ICallBack {
             lastFilter = newFilter;
         }
         if(backButton.getPressed()){
+            backButton.clearPressed();
             if (UserController.getCurrentUser() instanceof Student) {
                 switchToWindow = studentMainViewIndex;
             } else if (UserController.getCurrentUser() instanceof Staff){
