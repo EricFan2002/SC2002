@@ -4,29 +4,58 @@ import controller.camp.CampRegistrationController;
 import controller.camp.OperationResult;
 import controller.user.UserAccountManagementController;
 import controller.user.UserController;
+import entity.RepositoryCollection;
 import entity.camp.Camp;
+import entity.camp.CampList;
 import entity.user.Staff;
 import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static java.lang.System.currentTimeMillis;
 
 public class CampListViewStaff extends CampListView{
-    protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 2, "Created Camps");
+    protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Created Camps");
+    protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7 , getLenX() / 4 - 1, "My Faculty Camps");
+    protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 2 - 2, "Create New Camp");
     protected Camp selectedCamp;
-    protected OverlayCampInfoDisplayEnquiries overlayCampInfoDisplayEnquiries;
-    protected OverlayCampInfoDisplayEnquiriesCommittee overlayCampInfoDisplayEnquiriesCommittee;
+    protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
 
     public CampListViewStaff(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex) {
         super(loginSwitchToWindowIndex, changePasswordWindowIndex, forgotPasswordWindowIndex);
         addWidgetAfter(toggleCreated, filter4Index);
+        addWidgetAfter(toggleMySchool, filter4Index + 1);
+        addWidgetAfter(createNewCampButton, filter4Index + 2);
     }
 
     private WidgetButton buttonPosition;
 
-//        options.add("View Details");
+    protected CampList CustomFilter(CampList list){
+        if(toggleCreated.getPressed()){
+            if(UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                list = list.filterByStaff(staff);
+            }
+        }
+        if(toggleMySchool.getPressed()){
+            if(UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                list = list.filterBySchool(staff.getFaculty());
+            }
+        }
+        return list;
+    }
+
+    private Camp toBeDestroyed = null;
+
+
+    //        options.add("View Details");
 //        options.add("Edit Camp");
 //        options.add("Delete Camp");
 //        options.add("Reply Enquiry");
@@ -34,6 +63,20 @@ public class CampListViewStaff extends CampListView{
     @Override
     public void messageLoop() {
         super.messageLoop();
+        if(createNewCampButton.getPressed()){
+            if(UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                Date in = new Date();
+                LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+                Date currentTime = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+                createNewCampButton.clearPressed();
+                Camp newCamp = new Camp(String.valueOf(currentTimeMillis()), "", "", true, currentTime, currentTime, currentTime, staff.getFaculty(), "", staff, 0);
+                toBeDestroyed = newCamp;
+                RepositoryCollection.campRepository.insert(newCamp);
+                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Create New Camp" , newCamp, (Staff)UserController.getCurrentUser(), CampListViewStaff.this);
+                addOverlay(overlayCampInfoDisplayEdit);
+            }
+        }
         if(widgetPageSelection.getSelectedOption() != -1){
             selectedCamp = displayCamps.get(widgetPageSelection.getSelectedOption());
             buttonPosition = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
@@ -56,22 +99,27 @@ public class CampListViewStaff extends CampListView{
             chose = -1;
             choseString = "";
         }
-        else if(choseString.equals("Join As Participant")){ // join
+        else if(choseString.equals("Delete Camp")){ // join
             if(UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff)UserController.getCurrentUser();
-//                OperationResult result = CampRegistrationController.registerCamp(selectedCamp, staff);
-//                OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStaff.this);
-//                addOverlay(overlayNotification);
+                if(selectedCamp.getCommittees().size() > 0 || selectedCamp.getAttendees().size() > 0){
+                    OverlayNotification overlayNotification = new OverlayNotification(70,  getY()/2 - 8, getX()/2 - 35, "Error", "Cannot Delete Camp That Have Participants", CampListViewStaff.this);
+                    addOverlay(overlayNotification);
+                }
+                else {
+                    RepositoryCollection.campRepository.remove(selectedCamp);
+                }
             }
             chose = -1;
             choseString = "";
         }
-        else if(choseString.equals("Join As Committee")){ // join
+        else if(choseString.equals("Reply Enquiry")){ // Reply Enquiry
             if(UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff)UserController.getCurrentUser();
-//                OperationResult result = CampRegistrationController.registerCampAsCommittee(selectedCamp, student);
-//                OverlayNotification overlayNotification = new OverlayNotification(40,  getY()/2 - 8, getX()/2 - 20, "Info", result.getComment(), CampListViewStaff.this);
-//                addOverlay(overlayNotification);
+                overlayCampInfoDisplayEnquiriesStaff = new OverlayCampInfoDisplayEnquiriesStaff(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
+                addOverlay(overlayCampInfoDisplayEnquiriesStaff);
+                chose = -1;
+                choseString = "";
             }
             chose = -1;
             choseString = "";
@@ -104,29 +152,25 @@ public class CampListViewStaff extends CampListView{
             choseString = "";
         }
     }
-//        options.add("View Details");
-//        options.add("Join Camp");
-//        options.add("Quit Camp");
-//        options.add("Enquiry");
-//        options.add("Reply Enquiry");
-//        options.add("Create Suggestion");
+
     private int chose = -1;
     private String choseString = "";
     @Override
     public void onWindowFinished(int chose, String choseString) {
         this.chose = chose;
         this.choseString = choseString;
-        if(overlayCampInfoDisplayEnquiries != null && overlayCampInfoDisplayEnquiries.getDestroy() != true){
-            overlayCampInfoDisplayEnquiries.onWindowFinished(chose, choseString);
-        }
-        if(overlayCampInfoDisplayEnquiriesCommittee != null && overlayCampInfoDisplayEnquiriesCommittee.getDestroy() != true){
-            overlayCampInfoDisplayEnquiriesCommittee.onWindowFinished(chose, choseString);
+        if(overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true){
+            overlayCampInfoDisplayEnquiriesStaff.onWindowFinished(chose, choseString);
         }
         if(overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true){
             overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
         }
         if(chose == 254){
-
+            if(toBeDestroyed != null && choseString.equals("cancel")){
+                RepositoryCollection.campRepository.remove(toBeDestroyed);
+            }
+            toBeDestroyed = null;
+            refreshList(true);
         }
     }
 

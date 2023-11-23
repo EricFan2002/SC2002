@@ -94,15 +94,16 @@ public class CampListView extends Window implements ICallBack {
     }
 
     String lastFilter = "";
-    @Override
-    public void messageLoop() {
-        super.messageLoop();
-//        System.out.println("Message loop");
+
+    protected CampList CustomFilter(CampList list){
+        return list;
+    }
+
+    public void refreshList(boolean forceRefresh){
         String newFilter = "";
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
         if(filter1Enable.getPressed() && !filter1Start.getText().equals("") && !filter1End.getText().equals("")){
-            newFilter += filter1Start.getText() + filter1End.getText();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
                 Date dateStart = ft.parse(filter1Start.getText());
@@ -113,7 +114,6 @@ public class CampListView extends Window implements ICallBack {
             }
         }
         if(filter2Enable.getPressed() && !filter2.getText().equals("")){
-            newFilter += filter2.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getLocation().toLowerCase().contains(filter3.getText().toLowerCase())){
@@ -123,7 +123,6 @@ public class CampListView extends Window implements ICallBack {
             camps = res;
         }
         if(filter3Enable.getPressed() && !filter3.getText().equals("")){
-            newFilter += filter3.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getSchool().toLowerCase().contains(filter3.getText().toLowerCase())){
@@ -133,7 +132,6 @@ public class CampListView extends Window implements ICallBack {
             camps = res;
         }
         if(filter4Enable.getPressed() && !filter4.getText().equals("")){
-            newFilter += filter4.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getStaffInCharge().getName().toLowerCase().contains(filter4.getText().toLowerCase())){
@@ -142,6 +140,13 @@ public class CampListView extends Window implements ICallBack {
             }
             camps = res;
         }
+        int b4 = camps.size();
+        camps = CustomFilter(camps);
+        for(Camp c : camps){
+            newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
+        }
+        int af = camps.size();
+
         displayCamps.clear();
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
@@ -159,10 +164,17 @@ public class CampListView extends Window implements ICallBack {
             tmp.add(line);
             options.add(tmp);
         }
-        if(!newFilter.equals(lastFilter)) {
+        if(!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
         }
+    }
+    @Override
+    public void messageLoop() {
+        super.messageLoop();
+        refreshList(false);
+//        System.out.println("Message loop");
+
     }
     public void onExit(){
     }

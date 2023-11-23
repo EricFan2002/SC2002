@@ -4,17 +4,20 @@ import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.enquiry.Enquiry;
 import entity.enquiry.EnquiryList;
+import entity.user.Staff;
 import entity.user.Student;
-import ui.widgets.*;
+import ui.widgets.TEXT_ALIGNMENT;
+import ui.widgets.WidgetButton;
+import ui.widgets.WidgetLabel;
+import ui.widgets.WidgetPageSelection;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 
 import java.util.ArrayList;
 
-public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDisplayRaw implements ICallBack {
+public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplayRaw implements ICallBack {
 
-    protected Camp camp;
-    protected Student student;
+    protected Staff staff;
     protected Window mainWindow;
     protected WidgetPageSelection participantsView;
     protected ArrayList<Enquiry> enquiryList;
@@ -22,18 +25,18 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
     protected boolean replyEnq = false;
 
 
-    public OverlayCampInfoDisplayEnquiriesCommittee(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Student student, Window mainWindow) {
+    public OverlayCampInfoDisplayEnquiriesStaff(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
         super(x , y, offsetY, offsetX, windowName, camp);
 
         this.mainWindow = mainWindow;
 
         this.camp = camp;
-        this.student = student;
+        this.staff = staff;
 
         enquiryList = new ArrayList<>();
 
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
-        EnquiryList enquires = RepositoryCollection.enquiryRepository.getAll().filterByCamp(camp); //.filterBySender(student);
+        EnquiryList enquires = RepositoryCollection.enquiryRepository.getAll().filterByCamp(camp);
         for(Enquiry enquiry : enquires){
             ArrayList<String> tmp = new ArrayList<String>();
             enquiryList.add(enquiry);
@@ -48,11 +51,10 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
         WidgetLabel labelParticipants = new WidgetLabel(3, 15, 34, "Reply Participant Enquires:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelParticipants);
 
-        participantsView = new WidgetPageSelection(3, 16, getLenX() - 6, getLenY() / 2 + 4, "Participants", enqList, OverlayCampInfoDisplayEnquiriesCommittee.this);
+        participantsView = new WidgetPageSelection(3, 16, getLenX() - 6, getLenY() / 2 + 4, "Participants", enqList, OverlayCampInfoDisplayEnquiriesStaff.this);
 
         addWidget(participantsView);
 
-        textBoxCName.setSkipSelection(true);
         textBoxCName.setSkipSelection(true);
         textBoxDescription.setSkipSelection(true);
         textBoxDClose.setSkipSelection(true);
@@ -78,7 +80,7 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
             enquiryList.add(enquiry);
             ArrayList<String> tmp = new ArrayList<String>();
             tmp.add("Question: " + enquiry.getQuestion());
-            if(enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+            if(enquiry.getAnswer() == null || enquiry.getAnswer().equals("") || enquiry.getAnsweredBy() == null)
                 tmp.add("    Not Answer Yet.");
             else
                 tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + " )");
@@ -96,14 +98,14 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
                 options.add("Reply Enquiry");
                 options.add("Cancel");
                 WidgetButton buttonPosition = participantsView.getSelectionsButton().get(participantsView.getSelectedOption()).get(0);
-                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options, OverlayCampInfoDisplayEnquiriesCommittee.this);
+                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options, OverlayCampInfoDisplayEnquiriesStaff.this);
                 mainWindow.addOverlay(overlayChooseBox);
                 participantsView.clearSelectedOption();
             }
         }
         if(replyEnq){
             replyEnq = false;
-            OverlayTextInput overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX()  + getX() / 2- 30, "Info", "Reply Enquiry:", OverlayCampInfoDisplayEnquiriesCommittee.this);
+            OverlayTextInput overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX()  + getX() / 2- 30, "Info", "Reply Enquiry:", OverlayCampInfoDisplayEnquiriesStaff.this);
             mainWindow.addOverlay(overlayTextInput);
         }
         if(exitButton.getPressed()){
@@ -121,7 +123,7 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
             replyEnq = true;
         }
         else if(chose == 255){
-            selectedEnq.setAnswer(choseString, student);
+            selectedEnq.setAnswer(choseString, staff);
             RepositoryCollection.enquiryRepository.update(selectedEnq);
             updateEnquiries();
         }
