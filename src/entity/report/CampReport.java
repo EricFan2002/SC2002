@@ -16,11 +16,18 @@ public class CampReport extends Report {
         return fields;
     }
 
-    public CampReport(CampList camp, int option) {
+    public CampReport(CampList camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         camp.forEach((curCamp) -> {
             this.camp.add(curCamp);
         });
+        this.exportOption = 0;
+        if (includeCommittees) {
+            this.exportOption |= 1;
+        }
+        if (includeAttendees) {
+            this.exportOption |= 2;
+        }
     }
 
     public CampReport(Camp camp, int option) {

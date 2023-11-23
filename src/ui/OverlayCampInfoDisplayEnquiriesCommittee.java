@@ -21,9 +21,9 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
     protected Enquiry selectedEnq;
     protected boolean replyEnq = false;
 
-
-    public OverlayCampInfoDisplayEnquiriesCommittee(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Student student, Window mainWindow) {
-        super(x , y, offsetY, offsetX, windowName, camp);
+    public OverlayCampInfoDisplayEnquiriesCommittee(int x, int y, int offsetY, int offsetX, String windowName,
+            Camp camp, Student student, Window mainWindow) {
+        super(x, y, offsetY, offsetX, windowName, camp);
 
         this.mainWindow = mainWindow;
 
@@ -33,22 +33,24 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
         enquiryList = new ArrayList<>();
 
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
-        EnquiryList enquires = RepositoryCollection.enquiryRepository.getAll().filterByCamp(camp); //.filterBySender(student);
-        for(Enquiry enquiry : enquires){
+        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp); // .filterBySender(student);
+        for (Enquiry enquiry : enquires) {
             ArrayList<String> tmp = new ArrayList<String>();
             enquiryList.add(enquiry);
             tmp.add("Question: " + enquiry.getQuestion());
-            if(enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
                 tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
             else
                 tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
             enqList.add(tmp);
         }
 
-        WidgetLabel labelParticipants = new WidgetLabel(3, 15, 34, "Reply Participant Enquires:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        WidgetLabel labelParticipants = new WidgetLabel(3, 15, 34, "Reply Participant Enquires:",
+                TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelParticipants);
 
-        participantsView = new WidgetPageSelection(3, 16, getLenX() - 6, getLenY() / 2 + 4, "Participants", enqList, OverlayCampInfoDisplayEnquiriesCommittee.this);
+        participantsView = new WidgetPageSelection(3, 16, getLenX() - 6, getLenY() / 2 + 4, "Participants", enqList,
+                OverlayCampInfoDisplayEnquiriesCommittee.this);
 
         addWidget(participantsView);
 
@@ -70,15 +72,15 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
 
     }
 
-    public void updateEnquiries(){
+    public void updateEnquiries() {
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
-        EnquiryList enquires = RepositoryCollection.enquiryRepository.getAll().filterByCamp(camp);
+        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
         enquiryList.clear();
-        for(Enquiry enquiry : enquires){
+        for (Enquiry enquiry : enquires) {
             enquiryList.add(enquiry);
             ArrayList<String> tmp = new ArrayList<String>();
             tmp.add("Question: " + enquiry.getQuestion());
-            if(enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
                 tmp.add("    Not Answer Yet.");
             else
                 tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + " )");
@@ -89,40 +91,44 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
 
     public void messageLoop() {
         super.messageLoop();
-        if(participantsView.getSelectedOption() != -1){
+        if (participantsView.getSelectedOption() != -1) {
             selectedEnq = enquiryList.get(participantsView.getSelectedOption());
-            if(selectedEnq != null) {
+            if (selectedEnq != null) {
                 ArrayList<String> options = new ArrayList<>();
                 options.add("Reply Enquiry");
                 options.add("Cancel");
-                WidgetButton buttonPosition = participantsView.getSelectionsButton().get(participantsView.getSelectedOption()).get(0);
-                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(), getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options, OverlayCampInfoDisplayEnquiriesCommittee.this);
+                WidgetButton buttonPosition = participantsView.getSelectionsButton()
+                        .get(participantsView.getSelectedOption()).get(0);
+                OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(),
+                        getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options,
+                        OverlayCampInfoDisplayEnquiriesCommittee.this);
                 mainWindow.addOverlay(overlayChooseBox);
                 participantsView.clearSelectedOption();
             }
         }
-        if(replyEnq){
+        if (replyEnq) {
             replyEnq = false;
-            OverlayTextInput overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX()  + getX() / 2- 30, "Info", "Reply Enquiry:", OverlayCampInfoDisplayEnquiriesCommittee.this);
+            OverlayTextInput overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
+                    "Info", "Reply Enquiry:", OverlayCampInfoDisplayEnquiriesCommittee.this);
             mainWindow.addOverlay(overlayTextInput);
         }
-        if(exitButton.getPressed()){
+        if (exitButton.getPressed()) {
             exitButton.clearPressed();
             setDestroy();
         }
     }
-    public void onExit(){
+
+    public void onExit() {
         super.onExit();
     }
 
     @Override
     public void onWindowFinished(int chose, String choseString) {
-        if(choseString.equals("Reply Enquiry")){
+        if (choseString.equals("Reply Enquiry")) {
             replyEnq = true;
-        }
-        else if(chose == 255){
+        } else if (chose == 255) {
             selectedEnq.setAnswer(choseString, student);
-            RepositoryCollection.enquiryRepository.update(selectedEnq);
+            RepositoryCollection.getEnquiryRepository().update(selectedEnq);
             updateEnquiries();
         }
     }
