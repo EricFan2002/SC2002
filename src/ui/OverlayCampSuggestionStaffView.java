@@ -1,6 +1,7 @@
 package ui;
 
 import controller.camp.CampModificationController;
+import controller.camp.CampSuggestionController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.suggestion.Suggestion;
@@ -58,11 +59,11 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             ArrayList<String> tmp = new ArrayList<String>();
             String status = "";
             if (suggestion.getStatus() == SuggestionStatus.PENDING) {
-                status = " ( PENDING )";
+                status = " [ PENDING ]";
             } else if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
-                status = " ( APPROVED )";
+                status = " [ APPROVED ]";
             } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
-                status = " ( REJECTED )";
+                status = " [ REJECTED ]";
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
@@ -72,7 +73,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
                 changed += "Date, ";
             }
-            if (suggestion.getSuggestion().getDescription() != null) {
+            if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
             if (suggestion.getSuggestion().getName() != null) {
@@ -90,7 +91,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (changed.equals("")) {
                 tmp.add("    Nothing Changed.");
             } else {
-                changed = changed.substring(0, changed.length() - 2);
+                changed = changed.substring(0, changed.length() - 3);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
@@ -110,8 +111,10 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (selectedSuggestion != null) {
                 ArrayList<String> options = new ArrayList<>();
                 options.add("View");
-                options.add("Approve");
-                options.add("Reject");
+                if(selectedSuggestion.getStatus() == SuggestionStatus.PENDING) {
+                    options.add("Approve");
+                    options.add("Reject");
+                }
                 options.add("Cancel");
                 WidgetButton buttonPosition = allSuggestions.getSelectionsButton()
                         .get(allSuggestions.getSelectedOption()).get(0);
@@ -139,11 +142,13 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
                     offsetX, "Suggestion For Camp " + selectedSuggestion.getSuggestion().getName(), selectedSuggestion);
             // mainWindow.addOverlay(overlaySuggestionInfoDisplayRaw);
         } else if (choseString.equals("Approve") && selectedSuggestion != null) {
-            selectedSuggestion.setStatus(SuggestionStatus.APPROVED);
+//            CampModificationController.editCamp(selectedSuggestion.getSuggestion());
+            CampSuggestionController.approveSuggestion(selectedSuggestion, staff, true);
             CampModificationController.editCamp(selectedSuggestion.getSuggestion());
             updateSuggestionList();
         } else if (choseString.equals("Reject") && selectedSuggestion != null) {
-            selectedSuggestion.setStatus(SuggestionStatus.REJECTED);
+            CampSuggestionController.approveSuggestion(selectedSuggestion, staff, false);
+//            selectedSuggestion.setStatus(SuggestionStatus.REJECTED);
             updateSuggestionList();
         }
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
@@ -153,11 +158,11 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             ArrayList<String> tmp = new ArrayList<String>();
             String status = "";
             if (suggestion.getStatus() == SuggestionStatus.PENDING) {
-                status = " ( PENDING )";
+                status = " [ PENDING ]";
             } else if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
-                status = " ( APPROVED )";
+                status = " [ APPROVED ]";
             } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
-                status = " ( REJECTED )";
+                status = " [ REJECTED ]";
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
@@ -167,7 +172,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
                 changed += "Date, ";
             }
-            if (suggestion.getSuggestion().getDescription() != null) {
+            if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
             if (suggestion.getSuggestion().getName() != null) {
@@ -176,7 +181,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (changed == "") {
                 tmp.add("    Nothing Changed.");
             } else {
-                changed = changed.substring(0, changed.length() - 2);
+                changed = changed.substring(0, changed.length() - 3);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);

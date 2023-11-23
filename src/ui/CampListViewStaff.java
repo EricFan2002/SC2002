@@ -1,14 +1,10 @@
 package ui;
 
-import controller.camp.CampRegistrationController;
-import controller.camp.OperationResult;
-import controller.user.UserAccountManagementController;
 import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Staff;
-import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -16,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -31,7 +26,7 @@ public class CampListViewStaff extends CampListView {
     protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 4 - 1, "Create New Camp");
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
-    protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
+    protected OverlayCampSuggestionCommitteeView overlayCampSuggestionCommitteeView;
     protected OverlayCampSuggestionStaffView overlayCampSuggestionStaffView;
     private int staffMainViewIndex;
     private String sortMethod = "By";
@@ -203,8 +198,8 @@ public class CampListViewStaff extends CampListView {
         if (overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true) {
             overlayCampInfoDisplayEnquiriesStaff.onWindowFinished(chose, choseString);
         }
-        if (overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true) {
-            overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
+        if (overlayCampSuggestionCommitteeView != null && overlayCampSuggestionCommitteeView.getDestroy() != true) {
+            overlayCampSuggestionCommitteeView.onWindowFinished(chose, choseString);
         }
         if (overlayCampSuggestionStaffView != null && overlayCampSuggestionStaffView.getDestroy() != true) {
             overlayCampSuggestionStaffView.onWindowFinished(chose, choseString);

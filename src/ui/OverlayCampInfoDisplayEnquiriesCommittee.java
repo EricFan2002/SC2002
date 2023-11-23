@@ -1,5 +1,6 @@
 package ui;
 
+import controller.camp.CampEnquiryController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.enquiry.Enquiry;
@@ -95,7 +96,8 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
             selectedEnq = enquiryList.get(participantsView.getSelectedOption());
             if (selectedEnq != null) {
                 ArrayList<String> options = new ArrayList<>();
-                options.add("Reply Enquiry");
+                if(selectedEnq.getAnswer() == null)
+                    options.add("Reply Enquiry");
                 options.add("Cancel");
                 WidgetButton buttonPosition = participantsView.getSelectionsButton()
                         .get(participantsView.getSelectedOption()).get(0);
@@ -128,7 +130,8 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
             replyEnq = true;
         } else if (chose == 255) {
             selectedEnq.setAnswer(choseString, student);
-            RepositoryCollection.getEnquiryRepository().update(selectedEnq);
+//            RepositoryCollection.getEnquiryRepository().update(selectedEnq);
+            CampEnquiryController.answerEnquiry(selectedEnq, student, choseString);
             updateEnquiries();
         }
     }

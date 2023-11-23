@@ -323,6 +323,37 @@ public class Window {
 //        needClear = 2;
     }
 
+    public void clearOuterArea(Screen screen, int x, int y, double transparency){
+                for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < buffer.length + 1; i++) {
+                int modY = y + i;
+                int modX = buffer[0].length + x + j;
+                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
+                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
+                if(textCharacter != null) {
+                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
+                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
+                    textCharacter = textCharacter.withCharacter(' ');
+                    screen.setCharacter(cellToModify, textCharacter);
+                }
+            }
+        }
+        for (int j = 0; j < 1; j++) {
+            for (int i = 0; i < buffer[0].length + 1; i++) {
+                int modY = buffer.length + y + j;
+                int modX = x + i;
+                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
+                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
+                if(textCharacter != null) {
+                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
+                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
+                    textCharacter = textCharacter.withCharacter(' ');
+                    screen.setCharacter(cellToModify, textCharacter);
+                }
+            }
+        }
+    }
+
 
     public void draw(Screen screen, int x, int y, double transparency) {
         if(needClear > 0){
@@ -361,34 +392,7 @@ public class Window {
                 }
             }
         }
-//        for (int j = 0; j < 2; j++) {
-//            for (int i = 0; i < buffer.length + 1; i++) {
-//                int modY = y + i;
-//                int modX = buffer[0].length + x + j;
-//                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
-//                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
-//                if(textCharacter != null) {
-//                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
-//                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
-//                    textCharacter = textCharacter.withCharacter(' ');
-//                    screen.setCharacter(cellToModify, textCharacter);
-//                }
-//            }
-//        }
-//        for (int j = 0; j < 1; j++) {
-//            for (int i = 0; i < buffer[0].length + 1; i++) {
-//                int modY = buffer.length + y + j;
-//                int modX = x + i;
-//                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
-//                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
-//                if(textCharacter != null) {
-//                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
-//                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
-//                    textCharacter = textCharacter.withCharacter(' ');
-//                    screen.setCharacter(cellToModify, textCharacter);
-//                }
-//            }
-//        }
+
         for(int i = 0 ; i < getLenX() ; i++){
             TerminalPosition cellToModify = new TerminalPosition( i + x, y );
             TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
@@ -408,6 +412,7 @@ public class Window {
                 screen.setCharacter(cellToModify, textCharacter);
             }
         }
+        clearOuterArea(screen, x, y, transparency);
         // Draw Overlay
         ArrayList<WindowOverlayClass> newOverlays = new ArrayList<>();
         for(WindowOverlayClass overlay : overlays){

@@ -44,7 +44,7 @@ public class OverlaySuggestionInfoDisplayRaw extends WindowOverlayClass {
 // Description
         WidgetLabel labelDescription = new WidgetLabel(3, 4, 15, "Description:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelDescription);
-        if (suggestion.getSuggestion().getDescription() == null)
+        if (suggestion.getSuggestion().getDescription() == null || suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription()))
             textBoxDescription = new WidgetTextBox(19, 4, getLenX() - 24, camp.getDescription() + " (Unchanged)");
         else
             textBoxDescription = new WidgetTextBox(19, 4, getLenX() - 24, camp.getDescription() + " → " + suggestion.getSuggestion().getDescription());

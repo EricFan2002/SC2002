@@ -223,6 +223,10 @@ public class CampListView extends Window implements ICallBack {
     public void messageLoop() {
         super.messageLoop();
         refreshList(false);
+        if(overlayTextInput != null){
+            addOverlay(overlayTextInput);
+            overlayTextInput = null;
+        }
         // System.out.println("Message loop");
 
     }
