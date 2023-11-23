@@ -91,26 +91,26 @@ public class ChangePasswordView extends Window {
                             List<String> options = new ArrayList<String>();
                             options.add("OK");
                             OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Error changing the password", options, ChangePasswordView.this);
-                            overlayChooseBox.messageLoop();
+                            addOverlay(overlayChooseBox);
                         }
                     } else {
                         List<String> options = new ArrayList<String>();
                         options.add("OK");
                         OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Password must contain upper, lower, digit, and special char", options, ChangePasswordView.this);
-                        overlayChooseBox.messageLoop();
+                        addOverlay(overlayChooseBox);
                     }
                 } else {
                     List<String> options = new ArrayList<String>();
                     options.add("OK");
                     OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "New password and confirm password do not match or are not within the length limits", options, ChangePasswordView.this);
-                    overlayChooseBox.messageLoop();
+                    addOverlay(overlayChooseBox);
                 }
             } else {
                 // if incorrect, show error message
                 List<String> options = new ArrayList<String>();
                 options.add("OK");
                 OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Incorrect username or password", options, ChangePasswordView.this);
-                overlayChooseBox.messageLoop();
+                addOverlay(overlayChooseBox);
             }
         }
         if(cancelButton.getPressed()){

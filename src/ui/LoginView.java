@@ -50,6 +50,7 @@ public class LoginView extends Window implements ICallBack { ;
     @Override
     public void messageLoop() {
         if(loginButton.getPressed()){
+            loginButton.clearPressed();
             String name = widgetTextBox.getText();
             String password = widgetTextBox1.getText();
             // check if name and password is correct
@@ -74,6 +75,7 @@ public class LoginView extends Window implements ICallBack { ;
             }
         }
         if(forgetPasswordButton.getPressed()){
+            forgetPasswordButton.clearPressed();
             switchToWindow = staffMainViewIndex;
 //            List<String> options = new ArrayList<String>();
 //            options.add("SCSE");
