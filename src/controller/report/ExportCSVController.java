@@ -1,7 +1,5 @@
 package controller.report;
 
-import java.text.SimpleDateFormat;
-
 import entity.report.Report;
 import utils.CSV;
 
