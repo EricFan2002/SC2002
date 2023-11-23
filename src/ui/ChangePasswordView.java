@@ -89,6 +89,8 @@ public class ChangePasswordView extends Window {
                 switchToWindow = staffMainViewIndex;
             } else if (UserController.getCurrentUser() instanceof Student){
                 switchToWindow = studentMainViewIndex;
+            } else {
+                switchToWindow = loginView;
             }
         }
     }
