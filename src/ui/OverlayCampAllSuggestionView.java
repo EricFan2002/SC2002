@@ -63,7 +63,16 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if(suggestion.getSuggestion().getName() != null){
                 changed += "Name, ";
             }
-            if(changed == ""){
+            if(suggestion.getSuggestion().getCloseRegistrationDate() != null){
+                changed += "Registration Close, ";
+            }
+            if(suggestion.getSuggestion().getSchool() != null){
+                changed += "Faculty, ";
+            }
+            if(suggestion.getSuggestion().getTotalSlots() != null){
+                changed += "Slots, ";
+            }
+            if(changed.equals("")){
                 tmp.add("    Nothing Changed.");
             }
             else{

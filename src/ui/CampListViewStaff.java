@@ -104,7 +104,7 @@ public class CampListViewStaff extends CampListView{
             if(UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff)UserController.getCurrentUser();
                 if(selectedCamp.getCommittees().size() > 0 || selectedCamp.getAttendees().size() > 0){
-                    OverlayNotification overlayNotification = new OverlayNotification(70,  getY()/2 - 8, getX()/2 - 35, "Error", "Cannot Delete Camp That Have Participants", CampListViewStaff.this);
+                    OverlayNotification overlayNotification = new OverlayNotification(70,  getY()/2 - 8, getX()/2 - 35, "Error", "Camp Still Have Participants", CampListViewStaff.this);
                     addOverlay(overlayNotification);
                 }
                 else {

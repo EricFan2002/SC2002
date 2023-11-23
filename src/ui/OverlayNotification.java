@@ -19,7 +19,7 @@ public class OverlayNotification extends WindowOverlayClass {
 
     public OverlayNotification(int x, int offsetY, int offsetX, String windowName, String notification, Window callbackWindow) {
         super(12, x, offsetY, offsetX, windowName);
-        WidgetLabel widgetLabel = new WidgetLabel(3, 3, 30, notification);
+        WidgetLabel widgetLabel = new WidgetLabel(3, 3, getX() - 10, notification);
         addWidget(widgetLabel);
         exitButton = new WidgetButton(3, 8, getLenX() - 4, "OK");
         addWidget(exitButton);
