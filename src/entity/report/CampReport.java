@@ -16,17 +16,33 @@ public class CampReport extends Report {
         return fields;
     }
 
-    public CampReport(CampList camp, int option) {
+    public CampReport(CampList camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         camp.forEach((curCamp) -> {
             this.camp.add(curCamp);
         });
+
+        exportOption = 0;
+        if (includeCommittees) {
+            exportOption |= 1;
+        }
+        if (includeAttendees) {
+            exportOption |= 2;
+        }
     }
 
-    public CampReport(Camp camp, int option) {
+    public CampReport(Camp camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         this.camp = new CampList();
         this.camp.add(camp);
+
+        exportOption = 0;
+        if (includeCommittees) {
+            exportOption |= 1;
+        }
+        if (includeAttendees) {
+            exportOption |= 2;
+        }
     }
 
     public final ArrayList<ArrayList<String>> serialize() {

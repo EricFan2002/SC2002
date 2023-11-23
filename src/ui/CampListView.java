@@ -50,6 +50,7 @@ public class CampListView extends Window implements ICallBack {
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
+    private OverlayTextInput overlayTextInput;
 
     public CampListView(){
         super(55, 190, "Camp View");
@@ -213,6 +214,10 @@ public class CampListView extends Window implements ICallBack {
     public void messageLoop() {
         super.messageLoop();
         refreshList(false);
+        if(overlayTextInput != null){
+            addOverlay(overlayTextInput);
+            overlayTextInput = null;
+        }
 //        System.out.println("Message loop");
 
     }
@@ -221,5 +226,23 @@ public class CampListView extends Window implements ICallBack {
 
     @Override
     public void onWindowFinished(int chose, String choseString) {
+        if(choseString.equals("Camp Report")){
+            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2  - 30, "File Name Prompt", "Save [Camps Participant Report] to File Name:", CampListView.this, 220);
+        }
+        else if(choseString.equals("Performance Report")){
+            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
+        }
+        else if(choseString.equals("Enquiries Report")){
+            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Enquiries Report] to File Name:", CampListView.this, 222);
+        }
+        if(chose == 220){
+            // Camp Report
+        }
+        else if(chose == 221){
+            // Performance Report
+        }
+        else if(chose == 222){
+            // Enquiries Report
+        }
     }
 }

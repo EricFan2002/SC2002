@@ -23,8 +23,9 @@ import static java.lang.System.currentTimeMillis;
 public class CampListViewStaff extends CampListView{
     protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Created Camps");
     protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7 , getLenX() / 4 - 1, "My Faculty Camps");
+    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4 + getLenX() / 8, 8, getLenX() / 8, "Sort By");
+    protected WidgetButton generateReportButton = new WidgetButton(getLenX() / 4 + 1, 8, getLenX() / 8, "Generate Report");
     protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 4 - 1, "Create New Camp");
-    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4, 8, getLenX() / 4 - 1, "Sort By");
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
@@ -38,7 +39,8 @@ public class CampListViewStaff extends CampListView{
         addWidgetAfter(toggleCreated, filter4Index);
         addWidgetAfter(toggleMySchool, filter4Index + 1);
         addWidgetAfter(createNewCampButton, filter4Index + 2);
-        addWidgetAfter(sortByButton, filter4Index + 3);
+        addWidgetAfter(generateReportButton, filter4Index + 3);
+        addWidgetAfter(sortByButton, filter4Index + 4);
     }
 
     private WidgetButton buttonPosition;
@@ -65,7 +67,7 @@ public class CampListViewStaff extends CampListView{
         else if(sortMethod.equals("By End Date")){
             list = list.sortByEndDate();
         }
-        else if(sortMethod.equals("By Registration Date")){
+        else if(sortMethod.equals("By Reg Date")){
             list = list.sortByRegistrationCloseDate();
         }
         else if(sortMethod.equals("By Location")){
@@ -106,9 +108,18 @@ public class CampListViewStaff extends CampListView{
             options.add("By Camp Name");
             options.add("By Starting Date");
             options.add("By End Date");
-            options.add("By Registration Date");
+            options.add("By Reg Date");
             options.add("By Location");
             OverlayChooseBox overlayTestClass = new OverlayChooseBox(sortByButton.getLen(),  sortByButton.getY(), sortByButton.getX(), "Sort By?", options, CampListViewStaff.this);
+            addOverlay(overlayTestClass);
+        }
+        if(generateReportButton.getPressed()){
+            generateReportButton.clearPressed();
+            ArrayList<String> options = new ArrayList<>();
+            options.add("Camp Report");
+            options.add("Performance Report");
+            options.add("Enquiries Report");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStaff.this);
             addOverlay(overlayTestClass);
         }
         if(widgetPageSelection.getSelectedOption() != -1){
@@ -177,6 +188,7 @@ public class CampListViewStaff extends CampListView{
     private String choseString = "";
     @Override
     public void onWindowFinished(int chose, String choseString) {
+        super.onWindowFinished(chose, choseString);
         this.chose = chose;
         this.choseString = choseString;
         if(overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true){
@@ -204,8 +216,8 @@ public class CampListViewStaff extends CampListView{
         else if(choseString.equals("By End Date")){
             sortMethod = "By End Date";
         }
-        else if(choseString.equals("By Registration Date")){
-            sortMethod = "By Registration Date";
+        else if(choseString.equals("By Reg Date")){
+            sortMethod = "By Reg Date";
         }
         else if(choseString.equals("By Location")){
             sortMethod = "By Location";

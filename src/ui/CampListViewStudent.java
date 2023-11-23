@@ -18,7 +18,8 @@ import java.util.ArrayList;
 public class CampListViewStudent extends CampListView{
     protected WidgetToggle toggleJoinedCamp = new WidgetToggle(1, 8, getLenX() / 8 - 1, "Joined");
     protected WidgetToggle toggleCommittee = new WidgetToggle(getLenX() / 8, 8, getLenX() / 8 + 1, "As Committee");
-    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4, 8, getLenX() / 4 - 1, "Sort By");
+    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4 + getLenX() / 8, 8, getLenX() / 8, "Sort By");
+    protected WidgetButton generateReportButton = new WidgetButton(1 + getLenX() / 4, 8, getLenX() / 8, "Gen Report");
     protected WidgetToggle toggleAvailable = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Available As Participant");
     protected WidgetToggle toggleCommitteeAvailableC = new WidgetToggle(getLenX() / 4 + 1, 7, getLenX() / 4 - 1, "Available As Committee");
     protected Camp selectedCamp;
@@ -32,6 +33,7 @@ public class CampListViewStudent extends CampListView{
         super();
         this.studentMainViewIndex = studentMainViewIndex;
         addWidgetAfter(sortByButton, filter4Index);
+        addWidgetAfter(generateReportButton, filter4Index);
         addWidgetAfter(toggleCommittee, filter4Index);
         addWidgetAfter(toggleJoinedCamp, filter4Index);
         addWidgetAfter(toggleCommitteeAvailableC, filter4Index);
@@ -128,9 +130,18 @@ public class CampListViewStudent extends CampListView{
             options.add("By Camp Name");
             options.add("By Starting Date");
             options.add("By End Date");
-            options.add("By Registration Date");
+            options.add("By Reg Date");
             options.add("By Location");
             OverlayChooseBox overlayTestClass = new OverlayChooseBox(sortByButton.getLen(),  sortByButton.getY(), sortByButton.getX(), "Sort By?", options, CampListViewStudent.this);
+            addOverlay(overlayTestClass);
+        }
+        if(generateReportButton.getPressed()){
+            generateReportButton.clearPressed();
+            ArrayList<String> options = new ArrayList<>();
+            options.add("Camp Report");
+            options.add("Performance Report");
+            options.add("Enquiries Report");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStudent.this);
             addOverlay(overlayTestClass);
         }
         if(choseString.equals("View Details")){ // view details
@@ -228,6 +239,7 @@ public class CampListViewStudent extends CampListView{
     private String choseString = "";
     @Override
     public void onWindowFinished(int chose, String choseString) {
+        super.onWindowFinished(chose, choseString);
         this.chose = chose;
         this.choseString = choseString;
         if(overlayCampInfoDisplayEnquiries != null && overlayCampInfoDisplayEnquiries.getDestroy() != true){
@@ -248,13 +260,11 @@ public class CampListViewStudent extends CampListView{
         else if(choseString.equals("By End Date")){
             sortMethod = "By End Date";
         }
-        else if(choseString.equals("By Registration Date")){
+        else if(choseString.equals("By Reg Date")){
             sortMethod = "By Registration Date";
         }
         else if(choseString.equals("By Location")){
             sortMethod = "By Location";
         }
-
     }
-
 }
