@@ -104,10 +104,12 @@ public class CampListView extends Window implements ICallBack {
     }
 
     String lastFilter = "";
-    @Override
-    public void messageLoop() {
-        super.messageLoop();
-//        System.out.println("Message loop");
+
+    protected CampList CustomFilter(CampList list){
+        return list;
+    }
+
+    public void refreshList(boolean forceRefresh){
         String newFilter = "";
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
@@ -152,6 +154,13 @@ public class CampListView extends Window implements ICallBack {
             }
             camps = res;
         }
+        int b4 = camps.size();
+        camps = CustomFilter(camps);
+        for(Camp c : camps){
+            newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
+        }
+        int af = camps.size();
+
         if(backButton.getPressed()){
             if (UserController.getCurrentUser() instanceof Student) {
                 switchToWindow = studentMainViewIndex;
@@ -176,10 +185,17 @@ public class CampListView extends Window implements ICallBack {
             tmp.add(line);
             options.add(tmp);
         }
-        if(!newFilter.equals(lastFilter)) {
+        if(!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
         }
+    }
+    @Override
+    public void messageLoop() {
+        super.messageLoop();
+        refreshList(false);
+//        System.out.println("Message loop");
+
     }
     public void onExit(){
     }

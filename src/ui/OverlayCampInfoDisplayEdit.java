@@ -34,11 +34,14 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
     }
 
     public void messageLoop() {
-        super.messageLoop();
         if(exitButton.getPressed()){
             exitButton.clearPressed();
             setDestroy();
+            if(mainWindow instanceof ICallBack){
+                ((ICallBack)mainWindow).onWindowFinished(254, "cancel");
+            }
         }
+        super.messageLoop();
         if(submitButton.getPressed()){
             submitButton.clearPressed();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
