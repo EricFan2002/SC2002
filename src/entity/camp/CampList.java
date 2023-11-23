@@ -5,9 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import entity.RepositoryList;
+import entity.interfaces.IFilterableByAttendee;
+import entity.interfaces.IFilterableByCampCommittee;
 import entity.interfaces.IFilterableByDateRange;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableBySchool;
+import entity.interfaces.IFilterableByStudent;
 import entity.interfaces.IFilterableByVisibility;
 import entity.interfaces.ISortableByEndDate;
 import entity.interfaces.ISortableByID;
@@ -19,13 +22,16 @@ import entity.user.Staff;
 import entity.user.Student;
 
 /**
- * Represents a list of camps, providing functionality for filtering and sorting camps based on various criteria.
- * This class extends RepositoryList and implements several interfaces for filtering and sorting.
+ * Represents a list of camps, providing functionality for filtering and sorting
+ * camps based on various criteria.
+ * This class extends RepositoryList and implements several interfaces for
+ * filtering and sorting.
  */
 public class CampList extends RepositoryList<Camp> implements IFilterableByID<Camp>, IFilterableByDateRange<Camp>,
         IFilterableBySchool<Camp>, IFilterableByVisibility<Camp>, ISortableByEndDate<Camp>, ISortableByID<Camp>,
         ISortableByLocation<Camp>, ISortableByName<Camp>, ISortableByRegistrationCloseDate<Camp>,
-        ISortableByStartingDate<Camp> {
+        ISortableByStartingDate<Camp>, IFilterableByAttendee<Camp>, IFilterableByCampCommittee<Camp>,
+        IFilterableByStudent<Camp> {
     /**
      * Constructs a new CampList with the specified list of camps.
      *
@@ -111,7 +117,8 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
      * Filters the list of camps by registration date.
      *
      * @param currentDate The date to compare registration dates against.
-     * @return A new CampList containing camps whose registration date is on or after the specified date.
+     * @return A new CampList containing camps whose registration date is on or
+     *         after the specified date.
      */
     public CampList filterByRegistrationDate(Date currentDate) {
         CampList result = new CampList();
@@ -142,13 +149,34 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
     /**
      * Filters the list of camps by a specific staff member in charge.
      *
-     * @param staff The staff member to filter by.
+     * @param staff The staff member to filter
+     *              by.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffsssssssssssssssssssssssssssssssssssssssssssss
      * @return A new CampList containing camps managed by the given staff member.
      */
     public CampList filterByStaff(Staff staff) {
         CampList result = new CampList();
         for (Camp camp : super.all) {
             if (camp.getStaffInCharge().equals(staff)) {
+                result.add(camp);
+            }
+        }
+        return result;
+    }
+
+    public CampList filterByCampCommittee(Student student) {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            if (camp.getCommittees().contains(student)) {
+                result.add(camp);
+            }
+        }
+        return result;
+    }
+
+    public CampList filterByAttendee(Student attendee) {
+        CampList result = new CampList();
+        for (Camp camp : super.all) {
+            if (camp.getAttendees().contains(attendee)) {
                 result.add(camp);
             }
         }

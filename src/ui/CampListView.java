@@ -50,10 +50,8 @@ public class CampListView extends Window implements ICallBack {
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
-    private int studentMainViewIndex;
-    private int staffMainViewIndex;
 
-    public CampListView(int studentMainViewIndex, int staffMainViewIndex){
+    public CampListView(){
         super(55, 190, "Camp View");
         displayCamps = new ArrayList<>();
         WidgetLabel widgetLabel = new WidgetLabel(1, 1,40, "Filters:", TEXT_ALIGNMENT.ALIGN_LEFT);
@@ -180,14 +178,6 @@ public class CampListView extends Window implements ICallBack {
         if(!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
-        }
-        if(backButton.getPressed()){
-            backButton.clearPressed();
-            if (UserController.getCurrentUser() instanceof Student) {
-                switchToWindow = studentMainViewIndex;
-            } else if (UserController.getCurrentUser() instanceof Staff){
-                switchToWindow = staffMainViewIndex;
-            }
         }
     }
     @Override
