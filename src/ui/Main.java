@@ -47,7 +47,7 @@ public class Main {
             Window LoginView = new LoginView(20, 54, 1, 2, 3 ,6);
             Window studentMainView = new StudentMainView(0, 4, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
-            Window changePasswordView = new ChangePasswordView(1, 2);
+            Window changePasswordView = new ChangePasswordView(0, 1, 2);
             Window CampListView = new CampListViewStaff(0, 3, 0);
             Window createCampView = new CreateCampView(3);
             Window campViewer = new CampViewer(40, 40, 3);
