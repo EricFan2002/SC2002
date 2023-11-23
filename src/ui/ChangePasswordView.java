@@ -50,29 +50,59 @@ public class ChangePasswordView extends Window {
         this.staffMainViewIndex = staffMainViewIndex;
     }
 
+    private boolean isSpecialCharacter(char ch) {
+        String specialCharacters = "!@#$%^&*()_-+={}[]|:;\"'<>,.?/";
+        return specialCharacters.indexOf(ch) != -1;
+    }
+
     public void messageLoop() {
         super.messageLoop();
         if(confirmButton.getPressed()){
+            confirmButton.clearPressed();
             String name = widgetTextBox.getText();
             String password = widgetTextBox1.getText();
             String newPassword = widgetTextBox2.getText();
-            String confirmPassword = widgetTextBox2.getText();
+            String confirmPassword = widgetTextBox2.getText(); // Assuming widgetTextBox3 is for confirmPassword
+
             // check if name and password is correct
             if(UserController.login(name, password)){
-                // if correct, switch to main menu
-                if(newPassword.equals(confirmPassword)){
-                    if (UserAccountManagementController.changePassword(name, password, newPassword)) {
-                        switchToWindow = loginView;
+                // if correct, perform password change logic
+                if(newPassword.equals(confirmPassword) && newPassword.length() >= 8 && newPassword.length() <= 20){
+                    boolean hasUpper = false;
+                    boolean hasLower = false;
+                    boolean hasDigit = false;
+                    boolean hasSpecial = false;
+
+                    for (int i = 0; i < newPassword.length(); i++) {
+                        char ch = newPassword.charAt(i);
+
+                        if (Character.isUpperCase(ch)) hasUpper = true;
+                        else if (Character.isLowerCase(ch)) hasLower = true;
+                        else if (Character.isDigit(ch)) hasDigit = true;
+                        else if (!Character.isLetterOrDigit(ch)) hasSpecial = true;
+
+                        if (hasUpper && hasLower && hasDigit && hasSpecial) break;
+                    }
+
+                    if (hasUpper && hasLower && hasDigit && hasSpecial) {
+                        if (UserAccountManagementController.changePassword(name, password, newPassword)) {
+                            switchToWindow = loginView;
+                        } else {
+                            List<String> options = new ArrayList<String>();
+                            options.add("OK");
+                            OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Error changing the password", options, ChangePasswordView.this);
+                            overlayChooseBox.messageLoop();
+                        }
                     } else {
                         List<String> options = new ArrayList<String>();
                         options.add("OK");
-                        OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Error changing the password", options, ChangePasswordView.this);
+                        OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "Password must contain upper, lower, digit, and special char", options, ChangePasswordView.this);
                         overlayChooseBox.messageLoop();
                     }
                 } else {
                     List<String> options = new ArrayList<String>();
                     options.add("OK");
-                    OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "New password and confirm password do not match", options, ChangePasswordView.this);
+                    OverlayChooseBox overlayChooseBox = new OverlayChooseBox(10, 10, 30, "New password and confirm password do not match or are not within the length limits", options, ChangePasswordView.this);
                     overlayChooseBox.messageLoop();
                 }
             } else {
