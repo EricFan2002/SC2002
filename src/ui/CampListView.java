@@ -4,6 +4,10 @@ import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
+import entity.report.CampReport;
+import entity.report.EnquiryReport;
+import entity.report.PerformanceReport;
+import entity.report.Report;
 import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
@@ -11,6 +15,7 @@ import entity.user.UserList;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
+import utils.CSV;
 
 import java.io.Console;
 import java.text.ParseException;
@@ -33,7 +38,7 @@ public class CampListView extends Window implements ICallBack {
 
     protected WidgetLabel filterLabel1 = new WidgetLabel(1, 2, 19, "Date Filter:", TEXT_ALIGNMENT.ALIGN_RIGHT);
     protected WidgetTextBox filter1Start = new WidgetTextBox(20, 2, getLenX() / 4 - 18, "");
-    protected WidgetLabel filter1Comment = new WidgetLabel(20 + getLenX() / 4 - 19, 2, 1, "-");
+    protected WidgetLabel filter1Comment = new WidgetLabel(20 + getLenX() / 4 - 19, 2, 3 , "-");
     protected WidgetTextBox filter1End = new WidgetTextBox(20 + getLenX() / 4 - 17, 2, getLenX() / 4 - 17, "");
     protected WidgetToggle filter1Enable = new WidgetToggle(getLenX() / 2 - 14, 2, 14, "Enable");
     protected WidgetLabel filterLabel2 = new WidgetLabel(1, 3, 19, "Location Filter:", TEXT_ALIGNMENT.ALIGN_RIGHT);
@@ -50,9 +55,11 @@ public class CampListView extends Window implements ICallBack {
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
     private OverlayTextInput overlayTextInput;
+    protected CampList campListForExport;
 
     public CampListView() {
         super(55, 190, "Camp View");
+        campListForExport = new CampList();
         displayCamps = new ArrayList<>();
         WidgetLabel widgetLabel = new WidgetLabel(1, 1, 40, "Filters:", TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(widgetLabel);
@@ -165,8 +172,10 @@ public class CampListView extends Window implements ICallBack {
             newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
         }
         displayCamps.clear();
-        for (int i = 0; i < camps.size(); i++) {
+        campListForExport.clear();
+        for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
+            campListForExport.add(camp);
             displayCamps.add(camp);
             ArrayList<String> tmp = new ArrayList<String>();
             String campTitle = camp.getName() + " Camp";
@@ -233,12 +242,54 @@ public class CampListView extends Window implements ICallBack {
             overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Enquiries Report] to File Name:", CampListView.this, 222);
         }
-        if (chose == 220) {
-            // Camp Report
-        } else if (chose == 221) {
-            // Performance Report
-        } else if (chose == 222) {
-            // Enquiries Report
+        else if(choseString.equals("Performance Report")){
+            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
+        }
+        else if(choseString.equals("Enquiries Report")){
+            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Enquiries Report] to File Name:", CampListView.this, 222);
+        }
+        if(campListForExport != null) {
+            if (chose == 220) {
+                // Camp Report
+                if (UserController.getCurrentUser() != null) {
+                    if (UserController.getCurrentUser() instanceof Student) {
+                        Student student = (Student) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByCampCommittee(student);
+                        Report report = new CampReport(forExport, true, true);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                    if (UserController.getCurrentUser() instanceof Staff) {
+                        Staff staff = (Staff) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByStaff(staff);
+                        Report report = new CampReport(forExport, true, true);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                }
+            } else if (chose == 221) {
+                if (UserController.getCurrentUser() instanceof Staff) {
+                    Staff staff = (Staff) UserController.getCurrentUser();
+                    CampList forExport = campListForExport.filterByStaff(staff);
+                    Report report = new PerformanceReport(forExport);
+                    CSV.exportToCSV(choseString, report);
+                }
+                // Performance Report
+            } else if (chose == 222) {
+                if (UserController.getCurrentUser() != null) {
+                    if (UserController.getCurrentUser() instanceof Student) {
+                        Student student = (Student) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByCampCommittee(student);
+                        Report report = new EnquiryReport(forExport);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                    if (UserController.getCurrentUser() instanceof Staff) {
+                        Staff staff = (Staff) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByStaff(staff);
+                        Report report = new EnquiryReport(forExport);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                }
+                // Enquiries Report
+            }
         }
     }
 }

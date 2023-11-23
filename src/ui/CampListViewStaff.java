@@ -121,9 +121,8 @@ public class CampListViewStaff extends CampListView {
             options.add("Camp Report");
             options.add("Performance Report");
             options.add("Enquiries Report");
-            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),
-                    generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options,
-                    CampListViewStaff.this);
+            options.add("Cancel");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStaff.this);
             addOverlay(overlayTestClass);
         }
         if (widgetPageSelection.getSelectedOption() != -1) {

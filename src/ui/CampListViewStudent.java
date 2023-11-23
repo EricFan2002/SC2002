@@ -142,9 +142,8 @@ public class CampListViewStudent extends CampListView {
             options.add("Camp Report");
             options.add("Performance Report");
             options.add("Enquiries Report");
-            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),
-                    generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options,
-                    CampListViewStudent.this);
+            options.add("Cancel");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStudent.this);
             addOverlay(overlayTestClass);
         }
         if (choseString.equals("View Details")) { // view details
