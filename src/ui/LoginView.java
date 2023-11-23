@@ -68,7 +68,7 @@ public class LoginView extends Window implements ICallBack { ;
                 // if incorrect, show error message
                 List<String> options = new ArrayList<String>();
                 options.add("OK");
-                OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  loginButton.getY(), loginButton.getX(), "Wrong username or password", options, LoginView.this);
+                OverlayChooseBox overlayTestClass = new OverlayChooseBox(30,  loginButton.getY() + 10, loginButton.getX(), "Wrong username or password", options, LoginView.this);
                 addOverlay(overlayTestClass);
                 loginButton.clearPressed();
             }
@@ -94,7 +94,5 @@ public class LoginView extends Window implements ICallBack { ;
     }
 
     @Override
-    public void onWindowFinished(int chose, String choseString) {
-        forgetPasswordButton.setText(choseString);
-    }
+    public void onWindowFinished(int chose, String choseString) {}
 }
