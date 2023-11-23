@@ -45,10 +45,11 @@ public class Main {
                 }
             }
             Window LoginView = new LoginView(20, 54, 1, 2, 3 ,6);
-            Window studentMainView = new StudentMainView(0, 4, 3);
+            Window studentMainView = new StudentMainView(0, 5, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(0, 1, 2);
-            Window CampListView = new CampListViewStaff(1, 2);
+            Window CampListViewStaff = new CampListViewStaff(1, 2);
+            Window CampListViewStudent = new CampListViewStudent(1, 2);
             Window createCampView = new CreateCampView(5);
             Window campViewer = new CampViewer(40, 40, 3);
             WindowsManager windows = new WindowsManager(screen, 0, 0);
@@ -58,7 +59,8 @@ public class Main {
             windows.addWindow(studentMainView);
             windows.addWindow(staffMainView);
             windows.addWindow(changePasswordView);
-            windows.addWindow(CampListView);
+            windows.addWindow(CampListViewStaff);
+            windows.addWindow(CampListViewStudent);
             windows.addWindow(createCampView);
             windows.addWindow(campViewer);
 

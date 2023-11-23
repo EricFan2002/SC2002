@@ -55,13 +55,6 @@ public class CampListViewStaff extends CampListView{
 
     private Camp toBeDestroyed = null;
 
-    @Override
-    public void refreshList(boolean forceRefresh) {
-        super.refreshList(forceRefresh);
-        // Add debug statement to confirm this method is called and check the switchToWindow value
-        System.out.println("In CampListViewStaff, switchToWindow value: " + switchToWindow);
-    }
-
 
     //        options.add("View Details");
 //        options.add("Edit Camp");
