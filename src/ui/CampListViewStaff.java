@@ -28,8 +28,8 @@ public class CampListViewStaff extends CampListView{
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
     protected OverlayCampSuggestionStaffView overlayCampSuggestionStaffView;
 
-    public CampListViewStaff(int loginSwitchToWindowIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex) {
-        super(loginSwitchToWindowIndex, changePasswordWindowIndex, forgotPasswordWindowIndex);
+    public CampListViewStaff(int studentMainViewIndex, int staffMainViewIndex) {
+        super(studentMainViewIndex, staffMainViewIndex);
         addWidgetAfter(toggleCreated, filter4Index);
         addWidgetAfter(toggleMySchool, filter4Index + 1);
         addWidgetAfter(createNewCampButton, filter4Index + 2);
