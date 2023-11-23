@@ -1,8 +1,10 @@
 package ui;
 
+import ui.windows.ICallBack;
 import ui.windows.Window;
 
-public class LandingView extends Window {
+public class LandingView extends Window implements ICallBack {
+    // Sliding big logo of "CAMS"
     public LandingView() {
         super(1,2, "");
     }
@@ -13,6 +15,11 @@ public class LandingView extends Window {
     }
 
     public void onExit(){
+        System.exit(0);
+    }
+
+    @Override
+    public void onWindowFinished(int chose, String choseString) {
         System.exit(0);
     }
 }
