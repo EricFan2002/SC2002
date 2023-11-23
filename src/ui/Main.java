@@ -1,8 +1,6 @@
 package ui;
 
 import com.googlecode.lanterna.*;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -11,40 +9,105 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import entity.RepositoryCollection;
-import ui.windows.Window;
-import ui.windows.WindowsManager;
+import ui.windows.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
-/**
- * The third tutorial, introducing the Screen interface
- * 
- * @author Martin
- */
 public class Main {
     public static void main(String[] args) {
         RepositoryCollection.load();
 
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
-        Screen screen = null;
+        Screen animationScreen = null;
+        Screen appScreen = null;
 
         try {
             Terminal terminal = defaultTerminalFactory.createTerminal();
-            screen = new TerminalScreen(terminal);
+            animationScreen = new TerminalScreen(terminal);
+            animationScreen.startScreen();
+            animationScreen.setCursorPosition(null);
 
-            screen.startScreen();
-            screen.setCursorPosition(null);
+            String[] titleLines = {
+                    "███    ██ ████████ ██    ██          ██████  █████  ███    ███ ███████ ",
+                    "████   ██    ██    ██    ██         ██      ██   ██ ████  ████ ██      ",
+                    "██ ██  ██    ██    ██    ██         ██      ███████ ██ ████ ██ ███████ ",
+                    "██  ██ ██    ██    ██    ██         ██      ██   ██ ██  ██  ██      ██ ",
+                    "██   ████    ██     ██████           ██████ ██   ██ ██      ██ ███████ "
+            };
 
-            TerminalSize terminalSize = screen.getTerminalSize();
+            TextGraphics textGraphics = animationScreen.newTextGraphics();
+            int screenWidth = animationScreen.getTerminalSize().getColumns();
+            int screenHeight = animationScreen.getTerminalSize().getRows();
+            int longestLineLength = Arrays.stream(titleLines).mapToInt(String::length).max().getAsInt();
+            int titleHeight = titleLines.length;
+            int midHorizontalPos = (screenWidth - longestLineLength) / 2;
+            int midVerticalPos = (screenHeight - titleHeight) / 2;
+            int bounceHeight = 2; // Height of the bounce
+            int numBounces = 3; // Number of times the title bounces
+
+            // Animation from top to middle
+            for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
+
+            // Bounce effect
+            for (int bounce = 0; bounce < numBounces; bounce++) {
+                // Move up
+                for (int vPos = midVerticalPos; vPos > midVerticalPos - bounceHeight; vPos--) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+                // Move down
+                for (int vPos = midVerticalPos - bounceHeight; vPos <= midVerticalPos; vPos++) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+            }
+
+            // Continue animation to bottom
+            for (int vPos = midVerticalPos; vPos <= screenHeight; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
+
+            animationScreen.close();
+
+            // After the animation, switch to the application screen
+            Terminal appTerminal = defaultTerminalFactory.createTerminal();
+            appScreen = new TerminalScreen(appTerminal);
+            appScreen.startScreen();
+            appScreen.setCursorPosition(null);
+
+            TerminalSize terminalSize = appScreen.getTerminalSize();
             for (int column = 0; column < terminalSize.getColumns(); column++) {
                 for (int row = 0; row < terminalSize.getRows(); row++) {
-                    screen.setCharacter(column, row, new TextCharacter(
+                    appScreen.setCharacter(column, row, new TextCharacter(
                             ' ',
                             TextColor.ANSI.DEFAULT,
                             TextColor.ANSI.DEFAULT));
                 }
             }
-            Window LoginView = new LoginView(20, 54, 1, 2, 3 ,6);
+
+            // Rest of your application initialization code...
+            Window LoginView = new LoginView(20, 54, 1, 2, 3, 6);
             Window studentMainView = new StudentMainView(0, 5, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(0, 1, 2);
@@ -52,9 +115,8 @@ public class Main {
             Window CampListViewStudent = new CampListViewStudent(1);
             Window createCampView = new CreateCampView(5);
             Window campViewer = new CampViewer(40, 40, 3);
-            WindowsManager windows = new WindowsManager(screen, 0, 0);
+            WindowsManager windows = new WindowsManager(appScreen, 0, 0);
 
-//            windows.addWindow(CampListView);
             windows.addWindow(LoginView);
             windows.addWindow(studentMainView);
             windows.addWindow(staffMainView);
@@ -64,10 +126,11 @@ public class Main {
             windows.addWindow(createCampView);
             windows.addWindow(campViewer);
 
-            screen.refresh();
+            appScreen.refresh();
 
+            // Main application loop
             while (true) {
-                KeyStroke keyStroke = screen.pollInput();
+                KeyStroke keyStroke = appScreen.pollInput();
                 if (keyStroke != null
                         && (keyStroke.getKeyType() == KeyType.Escape || keyStroke.getKeyType() == KeyType.EOF)) {
                     break;
@@ -75,9 +138,9 @@ public class Main {
                 if (keyStroke != null)
                     windows.keyStroke(keyStroke);
 
-                TerminalSize newSize = screen.doResizeIfNecessary();
+                TerminalSize newSize = appScreen.doResizeIfNecessary();
                 if (newSize != null) {
-                    screen.clear();
+                    appScreen.clear();
                     terminalSize = newSize;
                 }
 
@@ -86,7 +149,7 @@ public class Main {
                 TerminalSize labelBoxSize = new TerminalSize(sizeLabel.length() + 2, 3);
                 TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft
                         .withRelativeColumn(labelBoxSize.getColumns() - 1);
-                TextGraphics textGraphics = screen.newTextGraphics();
+                textGraphics = appScreen.newTextGraphics();
                 // This isn't really needed as we are overwriting everything below anyway, but
                 // just for demonstrative purpose
                 textGraphics.fillRectangle(labelBoxTopLeft, labelBoxSize, ' ');
@@ -126,7 +189,7 @@ public class Main {
                  * threads so we don't clog up the core completely.
                  */
                 windows.draw(0, 0);
-                screen.refresh();
+                appScreen.refresh();
                 Thread.yield();
 
                 /*
@@ -144,21 +207,108 @@ public class Main {
                  * Screen won't know about.
                  */
             }
+
+            appScreen.close();
+
+            Terminal animeTerminal = defaultTerminalFactory.createTerminal();
+            animationScreen = new TerminalScreen(animeTerminal);
+            animationScreen.startScreen();
+            animationScreen.setCursorPosition(null);
+
+            titleLines = new String[] {
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠴⠒⠤⣄⡀⠀⠀⠀⠀⢠⣾⠉⠉⠉⠉⠑⠒⠦⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠋⠀⠀⠀⠀⠀⠉⠲⡄⠀⢠⠏⡏⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⢤⣤⣀⡀⠀⠀⠀⠀⠀⢰⡏⠀⠀⠀⠀⠀⠀⠀⠀⠘⢆⢸⠀⡇⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏⠀⠀⠀⠀⠈⠙⠢⣄⠀⠀⣿⠀⠀⠀⢰⣿⣷⣆⠀⠀⠀⠘⣾⠀⠇⠀⠀⠀⢾⣿⣿⣦⠀⠀⠀⠀⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⢀⣀⡤⣄⠀⠀⠀⣼⡇⠀⠀⠀⢀⣀⠀⠀⠀⠈⠳⣴⢿⡄⠀⠀⢸⡿⣿⢹⠀⠀⠀⠀⣿⠀⡆⠀⠀⠀⣼⠻⣇⣸⠀⠀⠀⠀⣸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⢀⡴⠚⠉⠀⠀⠈⠳⡄⠀⣿⡇⠀⠀⠀⣿⣿⡷⡄⠀⠀⠀⢹⣆⢧⠀⠀⠀⠙⠿⠋⠀⠀⠀⠀⣿⠀⡇⠀⠀⠀⠙⠛⠉⠁⠀⠀⠀⢠⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⢠⠟⠀⠀⠀⠀⢀⣤⣾⣷⣀⡇⢣⠀⠀⠀⢻⣟⣄⣷⠀⠀⠀⠈⣿⣾⣆⠀⠀⠀⠀⠀⠀⠀⠀⣸⢿⢰⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⣠⡏⠀⠀⠀⣼⡟⣿⣿⡿⠛⠉⢻⣞⣧⠀⠀⠀⠉⠛⠁⠀⠀⠀⠀⡿⣿⣿⣦⣀⠀⠀⠀⠀⣠⣾⡏⢸⣠⣧⣤⣄⣤⣤⣤⣤⣤⣴⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⣿⠀⠀⠀⢸⠋⣿⠛⠁⠀⠀⠀⠀⠻⣯⣷⣄⠀⠀⠀⠀⠀⠀⢀⣼⠁⠘⠿⣿⣿⣻⣿⣿⣿⣿⠏⠀⣾⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+                    "⡟⣇⠀⠀⠈⢿⣏⢧⣴⣶⡆⠀⠀⠀⢿⣿⣿⢳⢦⣤⣤⣤⣶⣿⠟⠀⠀⠀⠀⠉⠉⠛⠋⢩⡤⠖⠒⠛⠛⡿⢁⣾⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⣷⠀⠀⠀⠀⢀⣤⠤⠤⣀⡀⠀",
+                    "⣇⠘⣆⠀⠀⠀⠙⠻⠿⠛⠃⠀⠀⠀⣸⡙⠻⢿⣿⣿⣿⣿⠿⠋⠀⣀⡤⠤⠒⠚⠳⣄⢠⣿⠁⠀⠀⠀⢠⠇⡏⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠀⠀⢀⡴⢫⡇⠀⠀⠀⠈⠙",
+                    "⠘⣶⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⣀⣼⣿⠇⠀⠀⠀⣀⣀⣀⠀⢀⣼⣿⣦⡀⠀⠀⠀⠈⢻⡏⠀⠀⠀⠀⡞⠀⡇⢸⠀⠀⠀⠀⢰⣾⣶⣶⣶⣶⣶⡏⠀⠀⡼⠀⡞⠀⠀⠀⠀⠀⢸",
+                    "⠀⠈⠻⣿⣿⣿⣶⢶⡶⡶⣶⣾⣿⡿⠋⣠⠴⠚⠉⠁⠀⠉⠙⠺⡿⢿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⣸⠃⢰⠀⢸⠀⠀⠀⠀⠘⠛⠛⠿⠿⢿⡏⠀⠀⢰⠃⢠⠇⠀⠀⠀⠀⠀⠌",
+                    "⠀⠀⠀⠈⠙⠻⠿⠼⠽⠿⠿⠟⠋⢰⡟⠁⠀⠀⢀⣤⣄⡀⠀⠀⠹⡆⠙⢿⣿⣿⣦⡀⠀⠀⠀⠀⢰⡇⠀⢸⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⡞⠀⡜⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡾⢳⡀⠀⠀⠈⢿⡿⠇⠀⠀⣼⠃⠀⠀⠙⢿⣿⣿⣷⠀⠀⠀⠈⡇⠀⢸⠀⡄⠀⠀⠀⠀⢰⣶⣤⣤⣤⣼⠃⠀⢰⠃⢰⠃⠀⠀⠀⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠀⢣⠀⠀⠀⠀⠀⠀⠀⠈⠋⠉⠲⣄⠀⠀⠙⢿⠸⡄⠀⠀⠀⢳⠀⢸⠀⡇⠀⠀⠀⠀⠸⣿⣿⣿⣿⣃⠀⠀⣞⣠⣾⣤⣀⣀⠀⠀⡄⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣆⠈⣇⠀⠀⠀⠀⣠⣤⣀⠀⠀⠀⠘⣆⠀⠀⠸⡄⢳⠀⠀⠀⠸⡆⢸⠀⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠘⠻⢿⣿⣿⣿⣿⡿⠞⠁⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡆⠘⡄⠀⠀⠀⢻⣿⣿⠆⠀⠀⠀⢸⠀⠀⠀⣇⠘⡆⠀⢀⣀⣧⢸⢀⣿⣶⣤⣤⣤⣀⣀⣀⠀⢀⡏⠀⢀⣴⠟⠁⠀⠀⠈⢳⡀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡄⠹⡄⠀⠀⠈⠉⠁⠀⠀⠀⣠⡾⠀⠀⠀⢹⢀⣿⣿⣿⡿⠃⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⢰⣯⡏⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢳⠀⠹⡄⠀⠀⠀⢀⣠⣴⣾⣿⠃⠀⠀⠀⠘⠿⠟⠛⠛⠁⠀⠀⠀⠉⠉⠉⠛⠛⠛⠿⠟⠁⠀⠀⢾⣿⣷⣄⡀⠀⠀⢀⡼⠃⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⢳⣴⣶⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀",
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣦⣿⣿⡿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⣀⠀⠀⠀⠀⠀⠀⠀"
+            };
+
+            textGraphics = animationScreen.newTextGraphics();
+            screenWidth = animationScreen.getTerminalSize().getColumns();
+            screenHeight = animationScreen.getTerminalSize().getRows();
+            longestLineLength = Arrays.stream(titleLines).mapToInt(String::length).max().getAsInt();
+            titleHeight = titleLines.length;
+            midHorizontalPos = (screenWidth - longestLineLength) / 2;
+            midVerticalPos = (screenHeight - titleHeight) / 2;
+            bounceHeight = 2; // Height of the bounce
+            numBounces = 3; // Number of times the title bounces
+
+            // Animation from top to middle
+            for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
+
+            // Bounce effect
+            for (int bounce = 0; bounce < numBounces; bounce++) {
+                // Move up
+                for (int vPos = midVerticalPos; vPos > midVerticalPos - bounceHeight; vPos--) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+                // Move down
+                for (int vPos = midVerticalPos - bounceHeight; vPos <= midVerticalPos; vPos++) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+            }
+
+            // Continue animation to bottom
+            for (int vPos = midVerticalPos; vPos <= screenHeight; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
+
+            animationScreen.close();
+
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
-            if (screen != null) {
-                try {
-                    /*
-                     * The close() call here will restore the terminal by exiting from private mode
-                     * which was done in
-                     * the call to startScreen(), and also restore things like echo mode and intr
-                     */
-                    RepositoryCollection.save();
-                    screen.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            try {
+                if (animationScreen != null) {
+                    animationScreen.close();
                 }
+                if (appScreen != null) {
+                    RepositoryCollection.save();
+                    appScreen.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
