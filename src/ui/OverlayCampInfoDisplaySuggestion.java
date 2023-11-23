@@ -95,7 +95,7 @@ public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
             }
             suggestion.setDescription(textBoxDescription.getText());
             try {
-                suggestion.setStartDate(ft.parse(textBoxDescription.getText()));
+                suggestion.setStartDate(ft.parse(textBoxDStart.getText()));
                 suggestion.setEndDate(ft.parse(textBoxDEnd.getText()));
                 suggestion.setCloseRegistrationDate(ft.parse(textBoxDClose.getText()));
             } catch (ParseException e) {

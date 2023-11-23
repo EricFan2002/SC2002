@@ -40,10 +40,6 @@ public class OverlayCampListViewStudentCampActions extends WindowOverlayClass {
             options.add("Reply Enquiry");
         if(camp.getCommittees().contains(student))
             options.add("Suggestions");
-        if(camp.getCommittees().contains(student))
-            options.add("Generate Student List");
-        if(camp.getCommittees().contains(student))
-            options.add("Generate Enquires List");
         options.add("Cancel");
 
         setY(options.size() + 3);

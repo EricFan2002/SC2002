@@ -1,7 +1,5 @@
 package ui;
 
-import controller.camp.CampModificationController;
-import controller.camp.CampSuggestionController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.suggestion.Suggestion;
@@ -13,10 +11,9 @@ import ui.windows.ICallBack;
 import ui.windows.Window;
 import ui.windows.WindowOverlayClass;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class OverlayCampAllSuggestionView extends WindowOverlayClass implements ICallBack {
+public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass implements ICallBack {
 
     Camp camp;
     Student student;
@@ -29,8 +26,8 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
     protected OverlaySuggestionInfoDisplayRaw overlaySuggestionInfoDisplayRawToBeAdded;
     protected OverlayCampInfoDisplaySuggestion overlayCampInfoDisplaySuggestionPending;
 
-    public OverlayCampAllSuggestionView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
-            Student student, Window mainWindow) {
+    public OverlayCampSuggestionCommitteeView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
+                                              Student student, Window mainWindow) {
         super(y, x, offsetY, offsetX, windowName);
 
         this.camp = camp;
@@ -47,11 +44,11 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             ArrayList<String> tmp = new ArrayList<String>();
             String status = "";
             if (suggestion.getStatus() == SuggestionStatus.PENDING) {
-                status = " ( PENDING )";
+                status = " [ PENDING ]";
             } else if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
-                status = " ( APPROVED )";
+                status = " [ APPROVED ]";
             } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
-                status = " ( REJECTED )";
+                status = " [ REJECTED ]";
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
@@ -61,7 +58,7 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
                 changed += "Date, ";
             }
-            if (suggestion.getSuggestion().getDescription() != null) {
+            if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
             if (suggestion.getSuggestion().getName() != null) {
@@ -79,13 +76,14 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if (changed.equals("")) {
                 tmp.add("    Nothing Changed.");
             } else {
+                changed = changed.substring(0, changed.length() - 3);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
         }
 
         allSuggestions = new WidgetPageSelection(3, 3, getX() - 10, getY() - 12, "Suggestions", enqList,
-                OverlayCampAllSuggestionView.this);
+                OverlayCampSuggestionCommitteeView.this);
         allSuggestions.updateList(enqList);
 
         addWidget(allSuggestions);
@@ -108,11 +106,11 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             ArrayList<String> tmp = new ArrayList<String>();
             String status = "";
             if (suggestion.getStatus() == SuggestionStatus.PENDING) {
-                status = " ( PENDING )";
+                status = " [ PENDING ]";
             } else if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
-                status = " ( APPROVED )";
+                status = " [ APPROVED ]";
             } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
-                status = " ( REJECTED )";
+                status = " [ REJECTED ]";
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
@@ -122,7 +120,7 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
                 changed += "Date, ";
             }
-            if (suggestion.getSuggestion().getDescription() != null) {
+            if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
             if (suggestion.getSuggestion().getName() != null) {
@@ -140,7 +138,7 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if (changed.equals("")) {
                 tmp.add("    Nothing Changed.");
             } else {
-                changed = changed.substring(0, changed.length() - 2);
+                changed = changed.substring(0, changed.length() - 3);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
@@ -159,7 +157,7 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             createSuggestionButton.clearPressed();
             OverlayCampInfoDisplaySuggestion overlayCampInfoDisplaySuggestion = new OverlayCampInfoDisplaySuggestion(
                     getX(), getY(), offsetY, offsetX, "Create Suggestion", camp, student,
-                    OverlayCampAllSuggestionView.this, null);
+                    OverlayCampSuggestionCommitteeView.this, null);
             mainWindow.addOverlay(overlayCampInfoDisplaySuggestion);
         }
         if (allSuggestions.getSelectedOption() != -1) {
@@ -167,14 +165,16 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             if (selectedSuggestion != null) {
                 ArrayList<String> options = new ArrayList<>();
                 options.add("View");
-                options.add("Edit");
-                options.add("Delete");
+                if(selectedSuggestion.getStatus() == SuggestionStatus.PENDING) {
+                    options.add("Edit");
+                    options.add("Delete");
+                }
                 options.add("Cancel");
                 WidgetButton buttonPosition = allSuggestions.getSelectionsButton()
                         .get(allSuggestions.getSelectedOption()).get(0);
                 OverlayChooseBox overlayChooseBox = new OverlayChooseBox(30, buttonPosition.getY(),
                         getX() + buttonPosition.getX() + (getLenX() / 2 - 15), "Actions", options,
-                        OverlayCampAllSuggestionView.this);
+                        OverlayCampSuggestionCommitteeView.this);
                 mainWindow.addOverlay(overlayChooseBox);
             }
             allSuggestions.clearSelectedOption();
@@ -203,44 +203,12 @@ public class OverlayCampAllSuggestionView extends WindowOverlayClass implements 
             updateSuggestionList();
         } else if (choseString.equals("Edit") && selectedSuggestion != null) {
             overlayCampInfoDisplaySuggestionPending = new OverlayCampInfoDisplaySuggestion(getX(), getY(), offsetY,
-                    offsetX, "Edit Suggestion", camp, student, OverlayCampAllSuggestionView.this, selectedSuggestion);
+                    offsetX, "Edit Suggestion", camp, student, OverlayCampSuggestionCommitteeView.this, selectedSuggestion);
         }
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
         SuggestionList suggestions = RepositoryCollection.getSuggestionRepository().filterByCamp(camp)
                 .filterBySender(student);
-        for (Suggestion suggestion : suggestions) {
-            suggestionArrayList.add(suggestion);
-            ArrayList<String> tmp = new ArrayList<String>();
-            String status = "";
-            if (suggestion.getStatus() == SuggestionStatus.PENDING) {
-                status = " ( PENDING )";
-            } else if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
-                status = " ( APPROVED )";
-            } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
-                status = " ( REJECTED )";
-            }
-            tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
-            String changed = "";
-            if (suggestion.getSuggestion().getLocation() != null) {
-                changed += "Location, ";
-            }
-            if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
-                changed += "Date, ";
-            }
-            if (suggestion.getSuggestion().getDescription() != null) {
-                changed += "Description, ";
-            }
-            if (suggestion.getSuggestion().getName() != null) {
-                changed += "Name, ";
-            }
-            if (changed == "") {
-                tmp.add("    Nothing Changed.");
-            } else {
-                tmp.add("    Changed " + changed);
-            }
-            enqList.add(tmp);
-        }
-
         allSuggestions.updateList(enqList);
+        updateSuggestionList();
     }
 }

@@ -33,9 +33,6 @@ public class OverlayCampListViewStaffCampActions extends WindowOverlayClass {
             options.add("Delete Camp");
             options.add("Reply Enquiry");
             options.add("View Suggestions");
-            options.add("Performance Report");
-            options.add("Generate Student List");
-            options.add("Generate Enquires List");
         }
         options.add("Cancel");
 

@@ -3,10 +3,8 @@ package ui;
 import controller.camp.CampRegistrationController;
 import controller.camp.OperationResult;
 import controller.user.UserController;
-import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
-import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
 import ui.widgets.WidgetButton;
@@ -28,7 +26,7 @@ public class CampListViewStudent extends CampListView {
     protected OverlayCampInfoDisplayEnquiriesCommittee overlayCampInfoDisplayEnquiriesCommittee;
     private String sortMethod = "";
 
-    protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
+    protected OverlayCampSuggestionCommitteeView overlayCampSuggestionCommitteeView;
     private int studentMainViewIndex;
 
     public CampListViewStudent(int studentMainViewIndex) {
@@ -219,10 +217,10 @@ public class CampListViewStudent extends CampListView {
         } else if (choseString.equals("Suggestions")) { // Create Suggestion
             if (UserController.getCurrentUser() instanceof Student) {
                 Student student = (Student) UserController.getCurrentUser();
-                overlayCampAllSuggestionView = new OverlayCampAllSuggestionView(getLenX() / 2 - 2, getY(), 1,
+                overlayCampSuggestionCommitteeView = new OverlayCampSuggestionCommitteeView(getLenX() / 2 - 2, getY(), 1,
                         getLenX() / 2 + 2, "Create Suggestion To Camp", selectedCamp, student,
                         CampListViewStudent.this);
-                addOverlay(overlayCampAllSuggestionView);
+                addOverlay(overlayCampSuggestionCommitteeView);
             }
             chose = -1;
             choseString = "";
@@ -255,8 +253,8 @@ public class CampListViewStudent extends CampListView {
                 && overlayCampInfoDisplayEnquiriesCommittee.getDestroy() != true) {
             overlayCampInfoDisplayEnquiriesCommittee.onWindowFinished(chose, choseString);
         }
-        if (overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true) {
-            overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
+        if (overlayCampSuggestionCommitteeView != null && overlayCampSuggestionCommitteeView.getDestroy() != true) {
+            overlayCampSuggestionCommitteeView.onWindowFinished(chose, choseString);
         }
         if (choseString.equals("By Camp Name")) {
             sortMethod = "By Camp Name";

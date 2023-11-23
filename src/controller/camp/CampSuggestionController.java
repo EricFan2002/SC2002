@@ -99,7 +99,7 @@ public class CampSuggestionController {
             Student sender = suggestion.getSender();
             sender.addPoints(1);
             suggestion.setStatus(SuggestionStatus.APPROVED);
-            String editingID = suggestion.getID();
+            String editingID = suggestion.getOriginalCamp().getID();
             CampList editingCamps = RepositoryCollection.getCampRepository().filterByID(editingID);
             if (editingCamps.size() == 0)
                 return false;

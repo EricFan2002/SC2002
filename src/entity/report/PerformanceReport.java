@@ -45,6 +45,7 @@ public class PerformanceReport extends Report {
                 row.add(committee.getID());
                 row.add(committee.getName());
                 row.add(Integer.toString(committee.getPoints()));
+                data.add(row);
             }
         }
         return data;

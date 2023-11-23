@@ -74,6 +74,10 @@ public class WindowOverlayClass extends Window{
         destroy = true;
     }
 
+    public void clearOuterArea(Screen screen, int x, int y, double transparency){
+        return;
+    }
+
     /**
      * Clears the area occupied by this overlay window on the screen.
      *
