@@ -2,12 +2,15 @@ package utils;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import entity.report.Report;
 
 public class CSV {
     public static boolean exportToCSV(String filename, ArrayList<ArrayList<String>> data) {

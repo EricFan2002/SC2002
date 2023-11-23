@@ -6,11 +6,10 @@ import entity.report.Report;
 import utils.CSV;
 
 public class ExportCSVController {
-    public static String export(Report report) {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis());
-        boolean res = CSV.exportToCSV(timestamp + ".csv", report.serialize());
+    public static String exportReportToCSV(String filename, Report report) {
+        boolean res = CSV.exportToCSV(filename + ".csv", report.serialize());
         if (res) {
-            return timestamp + ".csv";
+            return filename + ".csv";
         } else {
             return null;
         }
