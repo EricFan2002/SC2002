@@ -81,7 +81,7 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
         addWidget(textBoxSlots);
 
         // Slots Committee
-        WidgetLabel labelSlotsC = new WidgetLabel(3, 11, 15, "Committee Slots:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+        WidgetLabel labelSlotsC = new WidgetLabel(3, 11, 15, "Committee:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSlotsC);
         textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, "10");
         addWidget(textBoxSlotsC);

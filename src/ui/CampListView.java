@@ -88,7 +88,7 @@ public class CampListView extends Window implements ICallBack {
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(),  "School: " + camp.getSchool(), getX() / 2 - 14));
             tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),  "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
-            tmp.add("    " + formLine("Participants: " + camp.getAttendees().size(),  "Committee: " + camp.getCommittees().size(), getX() / 2 - 14));
+            tmp.add("    " + formLine("Participants: " + (camp.getAttendees().size() + camp.getCommittees().size()) + " / " + camp.getTotalSlots(),  "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
             for(int j = 0 ; j < getX() / 2 - 3 ; j ++){
                 line += "─";
@@ -167,7 +167,7 @@ public class CampListView extends Window implements ICallBack {
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(),  "School: " + camp.getSchool(), getX() / 2 - 14));
             tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),  "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
-            tmp.add("    " + formLine("Participants: " + camp.getAttendees().size(),  "Committee: " + camp.getCommittees().size(), getX() / 2 - 14));
+            tmp.add("    " + formLine("Participants: " +  (camp.getAttendees().size() + camp.getCommittees().size()) + " / " + camp.getTotalSlots(),  "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
             for(int j = 0 ; j < getX() / 2 - 3 ; j ++){
                 line += "─";

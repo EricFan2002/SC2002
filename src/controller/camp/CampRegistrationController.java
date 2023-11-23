@@ -56,7 +56,7 @@ public class CampRegistrationController {
     public static OperationResult registerCamp(Camp camp, Student student) {
         if (checkConflict(camp, student)) {
             return new OperationResult(false, "Time Conflict!");
-        } else if (camp.getAttendees().size() >= camp.getTotalSlots()) {
+        } else if (camp.getAttendees().size() + camp.getCommittees().size() >= camp.getTotalSlots()) {
             return new OperationResult(false, "No More Slots");
         } else if (camp.getAttendees().contains(student)) {
             return new OperationResult(false, "Already joined as an attendee.");
@@ -79,6 +79,8 @@ public class CampRegistrationController {
             return new OperationResult(false, "Time Conflict!");
         } else if (camp.getCommittees().size() >= 10) {
             return new OperationResult(false, "No More Committee Slots");
+        } else if (camp.getAttendees().size() + camp.getCommittees().size() >= camp.getTotalSlots()) {
+            return new OperationResult(false, "No More Slots");
         } else if (camp.getAttendees().contains(student)) {
             return new OperationResult(false, "Already Joined As Participant");
         } else if (camp.getCommittees().contains(student)) {
