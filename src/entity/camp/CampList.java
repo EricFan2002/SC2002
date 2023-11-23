@@ -355,6 +355,12 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
             }
             String committeeIDs = String.join(";", committeeIDsTemp);
 
+            List<String> registeredIDsTemp = new ArrayList<String>();
+            for (Student registered : camp.getRegisteredStudents()) {
+                registeredIDsTemp.add(registered.getID());
+            }
+            String registeredIDs = String.join(";", registeredIDsTemp);
+
             record.add(camp.getID());
             record.add(camp.getName());
             record.add(camp.getDescription());
@@ -367,6 +373,7 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
             record.add(staffID);
             record.add(attendeeIDs);
             record.add(committeeIDs);
+            record.add(registeredIDs);
             record.add(Integer.toString(camp.getTotalSlots()));
 
             result.add(record);

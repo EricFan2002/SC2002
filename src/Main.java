@@ -92,6 +92,7 @@ public class Main {
 
         Student com = new Student("com", "Alan Walker", "MSE");
         Student com2 = new Student("com2", "Justin Trudeau", "SCSE");
+        Student com3 = new Student("com3", "Margaret Thatcher", "NIE");
 
         Staff staff = new Staff("staff", "John Cena", "SPMS");
         Staff staff2 = new Staff("staff2", "Donald J. Trump", "SSS");
@@ -103,6 +104,8 @@ public class Main {
         userRepository.add(att4);
         userRepository.add(att5);
         userRepository.add(com);
+        userRepository.add(com2);
+        userRepository.add(com3);
         userRepository.add(staff);
         userRepository.add(staff2);
 
