@@ -1,5 +1,6 @@
 package entity.camp;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import entity.interfaces.ISortableByLocation;
 import entity.interfaces.ISortableByName;
 import entity.interfaces.ISortableByRegistrationCloseDate;
 import entity.interfaces.ISortableByStartingDate;
+import entity.interfaces.ITaggedItem;
 import entity.user.Staff;
 import entity.user.Student;
 
@@ -325,6 +327,53 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
      */
     public Camp[] toArray() {
         return super.all.toArray(new Camp[super.all.size()]);
+    }
+
+    public ArrayList<ArrayList<String>> serialize() {
+
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+        super.all.forEach(campRaw -> {
+            Camp camp = (Camp) campRaw;
+            // id, name, desc, visibility (0/1), startDate, endDate, closeRegDate, school,
+            ArrayList<String> record = new ArrayList<String>();
+            String visibility = (camp.isVisible()) ? "1" : "0";
+            String startDate = Long.toString(camp.getStartDate().getTime());
+            String endDate = Long.toString(camp.getEndDate().getTime());
+            String closeRegDate = Long.toString(camp.getCloseRegistrationDate().getTime());
+
+            String staffID = camp.getStaffInCharge().getID();
+
+            List<String> attendeeIDsTemp = new ArrayList<String>();
+            for (Student attendee : camp.getAttendees()) {
+                attendeeIDsTemp.add(attendee.getID());
+            }
+            String attendeeIDs = String.join(";", attendeeIDsTemp);
+
+            List<String> committeeIDsTemp = new ArrayList<String>();
+            for (Student committee : camp.getCommittees()) {
+                committeeIDsTemp.add(committee.getID());
+            }
+            String committeeIDs = String.join(";", committeeIDsTemp);
+
+            record.add(camp.getID());
+            record.add(camp.getName());
+            record.add(camp.getDescription());
+            record.add(visibility);
+            record.add(startDate);
+            record.add(endDate);
+            record.add(closeRegDate);
+            record.add(camp.getSchool());
+            record.add(camp.getLocation());
+            record.add(staffID);
+            record.add(attendeeIDs);
+            record.add(committeeIDs);
+            record.add(Integer.toString(camp.getTotalSlots()));
+
+            result.add(record);
+
+        });
+
+        return result;
     }
 
 }

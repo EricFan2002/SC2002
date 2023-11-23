@@ -1,16 +1,15 @@
 import java.lang.reflect.Array;
 import java.util.Date;
 
-import entity.camp.CampRepository;
-import entity.enquiry.EnquiryRepository;
 import entity.RepositoryCollection;
-import entity.suggestion.SuggestionRepository;
 import entity.user.UserList;
-import entity.user.UserRepository;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
+import entity.camp.CampList;
 import entity.enquiry.Enquiry;
+import entity.enquiry.EnquiryList;
 import entity.suggestion.Suggestion;
+import entity.suggestion.SuggestionList;
 import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
@@ -19,10 +18,10 @@ public class Main {
     public static void main(String[] args) {
         RepositoryCollection.load();
 
-        UserRepository userRepository = RepositoryCollection.userRepository;
-        CampRepository campRepository = RepositoryCollection.campRepository;
-        EnquiryRepository enquiryRepository = RepositoryCollection.enquiryRepository;
-        SuggestionRepository suggestionRepository = RepositoryCollection.suggestionRepository;
+        UserList userRepository = RepositoryCollection.getUserRepository();
+        CampList campRepository = RepositoryCollection.getCampRepository();
+        EnquiryList enquiryRepository = RepositoryCollection.getEnquiryRepository();
+        SuggestionList suggestionRepository = RepositoryCollection.getSuggestionRepository();
 
         /*
          * // instantiate users
@@ -33,11 +32,11 @@ public class Main {
          * Staff staff = new Staff("5", "John Cena", "SPMS");
          * 
          * // add users to repository
-         * userRepository.insert(att1);
-         * userRepository.insert(att2);
-         * userRepository.insert(att3);
-         * userRepository.insert(com);
-         * userRepository.insert(staff);
+         * userRepository.add(att1);
+         * userRepository.add(att2);
+         * userRepository.add(att3);
+         * userRepository.add(com);
+         * userRepository.add(staff);
          * 
          * // instantiate camp
          * Camp camp1 = new Camp("abc", "Camp Nou", "Soccer camp for young students!",
@@ -47,8 +46,8 @@ public class Main {
          * true, new Date(1), new Date(1),
          * new Date(1), "1", "1", staff, 15);
          * 
-         * campRepository.insert(camp1);
-         * campRepository.insert(camp2);
+         * campRepository.add(camp1);
+         * campRepository.add(camp2);
          * camp1.addAttendee(att3);
          * camp1.addAttendee(att2);
          * camp2.addAttendee(att1);
@@ -64,9 +63,9 @@ public class Main {
          * camp2);
          * 
          * // insert enquiry
-         * enquiryRepository.insert(enquiry1);
-         * enquiryRepository.insert(enquiry2);
-         * enquiryRepository.insert(enquiry3);
+         * enquiryRepository.add(enquiry1);
+         * enquiryRepository.add(enquiry2);
+         * enquiryRepository.add(enquiry3);
          * 
          * // instantiate suggestion
          * CampDetails suggestionPlan = camp1.createSuggestionPlan();
@@ -74,7 +73,7 @@ public class Main {
          * Suggestion suggestion1 = new Suggestion(com, suggestionPlan, camp1);
          * 
          * // insert suggestion
-         * suggestionRepository.insert(suggestion1);
+         * suggestionRepository.add(suggestion1);
          * 
          * // prints suggestion
          */
@@ -98,14 +97,14 @@ public class Main {
         Staff staff2 = new Staff("staff2", "Donald J. Trump", "SSS");
 
         // add users to repository
-        userRepository.insert(att1);
-        userRepository.insert(att2);
-        userRepository.insert(att3);
-        userRepository.insert(att4);
-        userRepository.insert(att5);
-        userRepository.insert(com);
-        userRepository.insert(staff);
-        userRepository.insert(staff2);
+        userRepository.add(att1);
+        userRepository.add(att2);
+        userRepository.add(att3);
+        userRepository.add(att4);
+        userRepository.add(att5);
+        userRepository.add(com);
+        userRepository.add(staff);
+        userRepository.add(staff2);
 
         // instantiate camp
         Camp camp1 = new Camp("C001", "Soccer Match", "Night Soccer Scrimmage", true, new Date(1702734600000L),
@@ -140,16 +139,16 @@ public class Main {
                 new Date(1703512200000L), new Date(1703523000000L),
                 new Date(1707541200000L), "NTU", "1", staff, 10);
 
-        campRepository.insert(camp1);
-        campRepository.insert(camp2);
-        campRepository.insert(camp3);
-        campRepository.insert(camp4);
-        campRepository.insert(camp5);
-        campRepository.insert(camp6);
-        campRepository.insert(camp7);
-        campRepository.insert(camp8);
-        campRepository.insert(camp9);
-        campRepository.insert(camp10);
+        campRepository.add(camp1);
+        campRepository.add(camp2);
+        campRepository.add(camp3);
+        campRepository.add(camp4);
+        campRepository.add(camp5);
+        campRepository.add(camp6);
+        campRepository.add(camp7);
+        campRepository.add(camp8);
+        campRepository.add(camp9);
+        campRepository.add(camp10);
 
         camp1.addAttendee(att3);
         camp1.addAttendee(att2);
@@ -194,9 +193,9 @@ public class Main {
         Enquiry enquiry3 = new Enquiry("3", att3, "What is the camp schedule?", camp2);
 
         // insert enquiry
-        enquiryRepository.insert(enquiry1);
-        enquiryRepository.insert(enquiry2);
-        enquiryRepository.insert(enquiry3);
+        enquiryRepository.add(enquiry1);
+        enquiryRepository.add(enquiry2);
+        enquiryRepository.add(enquiry3);
 
         // instantiate suggestion
         CampDetails suggestionPlan = camp1.createSuggestionPlan();
@@ -206,7 +205,7 @@ public class Main {
 
         // insert suggestion
         System.out.println(suggestion1.getOriginalCamp().getID());
-        suggestionRepository.insert(suggestion1);
+        suggestionRepository.add(suggestion1);
 
         // prints suggestion
 

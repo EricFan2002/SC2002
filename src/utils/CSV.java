@@ -10,10 +10,11 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-import entity.report.Report;
+import entity.interfaces.ISerializeable;
 
 public class CSV {
-    public static boolean exportToCSV(String filename, ArrayList<ArrayList<String>> data) {
+    public static boolean exportToCSV(String filename, ISerializeable serializeable) {
+        ArrayList<ArrayList<String>> data = serializeable.serialize();
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(filename), CSVFormat.DEFAULT)) {
             for (ArrayList<String> row : data) {
                 printer.printRecord(row);

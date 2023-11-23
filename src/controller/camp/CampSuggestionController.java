@@ -48,7 +48,7 @@ public class CampSuggestionController {
      */
     public static boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
-        RepositoryCollection.suggestionRepository.insert(suggestion);
+        RepositoryCollection.getSuggestionRepository().add(suggestion);
         sender.addSuggestion(suggestion);
         originalCamp.addSuggestion(suggestion);
         return true;
@@ -62,7 +62,7 @@ public class CampSuggestionController {
      */
     public static boolean updateSuggestion(Suggestion newSuggestion) {
         // deep copy
-        Suggestion oldSuggestion = RepositoryCollection.suggestionRepository.getAll()
+        Suggestion oldSuggestion = RepositoryCollection.getSuggestionRepository()
                 .filterByID(newSuggestion.getID()).get(0); // get the old suggestion
         if (oldSuggestion.getStatus() != SuggestionStatus.PENDING)
             return false;
@@ -79,7 +79,7 @@ public class CampSuggestionController {
     public static boolean deleteSuggestion(Suggestion suggestion) {
         suggestion.getSender().removeSuggestion(suggestion);
         suggestion.getOriginalCamp().removeSuggestion(suggestion);
-        RepositoryCollection.suggestionRepository.remove(suggestion);
+        RepositoryCollection.getSuggestionRepository().remove(suggestion);
         return true;
     }
 
@@ -100,7 +100,7 @@ public class CampSuggestionController {
             sender.addPoints(1);
             suggestion.setStatus(SuggestionStatus.APPROVED);
             String editingID = suggestion.getID();
-            CampList editingCamps = RepositoryCollection.campRepository.getAll().filterByID(editingID);
+            CampList editingCamps = RepositoryCollection.getCampRepository().filterByID(editingID);
             if (editingCamps.size() == 0)
                 return false;
             Camp editingCamp = editingCamps.get(0);
@@ -132,7 +132,7 @@ public class CampSuggestionController {
      * @return SuggestionList A list of suggestions related to the specified camp.
      */
     public static SuggestionList getSuggestions(Camp camp) {
-        return RepositoryCollection.suggestionRepository.getAll().filterByCamp(camp);
+        return RepositoryCollection.getSuggestionRepository().filterByCamp(camp);
     }
 
     /**
@@ -143,7 +143,7 @@ public class CampSuggestionController {
      *         member.
      */
     public static SuggestionList getSuggestions(Staff staff) {
-        return RepositoryCollection.suggestionRepository.getAll().filterBySender(staff);
+        return RepositoryCollection.getSuggestionRepository().filterBySender(staff);
     }
 
     /**
@@ -153,6 +153,6 @@ public class CampSuggestionController {
      * @return SuggestionList A list of suggestions made by the specified student.
      */
     public static SuggestionList getSuggestions(Student student) {
-        return RepositoryCollection.suggestionRepository.getAll().filterBySender(student);
+        return RepositoryCollection.getSuggestionRepository().filterBySender(student);
     }
 }

@@ -64,7 +64,7 @@ public class UserController {
      * @return User The user object if found, null otherwise.
      */
     private static User getUserByUsername(String id) {
-        var userList = RepositoryCollection.userRepository.getAll().filterByID(id);
+        var userList = RepositoryCollection.getUserRepository().filterByID(id);
         if (!userList.isEmpty()) {
             return userList.get(0);
         } else {

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import entity.enquiry.Enquiry;
 import entity.enquiry.EnquiryList;
+import entity.interfaces.ITaggedItem;
 import entity.suggestion.Suggestion;
 import entity.suggestion.SuggestionList;
 import entity.user.Staff;
@@ -33,7 +34,7 @@ import entity.user.Student;
  * @see entity.user.Staff
  * @see entity.user.Student
  */
-public class Camp extends CampDetails {
+public class Camp extends CampDetails implements ITaggedItem {
 
     protected Staff staffInCharge;
     protected Set<Student> attendees;

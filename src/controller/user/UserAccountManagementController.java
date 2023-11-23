@@ -30,9 +30,9 @@ public class UserAccountManagementController {
      *         password is incorrect.
      */
     public static boolean changePassword(String username, String oldPassword, String newPassword) {
-        if (RepositoryCollection.userRepository.getAll().filterByID(username).get(0).getPassword()
+        if (RepositoryCollection.getUserRepository().filterByID(username).get(0).getPassword()
                 .equals(oldPassword)) {
-            RepositoryCollection.userRepository.getAll().filterByID(username).get(0).setPassword(newPassword);
+            RepositoryCollection.getUserRepository().filterByID(username).get(0).setPassword(newPassword);
             return true;
         } else {
             return false;
@@ -50,8 +50,8 @@ public class UserAccountManagementController {
      *         not.
      */
     public static String forgetPassword(String username, String email) {
-        if (RepositoryCollection.userRepository.getAll().filterByID(username).get(0).getEmail().equals(email)) {
-            return RepositoryCollection.userRepository.getAll().filterByID(username).get(0).getPassword();
+        if (RepositoryCollection.getUserRepository().filterByID(username).get(0).getEmail().equals(email)) {
+            return RepositoryCollection.getUserRepository().filterByID(username).get(0).getPassword();
         } else {
             return null;
         }
@@ -66,7 +66,7 @@ public class UserAccountManagementController {
      *         false otherwise.
      */
     public static boolean verifyPassword(String username, String password) {
-        if (RepositoryCollection.userRepository.getAll().filterByID(username).get(0).getPassword()
+        if (RepositoryCollection.getUserRepository().filterByID(username).get(0).getPassword()
                 .equals(password)) {
             return true;
         } else {
@@ -83,7 +83,7 @@ public class UserAccountManagementController {
      *         otherwise.
      */
     public static boolean verifyEmail(String username, String email) {
-        if (RepositoryCollection.userRepository.getAll().filterByID(username).get(0).getEmail().equals(email)) {
+        if (RepositoryCollection.getUserRepository().filterByID(username).get(0).getEmail().equals(email)) {
             return true;
         } else {
             return false;

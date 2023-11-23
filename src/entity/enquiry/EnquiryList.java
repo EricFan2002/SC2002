@@ -1,5 +1,6 @@
 package entity.enquiry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.RepositoryList;
@@ -8,12 +9,15 @@ import entity.interfaces.IFilterableByAnsweredBy;
 import entity.interfaces.IFilterableByCamp;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableByStatus;
+import entity.interfaces.ITaggedItem;
 import entity.interfaces.IFilterableBySender;
 import entity.user.User;
 
 /**
- * Represents a list of enquiries, providing functionalities for filtering enquiries based on various criteria.
- * This class extends RepositoryList and implements several interfaces for filtering.
+ * Represents a list of enquiries, providing functionalities for filtering
+ * enquiries based on various criteria.
+ * This class extends RepositoryList and implements several interfaces for
+ * filtering.
  */
 public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableByID<Enquiry>,
         IFilterableByCamp<Enquiry>, IFilterableByStatus<Enquiry, Boolean>, IFilterableBySender<Enquiry>,
@@ -102,7 +106,8 @@ public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableB
      * Filters the list of enquiries by a specific user who answered the enquiry.
      *
      * @param answeredBy The user who answered the enquiry to filter by.
-     * @return A new EnquiryList containing enquiries that match the given user who answered the enquiry.
+     * @return A new EnquiryList containing enquiries that match the given user who
+     *         answered the enquiry.
      */
     public EnquiryList filterByAnsweredBy(User answeredBy) {
         EnquiryList result = new EnquiryList();
@@ -121,6 +126,31 @@ public class EnquiryList extends RepositoryList<Enquiry> implements IFilterableB
      */
     public Enquiry[] toArray() {
         return super.all.toArray(new Enquiry[super.all.size()]);
+    }
+
+    public ArrayList<ArrayList<String>> serialize() {
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+
+        super.all.forEach(enquiryRaw -> {
+            Enquiry camp = enquiryRaw;
+            ArrayList<String> record = new ArrayList<String>();
+            // id, senderID, question, answer, campID, answeredByID
+            String senderID = camp.getSender().getID();
+            String answeredByID = (camp.getAnsweredBy() == null) ? "" : camp.getAnsweredBy().getID();
+            String campID = camp.getCamp().getID();
+
+            record.add(camp.getID());
+            record.add(senderID);
+            record.add(camp.getQuestion());
+            record.add(camp.getAnswer());
+            record.add(campID);
+            record.add(answeredByID);
+
+            result.add(record);
+
+        });
+
+        return result;
     }
 
 }
