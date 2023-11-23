@@ -18,6 +18,7 @@ public class CampReport extends Report {
 
     public CampReport(CampList camp, boolean includeCommittees, boolean includeAttendees) {
         super();
+        this.camp = new CampList();
         camp.forEach((curCamp) -> {
             this.camp.add(curCamp);
         });
