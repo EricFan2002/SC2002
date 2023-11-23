@@ -37,6 +37,24 @@ public class Window {
     private int widgetID;
     private int needClear = 0;
 
+    public void setY(int y){
+        buffer = new char[y][x];
+        printColor = new TextColor[y][x];
+        backColor = new TextColor[y][x];
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                buffer[i][j] = ' ';
+                printColor[i][j] = TextColor.ANSI.DEFAULT;
+                backColor[i][j] = TextColor.ANSI.WHITE;
+            }
+        }
+        lenY = y;
+        this.windowName = windowName;
+        selected = 0;
+        overlays = new ArrayList<>();
+        this.y = y;
+    }
+
     /**
      * Constructor for Window class.
      *
@@ -343,34 +361,34 @@ public class Window {
                 }
             }
         }
-        for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < buffer.length + 1; i++) {
-                int modY = y + i;
-                int modX = buffer[0].length + x + j;
-                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
-                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
-                if(textCharacter != null) {
-                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
-                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
-                    textCharacter = textCharacter.withCharacter(' ');
-                    screen.setCharacter(cellToModify, textCharacter);
-                }
-            }
-        }
-        for (int j = 0; j < 1; j++) {
-            for (int i = 0; i < buffer[0].length + 1; i++) {
-                int modY = buffer.length + y + j;
-                int modX = x + i;
-                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
-                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
-                if(textCharacter != null) {
-                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
-                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
-                    textCharacter = textCharacter.withCharacter(' ');
-                    screen.setCharacter(cellToModify, textCharacter);
-                }
-            }
-        }
+//        for (int j = 0; j < 2; j++) {
+//            for (int i = 0; i < buffer.length + 1; i++) {
+//                int modY = y + i;
+//                int modX = buffer[0].length + x + j;
+//                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
+//                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
+//                if(textCharacter != null) {
+//                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
+//                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
+//                    textCharacter = textCharacter.withCharacter(' ');
+//                    screen.setCharacter(cellToModify, textCharacter);
+//                }
+//            }
+//        }
+//        for (int j = 0; j < 1; j++) {
+//            for (int i = 0; i < buffer[0].length + 1; i++) {
+//                int modY = buffer.length + y + j;
+//                int modX = x + i;
+//                TerminalPosition cellToModify = new TerminalPosition(modX, modY);
+//                TextCharacter textCharacter = screen.getBackCharacter(cellToModify);
+//                if(textCharacter != null) {
+//                    textCharacter = textCharacter.withForegroundColor(TextColor.ANSI.DEFAULT);
+//                    textCharacter = textCharacter.withBackgroundColor(TextColor.ANSI.DEFAULT);
+//                    textCharacter = textCharacter.withCharacter(' ');
+//                    screen.setCharacter(cellToModify, textCharacter);
+//                }
+//            }
+//        }
         for(int i = 0 ; i < getLenX() ; i++){
             TerminalPosition cellToModify = new TerminalPosition( i + x, y );
             TextCharacter textCharacter = screen.getBackCharacter(cellToModify);

@@ -80,14 +80,21 @@ public class CampListView extends Window implements ICallBack {
         filter4Index = addWidget(filter4Enable);
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
+        camps = camps.filterBySchool("NTU");
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
             displayCamps.add(camp);
             ArrayList<String> tmp = new ArrayList<String>();
             tmp.add(camp.getName() + " Camp");
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date currentDate = new Date();
             tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(),  "School: " + camp.getSchool(), getX() / 2 - 14));
-            tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),  "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            if(currentDate.before(camp.getCloseRegistrationDate())) {
+                tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()), "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            }
+            else{
+                tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()), "Registration Already Closed: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            }
             tmp.add("    " + formLine("Participants: " + (camp.getAttendees().size() + camp.getCommittees().size()) + " / " + camp.getTotalSlots(),  "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
             for(int j = 0 ; j < getX() / 2 - 3 ; j ++){
@@ -96,12 +103,14 @@ public class CampListView extends Window implements ICallBack {
             tmp.add(line);
             options.add(tmp);
         }
+
         widgetPageSelection = new WidgetPageSelection(1, 10, getX() / 2 -2, getY() - 14, "PartyList", options, CampListView.this);
         addWidget(widgetPageSelection);
         addWidget(backButton);
     }
 
-    String lastFilter = "";
+    protected String lastFilter = "";
+    protected int lastSize = -1;
 
     protected CampList CustomFilter(CampList list){
         return list;
@@ -112,7 +121,6 @@ public class CampListView extends Window implements ICallBack {
         ArrayList<ArrayList<String>> options = new ArrayList<>();
         CampList camps = RepositoryCollection.campRepository.getAll();
         if(filter1Enable.getPressed() && !filter1Start.getText().equals("") && !filter1End.getText().equals("")){
-            newFilter += filter1Start.getText() + filter1End.getText();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
                 Date dateStart = ft.parse(filter1Start.getText());
@@ -123,7 +131,6 @@ public class CampListView extends Window implements ICallBack {
             }
         }
         if(filter2Enable.getPressed() && !filter2.getText().equals("")){
-            newFilter += filter2.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getLocation().toLowerCase().contains(filter3.getText().toLowerCase())){
@@ -133,7 +140,6 @@ public class CampListView extends Window implements ICallBack {
             camps = res;
         }
         if(filter3Enable.getPressed() && !filter3.getText().equals("")){
-            newFilter += filter3.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getSchool().toLowerCase().contains(filter3.getText().toLowerCase())){
@@ -143,7 +149,6 @@ public class CampListView extends Window implements ICallBack {
             camps = res;
         }
         if(filter4Enable.getPressed() && !filter4.getText().equals("")){
-            newFilter += filter4.getText();
             CampList res = new CampList();
             for(Camp camp : camps){
                 if(camp.getStaffInCharge().getName().toLowerCase().contains(filter4.getText().toLowerCase())){
@@ -152,21 +157,44 @@ public class CampListView extends Window implements ICallBack {
             }
             camps = res;
         }
-        int b4 = camps.size();
+        camps = camps.sortByName();
         camps = CustomFilter(camps);
         for(Camp c : camps){
             newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
         }
-        int af = camps.size();
         displayCamps.clear();
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
             displayCamps.add(camp);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add(camp.getName() + " Camp");
+            String campTitle = camp.getName() + " Camp";
+            if(UserController.getCurrentUser() != null){
+                if(UserController.getCurrentUser() instanceof Student){
+                    Student student = (Student)UserController.getCurrentUser();
+                    if(camp.getCommittees().contains(student)){
+                        campTitle += " (Committee)";
+                    }
+                    else if(camp.getAttendees().contains(student)){
+                        campTitle += " (Joined)";
+                    }
+                }
+                if(UserController.getCurrentUser() instanceof Staff){
+                    Staff staff = (Staff)UserController.getCurrentUser();
+                    if(camp.getStaffInCharge().equals(staff)){
+                        campTitle += " (In Charge)";
+                    }
+                }
+            }
+            tmp.add(campTitle);
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             tmp.add("    " + formLine("Creator: " + camp.getStaffInCharge().getName(),  "School: " + camp.getSchool(), getX() / 2 - 14));
-            tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),  "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            Date currentDate = new Date();
+            if(currentDate.before(camp.getCloseRegistrationDate())) {
+                tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()), "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            }
+            else{
+                tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()), "Registration Already Closed: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
+            }
             tmp.add("    " + formLine("Participants: " +  (camp.getAttendees().size() + camp.getCommittees().size()) + " / " + camp.getTotalSlots(),  "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
             for(int j = 0 ; j < getX() / 2 - 3 ; j ++){
@@ -175,9 +203,10 @@ public class CampListView extends Window implements ICallBack {
             tmp.add(line);
             options.add(tmp);
         }
-        if(!newFilter.equals(lastFilter) || forceRefresh) {
+        if(!newFilter.equals(lastFilter) || forceRefresh || lastSize != camps.size()) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
+            lastSize = camps.size();
         }
     }
     @Override

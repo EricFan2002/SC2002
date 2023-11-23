@@ -31,6 +31,7 @@ public class WindowOverlayClass extends Window{
         destroy = false;
     }
 
+
     /**
      * Draws the window on the screen with the specified transparency and offset.
      *
