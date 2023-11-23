@@ -29,10 +29,6 @@ public class StudentMainView extends Window {
         addWidget(widgetLabel);
         viewCampButton = new WidgetButton(4, 7, 40, "Camp Management");
         addWidget(viewCampButton);
-        registerForCampButton = new WidgetButton(4, 11, 40, "Register For Camp");
-        addWidget(registerForCampButton);
-        viewEnquiryButton = new WidgetButton(4, 13, 40, "View My Enquires");
-        addWidget(viewEnquiryButton);
         changePasswordButton = new WidgetButton(4, 15, 40, "Reset Password");
         addWidget(changePasswordButton);
         logoutButton = new WidgetButton(4, 17, 40, "Logout");
