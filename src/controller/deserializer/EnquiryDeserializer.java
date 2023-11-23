@@ -1,57 +1,18 @@
-package controller.serializer;
+package controller.deserializer;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import entity.camp.Camp;
-import entity.camp.CampDetails;
 import entity.camp.CampList;
 import entity.enquiry.Enquiry;
 import entity.enquiry.EnquiryList;
-
 import entity.user.Student;
 import entity.user.User;
-import entity.user.UserFactory;
 import entity.user.UserList;
 
-public class DeserializerController {
-    public static UserList userDeserializer(String filePath) {
-        ArrayList<ArrayList<String>> data = utils.CSV.importFromCSV(filePath);
+public class EnquiryDeserializer {
 
-        UserList cur = new UserList();
-        data.forEach(record -> {
-            // id, name, password, faculty, type, points
-            String id = record.get(0);
-            String name = record.get(1);
-            String password = record.get(2);
-            String faculty = record.get(3);
-            int type = Integer.parseInt(record.get(4));
-
-            String typeName = (type == 1) ? "Staff" : "Student";
-
-            String pointsRaw = record.get(5);
-
-            User user = UserFactory.getUser(typeName, id, name, faculty);
-            if (user instanceof Student) {
-                ((Student) user).setPoints(Integer.parseInt(pointsRaw));
-            }
-
-            if (user != null) {
-                user.setPassword(password);
-                cur.add(user);
-                // add to UserList which extends Repository List
-            }
-
-            cur.add(user);
-        });
-
-        return cur;
-
-    }
-
-    public static EnquiryList enquiryDeserializer(String filePath, UserList userList, CampList campList) {
-        ArrayList<ArrayList<String>> data = utils.CSV.importFromCSV(filePath);
-
+    public static EnquiryList deserialize(ArrayList<ArrayList<String>> data, UserList userList, CampList campList) {
         EnquiryList cur = new EnquiryList();
 
         data.forEach(record -> {
@@ -97,5 +58,4 @@ public class DeserializerController {
 
         return cur;
     }
-
 }

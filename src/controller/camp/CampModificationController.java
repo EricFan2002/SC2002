@@ -45,7 +45,7 @@ public class CampModificationController {
             return false;
         }
         staff.addOrganizedCamp(camp);
-        RepositoryCollection.campRepository.insert(camp);
+        RepositoryCollection.getCampRepository().add(camp);
         return true;
     }
 
@@ -63,7 +63,7 @@ public class CampModificationController {
             return false;
         }
         camp.getStaffInCharge().removeOrganizedCamp(camp);
-        RepositoryCollection.campRepository.remove(camp);
+        RepositoryCollection.getCampRepository().remove(camp);
 
         return false;
     }
@@ -87,7 +87,7 @@ public class CampModificationController {
      */
     public static void editCamp(CampDetails newCD) {
 
-        Camp campObj = RepositoryCollection.campRepository.getAll().filterByID(newCD.getID()).get(0);
+        Camp campObj = RepositoryCollection.getCampRepository().filterByID(newCD.getID()).get(0);
         if (newCD.getDescription() != null) {
             campObj.setDescription(newCD.getDescription());
         }
@@ -112,6 +112,6 @@ public class CampModificationController {
         if (newCD.getID() != null) {
             campObj.setID(newCD.getID());
         }
-        RepositoryCollection.campRepository.update(campObj);
+        RepositoryCollection.getCampRepository().update(campObj);
     }
 }

@@ -20,11 +20,14 @@ import java.util.List;
 
 import static java.lang.System.currentTimeMillis;
 
-public class CampListViewStaff extends CampListView{
+public class CampListViewStaff extends CampListView {
     protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Created Camps");
-    protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7 , getLenX() / 4 - 1, "My Faculty Camps");
-    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4 + getLenX() / 8, 8, getLenX() / 8, "Sort By");
-    protected WidgetButton generateReportButton = new WidgetButton(getLenX() / 4 + 1, 8, getLenX() / 8, "Generate Report");
+    protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7, getLenX() / 4 - 1,
+            "My Faculty Camps");
+    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4 + getLenX() / 8, 8, getLenX() / 8,
+            "Sort By");
+    protected WidgetButton generateReportButton = new WidgetButton(getLenX() / 4 + 1, 8, getLenX() / 8,
+            "Generate Report");
     protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 4 - 1, "Create New Camp");
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
@@ -45,32 +48,28 @@ public class CampListViewStaff extends CampListView{
 
     private WidgetButton buttonPosition;
 
-    protected CampList CustomFilter(CampList list){
-        if(toggleCreated.getPressed()){
-            if(UserController.getCurrentUser() instanceof Staff) {
+    protected CampList CustomFilter(CampList list) {
+        if (toggleCreated.getPressed()) {
+            if (UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff) UserController.getCurrentUser();
                 list = list.filterByStaff(staff);
             }
         }
-        if(toggleMySchool.getPressed()){
-            if(UserController.getCurrentUser() instanceof Staff) {
+        if (toggleMySchool.getPressed()) {
+            if (UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff) UserController.getCurrentUser();
                 list = list.filterBySchool(staff.getFaculty());
             }
         }
-        if(sortMethod.equals("By Camp Name")){
+        if (sortMethod.equals("By Camp Name")) {
             list = list.sortByName();
-        }
-        else if(sortMethod.equals("By Starting Date")){
+        } else if (sortMethod.equals("By Starting Date")) {
             list = list.sortByStartingDate();
-        }
-        else if(sortMethod.equals("By End Date")){
+        } else if (sortMethod.equals("By End Date")) {
             list = list.sortByEndDate();
-        }
-        else if(sortMethod.equals("By Reg Date")){
+        } else if (sortMethod.equals("By Reg Date")) {
             list = list.sortByRegistrationCloseDate();
-        }
-        else if(sortMethod.equals("By Location")){
+        } else if (sortMethod.equals("By Location")) {
             list = list.sortByLocation();
         }
         return list;
@@ -78,31 +77,33 @@ public class CampListViewStaff extends CampListView{
 
     private Camp toBeDestroyed = null;
 
-
-    //        options.add("View Details");
-//        options.add("Edit Camp");
-//        options.add("Delete Camp");
-//        options.add("Reply Enquiry");
-//        options.add("View Suggestions");
+    // options.add("View Details");
+    // options.add("Edit Camp");
+    // options.add("Delete Camp");
+    // options.add("Reply Enquiry");
+    // options.add("View Suggestions");
     @Override
     public void messageLoop() {
         super.messageLoop();
         sortByButton.setText("Sort " + sortMethod);
-        if(createNewCampButton.getPressed()){
-            if(UserController.getCurrentUser() instanceof Staff) {
+        if (createNewCampButton.getPressed()) {
+            if (UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff) UserController.getCurrentUser();
                 Date in = new Date();
                 LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
                 Date currentTime = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
                 createNewCampButton.clearPressed();
-                Camp newCamp = new Camp(String.valueOf(currentTimeMillis()), "", "", true, currentTime, currentTime, currentTime, staff.getFaculty(), "", staff, 0);
+                Camp newCamp = new Camp(String.valueOf(currentTimeMillis()), "", "", true, currentTime, currentTime,
+                        currentTime, staff.getFaculty(), "", staff, 0);
                 toBeDestroyed = newCamp;
-                RepositoryCollection.campRepository.insert(newCamp);
-                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Create New Camp" , newCamp, (Staff)UserController.getCurrentUser(), CampListViewStaff.this);
+                RepositoryCollection.getCampRepository().add(newCamp);
+                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(
+                        getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Create New Camp", newCamp,
+                        (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);
             }
         }
-        if(sortByButton.getPressed()){
+        if (sortByButton.getPressed()) {
             sortByButton.clearPressed();
             ArrayList<String> options = new ArrayList<>();
             options.add("By Camp Name");
@@ -110,10 +111,11 @@ public class CampListViewStaff extends CampListView{
             options.add("By End Date");
             options.add("By Reg Date");
             options.add("By Location");
-            OverlayChooseBox overlayTestClass = new OverlayChooseBox(sortByButton.getLen(),  sortByButton.getY(), sortByButton.getX(), "Sort By?", options, CampListViewStaff.this);
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(sortByButton.getLen(), sortByButton.getY(),
+                    sortByButton.getX(), "Sort By?", options, CampListViewStaff.this);
             addOverlay(overlayTestClass);
         }
-        if(generateReportButton.getPressed()){
+        if (generateReportButton.getPressed()) {
             generateReportButton.clearPressed();
             ArrayList<String> options = new ArrayList<>();
             options.add("Camp Report");
@@ -123,63 +125,68 @@ public class CampListViewStaff extends CampListView{
             OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStaff.this);
             addOverlay(overlayTestClass);
         }
-        if(widgetPageSelection.getSelectedOption() != -1){
+        if (widgetPageSelection.getSelectedOption() != -1) {
             selectedCamp = displayCamps.get(widgetPageSelection.getSelectedOption());
-            buttonPosition = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
+            buttonPosition = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption())
+                    .get(0);
             buttonPosition.clearPressed();
-            if(UserController.getCurrentUser() != null && UserController.getCurrentUser() instanceof Staff) {
-                OverlayCampListViewStaffCampActions overlayCampListViewStaffCampActions = new OverlayCampListViewStaffCampActions(50, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStaff.this, (Staff)UserController.getCurrentUser(), selectedCamp);
+            if (UserController.getCurrentUser() != null && UserController.getCurrentUser() instanceof Staff) {
+                OverlayCampListViewStaffCampActions overlayCampListViewStaffCampActions = new OverlayCampListViewStaffCampActions(
+                        50, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 25), "Actions",
+                        CampListViewStaff.this, (Staff) UserController.getCurrentUser(), selectedCamp);
                 addOverlay(overlayCampListViewStaffCampActions);
             }
             widgetPageSelection.clearSelectedOption();
         }
-        if(chose == 0 && choseString.equals("View Details")){ // view details
-            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
+        if (chose == 0 && choseString.equals("View Details")) { // view details
+            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(
+                    getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
             choseString = "";
-        }
-        else if(chose == 1 && choseString.equals("Edit Camp")){ // join
-            if(UserController.getCurrentUser() instanceof Staff) {
-                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Edit Camp " + selectedCamp.getName() , selectedCamp, (Staff)UserController.getCurrentUser(), CampListViewStaff.this);
+        } else if (chose == 1 && choseString.equals("Edit Camp")) { // join
+            if (UserController.getCurrentUser() instanceof Staff) {
+                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(
+                        getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Edit Camp " + selectedCamp.getName(),
+                        selectedCamp, (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);
             }
             chose = -1;
             choseString = "";
-        }
-        else if(choseString.equals("Delete Camp")){ // join
-            if(UserController.getCurrentUser() instanceof Staff) {
-                Staff staff = (Staff)UserController.getCurrentUser();
-                if(selectedCamp.getCommittees().size() > 0 || selectedCamp.getAttendees().size() > 0){
-                    OverlayNotification overlayNotification = new OverlayNotification(70,  getY()/2 - 8, getX()/2 - 35, "Error", "Camp Still Have Participants", CampListViewStaff.this);
+        } else if (choseString.equals("Delete Camp")) { // join
+            if (UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                if (selectedCamp.getCommittees().size() > 0 || selectedCamp.getAttendees().size() > 0) {
+                    OverlayNotification overlayNotification = new OverlayNotification(70, getY() / 2 - 8,
+                            getX() / 2 - 35, "Error", "Camp Still Have Participants", CampListViewStaff.this);
                     addOverlay(overlayNotification);
-                }
-                else {
-                    RepositoryCollection.campRepository.remove(selectedCamp);
+                } else {
+                    RepositoryCollection.getCampRepository().remove(selectedCamp);
                 }
             }
             chose = -1;
             choseString = "";
-        }
-        else if(choseString.equals("Reply Enquiry")){ // Reply Enquiry
-            if(UserController.getCurrentUser() instanceof Staff) {
-                Staff staff = (Staff)UserController.getCurrentUser();
-                overlayCampInfoDisplayEnquiriesStaff = new OverlayCampInfoDisplayEnquiriesStaff(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
+        } else if (choseString.equals("Reply Enquiry")) { // Reply Enquiry
+            if (UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                overlayCampInfoDisplayEnquiriesStaff = new OverlayCampInfoDisplayEnquiriesStaff(getLenX() / 2 - 2,
+                        getY(), 1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEnquiriesStaff);
             }
             chose = -1;
             choseString = "";
-        }
-        else if(choseString.equals("View Suggestions")){ // View Suggestions
-            if(UserController.getCurrentUser() instanceof Staff) {
-                Staff staff = (Staff)UserController.getCurrentUser();
-                overlayCampSuggestionStaffView = new OverlayCampSuggestionStaffView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "All Suggestions For Camp " + selectedCamp.getName(), selectedCamp, staff, CampListViewStaff.this);
+        } else if (choseString.equals("View Suggestions")) { // View Suggestions
+            if (UserController.getCurrentUser() instanceof Staff) {
+                Staff staff = (Staff) UserController.getCurrentUser();
+                overlayCampSuggestionStaffView = new OverlayCampSuggestionStaffView(getLenX() / 2 - 2, getY(), 1,
+                        getLenX() / 2 + 2, "All Suggestions For Camp " + selectedCamp.getName(), selectedCamp, staff,
+                        CampListViewStaff.this);
                 addOverlay(overlayCampSuggestionStaffView);
             }
             chose = -1;
             choseString = "";
         }
-        if(backButton.getPressed()){
+        if (backButton.getPressed()) {
             backButton.clearPressed();
             switchToWindow = staffMainViewIndex;
         }
@@ -187,40 +194,37 @@ public class CampListViewStaff extends CampListView{
 
     private int chose = -1;
     private String choseString = "";
+
     @Override
     public void onWindowFinished(int chose, String choseString) {
         super.onWindowFinished(chose, choseString);
         this.chose = chose;
         this.choseString = choseString;
-        if(overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true){
+        if (overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true) {
             overlayCampInfoDisplayEnquiriesStaff.onWindowFinished(chose, choseString);
         }
-        if(overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true){
+        if (overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true) {
             overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
         }
-        if(overlayCampSuggestionStaffView != null && overlayCampSuggestionStaffView.getDestroy() != true){
+        if (overlayCampSuggestionStaffView != null && overlayCampSuggestionStaffView.getDestroy() != true) {
             overlayCampSuggestionStaffView.onWindowFinished(chose, choseString);
         }
-        if(chose == 254){
-            if(toBeDestroyed != null && choseString.equals("cancel")){
-                RepositoryCollection.campRepository.remove(toBeDestroyed);
+        if (chose == 254) {
+            if (toBeDestroyed != null && choseString.equals("cancel")) {
+                RepositoryCollection.getCampRepository().remove(toBeDestroyed);
             }
             toBeDestroyed = null;
             refreshList(true);
         }
-        if(choseString.equals("By Camp Name")){
+        if (choseString.equals("By Camp Name")) {
             sortMethod = "By Camp Name";
-        }
-        else if(choseString.equals("By Starting Date")){
+        } else if (choseString.equals("By Starting Date")) {
             sortMethod = "By Starting Date";
-        }
-        else if(choseString.equals("By End Date")){
+        } else if (choseString.equals("By End Date")) {
             sortMethod = "By End Date";
-        }
-        else if(choseString.equals("By Reg Date")){
+        } else if (choseString.equals("By Reg Date")) {
             sortMethod = "By Reg Date";
-        }
-        else if(choseString.equals("By Location")){
+        } else if (choseString.equals("By Location")) {
             sortMethod = "By Location";
         }
 

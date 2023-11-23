@@ -46,7 +46,7 @@ public class CampEnquiryController {
      * @return boolean True after successful insertion.
      */
     public static boolean createEnquiry(Enquiry enquiry) {
-        RepositoryCollection.enquiryRepository.insert(enquiry);
+        RepositoryCollection.getEnquiryRepository().add(enquiry);
         enquiry.getSender().addEnquiry(enquiry);
         enquiry.getCamp().addEnquiry(enquiry);
         return true;
@@ -61,7 +61,7 @@ public class CampEnquiryController {
      * @return Enquiry The enquiry matching the given ID, or null if none found.
      */
     public static Enquiry getEnquiry(String enquiryID) {
-        EnquiryList filteredEnquiries = RepositoryCollection.enquiryRepository.getAll().filterByID(enquiryID);
+        EnquiryList filteredEnquiries = RepositoryCollection.getEnquiryRepository().filterByID(enquiryID);
         return filteredEnquiries.size() == 0 ? null : filteredEnquiries.get(0);
     }
 
@@ -71,7 +71,7 @@ public class CampEnquiryController {
      * @return EnquiryList A list of all enquiries.
      */
     public static EnquiryList getEnquiries() {
-        return RepositoryCollection.enquiryRepository.getAll();
+        return RepositoryCollection.getEnquiryRepository();
     }
 
     /**
@@ -126,7 +126,7 @@ public class CampEnquiryController {
     public static boolean deleteEnquiry(Enquiry enquiry) {
         enquiry.getSender().removeEnquiry(enquiry);
         enquiry.getCamp().removeEnquiry(enquiry);
-        RepositoryCollection.enquiryRepository.remove(enquiry);
+        RepositoryCollection.getEnquiryRepository().remove(enquiry);
         return true;
     }
 
@@ -148,6 +148,6 @@ public class CampEnquiryController {
         if (answeringUser instanceof Student answeringStudent) {
             answeringStudent.addPoints(1);
         }
-        return RepositoryCollection.enquiryRepository.update(enquiry);
+        return RepositoryCollection.getEnquiryRepository().update(enquiry);
     }
 }
