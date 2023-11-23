@@ -66,6 +66,8 @@ public class CampListViewStaff extends CampListView {
             list = list.sortByRegistrationCloseDate();
         } else if (sortMethod.equals("By Location")) {
             list = list.sortByLocation();
+        } else{
+            list = list.sortByName();
         }
         return list;
     }

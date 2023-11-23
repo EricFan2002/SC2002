@@ -38,7 +38,10 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
         for (Enquiry enquiry : enquires) {
             ArrayList<String> tmp = new ArrayList<String>();
             enquiryList.add(enquiry);
-            tmp.add("Question: " + enquiry.getQuestion());
+            if(enquiry.getSender().equals(student))
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
+            else
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
             if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
                 tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
             else
@@ -78,13 +81,16 @@ public class OverlayCampInfoDisplayEnquiriesCommittee extends OverlayCampInfoDis
         EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
         enquiryList.clear();
         for (Enquiry enquiry : enquires) {
-            enquiryList.add(enquiry);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add("Question: " + enquiry.getQuestion());
-            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
-                tmp.add("    Not Answer Yet.");
+            enquiryList.add(enquiry);
+            if(enquiry.getSender().equals(student))
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
             else
-                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + " )");
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
+            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+                tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
+            else
+                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
             enqList.add(tmp);
         }
         participantsView.updateList(enqList);

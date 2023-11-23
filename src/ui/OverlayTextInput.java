@@ -39,6 +39,11 @@ public class OverlayTextInput extends WindowOverlayClass {
         this.returnCode = returnCode;
     }
 
+    public OverlayTextInput(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow, String loadText) {
+        this(x,offsetY, offsetX,windowName,prompt,callbackWindow);
+        textInput.setText(loadText);
+    }
+
     public void messageLoop() {
         if(exitButton.getPressed()){
             exitButton.clearPressed();

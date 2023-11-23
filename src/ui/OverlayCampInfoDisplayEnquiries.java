@@ -37,11 +37,14 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
         enquiryList = new ArrayList<>();
 
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
-        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp).filterBySender(student);
+        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
         for (Enquiry enquiry : enquires) {
             ArrayList<String> tmp = new ArrayList<String>();
             enquiryList.add(enquiry);
-            tmp.add("Question: " + enquiry.getQuestion());
+            if(enquiry.getSender().equals(student))
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
+            else
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
             if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
                 tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
             else
@@ -81,16 +84,19 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
 
     public void updateEnquiries() {
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
-        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp).filterBySender(student);
+        EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
         enquiryList.clear();
         for (Enquiry enquiry : enquires) {
-            enquiryList.add(enquiry);
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add("Question: " + enquiry.getQuestion());
-            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
-                tmp.add("    Not Answer Yet.");
+            enquiryList.add(enquiry);
+            if(enquiry.getSender().equals(student))
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
             else
-                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + " )");
+                tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
+            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+                tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
+            else
+                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
             enqList.add(tmp);
         }
         participantsView.updateList(enqList);
@@ -103,8 +109,10 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
             if (selectedEnq != null) {
                 if (selectedEnq.getAnswer() == null || selectedEnq.getAnswer().equals("")) {
                     ArrayList<String> options = new ArrayList<>();
-                    options.add("Delete Enquiry");
-                    options.add("Edit Enquiry");
+                    if(selectedEnq.getSender().equals(student)) {
+                        options.add("Delete Enquiry");
+                        options.add("Edit Enquiry");
+                    }
                     options.add("Cancel");
                     WidgetButton buttonPosition = participantsView.getSelectionsButton()
                             .get(participantsView.getSelectedOption()).get(0);
@@ -146,7 +154,7 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw i
         if (editEnq) {
             editEnq = false;
             OverlayTextInput overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
-                    "Info", "Change Enquiry To:", OverlayCampInfoDisplayEnquiries.this);
+                    "Info", "Change Enquiry To:", OverlayCampInfoDisplayEnquiries.this, selectedEnq.getQuestion());
             mainWindow.addOverlay(overlayTextInput);
         }
         if (exitButton.getPressed()) {
