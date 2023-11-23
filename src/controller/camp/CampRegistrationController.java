@@ -5,6 +5,8 @@ import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Student;
 
+import java.util.Date;
+
 /**
  * The {@code CampRegistrationController} class is responsible for handling the
  * registration and deregistration
@@ -64,6 +66,8 @@ public class CampRegistrationController {
             return new OperationResult(false, "Already joined as a committee.");
         } else if (camp.isStudentRegistered(student)) {
             return new OperationResult(false, "Cannot re-register after unregistering.");
+        } else if (camp.getCloseRegistrationDate().before(new Date())) {
+            return new OperationResult(false, "Registration Already Closed");
         }
         camp.addAttendee(student);
         camp.addRegisteredStudent(student);
@@ -89,6 +93,8 @@ public class CampRegistrationController {
             return new OperationResult(false, "Committee In Another Camp");
         } else if (camp.isStudentRegistered(student)) {
             return new OperationResult(false, "Cannot re-register after unregistering.");
+        } else if (camp.getCloseRegistrationDate().before(new Date())) {
+            return new OperationResult(false, "Registration Already Closed");
         }
         camp.addCommittee(student);
         student.addCommitteeCamp(camp);
