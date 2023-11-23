@@ -20,12 +20,14 @@ public class OverlayCampListViewStudentCampActions extends WindowOverlayClass {
     public OverlayCampListViewStudentCampActions(int x, int offsetY, int offsetX, String windowName, Window callbackWindow) {
         super(3 + optionCount, x, offsetY, offsetX, windowName);
         List<String> options = new ArrayList<>();
+
         options.add("View Details");
         options.add("Join Camp");
         options.add("Quit Camp");
         options.add("Enquiry");
         options.add("Reply Enquiry");
         options.add("Suggestions");
+        options.add("Cancel");
 
         choices = new ArrayList<>();
         this.callbackWindow = callbackWindow;

@@ -3,9 +3,12 @@ package ui;
 import controller.camp.CampRegistrationController;
 import controller.camp.OperationResult;
 import controller.user.UserController;
+import entity.RepositoryCollection;
 import entity.camp.Camp;
+import entity.camp.CampList;
 import entity.user.Staff;
 import entity.user.Student;
+import entity.user.User;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -32,6 +35,53 @@ public class CampListViewStudent extends CampListView{
     }
 
     private WidgetButton buttonPosition;
+
+    protected CampList CustomFilter(CampList list){
+        if(toggleAvailable.getPressed()){
+            CampList newList = new CampList();
+            for(Camp c : list){
+                if(c.getAttendees().size() + c.getCommittees().size() < c.getTotalSlots()){
+                    newList.add(c);
+                }
+            }
+            list = newList;
+        }
+        if(toggleCommittee.getPressed()){
+            User user = UserController.getCurrentUser();
+            if(user != null) {
+                CampList newList = new CampList();
+                for (Camp c : list) {
+                    if(c.getCommittees().contains(user)){
+                        newList.add(c);
+                    }
+                }
+                list = newList;
+            }
+        }
+        if(toggleJoinedCamp.getPressed()){
+            User user = UserController.getCurrentUser();
+            if(user != null) {
+                CampList newList = new CampList();
+                for (Camp c : list) {
+                    if(c.getCommittees().contains(user) || c.getAttendees().contains(user)){
+                        newList.add(c);
+                    }
+                }
+                list = newList;
+            }
+        }
+        if(toggleCommitteeAvailableC.getPressed()){
+            CampList newList = new CampList();
+            for(Camp c : list){
+                if(c.getCommittees().size() < 10){
+                    newList.add(c);
+                }
+            }
+            list = newList;
+        }
+        return list;
+    }
+
 
     @Override
     public void messageLoop() {
