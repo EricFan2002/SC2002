@@ -50,8 +50,8 @@ public class CampListView extends Window implements ICallBack {
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
-    private int studentMainViewIndex;
-    private int staffMainViewIndex;
+    protected int studentMainViewIndex;
+    protected int staffMainViewIndex;
 
     public CampListView(int studentMainViewIndex, int staffMainViewIndex){
         super(55, 190, "Camp View");
@@ -182,10 +182,13 @@ public class CampListView extends Window implements ICallBack {
             lastFilter = newFilter;
         }
         if(backButton.getPressed()){
+            System.out.println("Back button pressed in CampListView");
             backButton.clearPressed();
             if (UserController.getCurrentUser() instanceof Student) {
+                System.out.println("Setting switchToWindow to Student Main View Index: " + studentMainViewIndex);
                 switchToWindow = studentMainViewIndex;
             } else if (UserController.getCurrentUser() instanceof Staff){
+                System.out.println("Setting switchToWindow to Staff Main View Index: " + staffMainViewIndex);
                 switchToWindow = staffMainViewIndex;
             }
         }
