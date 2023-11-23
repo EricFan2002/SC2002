@@ -26,6 +26,7 @@ public class CampListViewStaff extends CampListView{
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
+    protected OverlayCampSuggestionStaffView overlayCampSuggestionStaffView;
 
     public CampListViewStaff(int studentMainViewIndex, int staffMainViewIndex) {
         super(studentMainViewIndex, staffMainViewIndex);
@@ -125,35 +126,15 @@ public class CampListViewStaff extends CampListView{
                 Staff staff = (Staff)UserController.getCurrentUser();
                 overlayCampInfoDisplayEnquiriesStaff = new OverlayCampInfoDisplayEnquiriesStaff(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEnquiriesStaff);
-                chose = -1;
-                choseString = "";
             }
             chose = -1;
             choseString = "";
         }
-        else if(chose == 3 && choseString.equals("Enquiry")){ // Enquiry
+        else if(choseString.equals("View Suggestions")){ // View Suggestions
             if(UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff)UserController.getCurrentUser();
-//                overlayCampInfoDisplayEnquiries = new OverlayCampInfoDisplayEnquiries(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
-//                addOverlay(overlayCampInfoDisplayEnquiries);
-            }
-            chose = -1;
-            choseString = "";
-        }
-        else if(chose == 4 && choseString.equals("Reply Enquiry")){ // Enquiry
-            if(UserController.getCurrentUser() instanceof Staff) {
-                Staff staff = (Staff)UserController.getCurrentUser();
-//                overlayCampInfoDisplayEnquiriesCommittee = new OverlayCampInfoDisplayEnquiriesCommittee(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Camp Details", selectedCamp, staff, CampListViewStaff.this);
-//                addOverlay(overlayCampInfoDisplayEnquiriesCommittee);
-            }
-            chose = -1;
-            choseString = "";
-        }
-        else if(chose == 5 && choseString.equals("Suggestions")){ // Create Suggestion
-            if(UserController.getCurrentUser() instanceof Staff) {
-                Staff staff = (Staff)UserController.getCurrentUser();
-//                overlayCampAllSuggestionView = new OverlayCampAllSuggestionView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "Create Suggestion To Camp", selectedCamp, staff, CampListViewStaff.this);
-                addOverlay(overlayCampAllSuggestionView);
+                overlayCampSuggestionStaffView = new OverlayCampSuggestionStaffView(getLenX() / 2 - 2, getY(),1, getLenX() / 2 + 2, "All Suggestions For Camp " + selectedCamp.getName(), selectedCamp, staff, CampListViewStaff.this);
+                addOverlay(overlayCampSuggestionStaffView);
             }
             chose = -1;
             choseString = "";
@@ -171,6 +152,9 @@ public class CampListViewStaff extends CampListView{
         }
         if(overlayCampAllSuggestionView != null && overlayCampAllSuggestionView.getDestroy() != true){
             overlayCampAllSuggestionView.onWindowFinished(chose, choseString);
+        }
+        if(overlayCampSuggestionStaffView != null && overlayCampSuggestionStaffView.getDestroy() != true){
+            overlayCampSuggestionStaffView.onWindowFinished(chose, choseString);
         }
         if(chose == 254){
             if(toBeDestroyed != null && choseString.equals("cancel")){

@@ -131,15 +131,19 @@ public abstract class Widget implements IDrawable {
     public void drawText(char[][] buffer){
         if(hide)
             return;
+        String renderText = text;
+        if(renderText.length() + 2 > getLen()){
+            renderText = renderText.substring(Math.max(0, renderText.length() - getLen()), renderText.length() - 1);
+        }
         int blank = 1;
         if(textAlignment == TEXT_ALIGNMENT.ALIGN_MID){
-            blank = (getLen() - text.length()) / 2;
+            blank = (getLen() - renderText.length()) / 2;
         }
         else if(textAlignment == TEXT_ALIGNMENT.ALIGN_RIGHT){
-            blank = (getLen() - text.length());
+            blank = (getLen() - renderText.length());
         }
-        for (int i = 0; i < text.length(); i++) {
-            buffer[y][x + i + blank] = text.charAt(i);
+        for (int i = 0; i < renderText.length(); i++) {
+            buffer[y][x + i + blank] = renderText.charAt(i);
         }
     }
 
