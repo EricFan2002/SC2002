@@ -160,14 +160,6 @@ public class CampListView extends Window implements ICallBack {
             newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
         }
         int af = camps.size();
-
-        if(backButton.getPressed()){
-            if (UserController.getCurrentUser() instanceof Student) {
-                switchToWindow = studentMainViewIndex;
-            } else if (UserController.getCurrentUser() instanceof Staff){
-                switchToWindow = staffMainViewIndex;
-            }
-        }
         displayCamps.clear();
         for(int i = 0 ; i < camps.size() ; i ++){
             Camp camp = camps.get(i);
@@ -188,6 +180,13 @@ public class CampListView extends Window implements ICallBack {
         if(!newFilter.equals(lastFilter) || forceRefresh) {
             widgetPageSelection.updateList(options);
             lastFilter = newFilter;
+        }
+        if(backButton.getPressed()){
+            if (UserController.getCurrentUser() instanceof Student) {
+                switchToWindow = studentMainViewIndex;
+            } else if (UserController.getCurrentUser() instanceof Staff){
+                switchToWindow = staffMainViewIndex;
+            }
         }
     }
     @Override
