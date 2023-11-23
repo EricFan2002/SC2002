@@ -5,10 +5,8 @@ import java.util.List;
 
 import entity.RepositoryList;
 import entity.interfaces.IFilterableByID;
-import entity.interfaces.ISerializeable;
-import entity.interfaces.ITaggedItem;
 
-public class UserList extends RepositoryList<User> implements IFilterableByID<User>, ISerializeable {
+public class UserList extends RepositoryList<User> implements IFilterableByID<User> {
     public UserList(List<User> all) {
         super(all);
     }

@@ -35,10 +35,10 @@ public class RepositoryCollection {
     }
 
     public static void save() {
-        CSV.exportToCSV(Config.USER_REPOSITORY_PATH, userRepository.serialize());
-        CSV.exportToCSV(Config.CAMP_REPOSITORY_PATH, campRepository.serialize());
-        CSV.exportToCSV(Config.ENQUIRY_REPOSITORY_PATH, enquiryRepository.serialize());
-        CSV.exportToCSV(Config.SUGGESTION_REPOSITORY_PATH, suggestionRepository.serialize());
+        CSV.exportToCSV(Config.USER_REPOSITORY_PATH, userRepository);
+        CSV.exportToCSV(Config.CAMP_REPOSITORY_PATH, campRepository);
+        CSV.exportToCSV(Config.ENQUIRY_REPOSITORY_PATH, enquiryRepository);
+        CSV.exportToCSV(Config.SUGGESTION_REPOSITORY_PATH, suggestionRepository);
     }
 
     public static UserList getUserRepository() {
