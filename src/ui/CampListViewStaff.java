@@ -27,9 +27,11 @@ public class CampListViewStaff extends CampListView{
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
     protected OverlayCampSuggestionStaffView overlayCampSuggestionStaffView;
+    private int staffMainViewIndex;
 
-    public CampListViewStaff(int studentMainViewIndex, int staffMainViewIndex) {
-        super(studentMainViewIndex, staffMainViewIndex);
+    public CampListViewStaff(int staffMainViewIndex) {
+        super();
+        this.staffMainViewIndex = staffMainViewIndex;
         addWidgetAfter(toggleCreated, filter4Index);
         addWidgetAfter(toggleMySchool, filter4Index + 1);
         addWidgetAfter(createNewCampButton, filter4Index + 2);
@@ -131,6 +133,10 @@ public class CampListViewStaff extends CampListView{
             }
             chose = -1;
             choseString = "";
+        }
+        if(backButton.getPressed()){
+            backButton.clearPressed();
+            switchToWindow = staffMainViewIndex;
         }
     }
 
