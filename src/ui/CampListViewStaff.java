@@ -16,18 +16,21 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static java.lang.System.currentTimeMillis;
 
 public class CampListViewStaff extends CampListView{
     protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Created Camps");
     protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7 , getLenX() / 4 - 1, "My Faculty Camps");
-    protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 2 - 2, "Create New Camp");
+    protected WidgetButton createNewCampButton = new WidgetButton(1, 8, getLenX() / 4 - 1, "Create New Camp");
+    protected WidgetButton sortByButton = new WidgetButton(1 + getLenX() / 4, 8, getLenX() / 4 - 1, "Sort By");
     protected Camp selectedCamp;
     protected OverlayCampInfoDisplayEnquiriesStaff overlayCampInfoDisplayEnquiriesStaff;
     protected OverlayCampAllSuggestionView overlayCampAllSuggestionView;
     protected OverlayCampSuggestionStaffView overlayCampSuggestionStaffView;
     private int staffMainViewIndex;
+    private String sortMethod = "By";
 
     public CampListViewStaff(int staffMainViewIndex) {
         super();
@@ -35,6 +38,7 @@ public class CampListViewStaff extends CampListView{
         addWidgetAfter(toggleCreated, filter4Index);
         addWidgetAfter(toggleMySchool, filter4Index + 1);
         addWidgetAfter(createNewCampButton, filter4Index + 2);
+        addWidgetAfter(sortByButton, filter4Index + 3);
     }
 
     private WidgetButton buttonPosition;
@@ -52,6 +56,21 @@ public class CampListViewStaff extends CampListView{
                 list = list.filterBySchool(staff.getFaculty());
             }
         }
+        if(sortMethod.equals("By Camp Name")){
+            list = list.sortByName();
+        }
+        else if(sortMethod.equals("By Starting Date")){
+            list = list.sortByStartingDate();
+        }
+        else if(sortMethod.equals("By End Date")){
+            list = list.sortByEndDate();
+        }
+        else if(sortMethod.equals("By Registration Date")){
+            list = list.sortByRegistrationCloseDate();
+        }
+        else if(sortMethod.equals("By Location")){
+            list = list.sortByLocation();
+        }
         return list;
     }
 
@@ -66,6 +85,7 @@ public class CampListViewStaff extends CampListView{
     @Override
     public void messageLoop() {
         super.messageLoop();
+        sortByButton.setText("Sort " + sortMethod);
         if(createNewCampButton.getPressed()){
             if(UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff) UserController.getCurrentUser();
@@ -80,12 +100,25 @@ public class CampListViewStaff extends CampListView{
                 addOverlay(overlayCampInfoDisplayEdit);
             }
         }
+        if(sortByButton.getPressed()){
+            sortByButton.clearPressed();
+            ArrayList<String> options = new ArrayList<>();
+            options.add("By Camp Name");
+            options.add("By Starting Date");
+            options.add("By End Date");
+            options.add("By Registration Date");
+            options.add("By Location");
+            OverlayChooseBox overlayTestClass = new OverlayChooseBox(sortByButton.getLen(),  sortByButton.getY(), sortByButton.getX(), "Sort By?", options, CampListViewStaff.this);
+            addOverlay(overlayTestClass);
+        }
         if(widgetPageSelection.getSelectedOption() != -1){
             selectedCamp = displayCamps.get(widgetPageSelection.getSelectedOption());
             buttonPosition = widgetPageSelection.getSelectionsButton().get(widgetPageSelection.getSelectedOption()).get(0);
             buttonPosition.clearPressed();
-            OverlayCampListViewStaffCampActions overlayCampListViewStaffCampActions = new OverlayCampListViewStaffCampActions(50,  buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStaff.this);
-            addOverlay(overlayCampListViewStaffCampActions);
+            if(UserController.getCurrentUser() != null && UserController.getCurrentUser() instanceof Staff) {
+                OverlayCampListViewStaffCampActions overlayCampListViewStaffCampActions = new OverlayCampListViewStaffCampActions(50, buttonPosition.getY(), buttonPosition.getX() + (getLenX() / 4 - 25), "Actions", CampListViewStaff.this, (Staff)UserController.getCurrentUser(), selectedCamp);
+                addOverlay(overlayCampListViewStaffCampActions);
+            }
             widgetPageSelection.clearSelectedOption();
         }
         if(chose == 0 && choseString.equals("View Details")){ // view details
@@ -162,6 +195,22 @@ public class CampListViewStaff extends CampListView{
             toBeDestroyed = null;
             refreshList(true);
         }
+        if(choseString.equals("By Camp Name")){
+            sortMethod = "By Camp Name";
+        }
+        else if(choseString.equals("By Starting Date")){
+            sortMethod = "By Starting Date";
+        }
+        else if(choseString.equals("By End Date")){
+            sortMethod = "By End Date";
+        }
+        else if(choseString.equals("By Registration Date")){
+            sortMethod = "By Registration Date";
+        }
+        else if(choseString.equals("By Location")){
+            sortMethod = "By Location";
+        }
+
     }
 
 }
