@@ -38,7 +38,7 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(widgetTextBox1);
         loginButton = new WidgetButton(5, 10, 40, "Login");
         addWidget(loginButton);
-        forgetPasswordButton = new WidgetButton(5 + 20 , 12, 20, "Forgot Password");
+        forgetPasswordButton = new WidgetButton(5 , 12, 40, "Forgot Password");
         addWidget(forgetPasswordButton);
         setPointer(loginButton);
         this.studentMainViewIndex = studentMainViewIndex;
