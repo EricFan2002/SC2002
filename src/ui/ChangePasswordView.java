@@ -84,6 +84,7 @@ public class ChangePasswordView extends Window {
             }
         }
         if(cancelButton.getPressed()){
+            cancelButton.clearPressed();
             if (UserController.getCurrentUser() instanceof Staff) {
                 switchToWindow = staffMainViewIndex;
             } else if (UserController.getCurrentUser() instanceof Student){
