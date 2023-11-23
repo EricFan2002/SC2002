@@ -105,7 +105,7 @@ public class EnquiryRepository extends Repository<Enquiry> {
                 UserList answeredByTmp = userRepository.getAll().filterByID(answeredByID);
                 User answeredBy = null;
                 if (answeredByTmp.size() > 0) {
-                    answeredBy = (Student) answeredByTmp.get(0);
+                    answeredBy = answeredByTmp.get(0);
                 }
 
                 Enquiry enquiry = new Enquiry(id, sender, question, answer, camp, answeredBy);

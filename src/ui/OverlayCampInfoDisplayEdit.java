@@ -53,6 +53,13 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
                 suggestion.setCloseRegistrationDate(ft.parse(textBoxDClose.getText()));
             } catch (ParseException e) {
             }
+            if(!textBoxSlots.getText().equals(camp.getTotalSlots().toString())){
+                try{
+                    suggestion.setTotalSlots(Integer.parseInt(textBoxSlots.getText()));
+                }
+                catch (Exception e){
+                }
+            }
             if(!textBoxCName.getText().equals(camp.getName()))
                 suggestion.setName(textBoxCName.getText());
             if(!textBoxSchool.getText().equals(camp.getSchool()))

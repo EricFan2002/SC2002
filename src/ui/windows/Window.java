@@ -319,6 +319,9 @@ public class Window {
             widget.draw(buffer, printColor, backColor);
             if(widget.getSelected() && (widget instanceof WidgetTextBox)){
                 TerminalPosition curPosition = new TerminalPosition( x + widget.getX() + widget.getText().length() + 1, y+ widget.getY() );
+                if(widget.getText().length() > widget.getLen() - 1){
+                    curPosition = new TerminalPosition( x + widget.getX() + widget.getLen(), y+ widget.getY() );
+                }
                 screen.setCursorPosition(curPosition);
                 ifSetCursorNull = false;
             }
