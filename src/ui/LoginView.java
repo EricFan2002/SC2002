@@ -24,7 +24,7 @@ public class LoginView extends Window implements ICallBack { ;
     private int staffMainViewIndex;
     private int changePasswordWindowIndex;
     private int forgotPasswordWindowIndex;
-    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -47,6 +47,7 @@ public class LoginView extends Window implements ICallBack { ;
         setPointer(loginButton);
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
+        this.changePasswordWindowIndex = changePasswordWindowIndex;
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
@@ -57,8 +58,12 @@ public class LoginView extends Window implements ICallBack { ;
             String password = widgetTextBox1.getText();
             // check if name and password is correct
             if(UserController.login(name, password)){
+                // if default password, switch to change password
+                if (UserController.getCurrentUser().getPassword().equals("password")) {
+                    switchToWindow = changePasswordWindowIndex;
+                }
                 // if correct, switch to main menu
-                if (UserController.getCurrentUser() instanceof Student) {
+                else if (UserController.getCurrentUser() instanceof Student) {
                     switchToWindow = studentMainViewIndex;
                 } else if (UserController.getCurrentUser() instanceof Staff){
                     switchToWindow = staffMainViewIndex;
