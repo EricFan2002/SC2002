@@ -39,7 +39,7 @@ public class CampDeserializer {
             String staffIDRaw = record.get(9);
             UserList tempStaff = userList.filterByID(staffIDRaw);
 
-            String totalSlotsRaw = record.get(12);
+            String totalSlotsRaw = record.get(13);
             int totalSlots = Integer.parseInt(totalSlotsRaw);
 
             Staff staff;
@@ -69,6 +69,16 @@ public class CampDeserializer {
                     camp.addCommittee((Student) tempUser.get(0));
                 } else {
                     /// skip
+                }
+            }
+
+            String[] registeredIDsRaw = record.get(12).split(";");
+            for (String registeredIDRaw : registeredIDsRaw) {
+                UserList tempUser = userList.filterByID(registeredIDRaw);
+                if (tempUser.size() > 0) {
+                    camp.addRegisteredStudent((Student) tempUser.get(0));
+                } else {
+                    // skip
                 }
             }
 

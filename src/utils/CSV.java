@@ -1,7 +1,9 @@
 package utils;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -27,6 +29,14 @@ public class CSV {
     }
 
     public static ArrayList<ArrayList<String>> importFromCSV(String filename) {
+        File source = new File(filename);
+        try {
+            source.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         try (CSVParser parser = new CSVParser(new FileReader(filename), CSVFormat.DEFAULT)) {
             for (CSVRecord record : parser) {

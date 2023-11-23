@@ -115,7 +115,11 @@ public class Camp extends CampDetails implements ITaggedItem {
      * @return boolean True if the student is successfully added.
      */
     public boolean addAttendee(Student attendee) {
+        if (this.attendees.size() >= this.totalSlots - MAX_COMMITTEE) {
+            return false;
+        }
         attendees.add(attendee);
+        registeredStudents.add(attendee);
         return true;
     }
 
@@ -130,6 +134,7 @@ public class Camp extends CampDetails implements ITaggedItem {
             return false;
         }
         committees.add(committee);
+        registeredStudents.add(committee);
         return true;
     }
 
@@ -225,11 +230,21 @@ public class Camp extends CampDetails implements ITaggedItem {
     }
 
     /**
-     * Adds a student to the list of registered students.
+     * Adds a student to the list of registered students (used for deserialize
+     * only).
      *
      * @param student The student to be added.
      */
     public void addRegisteredStudent(Student student) {
         registeredStudents.add(student);
+    }
+
+    /**
+     * Retrieves the list of previously registered students.
+     *
+     * @param student The student to be removed.
+     */
+    public Set<Student> getRegisteredStudents() {
+        return registeredStudents;
     }
 }
