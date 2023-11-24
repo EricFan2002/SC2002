@@ -6,11 +6,31 @@ import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Student;
 
+/**
+ * The {@code CampReport} class represents a report containing information about camps, including students and their roles.
+ */
 public class CampReport extends Report {
+
+    /** The fields to include in the report. */
     private static String[] fields = { "Camp ID", "Camp", "Student ID", "Name", "Faculty", "Role" };
 
+    /** The list of camps to include in the report. */
     private CampList camp;
-    private int exportOption; // 0th bit: include committees, 1st bit: include attendees
+
+    /**
+     * The export option that determines which data to include in the report.
+     * <p>
+     * Bit 0: Include committees, Bit 1: Include attendees
+     */
+    private int exportOption;
+
+    /**
+     * Constructs a {@code CampReport} with the specified list of camps and export options.
+     *
+     * @param camp              The list of camps to include in the report.
+     * @param includeCommittees Whether to include committees in the report.
+     * @param includeAttendees  Whether to include attendees in the report.
+     */
 
     public CampReport(CampList camp, boolean includeCommittees, boolean includeAttendees) {
         super();
@@ -27,7 +47,13 @@ public class CampReport extends Report {
             exportOption |= 2;
         }
     }
-
+    /**
+     * Constructs a {@code CampReport} with the specified camp and export options.
+     *
+     * @param camp              The camp to include in the report.
+     * @param includeCommittees Whether to include committees in the report.
+     * @param includeAttendees  Whether to include attendees in the report.
+     */
     public CampReport(Camp camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         this.camp = new CampList();
@@ -41,7 +67,11 @@ public class CampReport extends Report {
             exportOption |= 2;
         }
     }
-
+    /**
+     * Serializes the camp report into a list of lists of strings.
+     *
+     * @return An {@link ArrayList} containing lists of strings representing the serialized data.
+     */
     public final ArrayList<ArrayList<String>> serialize() {
         boolean INCLUDE_COMMITEES = ((exportOption >> 0) & 1) == 1;
         boolean INCLUDE_ATTENDEES = ((exportOption >> 1) & 1) == 1;
