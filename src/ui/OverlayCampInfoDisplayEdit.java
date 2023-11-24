@@ -42,6 +42,14 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
             }
         }
         super.messageLoop();
+        if(!textBoxVis.getPressed()){
+            if(camp.getAttendees().size() != 0 || camp.getCommittees().size() != 0){
+                OverlayNotification overlayNotification = new OverlayNotification(40, getY() / 2 - 8,
+                        getX() + getX() / 2 - 20, "Error", "Party Still Have Participants!", OverlayCampInfoDisplayEdit.this);
+                mainWindow.addOverlay(overlayNotification);
+                textBoxVis.setPressed();
+            }
+        }
         if(submitButton.getPressed()){
             submitButton.clearPressed();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -70,6 +78,9 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
                 suggestion.setVisibility(textBoxVis.getPressed());
             if(!textBoxDescription.getText().equals(camp.getDescription()))
                 suggestion.setDescription(textBoxDescription.getText());
+            if(textBoxVis.getPressed() != camp.isVisible()){
+                suggestion.setVisibility(textBoxVis.getPressed());
+            }
             CampModificationController.editCamp(suggestion);
             if(mainWindow instanceof ICallBack){
                 ((ICallBack)mainWindow).onWindowFinished(254, "EDITED");

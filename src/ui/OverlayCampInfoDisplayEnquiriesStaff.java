@@ -104,7 +104,7 @@ public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplay
             selectedEnq = enquiryList.get(participantsView.getSelectedOption());
             if (selectedEnq != null) {
                 ArrayList<String> options = new ArrayList<>();
-                if(selectedEnq.getAnswer() == null)
+                if (selectedEnq.getAnswer() == null || selectedEnq.getAnswer().equals(""))
                     options.add("Reply Enquiry");
                 options.add("Cancel");
                 WidgetButton buttonPosition = participantsView.getSelectionsButton()

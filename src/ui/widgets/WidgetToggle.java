@@ -70,13 +70,16 @@ public class WidgetToggle extends Widget implements IClickable, ITextInput, ISel
      * Clears the pressed state of the toggle, setting it to unpressed.
      */
     public void clearPressed(){
+        this.text = "✖ " + rawText;
         pressed = false;
     }
 
     /**
      * Sets the toggle to a pressed state.
      */
-    public void setPressed(){ pressed = true; }
+    public void setPressed(){
+        this.text = "✓ " + rawText;
+        pressed = true; }
 
     /**
      * Draws the selection state of the toggle on the provided buffer.
