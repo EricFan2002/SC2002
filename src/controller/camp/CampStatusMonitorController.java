@@ -27,6 +27,12 @@ import entity.user.Student;
 
 public class CampStatusMonitorController {
     /**
+     * Priate constructor to prevent instantiation.
+     */
+    private CampStatusMonitorController() {
+    }
+
+    /**
      * Retrieves a list of all students attending a specific camp.
      * This method returns an {@link ArrayList} of {@link User} objects representing
      * students who are attendees
@@ -34,9 +40,11 @@ public class CampStatusMonitorController {
      *
      * @param camp The {@link Camp} for which the list of attending students is
      *             requested.
-     * @return An {@link ArrayList} of {@link User} objects representing the students attending the camp.
+     * @return An {@link ArrayList} of {@link User} objects representing the
+     *         students attending the camp.
      */
-    private CampList campList = new CampList();
+    ;
+
     public static ArrayList<User> getAttendingStudents(Camp camp) {
         ArrayList<User> attendingStudents = new ArrayList<>();
         if (camp != null) {
@@ -56,7 +64,8 @@ public class CampStatusMonitorController {
      *
      * @param camp The {@link Camp} for which the performance report is to be
      *             generated.
-     * @return A {@link Map} containing the names and points of students in the camp committees.
+     * @return A {@link Map} containing the names and points of students in the camp
+     *         committees.
      */
     public static Map<String, Integer> generatePerformanceReport(Camp camp) {
         Map<String, Integer> performanceReport = new HashMap<>();

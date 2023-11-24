@@ -21,6 +21,12 @@ import entity.user.User;
  * @see entity.user.User
  */
 public class UserController {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private UserController() {
+    }
+
     private static User currentUser;
 
     /**

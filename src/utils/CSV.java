@@ -14,6 +14,12 @@ import org.apache.commons.csv.CSVRecord;
 import entity.interfaces.ISerializable;
 
 public class CSV {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private CSV() {
+    }
+
     public static boolean exportToCSV(String filename, ISerializable serializable) {
         ArrayList<ArrayList<String>> data = serializable.serialize();
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(filename), CSVFormat.DEFAULT)) {

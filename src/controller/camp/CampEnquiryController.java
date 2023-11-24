@@ -36,6 +36,11 @@ import entity.user.User;
  * @see entity.user.User
  */
 public class CampEnquiryController {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private CampEnquiryController() {
+    }
 
     /*
      * Creates a new enquiry by inserting it into the enquiry repository.

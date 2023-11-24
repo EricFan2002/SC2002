@@ -3,7 +3,6 @@ package controller.deserializer;
 import java.util.ArrayList;
 import java.util.Date;
 
-import controller.camp.CampStatusMonitorController;
 import entity.camp.Camp;
 import entity.camp.CampList;
 
@@ -12,15 +11,24 @@ import entity.user.Student;
 import entity.user.UserList;
 
 /**
- * The CampDeserializer class contains methods to deserialize data into a CampList object.
+ * The CampDeserializer class contains methods to deserialize data into a
+ * CampList object.
  */
-public class CampDeserializer extends CampStatusMonitorController {
+public class CampDeserializer {
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private CampDeserializer() {
+    }
 
     /**
      * Deserializes the provided data into a CampList object.
      *
-     * @param data     The data to deserialize, represented as an ArrayList of ArrayLists of Strings.
-     * @param userList The UserList containing user information to associate with camps.
+     * @param data     The data to deserialize, represented as an ArrayList of
+     *                 ArrayLists of Strings.
+     * @param userList The UserList containing user information to associate with
+     *                 camps.
      * @return A CampList object populated with deserialized camp data.
      */
     public static CampList deserialize(ArrayList<ArrayList<String>> data, UserList userList) {

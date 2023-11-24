@@ -32,6 +32,12 @@ import entity.user.Staff;
  */
 public class CampModificationController {
     /**
+     * Private constructor to prevent instantiation.
+     */
+    private CampModificationController() {
+    }
+
+    /**
      * Creates a new camp by inserting it into the camp repository.
      * This method adds the specified {@link Camp} object to the camp repository.
      *
@@ -112,7 +118,7 @@ public class CampModificationController {
         if (newCD.getID() != null) {
             campObj.setID(newCD.getID());
         }
-        if (newCD.isVisible() != campObj.isVisible()){
+        if (newCD.isVisible() != campObj.isVisible()) {
             campObj.setVisibility(newCD.isVisible());
         }
         RepositoryCollection.getCampRepository().update(campObj);

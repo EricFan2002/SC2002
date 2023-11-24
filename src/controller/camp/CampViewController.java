@@ -6,9 +6,15 @@ import entity.user.Staff;
 import entity.user.Student;
 
 /**
- * The CampViewController class provides methods to retrieve information about camps.
+ * The CampViewController class provides methods to retrieve information about
+ * camps.
  */
 public class CampViewController {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private CampViewController() {
+    }
 
     /**
      * Retrieves an array of camps filtered by school.

@@ -6,14 +6,25 @@ import entity.user.Student;
 import entity.user.User;
 import entity.user.UserFactory;
 import entity.user.UserList;
+
 /**
- * The UserDeserializer class contains methods to deserialize user data into a UserList object.
+ * The UserDeserializer class contains methods to deserialize user data into a
+ * UserList object.
  */
 public class UserDeserializer {
+
     /**
-     * Deserializes the provided data into a UserList object containing User entities.
+     * Private constructor to prevent instantiation.
+     */
+    private UserDeserializer() {
+    }
+
+    /**
+     * Deserializes the provided data into a UserList object containing User
+     * entities.
      *
-     * @param data The data to deserialize, represented as an ArrayList of ArrayLists of Strings.
+     * @param data The data to deserialize, represented as an ArrayList of
+     *             ArrayLists of Strings.
      * @return A UserList object populated with deserialized user data.
      */
     public static UserList deserialize(ArrayList<ArrayList<String>> data) {
@@ -38,7 +49,6 @@ public class UserDeserializer {
             if (user instanceof Student) {
                 ((Student) user).setPoints(Integer.parseInt(pointsRaw));
             }
-
 
             // Adding the user to the UserList if it's not null
             if (user != null) {
