@@ -47,8 +47,14 @@ public class CampRegistrationController {
     public static Camp checkConflict(Camp camp, Student student) {
         CampList camps = new CampList(student.getAttendedCampList());
         for (Camp oneCamp : camps) {
-            if (oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime()
-                    || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()) {
+            if(oneCamp.equals(camp))
+                continue;
+            if (oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime()) {
+                continue;
+//                    System.out.printf("%d <= %d , %d <= %d, %s vs %s \n", oneCamp.getStartDate().getTime(), camp.getEndDate().getTime(), camp.getStartDate().getTime(), oneCamp.getEndDate().getTime(), camp.getName(), oneCamp.getName());
+            }
+            else {
                 return oneCamp;
             }
         }

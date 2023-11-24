@@ -3,6 +3,7 @@ package controller.deserializer;
 import java.util.ArrayList;
 import java.util.Date;
 
+import controller.camp.CampStatusMonitorController;
 import entity.camp.Camp;
 import entity.camp.CampList;
 
@@ -13,7 +14,7 @@ import entity.user.UserList;
 /**
  * The CampDeserializer class contains methods to deserialize data into a CampList object.
  */
-public class CampDeserializer {
+public class CampDeserializer extends CampStatusMonitorController {
 
     /**
      * Deserializes the provided data into a CampList object.

@@ -8,7 +8,7 @@ import com.googlecode.lanterna.input.KeyType;
  * WidgetToggle represents a toggle button in a user interface.
  * It can be pressed or unpressed, changing its state and appearance.
  */
-public class WidgetToggle extends Widget implements IClickable, ITextInput, ISelectable{
+public class WidgetToggle extends Widget implements ITextInput, ISelectable{
     private boolean pressed;
     String rawText;
 
