@@ -24,8 +24,15 @@ import java.util.Arrays;
 
 import static consts.Config.titleLines;
 import static consts.Config.titleLinesGoodBye;
-
+/**
+ * The main class representing the entry point of the UI application.
+ * Manages terminal screens, displays animated title sequences, and handles user interface components.
+ */
 public class Main {
+    /**
+     * The main method responsible for initializing the application and managing user interface components.
+     * @param args The command line arguments (unused in this context).
+     */
     public static void main(String[] args) {
         RepositoryCollection.load();
 

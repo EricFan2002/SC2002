@@ -14,7 +14,15 @@ import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
 
+/**
+ * The main class responsible for initializing the application data and entities for testing purposes.
+ * It sets up user repositories, camp repositories, enquires, suggestions, and interactions among them.
+ */
 public class Main {
+    /**
+     * The main method initializes various entities and interactions for testing purposes within the application.
+     * @param args The command line arguments (unused in this context).
+     */
     public static void main(String[] args) {
         RepositoryCollection.load();
 
