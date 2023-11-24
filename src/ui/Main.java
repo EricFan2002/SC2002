@@ -2,6 +2,7 @@ package ui;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -21,6 +22,9 @@ public class Main {
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
         Screen animationScreen = null;
         Screen appScreen = null;
+
+        TextColor greenColor = TextColor.ANSI.GREEN;
+        TextColor redColor = TextColor.ANSI.RED_BRIGHT;
 
         try {
             Terminal terminal = defaultTerminalFactory.createTerminal();
@@ -50,6 +54,7 @@ public class Main {
             for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
                 animationScreen.clear();
                 for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.setForegroundColor(greenColor); // Set the text color to green
                     textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
                 }
                 animationScreen.refresh();
@@ -255,6 +260,7 @@ public class Main {
             for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
                 animationScreen.clear();
                 for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.setForegroundColor(redColor); // Set the text color to red
                     textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
                 }
                 animationScreen.refresh();
