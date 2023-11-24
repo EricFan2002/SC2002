@@ -12,7 +12,7 @@ import java.util.List;
  * This class provides a framework for managing a collection of windows in a user interface. It allows for
  * adding and switching between windows, handling user input, and rendering the currently active window.
  */
-public class WindowsManager {
+public abstract class WindowsManager implements ICallBack {
     private List<Window> windows = new ArrayList<>();
     Screen screen;
     int currentWindow = 0;
