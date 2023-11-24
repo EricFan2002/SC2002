@@ -6,21 +6,74 @@ import ui.widgets.*;
 import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
-
+/**
+ * The {@code OverlayCampSuggestionView} class represents an overlay window for viewing camp suggestions. It extends
+ * the {@code WindowOverlayClass} class and provides details about the suggested changes to a camp.
+ */
 public class OverlayCampSuggestionView extends WindowOverlayClass {
 
+    /**
+     * The suggestion for which the details are displayed.
+     */
     Suggestion suggestion;
-    protected WidgetButton exitButton;
-    protected WidgetTextBox textBoxCName;
-    protected WidgetTextBox textBoxDescription;
-    protected WidgetTextBox textBoxDStart;
-    protected WidgetTextBox textBoxDEnd;
-    protected WidgetTextBox textBoxDClose;
-    protected WidgetTextBox textBoxSchool;
-    protected WidgetTextBox textBoxLocation;
-    protected WidgetTextBox textBoxSlotsC;
-    protected WidgetTextBox textBoxSlots;
 
+    /**
+     * The button widget for exiting the overlay.
+     */
+    protected WidgetButton exitButton;
+
+    /**
+     * The text box widget for displaying the camp name.
+     */
+    protected WidgetTextBox textBoxCName;
+
+    /**
+     * The text box widget for displaying the camp description.
+     */
+    protected WidgetTextBox textBoxDescription;
+
+    /**
+     * The text box widget for displaying the camp start date.
+     */
+    protected WidgetTextBox textBoxDStart;
+
+    /**
+     * The text box widget for displaying the camp end date.
+     */
+    protected WidgetTextBox textBoxDEnd;
+
+    /**
+     * The text box widget for displaying the camp registration close date.
+     */
+    protected WidgetTextBox textBoxDClose;
+
+    /**
+     * The text box widget for displaying the camp school or faculty.
+     */
+    protected WidgetTextBox textBoxSchool;
+
+    /**
+     * The text box widget for displaying the camp location.
+     */
+    protected WidgetTextBox textBoxLocation;
+    /**
+     * The text box widget for displaying the committee slots.
+     */
+    protected WidgetTextBox textBoxSlotsC;
+    /**
+     * The text box widget for displaying the total camp slots.
+     */
+    protected WidgetTextBox textBoxSlots;
+    /**
+     * Constructs an instance of {@code OverlayCampSuggestionView}.
+     *
+     * @param x           The x-coordinate of the overlay window.
+     * @param y           The y-coordinate of the overlay window.
+     * @param offsetY     The y-offset of the overlay window.
+     * @param offsetX     The x-offset of the overlay window.
+     * @param windowName  The name of the overlay window.
+     * @param suggestion  The suggestion for which the details are displayed.
+     */
     public OverlayCampSuggestionView(int x, int y, int offsetY, int offsetX, String windowName, Suggestion suggestion) {
         super(y , x, offsetY, offsetX, windowName);
 
@@ -133,7 +186,9 @@ public class OverlayCampSuggestionView extends WindowOverlayClass {
         addWidget(exitButton);
 
     }
-
+    /**
+     * Handles the message loop for the overlay.
+     */
     public void messageLoop() {
         super.messageLoop();
         if(exitButton.getPressed()){
@@ -141,6 +196,9 @@ public class OverlayCampSuggestionView extends WindowOverlayClass {
             setDestroy();
         }
     }
+    /**
+     * Performs actions upon exiting the overlay.
+     */
     public void onExit(){
         super.onExit();
     }
