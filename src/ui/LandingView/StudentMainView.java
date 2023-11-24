@@ -34,6 +34,7 @@ public class StudentMainView extends Window {
      * The label widget for displaying the points information.
      */
     WidgetLabel pointLabel;
+    WidgetLabel campLabel;
 
     /**
      * The label widget for displaying a greeting message.
@@ -88,20 +89,22 @@ public class StudentMainView extends Window {
      * @param changePasswordWindowIndex The index of the change password window.
      */
     public StudentMainView(int loginViewIndex, int campListViewIndex, int changePasswordWindowIndex) {
-        super(24, 50, "Landing Page");
-        widgetLabel = new WidgetLabel(3, 3, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        super(24, 60, "Landing Page");
+        widgetLabel = new WidgetLabel(3, 3, 50, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
-        facultyLabel = new WidgetLabel(3, 5, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        facultyLabel = new WidgetLabel(3, 5, 50, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(facultyLabel);
-        pointLabel = new WidgetLabel(3, 7, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        pointLabel = new WidgetLabel(3, 7, 50, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(pointLabel);
-        greetingLabel = new WidgetLabel(3, 9, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        campLabel = new WidgetLabel(3, 9, 50, "", TEXT_ALIGNMENT.ALIGN_MID);
+        addWidget(campLabel);
+        greetingLabel = new WidgetLabel(3, 11, 50, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(greetingLabel);
-        viewCampButton = new WidgetButton(4, 14, 40, "Camp Management");
+        viewCampButton = new WidgetButton(4, 14, 50, "Camp Management");
         addWidget(viewCampButton);
-        changePasswordButton = new WidgetButton(4, 17, 40, "Reset Password");
+        changePasswordButton = new WidgetButton(4, 17, 50, "Reset Password");
         addWidget(changePasswordButton);
-        logoutButton = new WidgetButton(4, 20, 40, "Logout");
+        logoutButton = new WidgetButton(4, 20, 50, "Logout");
         addWidget(logoutButton);
         this.loginViewIndex = loginViewIndex;
         this.campListViewIndex = campListViewIndex;
@@ -127,8 +130,10 @@ public class StudentMainView extends Window {
             userName = UserController.getCurrentUser().getName();
             widgetLabel.setText("Welcome, " + userName + "!");
             facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getFaculty());
-            pointLabel.setText(((Student) UserController.getCurrentUser()).getPoints() == 0 ? "" :
-                    "You have " + (((Student) UserController.getCurrentUser()).getPoints()) + " points");
+            pointLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :
+                    "You have " + (((Student) UserController.getCurrentUser()).getPoints()) + " points as a committee member in");
+            campLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :
+                    ((Student) UserController.getCurrentUser()).getCommitteeCampList().get(0).getName());
             greetingLabel.setText("What would you like to do today?");
         }
         if (logoutButton.getPressed()) {

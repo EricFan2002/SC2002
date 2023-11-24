@@ -23,13 +23,11 @@ public class LoginView extends Window implements ICallBack { ;
     WidgetPasswordBox widgetTextBox1;
     WidgetButton loginButton;
     WidgetButton changePasswordButton;
-    WidgetButton forgetPasswordButton;
     WidgetToggle toggle;
     private int studentMainViewIndex;
     private int staffMainViewIndex;
     private int changePasswordWindowIndex;
-    private int forgotPasswordWindowIndex;
-    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int changePasswordWindowIndex, int forgotPasswordWindowIndex){
+    public LoginView(int y, int x, int studentMainViewIndex, int staffMainViewIndex, int changePasswordWindowIndex){
         super(y, x, "Please Login");
         WidgetLabel widgetLabel = new WidgetLabel(3, 4,40, "Please Login:", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
@@ -41,15 +39,12 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(widgetLabel2);
         widgetTextBox1 = new WidgetPasswordBox(14, 8,30, "password");
         addWidget(widgetTextBox1);
-        loginButton = new WidgetButton(5, 11, 40, "Login");
+        loginButton = new WidgetButton(5, 12, 40, "Login");
         addWidget(loginButton);
-        forgetPasswordButton = new WidgetButton(5 , 14, 40, "Forgot Password");
-        addWidget(forgetPasswordButton);
         setPointer(loginButton);
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
         this.changePasswordWindowIndex = changePasswordWindowIndex;
-        this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
     /**
@@ -82,10 +77,6 @@ public class LoginView extends Window implements ICallBack { ;
                 addOverlay(overlayTestClass);
             }
         }
-        if(forgetPasswordButton.getPressed()){
-            forgetPasswordButton.clearPressed();
-            switchToWindow = staffMainViewIndex;
-        }
     }
 
     /**
@@ -94,7 +85,6 @@ public class LoginView extends Window implements ICallBack { ;
      */
     public void onExit(){
         loginButton.clearPressed();
-        forgetPasswordButton.clearPressed();
     }
 
     /**
