@@ -39,8 +39,10 @@ public class LoginView extends Window implements ICallBack { ;
         addWidget(widgetLabel2);
         widgetTextBox1 = new WidgetPasswordBox(14, 8,30, "password");
         addWidget(widgetTextBox1);
-        loginButton = new WidgetButton(5, 12, 40, "Login");
+        loginButton = new WidgetButton(5, 11, 40, "Login");
         addWidget(loginButton);
+        changePasswordButton = new WidgetButton(5 , 14, 40, "Change Password");
+        addWidget(changePasswordButton);
         setPointer(loginButton);
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
@@ -77,6 +79,10 @@ public class LoginView extends Window implements ICallBack { ;
                 addOverlay(overlayTestClass);
             }
         }
+        if(changePasswordButton.getPressed()){
+            changePasswordButton.clearPressed();
+            switchToWindow = changePasswordWindowIndex;
+        }
     }
 
     /**
@@ -85,6 +91,7 @@ public class LoginView extends Window implements ICallBack { ;
      */
     public void onExit(){
         loginButton.clearPressed();
+        changePasswordButton.clearPressed();
     }
 
     /**
