@@ -24,7 +24,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Represents a view displaying a list of camps with filtering options and functionalities.
+ * It extends the Window class and implements the ICallBack interface.
+ */
 public class CampListView extends Window implements ICallBack {
+
+    /**
+     * Formats a string to create a line with a specific length and alignment.
+     * @param part1 The first part of the line.
+     * @param part2 The second part of the line.
+     * @param length The total length of the line.
+     * @return The formatted line.
+     */
     private String formLine(String part1, String part2, int length) {
         int padding = length / 2 - part1.length();
         String res = part1;
@@ -57,6 +69,10 @@ public class CampListView extends Window implements ICallBack {
     private OverlayTextInputAction overlayTextInputAction;
     protected CampList campListForExport;
 
+
+    /**
+     * Constructs a CampListView with default dimensions and initializes various UI elements.
+     */
     public CampListView() {
         super(55, 190, "Camp View");
         campListForExport = new CampList();
@@ -117,10 +133,20 @@ public class CampListView extends Window implements ICallBack {
     protected String lastFilter = "";
     protected int lastSize = -1;
 
+    /**
+     * Customizes the filter for camps based on certain criteria.
+     * @param list The original list of camps.
+     * @return The filtered list of camps.
+     */
     protected CampList CustomFilter(CampList list) {
         return list;
     }
 
+
+    /**
+     * Refreshes the list of camps based on applied filters.
+     * @param forceRefresh Boolean indicating whether to force a refresh.
+     */
     public void refreshList(boolean forceRefresh) {
         String newFilter = "";
         ArrayList<ArrayList<String>> options = new ArrayList<>();
@@ -254,6 +280,10 @@ public class CampListView extends Window implements ICallBack {
         }
     }
 
+
+    /**
+     * Message loop to update and manage the UI elements and interactions.
+     */
     @Override
     public void messageLoop() {
         super.messageLoop();
@@ -266,9 +296,17 @@ public class CampListView extends Window implements ICallBack {
 
     }
 
+    /**
+     * Performs actions when the window is closed or exited.
+     */
     public void onExit() {
     }
 
+    /**
+     * Handles window-specific actions upon certain selections.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("Camp Report")) {

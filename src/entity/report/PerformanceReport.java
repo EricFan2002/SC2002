@@ -6,13 +6,23 @@ import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Student;
 
+/**
+ * The {@code PerformanceReport} class represents a performance report for committees in camps.
+ */
 public class PerformanceReport extends Report {
+    /**
+     * The fields to be included in the report.
+     */
     private static String[] fields = { "Camp ID", "Camp", "Student ID", "Student", "Points" };
+    /**
+     * The list of camps for which the performance report is generated.
+     */
     private CampList camps;
-
-    public static String[] getFields() {
-        return fields;
-    }
+    /**
+     * Constructs a performance report for multiple camps.
+     *
+     * @param camps The list of camps for which the performance report is generated.
+     */
 
     public PerformanceReport(CampList camps) {
         super();
@@ -23,12 +33,22 @@ public class PerformanceReport extends Report {
         });
     }
 
+    /**
+     * Constructs a performance report for a single camp.
+     *
+     * @param camp The camp for which the performance report is generated.
+     */
     public PerformanceReport(Camp camp) {
         super();
         this.camps = new CampList();
         this.camps.add(camp);
     }
 
+    /**
+     * Serializes the performance report into a two-dimensional ArrayList of strings.
+     *
+     * @return The serialized performance report data.
+     */
     public final ArrayList<ArrayList<String>> serialize() {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
 

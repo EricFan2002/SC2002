@@ -12,7 +12,7 @@ import java.util.List;
  * This class provides a framework for managing a collection of windows in a user interface. It allows for
  * adding and switching between windows, handling user input, and rendering the currently active window.
  */
-public class WindowsManager {
+public class WindowsManager implements ICallBack {
     private List<Window> windows = new ArrayList<>();
     Screen screen;
     int currentWindow = 0;
@@ -94,5 +94,9 @@ public class WindowsManager {
      */
     public void keyStroke(KeyStroke keyStroke){
         windows.get(currentWindow).keyStrokeHelper(keyStroke);
+    }
+
+    public void onWindowFinished(int chose, String choseString){
+        windows.remove(currentWindow);
     }
 }

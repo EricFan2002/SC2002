@@ -9,9 +9,19 @@ import entity.enquiry.EnquiryList;
 import entity.user.Student;
 import entity.user.User;
 import entity.user.UserList;
-
+/**
+ * The EnquiryDeserializer class contains methods to deserialize data into an EnquiryList object.
+ */
 public class EnquiryDeserializer {
 
+    /**
+     * Deserializes the provided data into an EnquiryList object.
+     *
+     * @param data     The data to deserialize, represented as an ArrayList of ArrayLists of Strings.
+     * @param userList The UserList containing user information related to enquiries.
+     * @param campList The CampList containing camp information related to enquiries.
+     * @return An EnquiryList object populated with deserialized enquiry data.
+     */
     public static EnquiryList deserialize(ArrayList<ArrayList<String>> data, UserList userList, CampList campList) {
         EnquiryList cur = new EnquiryList();
 

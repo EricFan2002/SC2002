@@ -6,6 +6,11 @@ import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
 
+
+/**
+ * OverlayCampInfoDisplayLowRaw extends WindowOverlayClass and manages the display of basic camp information
+ * within an overlay, providing details such as camp name, description, dates, location, slots, and visibility.
+ */
 public class OverlayCampInfoDisplayLowRaw extends WindowOverlayClass {
 
     Camp camp;
@@ -21,6 +26,17 @@ public class OverlayCampInfoDisplayLowRaw extends WindowOverlayClass {
     protected WidgetToggle textBoxVis;
     protected WidgetTextBox textBoxSlots;
 
+
+    /**
+     * Constructs an OverlayCampInfoDisplayLowRaw object.
+     *
+     * @param x          The x-coordinate position.
+     * @param y          The y-coordinate position.
+     * @param offsetY    The y-coordinate offset.
+     * @param offsetX    The x-coordinate offset.
+     * @param windowName The name of the overlay window.
+     * @param camp       The camp entity containing information to be displayed.
+     */
     public OverlayCampInfoDisplayLowRaw(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
         super(y , x, offsetY, offsetX, windowName);
 
@@ -99,6 +115,10 @@ public class OverlayCampInfoDisplayLowRaw extends WindowOverlayClass {
         addWidget(exitButton);
     }
 
+    /**
+     * The main message loop that manages interactions within the overlay.
+     * Handles button presses and actions accordingly.
+     */
     public void messageLoop() {
         super.messageLoop();
         if(exitButton.getPressed()){
@@ -106,6 +126,10 @@ public class OverlayCampInfoDisplayLowRaw extends WindowOverlayClass {
             setDestroy();
         }
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the overlay.
+     */
     public void onExit(){
         super.onExit();
     }

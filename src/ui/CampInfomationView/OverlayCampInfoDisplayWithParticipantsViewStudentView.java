@@ -2,10 +2,24 @@ package ui.CampInfomationView;
 
 import entity.camp.Camp;
 
+
+/**
+ * Extension of OverlayCampInfoDisplayWithParticipantsView customized for student view.
+ */
 public class OverlayCampInfoDisplayWithParticipantsViewStudentView extends OverlayCampInfoDisplayWithParticipantsView {
 
     Camp camp;
 
+    /**
+     * Constructs an OverlayCampInfoDisplayWithParticipantsViewStudentView object.
+     *
+     * @param x          The x-coordinate position.
+     * @param y          The y-coordinate position.
+     * @param offsetY    The y-coordinate offset.
+     * @param offsetX    The x-coordinate offset.
+     * @param windowName The name of the overlay window.
+     * @param camp       The camp entity containing information to be displayed.
+     */
     public OverlayCampInfoDisplayWithParticipantsViewStudentView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
         super(x, y, offsetY, offsetX, windowName, camp);
         textBoxDescription.setSkipSelection(true);
@@ -21,6 +35,9 @@ public class OverlayCampInfoDisplayWithParticipantsViewStudentView extends Overl
         textBoxCName.setSkipSelection(true);
     }
 
+    /**
+     * Manages interactions within the overlay, including exit functionality.
+     */
     public void messageLoop() {
         super.messageLoop();
         if(exitButton.getPressed()){
@@ -28,6 +45,10 @@ public class OverlayCampInfoDisplayWithParticipantsViewStudentView extends Overl
             setDestroy();
         }
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the overlay.
+     */
     public void onExit(){
         super.onExit();
     }

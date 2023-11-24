@@ -11,6 +11,10 @@ import ui.windows.Window;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ChangePasswordView class represents the UI window for changing a user's password.
+ * It extends the Window class and provides functionality for password change.
+ */
 public class ChangePasswordView extends Window {
     WidgetLabel widgetLabel1;
     WidgetLabel widgetLabel2;
@@ -56,12 +60,21 @@ public class ChangePasswordView extends Window {
         this.studentMainViewIndex = studentMainViewIndex;
         this.staffMainViewIndex = staffMainViewIndex;
     }
-
+    /**
+     * Checks if a character is a special character.
+     *
+     * @param ch The character to be checked.
+     * @return true if the character is a special character, otherwise false.
+     */
     private boolean isSpecialCharacter(char ch) {
         String specialCharacters = "!@#$%^&*()_-+={}[]|:;\"'<>,.?/";
         return specialCharacters.indexOf(ch) != -1;
     }
 
+    /**
+     * The main message loop handling user interactions within the ChangePasswordView.
+     * Checks for button presses and performs password change logic based on user input.
+     */
     @Override
     public void messageLoop() {
         super.messageLoop();
@@ -139,6 +152,11 @@ public class ChangePasswordView extends Window {
             }
         }
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the ChangePasswordView.
+     * Clears button presses to avoid unintended behavior.
+     */
     public void onExit(){
         confirmButton.clearPressed();
         cancelButton.clearPressed();

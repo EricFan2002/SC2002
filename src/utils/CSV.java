@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.commons.csv.CSVFormat;
@@ -12,17 +11,17 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-import entity.interfaces.ISerializeable;
+import entity.interfaces.ISerializable;
 
 public class CSV {
-    public static boolean exportToCSV(String filename, ISerializeable serializeable) {
-        ArrayList<ArrayList<String>> data = serializeable.serialize();
+    public static boolean exportToCSV(String filename, ISerializable serializable) {
+        ArrayList<ArrayList<String>> data = serializable.serialize();
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(filename), CSVFormat.DEFAULT)) {
             for (ArrayList<String> row : data) {
                 printer.printRecord(row);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.toString());
             return false;
         }
         return true;

@@ -13,6 +13,10 @@ import ui.windows.Window;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents an overlay view for staff to edit camp details.
+ * Extends the OverlayCampInfoDisplayWithParticipantsView class.
+ */
 public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticipantsView {
 
     protected Camp camp;
@@ -20,6 +24,17 @@ public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticip
     protected Window mainWindow;
     protected WidgetButton submitButton;
 
+    /**
+     * Constructs an OverlayCampStaffEditView object.
+     * @param x The x-coordinate position of the view.
+     * @param y The y-coordinate position of the view.
+     * @param offsetY The offset value for the y-coordinate.
+     * @param offsetX The offset value for the x-coordinate.
+     * @param windowName The name of the window.
+     * @param camp The camp to be edited.
+     * @param staff The staff user editing the camp.
+     * @param mainWindow The main window where this overlay view is displayed.
+     */
     public OverlayCampStaffEditView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
         super(x, y, offsetY, offsetX, windowName, camp);
         this.staff = staff;
@@ -31,6 +46,9 @@ public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticip
         addWidget(exitButton);
     }
 
+    /**
+     * Handles the message loop for editing camp details.
+     */
     public void messageLoop() {
         if(exitButton.getPressed()){
             exitButton.clearPressed();
@@ -86,6 +104,11 @@ public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticip
             setDestroy();
         }
     }
+
+    /**
+     * Overrides the onExit method from the parent class.
+     * Performs additional actions when the overlay is exited.
+     */
     public void onExit(){
         super.onExit();
     }

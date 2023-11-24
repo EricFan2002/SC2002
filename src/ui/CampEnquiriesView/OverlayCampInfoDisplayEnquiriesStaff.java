@@ -18,6 +18,10 @@ import ui.windows.Window;
 
 import java.util.ArrayList;
 
+/**
+ * OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplayView and implements ICallBack.
+ * Manages the display and interaction with camp enquiries within an overlay view for staff members.
+ */
 public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplayView implements ICallBack {
 
     protected Staff staff;
@@ -80,6 +84,10 @@ public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplay
 
     }
 
+
+    /**
+     * Updates the list of camp enquiries displayed in the overlay.
+     */
     public void updateEnquiries() {
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
         EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
@@ -100,6 +108,10 @@ public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplay
         participantsView.updateList(enqList);
     }
 
+    /**
+     * The main message loop handling user interactions within the camp enquiries overlay.
+     * Manages actions based on button presses and user selections.
+     */
     public void messageLoop() {
         super.messageLoop();
         if (participantsView.getSelectedOption() != -1) {
@@ -130,10 +142,21 @@ public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplay
         }
     }
 
+    /**
+     * Performs necessary clean-up tasks upon exiting the overlay for camp enquiries.
+     */
     public void onExit() {
         super.onExit();
     }
 
+
+    /**
+     * An override method from the ICallBack interface.
+     * Handles specific actions based on the user's choice within the overlay.
+     *
+     * @param chose      The chosen index.
+     * @param choseString The chosen string.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("Reply Enquiry")) {

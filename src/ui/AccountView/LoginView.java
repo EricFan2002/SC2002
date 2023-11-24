@@ -11,6 +11,10 @@ import ui.windows.Window;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The LoginView class represents the UI window for user login.
+ * It extends the Window class and handles user authentication and login functionality.
+ */
 public class LoginView extends Window implements ICallBack { ;
     WidgetLabel widgetLabel;
     WidgetLabel widgetLabel1;
@@ -48,6 +52,10 @@ public class LoginView extends Window implements ICallBack { ;
         this.forgotPasswordWindowIndex = forgotPasswordWindowIndex;
     }
 
+    /**
+     * The main message loop handling user interactions within the LoginView.
+     * Checks for button presses and performs login logic based on user input.
+     */
     @Override
     public void messageLoop() {
         if(loginButton.getPressed()){
@@ -79,11 +87,23 @@ public class LoginView extends Window implements ICallBack { ;
             switchToWindow = staffMainViewIndex;
         }
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the LoginView.
+     * Clears button presses to avoid unintended behavior.
+     */
     public void onExit(){
         loginButton.clearPressed();
         forgetPasswordButton.clearPressed();
     }
 
+    /**
+     * An override method from the ICallBack interface.
+     * It handles the window finish event, but it's not utilized in this context.
+     *
+     * @param chose      The chosen index.
+     * @param choseString The chosen string.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {}
 }

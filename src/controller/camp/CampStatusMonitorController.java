@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import entity.camp.Camp;
+import entity.camp.CampList;
 import entity.user.User;
 import entity.user.Student;
 
@@ -35,6 +36,7 @@ public class CampStatusMonitorController {
      *             requested.
      * @return An {@link ArrayList} of {@link User} objects representing the students attending the camp.
      */
+    private CampList campList = new CampList();
     public static ArrayList<User> getAttendingStudents(Camp camp) {
         ArrayList<User> attendingStudents = new ArrayList<>();
         if (camp != null) {

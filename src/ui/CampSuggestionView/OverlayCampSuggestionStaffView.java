@@ -16,7 +16,10 @@ import ui.windows.Window;
 import ui.windows.WindowOverlayClass;
 
 import java.util.ArrayList;
-
+/**
+ * Represents an overlay view displaying camp suggestions for staff members.
+ * Extends the WindowOverlayClass and implements the ICallBack interface.
+ */
 public class OverlayCampSuggestionStaffView extends WindowOverlayClass implements ICallBack {
 
     Camp camp;
@@ -28,6 +31,17 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
     protected Suggestion selectedSuggestion;
     protected OverlayCampSuggestionView overlayCampSuggestionViewToBeAdded;
 
+    /**
+     * Constructs an OverlayCampSuggestionStaffView object.
+     * @param x The x-coordinate position of the view.
+     * @param y The y-coordinate position of the view.
+     * @param offsetY The offset value for the y-coordinate.
+     * @param offsetX The offset value for the x-coordinate.
+     * @param windowName The name of the window.
+     * @param camp The camp associated with the suggestions.
+     * @param staff The staff member interacting with the suggestions.
+     * @param mainWindow The main window where this overlay view is displayed.
+     */
     public OverlayCampSuggestionStaffView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
             Staff staff, Window mainWindow) {
         super(y, x, offsetY, offsetX, windowName);
@@ -49,6 +63,9 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
 
     }
 
+    /**
+     * Updates the list of suggestions displayed in the view.
+     */
     public void updateSuggestionList() {
         suggestionArrayList = new ArrayList<>();
 
@@ -105,6 +122,9 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
         allSuggestions.updateList(enqList);
     }
 
+    /**
+     * Handles the message loop for interactions with suggestions and buttons in the view.
+     */
     @Override
     public void messageLoop() {
         super.messageLoop();
@@ -137,10 +157,20 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
         }
     }
 
+    /**
+     * Overrides the onExit method from the parent class.
+     * Performs additional actions when the overlay is exited.
+     */
     public void onExit() {
         super.onExit();
     }
 
+
+    /**
+     * Handles actions triggered upon completion of certain operations in the overlay view.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("View") && selectedSuggestion != null) {

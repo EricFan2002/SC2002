@@ -7,9 +7,22 @@ import entity.camp.Camp;
 
 import java.util.ArrayList;
 
+/**
+ * Extension of OverlayCampInfoDisplayView that includes participant and committee views
+ * in addition to displaying camp information.
+ */
 public class OverlayCampInfoDisplayWithParticipantsView extends OverlayCampInfoDisplayView {
 
-
+    /**
+     * Constructs an OverlayCampInfoDisplayWithParticipantsView object.
+     *
+     * @param x          The x-coordinate position.
+     * @param y          The y-coordinate position.
+     * @param offsetY    The y-coordinate offset.
+     * @param offsetX    The x-coordinate offset.
+     * @param windowName The name of the overlay window.
+     * @param camp       The camp entity containing information to be displayed.
+     */
     public OverlayCampInfoDisplayWithParticipantsView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
         super(x , y, offsetY, offsetX, windowName, camp);
 
@@ -40,9 +53,16 @@ public class OverlayCampInfoDisplayWithParticipantsView extends OverlayCampInfoD
         addWidget(committeesView);
     }
 
+    /**
+     * The main message loop that manages interactions within the overlay.
+     */
     public void messageLoop() {
         super.messageLoop();
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the overlay.
+     */
     public void onExit(){
         super.onExit();
     }

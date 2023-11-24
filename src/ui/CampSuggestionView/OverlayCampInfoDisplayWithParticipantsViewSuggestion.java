@@ -14,6 +14,10 @@ import ui.windows.Window;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents an overlay view displaying camp details with the ability to suggest modifications.
+ * Extends the OverlayCampInfoDisplayWithParticipantsView class.
+ */
 public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends OverlayCampInfoDisplayWithParticipantsView {
 
     protected Camp camp;
@@ -22,6 +26,18 @@ public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends Overla
     protected WidgetButton submitButton;
     protected Suggestion editSuggestion;
 
+    /**
+     * Constructs an OverlayCampInfoDisplayWithParticipantsViewSuggestion object.
+     * @param x The x-coordinate position of the view.
+     * @param y The y-coordinate position of the view.
+     * @param offsetY The offset value for the y-coordinate.
+     * @param offsetX The offset value for the x-coordinate.
+     * @param windowName The name of the window.
+     * @param camp The camp for which suggestions are displayed.
+     * @param student The student user making the suggestion.
+     * @param mainWindow The main window where this overlay view is displayed.
+     * @param suggestion The suggestion object containing modification details.
+     */
     public OverlayCampInfoDisplayWithParticipantsViewSuggestion(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
                                                                 Student student, Window mainWindow, Suggestion suggestion) {
         super(x, y, offsetY, offsetX, windowName, camp);
@@ -82,6 +98,9 @@ public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends Overla
 
     }
 
+    /**
+     * Handles the message loop for suggesting camp details modifications.
+     */
     public void messageLoop() {
         super.messageLoop();
         if (exitButton.getPressed()) {
@@ -126,6 +145,10 @@ public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends Overla
         }
     }
 
+    /**
+     * Overrides the onExit method from the parent class.
+     * Performs additional actions when the overlay is exited.
+     */
     public void onExit() {
         super.onExit();
     }

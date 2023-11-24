@@ -241,8 +241,6 @@ public class Camp extends CampDetails implements ITaggedItem {
 
     /**
      * Retrieves the list of previously registered students.
-     *
-     * @param student The student to be removed.
      */
     public Set<Student> getRegisteredStudents() {
         return registeredStudents;

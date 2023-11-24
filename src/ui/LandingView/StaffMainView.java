@@ -7,26 +7,85 @@ import ui.widgets.WidgetButton;
 import ui.widgets.WidgetLabel;
 import ui.windows.Window;
 
+/**
+ * The {@code StaffMainView} class represents the main landing page for a staff user. It extends the {@code Window}
+ * class and provides functionalities such as viewing camp details, changing password, and logging out.
+ */
 public class StaffMainView extends Window {
+    /**
+     * The user name displayed on the main view.
+     */
     String userName = "NULL";
+
+    /**
+     * The label widget for displaying the user name.
+     */
     WidgetLabel widgetLabel;
+
+    /**
+     * The label widget for displaying the faculty information.
+     */
     WidgetLabel facultyLabel;
+
+    /**
+     * The label widget for displaying a greeting message.
+     */
     WidgetLabel greetingLabel;
+
+    /**
+     * The button widget for viewing camp details.
+     */
     WidgetButton viewCampButton;
+
+    /**
+     * The button widget for registering for camps.
+     */
     WidgetButton registerForCampButton;
+
+    /**
+     * The button widget for viewing enquiries.
+     */
     WidgetButton viewEnquiryButton;
+
+    /**
+     * The button widget for changing the password.
+     */
     WidgetButton changePasswordButton;
+
+    /**
+     * The button widget for logging out.
+     */
     WidgetButton logoutButton;
+
+    /**
+     * The index of the camp list view window.
+     */
     private int campListViewIndex;
+
+    /**
+     * The index of the login view window.
+     */
     private int loginViewIndex;
+
+    /**
+     * The index of the change password window.
+     */
     private int changePasswordWindowIndex;
-    public StaffMainView(int loginViewIndex, int campListViewIndex, int changePasswordWindowIndex){
+
+    /**
+     * Constructs an instance of {@code StaffMainView}.
+     *
+     * @param loginViewIndex        The index of the login view window.
+     * @param campListViewIndex     The index of the camp list view window.
+     * @param changePasswordWindowIndex The index of the change password window.
+     */
+    public StaffMainView(int loginViewIndex, int campListViewIndex, int changePasswordWindowIndex) {
         super(24, 50, "Landing Page");
-        widgetLabel = new WidgetLabel(3, 3,40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        widgetLabel = new WidgetLabel(3, 3, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(widgetLabel);
-        facultyLabel = new WidgetLabel(3, 5,40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        facultyLabel = new WidgetLabel(3, 5, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(facultyLabel);
-        greetingLabel = new WidgetLabel(3, 9,40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        greetingLabel = new WidgetLabel(3, 9, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(greetingLabel);
         viewCampButton = new WidgetButton(4, 14, 40, "Camp Management");
         addWidget(viewCampButton);
@@ -43,34 +102,47 @@ public class StaffMainView extends Window {
         this.changePasswordWindowIndex = changePasswordWindowIndex;
     }
 
-    public void setUserName(String userName){
+    /**
+     * Sets the user name for display on the main view.
+     *
+     * @param userName The user name to set.
+     */
+    public void setUserName(String userName) {
         this.userName = userName;
         widgetLabel.setText("Welcome! " + userName);
     }
 
+    /**
+     * Handles the message loop for the main view.
+     */
     public void messageLoop() {
         super.messageLoop();
-        if(UserController.getCurrentUser() != null){
+        if (UserController.getCurrentUser() != null) {
             userName = UserController.getCurrentUser().getName();
             widgetLabel.setText("Welcome, " + userName + "!");
             facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getFaculty());
             greetingLabel.setText("What would you like to do today?");
         }
-        if(logoutButton.getPressed()){
+        if (logoutButton.getPressed()) {
             switchToWindow = loginViewIndex;
         }
-        if(changePasswordButton.getPressed()){
+        if (changePasswordButton.getPressed()) {
             switchToWindow = changePasswordWindowIndex;
         }
-        if(viewCampButton.getPressed()){
+        if (viewCampButton.getPressed()) {
             switchToWindow = campListViewIndex;
         }
     }
-    public void onExit(){
-        for(Widget widget : widgets){
-            if(widget instanceof WidgetButton){
-                ((WidgetButton)widget).clearPressed();
+
+    /**
+     * Performs actions upon exiting the main view.
+     */
+    public void onExit() {
+        for (Widget widget : widgets) {
+            if (widget instanceof WidgetButton) {
+                ((WidgetButton) widget).clearPressed();
             }
         }
     }
 }
+
