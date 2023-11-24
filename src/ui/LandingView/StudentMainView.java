@@ -34,6 +34,7 @@ public class StudentMainView extends Window {
      * The label widget for displaying the points information.
      */
     WidgetLabel pointLabel;
+    WidgetLabel campLabel;
 
     /**
      * The label widget for displaying a greeting message.
@@ -95,7 +96,9 @@ public class StudentMainView extends Window {
         addWidget(facultyLabel);
         pointLabel = new WidgetLabel(3, 7, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(pointLabel);
-        greetingLabel = new WidgetLabel(3, 9, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        campLabel = new WidgetLabel(3, 9, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
+        addWidget(campLabel);
+        greetingLabel = new WidgetLabel(3, 11, 40, "", TEXT_ALIGNMENT.ALIGN_MID);
         addWidget(greetingLabel);
         viewCampButton = new WidgetButton(4, 14, 40, "Camp Management");
         addWidget(viewCampButton);
@@ -127,8 +130,10 @@ public class StudentMainView extends Window {
             userName = UserController.getCurrentUser().getName();
             widgetLabel.setText("Welcome, " + userName + "!");
             facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getFaculty());
-            pointLabel.setText(((Student) UserController.getCurrentUser()).getPoints() == 0 ? "" :
-                    "You have " + (((Student) UserController.getCurrentUser()).getPoints()) + " points");
+            pointLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :
+                    "You have " + (((Student) UserController.getCurrentUser()).getPoints()) + " points as a committee member in");
+            campLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :
+                    ((Student) UserController.getCurrentUser()).getCommitteeCampList().get(0).getName());
             greetingLabel.setText("What would you like to do today?");
         }
         if (logoutButton.getPressed()) {
