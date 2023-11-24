@@ -1,18 +1,21 @@
-package ui;
+package ui.CampEnquiriesView;
 
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.enquiry.Enquiry;
 import entity.enquiry.EnquiryList;
 import entity.user.Student;
+import ui.CampInfomationView.OverlayCampInfoDisplayView;
+import ui.OverlayActions.OverlayChooseBox;
+import ui.OverlayActions.OverlayNotification;
+import ui.OverlayActions.OverlayTextInput;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayRaw implements ICallBack {
+public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayView implements ICallBack {
 
     protected WidgetLabel labelNewEnq;
     protected WidgetTextBox textBoxEnq;

@@ -1,4 +1,4 @@
-package ui;
+package ui.CampInfomationView;
 
 import entity.camp.Camp;
 import ui.widgets.*;

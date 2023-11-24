@@ -1,4 +1,4 @@
-package ui;
+package ui.CampListView;
 
 import controller.user.UserController;
 import entity.RepositoryCollection;
@@ -13,19 +13,16 @@ import entity.suggestion.Suggestion;
 import entity.suggestion.SuggestionStatus;
 import entity.user.Staff;
 import entity.user.Student;
-import entity.user.User;
-import entity.user.UserList;
+import ui.OverlayActions.OverlayTextInput;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
 import utils.CSV;
 
-import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class CampListView extends Window implements ICallBack {
     private String formLine(String part1, String part2, int length) {

@@ -10,6 +10,13 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import entity.RepositoryCollection;
+import ui.AccountView.ChangePasswordView;
+import ui.AccountView.LoginView;
+import ui.CampModificationView.CreateCampView;
+import ui.CampListView.CampListViewStaff;
+import ui.CampListView.CampListViewStudent;
+import ui.LandingView.StaffMainView;
+import ui.LandingView.StudentMainView;
 import ui.windows.*;
 
 import java.io.IOException;
@@ -120,7 +127,6 @@ public class Main {
             Window CampListViewStaff = new CampListViewStaff(2);
             Window CampListViewStudent = new CampListViewStudent(1);
             Window createCampView = new CreateCampView(5);
-            Window campViewer = new CampViewer(40, 40, 3);
             WindowsManager windows = new WindowsManager(appScreen, 0, 0);
 
             windows.addWindow(LoginView);
@@ -130,7 +136,6 @@ public class Main {
             windows.addWindow(CampListViewStaff);
             windows.addWindow(CampListViewStudent);
             windows.addWindow(createCampView);
-            windows.addWindow(campViewer);
 
             appScreen.refresh();
 

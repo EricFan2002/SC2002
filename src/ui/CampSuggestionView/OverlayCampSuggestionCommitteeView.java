@@ -1,4 +1,4 @@
-package ui;
+package ui.CampSuggestionView;
 
 import entity.RepositoryCollection;
 import entity.camp.Camp;
@@ -6,6 +6,7 @@ import entity.suggestion.Suggestion;
 import entity.suggestion.SuggestionList;
 import entity.suggestion.SuggestionStatus;
 import entity.user.Student;
+import ui.OverlayActions.OverlayChooseBox;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -23,8 +24,8 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
     protected Window mainWindow;
     protected ArrayList<Suggestion> suggestionArrayList;
     protected Suggestion selectedSuggestion;
-    protected OverlaySuggestionInfoDisplayRaw overlaySuggestionInfoDisplayRawToBeAdded;
-    protected OverlayCampInfoDisplaySuggestion overlayCampInfoDisplaySuggestionPending;
+    protected OverlayCampSuggestionView overlayCampSuggestionViewToBeAdded;
+    protected OverlayCampInfoDisplayWithParticipantsViewSuggestion overlayCampInfoDisplaySuggestionPending;
 
     public OverlayCampSuggestionCommitteeView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
                                               Student student, Window mainWindow) {
@@ -167,7 +168,7 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
         }
         if (createSuggestionButton.getPressed()) {
             createSuggestionButton.clearPressed();
-            OverlayCampInfoDisplaySuggestion overlayCampInfoDisplaySuggestion = new OverlayCampInfoDisplaySuggestion(
+            OverlayCampInfoDisplayWithParticipantsViewSuggestion overlayCampInfoDisplaySuggestion = new OverlayCampInfoDisplayWithParticipantsViewSuggestion(
                     getX(), getY(), offsetY, offsetX, "Create Suggestion", camp, student,
                     OverlayCampSuggestionCommitteeView.this, null);
             mainWindow.addOverlay(overlayCampInfoDisplaySuggestion);
@@ -191,9 +192,9 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
             }
             allSuggestions.clearSelectedOption();
         }
-        if (overlaySuggestionInfoDisplayRawToBeAdded != null) {
-            mainWindow.addOverlay(overlaySuggestionInfoDisplayRawToBeAdded);
-            overlaySuggestionInfoDisplayRawToBeAdded = null;
+        if (overlayCampSuggestionViewToBeAdded != null) {
+            mainWindow.addOverlay(overlayCampSuggestionViewToBeAdded);
+            overlayCampSuggestionViewToBeAdded = null;
         }
         if (overlayCampInfoDisplaySuggestionPending != null) {
             mainWindow.addOverlay(overlayCampInfoDisplaySuggestionPending);
@@ -208,13 +209,13 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("View") && selectedSuggestion != null) {
-            overlaySuggestionInfoDisplayRawToBeAdded = new OverlaySuggestionInfoDisplayRaw(getX(), getY(), offsetY,
+            overlayCampSuggestionViewToBeAdded = new OverlayCampSuggestionView(getX(), getY(), offsetY,
                     offsetX, "Suggestion For Camp " + selectedSuggestion.getSuggestion().getName(), selectedSuggestion);
         } else if (choseString.equals("Delete") && selectedSuggestion != null) {
             RepositoryCollection.getSuggestionRepository().remove(selectedSuggestion);
             updateSuggestionList();
         } else if (choseString.equals("Edit") && selectedSuggestion != null) {
-            overlayCampInfoDisplaySuggestionPending = new OverlayCampInfoDisplaySuggestion(getX(), getY(), offsetY,
+            overlayCampInfoDisplaySuggestionPending = new OverlayCampInfoDisplayWithParticipantsViewSuggestion(getX(), getY(), offsetY,
                     offsetX, "Edit Suggestion", camp, student, OverlayCampSuggestionCommitteeView.this, selectedSuggestion);
         }
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();

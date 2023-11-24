@@ -1,4 +1,4 @@
-package ui;
+package ui.OverlayActions;
 
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetLabel;

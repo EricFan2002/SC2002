@@ -1,17 +1,14 @@
-package ui;
+package ui.CampInfomationView;
 
 import entity.camp.Camp;
-import entity.user.Student;
 import ui.widgets.*;
-import ui.windows.ICallBack;
 import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
+public class OverlayCampInfoDisplayView extends WindowOverlayClass {
 
-    Camp camp;
+    protected Camp camp;
     protected WidgetButton exitButton;
     protected WidgetTextBox textBoxCName;
     protected WidgetTextBox textBoxDescription;
@@ -24,7 +21,7 @@ public class OverlayCampInfoDisplayRaw extends WindowOverlayClass {
     protected WidgetToggle textBoxVis;
     protected WidgetTextBox textBoxSlots;
 
-    public OverlayCampInfoDisplayRaw(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
+    public OverlayCampInfoDisplayView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
         super(y , x, offsetY, offsetX, windowName);
 
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");

@@ -1,4 +1,4 @@
-package ui;
+package ui.CampListView;
 
 import controller.camp.CampRegistrationController;
 import controller.camp.OperationResult;
@@ -7,6 +7,13 @@ import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Student;
 import entity.user.User;
+import ui.CampEnquiriesView.OverlayCampInfoDisplayEnquiries;
+import ui.CampEnquiriesView.OverlayCampInfoDisplayEnquiriesCommittee;
+import ui.CampInfomationView.OverlayCampInfoDisplayWithParticipantsViewStudentView;
+import ui.CampSuggestionView.OverlayCampSuggestionCommitteeView;
+import ui.OverlayActions.OverlayCampListViewStudentCampActions;
+import ui.OverlayActions.OverlayChooseBox;
+import ui.OverlayActions.OverlayNotification;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -147,13 +154,13 @@ public class CampListViewStudent extends CampListView {
             addOverlay(overlayTestClass);
         }
         if (choseString.equals("View Details")) { // view details
-            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(
+            OverlayCampInfoDisplayWithParticipantsViewStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayWithParticipantsViewStudentView(
                     getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
             choseString = "";
         } else if (chose == 0 && choseString.equals("CFM")) { // view details
-            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(
+            OverlayCampInfoDisplayWithParticipantsViewStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayWithParticipantsViewStudentView(
                     getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;

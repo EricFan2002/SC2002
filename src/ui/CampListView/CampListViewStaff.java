@@ -1,12 +1,18 @@
-package ui;
+package ui.CampListView;
 
-import controller.camp.CampModificationController;
-import controller.camp.CampSuggestionController;
 import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Staff;
+import ui.CampModificationView.OverlayCampInfoDisplayWithParticipantsViewEdit;
+import ui.CampEnquiriesView.OverlayCampInfoDisplayEnquiriesStaff;
+import ui.CampInfomationView.OverlayCampInfoDisplayWithParticipantsViewStudentView;
+import ui.CampSuggestionView.OverlayCampSuggestionCommitteeView;
+import ui.CampSuggestionView.OverlayCampSuggestionStaffView;
+import ui.OverlayActions.OverlayCampListViewStaffCampActions;
+import ui.OverlayActions.OverlayChooseBox;
+import ui.OverlayActions.OverlayNotification;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetToggle;
 
@@ -96,7 +102,7 @@ public class CampListViewStaff extends CampListView {
                         currentTime, staff.getFaculty(), "", staff, 0);
                 toBeDestroyed = newCamp;
                 RepositoryCollection.getCampRepository().add(newCamp);
-                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(
+                OverlayCampInfoDisplayWithParticipantsViewEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayWithParticipantsViewEdit(
                         getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Create New Camp", newCamp,
                         (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);
@@ -138,14 +144,14 @@ public class CampListViewStaff extends CampListView {
             widgetPageSelection.clearSelectedOption();
         }
         if (chose == 0 && choseString.equals("View Details")) { // view details
-            OverlayCampInfoDisplayStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayStudentView(
+            OverlayCampInfoDisplayWithParticipantsViewStudentView overlayCampInfoDisplay = new OverlayCampInfoDisplayWithParticipantsViewStudentView(
                     getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Camp Details", selectedCamp);
             addOverlay(overlayCampInfoDisplay);
             chose = -1;
             choseString = "";
         } else if (chose == 1 && choseString.equals("Edit Camp")) { // join
             if (UserController.getCurrentUser() instanceof Staff) {
-                OverlayCampInfoDisplayEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayEdit(
+                OverlayCampInfoDisplayWithParticipantsViewEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayWithParticipantsViewEdit(
                         getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Edit Camp " + selectedCamp.getName(),
                         selectedCamp, (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);
