@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>controller.user.UserController</OriginalElement>
+  <nodes>
+    <node x="643.998387656159" y="686.5287191208774">controller.camp.CampRegistrationController</node>
+    <node x="2505.1096548695273" y="759.6521354386514">controller.deserializer.EnquiryDeserializer</node>
+    <node x="741.998387656159" y="328.21075813443406">controller.camp.OperationResult</node>
+    <node x="1679.7043705617589" y="527.459669151662">entity.user.UserList</node>
+    <node x="2096.7688277655366" y="824.775779495252">entity.enquiry.EnquiryList</node>
+    <node x="746.498387656159" y="888.5837625505981">controller.camp.CampViewController</node>
+    <node x="1654.6143225743922" y="1171.8904958720257">entity.suggestion.SuggestionList</node>
+    <node x="1646.7043705617589" y="342.2140836970302">controller.deserializer.UserDeserializer</node>
+    <node x="1730.2043705617589" y="787.275779495252">entity.RepositoryList</node>
+    <node x="1241.6399133579812" y="703.9182535640502">entity.camp.CampList</node>
+    <node x="1962.1884657911305" y="1481.5052122487994">controller.camp.CampSuggestionController</node>
+    <node x="2135.1374038256154" y="294.2140836970302">controller.user.UserController</node>
+    <node x="1200.4136911166624" y="294.2140836970302">controller.user.UserAccountManagementController</node>
+    <node x="719.998387656159" y="1219.8904958720257">controller.camp.CampModificationController</node>
+    <node x="1288.404084914429" y="1553.5052122487994">controller.deserializer.SuggestionDeserializer</node>
+    <node x="650.998387656159" y="1066.6388059803185">controller.camp.CampStatusMonitorController</node>
+    <node x="677.2598136159397" y="563.4596691516618">controller.deserializer.CampDeserializer</node>
+    <node x="2564.3332849693143" y="922.4465612968379">controller.camp.CampEnquiryController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="entity.camp.CampList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="158.0000866420189" y="-2.535640502401293E-4" />
+      <point x="1653.0" y="939.418" />
+      <point x="1653.0" y="928.276" />
+      <point x="-97.00037056175893" y="2.205047479719724E-4" />
+    </edge>
+    <edge source="controller.camp.CampEnquiryController" target="entity.enquiry.EnquiryList" relationship="CREATE">
+      <point x="-2.8496931417976157E-4" y="-115.4995612968379" />
+      <point x="2728.833" y="873.0" />
+      <point x="2718.0" y="873.0" />
+      <point x="2718.0" y="904.947" />
+      <point x="147.5001722344632" y="-23.32877949525198" />
+    </edge>
+    <edge source="controller.user.UserAccountManagementController" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="3.088833375386457E-4" y="79.49991630296978" />
+      <point x="1371.414" y="492.0" />
+      <point x="1993.0" y="492.0" />
+      <point x="1993.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.camp.CampSuggestionController" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="14.99953420886959" y="-103.50021224879924" />
+      <point x="2176.188" y="1457.0" />
+      <point x="1091.0" y="1457.0" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.camp.CampList" relationship="CREATE">
+      <point x="8.664201891406265E-5" y="-235.50025356405024" />
+      <point x="1399.64" y="656.0" />
+      <point x="1399.64" y="656.0" />
+      <point x="8.664201891406265E-5" y="-235.50025356405024" />
+    </edge>
+    <edge source="controller.camp.CampSuggestionController" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-4.6579113040934317E-4" y="-103.50021224879924" />
+      <point x="2161.188" y="1431.0" />
+      <point x="2054.0" y="1431.0" />
+      <point x="2054.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.deserializer.SuggestionDeserializer" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-8.491442895319778E-5" y="-31.500212248799244" />
+      <point x="1546.404" y="1431.0" />
+      <point x="2054.0" y="1431.0" />
+      <point x="2054.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.deserializer.CampDeserializer" target="entity.user.UserList" relationship="DEPENDENCY">
+      <point x="104.24018638406028" y="-31.499669151661806" />
+      <point x="994.5" y="510.0" />
+      <point x="1827.204" y="510.0" />
+      <point x="-3.705617589275789E-4" y="-67.49966915166192" />
+    </edge>
+    <edge source="controller.camp.CampModificationController" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="133.99961234384102" y="-4.958720255672233E-4" />
+      <point x="1091.0" y="1275.39" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="controller.deserializer.UserDeserializer" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-3.705617589275789E-4" y="31.49991630296978" />
+      <point x="1827.204" y="492.0" />
+      <point x="1993.0" y="492.0" />
+      <point x="1993.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.deserializer.EnquiryDeserializer" target="entity.user.UserList" relationship="DEPENDENCY">
+      <point x="15.000345130472851" y="-31.50013543865134" />
+      <point x="2766.61" y="510.0" />
+      <point x="1827.204" y="510.0" />
+      <point x="-3.705617589275789E-4" y="-67.49966915166192" />
+    </edge>
+    <edge source="entity.user.UserList" target="entity.user.UserList" relationship="CREATE">
+      <point x="-147.50037056175893" y="-23.459669151661956" />
+      <point x="1652.0" y="571.5" />
+      <point x="1652.0" y="571.5" />
+      <point x="-147.50037056175893" y="-23.459669151661956" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="1.7223446320713265E-4" y="103.50022050474809" />
+      <point x="2244.269" y="1086.776" />
+      <point x="1653.0" y="1086.776" />
+      <point x="1653.0" y="928.276" />
+      <point x="-97.00037056175893" y="2.205047479719724E-4" />
+    </edge>
+    <edge source="controller.camp.CampEnquiryController" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-2.8496931417976157E-4" y="115.50043870316199" />
+      <point x="2728.833" y="1431.0" />
+      <point x="2054.0" y="1431.0" />
+      <point x="2054.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.deserializer.EnquiryDeserializer" target="entity.enquiry.EnquiryList" relationship="CREATE">
+      <point x="3.451304728514515E-4" y="31.49986456134866" />
+      <point x="2751.61" y="873.0" />
+      <point x="2718.0" y="873.0" />
+      <point x="2718.0" y="904.947" />
+      <point x="147.5001722344632" y="-23.32877949525198" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.suggestion.SuggestionList" relationship="CREATE">
+      <point x="-3.2257439215754857E-4" y="103.49950412797443" />
+      <point x="1827.614" y="1506.0" />
+      <point x="1827.614" y="1506.0" />
+      <point x="-3.2257439215754857E-4" y="103.49950412797443" />
+    </edge>
+    <edge source="controller.deserializer.EnquiryDeserializer" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="3.451304728514515E-4" y="-31.50013543865134" />
+      <point x="2751.61" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.user.UserController" target="controller.user.UserController" relationship="DEPENDENCY">
+      <point x="0.0" y="-81.0" />
+      <point x="2266.6374038256154" y="276.7140836970302" />
+      <point x="2512.6096548695273" y="276.7140836970302" />
+      <point x="2512.6096548695273" y="375.2140836970302" />
+      <point x="131.5" y="0.0" />
+    </edge>
+    <edge source="controller.camp.CampViewController" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="107.49961234384102" y="2.3744940187953034E-4" />
+      <point x="1091.0" y="956.084" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="controller.user.UserAccountManagementController" target="entity.user.UserList" relationship="DEPENDENCY">
+      <point x="-14.999691116662461" y="79.49991630296978" />
+      <point x="1356.414" y="475.0" />
+      <point x="2008.0" y="475.0" />
+      <point x="2008.0" y="510.0" />
+      <point x="1827.204" y="510.0" />
+      <point x="-3.705617589275789E-4" y="-67.49966915166192" />
+    </edge>
+    <edge source="controller.deserializer.SuggestionDeserializer" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="14.999915085571047" y="-31.500212248799244" />
+      <point x="1561.404" y="1457.0" />
+      <point x="1091.0" y="1457.0" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="controller.camp.CampModificationController" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-3.8765615897773387E-4" y="55.49950412797443" />
+      <point x="853.998" y="1431.0" />
+      <point x="2054.0" y="1431.0" />
+      <point x="2054.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.camp.CampRegistrationController" target="controller.camp.CampRegistrationController" relationship="DEPENDENCY">
+      <point x="0.0" y="79.5" />
+      <point x="853.998387656159" y="863.0287191208774" />
+      <point x="1120.7598136159397" y="863.0287191208774" />
+      <point x="1120.7598136159397" y="766.0287191208774" />
+      <point x="210.0000000000001" y="0.0" />
+    </edge>
+    <edge source="controller.deserializer.EnquiryDeserializer" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="159.2233451304728" y="31.49986456134866" />
+      <point x="2910.833" y="1457.0" />
+      <point x="1091.0" y="1457.0" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="controller.camp.CampSuggestionController" target="entity.suggestion.SuggestionList" relationship="DEPENDENCY">
+      <point x="-191.5" y="-103.5" />
+      <point x="142.07414321673832" y="103.5" />
+    </edge>
+    <edge source="controller.deserializer.UserDeserializer" target="entity.user.UserList" relationship="CREATE">
+      <point x="-15.000370561758928" y="31.49991630296978" />
+      <point x="1812.204" y="448.714" />
+      <point x="1652.0" y="448.714" />
+      <point x="1652.0" y="571.5" />
+      <point x="-147.50037056175893" y="-23.459669151661956" />
+    </edge>
+    <edge source="controller.camp.CampRegistrationController" target="controller.camp.OperationResult" relationship="CREATE">
+      <point x="-194.2385740402193" y="-79.5" />
+      <point x="659.7598136159397" y="421.21075813443406" />
+      <point x="-115.0" y="0.0" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.enquiry.EnquiryList" relationship="CREATE">
+      <point x="147.5001722344632" y="-23.32877949525198" />
+      <point x="2718.0" y="904.947" />
+      <point x="2718.0" y="904.947" />
+      <point x="147.5001722344632" y="-23.32877949525198" />
+    </edge>
+    <edge source="controller.camp.CampEnquiryController" target="controller.camp.CampEnquiryController" relationship="DEPENDENCY">
+      <point x="14.99971503068582" y="115.5" />
+      <point x="2743.833" y="1179.3904958720257" />
+      <point x="2925.833" y="1179.3904958720257" />
+      <point x="2925.833" y="1037.946561296838" />
+      <point x="164.5" y="0.0" />
+    </edge>
+    <edge source="controller.deserializer.SuggestionDeserializer" target="entity.suggestion.SuggestionList" relationship="CREATE">
+      <point x="-15.000084914428953" y="-31.500212248799244" />
+      <point x="1531.404" y="1506.0" />
+      <point x="1827.614" y="1506.0" />
+      <point x="-3.2257439215754857E-4" y="103.49950412797443" />
+    </edge>
+    <edge source="controller.user.UserController" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="-4.038256151943642E-4" y="80.99991630296978" />
+      <point x="2266.637" y="492.0" />
+      <point x="1993.0" y="492.0" />
+      <point x="1993.0" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.deserializer.SuggestionDeserializer" target="entity.user.UserList" relationship="DEPENDENCY">
+      <point x="-8.491442895319778E-5" y="31.499787751200756" />
+      <point x="1546.404" y="1706.005" />
+      <point x="3015.61" y="1706.005" />
+      <point x="3015.61" y="510.0" />
+      <point x="1827.204" y="510.0" />
+      <point x="-3.705617589275789E-4" y="-67.49966915166192" />
+    </edge>
+    <edge source="controller.deserializer.CampDeserializer" target="entity.RepositoryList" relationship="DEPENDENCY">
+      <point x="196.24018638406028" y="31.500330848338194" />
+      <point x="1086.5" y="684.0" />
+      <point x="1827.204" y="684.0" />
+      <point x="-3.705617589275789E-4" y="-140.99977949525203" />
+    </edge>
+    <edge source="controller.camp.CampRegistrationController" target="entity.camp.CampList" relationship="CREATE">
+      <point x="-3.8765615897773387E-4" y="-79.49971912087744" />
+      <point x="853.998" y="656.0" />
+      <point x="1399.64" y="656.0" />
+      <point x="8.664201891406265E-5" y="-235.50025356405024" />
+    </edge>
+    <edge source="controller.camp.CampStatusMonitorController" target="entity.camp.CampList" relationship="DEPENDENCY">
+      <point x="202.99961234384102" y="1.940196814302908E-4" />
+      <point x="1091.0" y="1110.139" />
+      <point x="1091.0" y="939.418" />
+      <point x="-157.9999133579811" y="-2.535640502401293E-4" />
+    </edge>
+    <edge source="entity.user.UserList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="-147.50037056175893" y="3.3084833808061376E-4" />
+      <point x="1653.0" y="594.96" />
+      <point x="1653.0" y="928.276" />
+      <point x="-97.00037056175893" y="2.205047479719724E-4" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="-3.2257439215754857E-4" y="-103.50049587202557" />
+      <point x="1827.614" y="1101.776" />
+      <point x="1653.0" y="1101.776" />
+      <point x="1653.0" y="928.276" />
+      <point x="-97.00037056175893" y="2.205047479719724E-4" />
+    </edge>
+    <edge source="controller.user.UserController" target="entity.user.UserList" relationship="DEPENDENCY">
+      <point x="14.999596174384806" y="80.99991630296978" />
+      <point x="2281.637" y="475.0" />
+      <point x="2008.0" y="475.0" />
+      <point x="2008.0" y="510.0" />
+      <point x="1827.204" y="510.0" />
+      <point x="-3.705617589275789E-4" y="-67.49966915166192" />
+    </edge>
+    <edge source="controller.deserializer.CampDeserializer" target="entity.camp.CampList" relationship="CREATE">
+      <point x="1.863840602709388E-4" y="31.500330848338194" />
+      <point x="890.26" y="656.0" />
+      <point x="1399.64" y="656.0" />
+      <point x="8.664201891406265E-5" y="-235.50025356405024" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.34275635192862736" showDependencies="true" x="1964.1744102448406" y="958.9429074357498" />
+  <SelectedNodes>
+    <node>controller.camp.CampViewController</node>
+    <node>entity.camp.CampList</node>
+    <node>controller.camp.CampModificationController</node>
+    <node>controller.camp.CampStatusMonitorController</node>
+    <node>entity.enquiry.EnquiryList</node>
+    <node>controller.camp.CampSuggestionController</node>
+    <node>controller.camp.CampRegistrationController</node>
+    <node>entity.RepositoryList</node>
+    <node>controller.camp.CampEnquiryController</node>
+    <node>controller.deserializer.EnquiryDeserializer</node>
+    <node>controller.deserializer.UserDeserializer</node>
+    <node>controller.deserializer.CampDeserializer</node>
+    <node>controller.camp.OperationResult</node>
+    <node>controller.deserializer.SuggestionDeserializer</node>
+    <node>controller.user.UserController</node>
+    <node>entity.user.UserList</node>
+    <node>entity.suggestion.SuggestionList</node>
+    <node>controller.user.UserAccountManagementController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
