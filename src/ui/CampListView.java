@@ -4,10 +4,13 @@ import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
+import entity.enquiry.Enquiry;
 import entity.report.CampReport;
 import entity.report.EnquiryReport;
 import entity.report.PerformanceReport;
 import entity.report.Report;
+import entity.suggestion.Suggestion;
+import entity.suggestion.SuggestionStatus;
 import entity.user.Staff;
 import entity.user.Student;
 import entity.user.User;
@@ -183,15 +186,50 @@ public class CampListView extends Window implements ICallBack {
                 if (UserController.getCurrentUser() instanceof Student) {
                     Student student = (Student) UserController.getCurrentUser();
                     if (camp.getCommittees().contains(student)) {
-                        campTitle += " (Committee)";
+                        campTitle += " [Committee]";
                     } else if (camp.getAttendees().contains(student)) {
-                        campTitle += " (Joined)";
+                        campTitle += " [Joined]";
+                    }
+                    if(camp.getCommittees().contains(student)){
+                        boolean newEnquiries = false;
+                        for(Enquiry s : camp.getEnquiryList()){
+                            if(s.getAnswer() == null || s.getAnswer().equals("")){
+                                newEnquiries = true;
+                                break;
+                            }
+                        }
+                        if(newEnquiries){
+                            campTitle += " [Enquiries]";
+                        }
                     }
                 }
                 if (UserController.getCurrentUser() instanceof Staff) {
                     Staff staff = (Staff) UserController.getCurrentUser();
                     if (camp.getStaffInCharge().equals(staff)) {
-                        campTitle += " (In Charge)";
+                        campTitle += " [In Charge]";
+                    }
+                    if (!camp.isVisible()) {
+                        campTitle += " [Hidden]";
+                    }
+                    boolean newSuggestion = false;
+                    for(Suggestion s : camp.getSuggestionList()){
+                        if(s.getStatus() == SuggestionStatus.PENDING){
+                            newSuggestion = true;
+                            break;
+                        }
+                    }
+                    if(newSuggestion){
+                        campTitle += " [Suggestions]";
+                    }
+                    boolean newEnquiries = false;
+                    for(Enquiry s : camp.getEnquiryList()){
+                        if(s.getAnswer() == null || s.getAnswer().equals("")){
+                            newEnquiries = true;
+                            break;
+                        }
+                    }
+                    if(newEnquiries){
+                        campTitle += " [Enquiries]";
                     }
                 }
             }

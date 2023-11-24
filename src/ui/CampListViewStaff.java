@@ -1,5 +1,7 @@
 package ui;
 
+import controller.camp.CampModificationController;
+import controller.camp.CampSuggestionController;
 import controller.user.UserController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
@@ -195,6 +197,9 @@ public class CampListViewStaff extends CampListView {
     @Override
     public void onWindowFinished(int chose, String choseString) {
         super.onWindowFinished(chose, choseString);
+        if (choseString.equals("Approve") && overlayCampSuggestionStaffView != null) {
+            refreshList(true);
+        }
         this.chose = chose;
         this.choseString = choseString;
         if (overlayCampInfoDisplayEnquiriesStaff != null && overlayCampInfoDisplayEnquiriesStaff.getDestroy() != true) {

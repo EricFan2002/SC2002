@@ -33,6 +33,8 @@ public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
         addWidget(submitButton);
         removeWidget(exitButton);
         addWidget(exitButton);
+        textBoxVis.setHide(true);
+        textBoxVis.setSkipSelection(true);
         if (suggestion != null && suggestion.getSuggestion() != null) {
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 

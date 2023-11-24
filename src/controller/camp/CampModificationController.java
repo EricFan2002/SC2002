@@ -112,6 +112,9 @@ public class CampModificationController {
         if (newCD.getID() != null) {
             campObj.setID(newCD.getID());
         }
+        if (newCD.isVisible() != campObj.isVisible()){
+            campObj.setVisibility(newCD.isVisible());
+        }
         RepositoryCollection.getCampRepository().update(campObj);
     }
 }

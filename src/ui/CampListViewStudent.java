@@ -50,6 +50,7 @@ public class CampListViewStudent extends CampListView {
                 list.add(c);
             }
         }
+        list = list.filterByVisibility(true);
         if (toggleAvailable.getPressed()) {
             CampList newList = new CampList();
             for (Camp c : list) {
@@ -140,7 +141,6 @@ public class CampListViewStudent extends CampListView {
             generateReportButton.clearPressed();
             ArrayList<String> options = new ArrayList<>();
             options.add("Camp Report");
-            options.add("Performance Report");
             options.add("Enquiries Report");
             options.add("Cancel");
             OverlayChooseBox overlayTestClass = new OverlayChooseBox(generateReportButton.getLen(),  generateReportButton.getY(), generateReportButton.getX(), "Which Report?", options, CampListViewStudent.this);

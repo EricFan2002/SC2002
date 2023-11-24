@@ -52,25 +52,25 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
-            if (suggestion.getSuggestion().getLocation() != null) {
+            if (suggestion.getSuggestion().getLocation() != null && !suggestion.getSuggestion().getLocation().equals(camp.getLocation())) {
                 changed += "Location, ";
             }
-            if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
+            if ((suggestion.getSuggestion().getStartDate() != null && suggestion.getSuggestion().getStartDate().compareTo(camp.getStartDate()) != 0) || (suggestion.getSuggestion().getEndDate() != null && suggestion.getSuggestion().getEndDate().compareTo(camp.getEndDate()) != 0)) {
                 changed += "Date, ";
             }
             if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
-            if (suggestion.getSuggestion().getName() != null) {
+            if (suggestion.getSuggestion().getName() != null && !suggestion.getSuggestion().getName().equals(suggestion.getOriginalCamp().getName())) {
                 changed += "Name, ";
             }
-            if (suggestion.getSuggestion().getCloseRegistrationDate() != null) {
-                changed += "Registration Close, ";
+            if (suggestion.getSuggestion().getCloseRegistrationDate() != null && suggestion.getSuggestion().getCloseRegistrationDate().compareTo(suggestion.getOriginalCamp().getCloseRegistrationDate()) != 0) {
+                changed += "Reg Date, ";
             }
-            if (suggestion.getSuggestion().getSchool() != null) {
+            if (suggestion.getSuggestion().getSchool() != null && !suggestion.getSuggestion().getSchool().equals(suggestion.getOriginalCamp().getSchool())) {
                 changed += "Faculty, ";
             }
-            if (suggestion.getSuggestion().getTotalSlots() != null) {
+            if (suggestion.getSuggestion().getTotalSlots() != null && !suggestion.getSuggestion().getTotalSlots().equals(suggestion.getOriginalCamp().getTotalSlots())) {
                 changed += "Slots, ";
             }
             if (changed.equals("")) {
@@ -114,25 +114,25 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
             }
             tmp.add("Suggestion: " + suggestion.getSuggestion().getID() + status);
             String changed = "";
-            if (suggestion.getSuggestion().getLocation() != null) {
+            if (suggestion.getSuggestion().getLocation() != null && !suggestion.getSuggestion().getLocation().equals(camp.getLocation())) {
                 changed += "Location, ";
             }
-            if (suggestion.getSuggestion().getStartDate() != null || suggestion.getSuggestion().getEndDate() != null) {
+            if ((suggestion.getSuggestion().getStartDate() != null && suggestion.getSuggestion().getStartDate().compareTo(camp.getStartDate()) != 0) || (suggestion.getSuggestion().getEndDate() != null && suggestion.getSuggestion().getEndDate().compareTo(camp.getEndDate()) != 0)) {
                 changed += "Date, ";
             }
             if (suggestion.getSuggestion().getDescription() != null && !suggestion.getSuggestion().getDescription().equals(suggestion.getOriginalCamp().getDescription())) {
                 changed += "Description, ";
             }
-            if (suggestion.getSuggestion().getName() != null) {
+            if (suggestion.getSuggestion().getName() != null && !suggestion.getSuggestion().getName().equals(suggestion.getOriginalCamp().getName())) {
                 changed += "Name, ";
             }
-            if (suggestion.getSuggestion().getCloseRegistrationDate() != null) {
-                changed += "Registration Close, ";
+            if (suggestion.getSuggestion().getCloseRegistrationDate() != null && suggestion.getSuggestion().getCloseRegistrationDate().compareTo(suggestion.getOriginalCamp().getCloseRegistrationDate()) != 0) {
+                changed += "Reg Date, ";
             }
-            if (suggestion.getSuggestion().getSchool() != null) {
+            if (suggestion.getSuggestion().getSchool() != null && !suggestion.getSuggestion().getSchool().equals(suggestion.getOriginalCamp().getSchool())) {
                 changed += "Faculty, ";
             }
-            if (suggestion.getSuggestion().getTotalSlots() != null) {
+            if (suggestion.getSuggestion().getTotalSlots() != null && !suggestion.getSuggestion().getTotalSlots().equals(suggestion.getOriginalCamp().getTotalSlots())) {
                 changed += "Slots, ";
             }
             if (changed.equals("")) {
