@@ -118,7 +118,7 @@ public class Main {
                 }
             }
 
-            Window LoginView = new LoginView(20, 54, 1, 2, 3, 6);
+            Window LoginView = new LoginView(20, 54, 1, 2, 3);
             Window studentMainView = new StudentMainView(0, 5, 3);
             Window staffMainView = new StaffMainView(0, 4, 3);
             Window changePasswordView = new ChangePasswordView(0, 1, 2);
