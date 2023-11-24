@@ -13,7 +13,18 @@ import entity.user.Staff;
 import entity.user.Student;
 import entity.user.UserList;
 
+/**
+ * The SuggestionDeserializer class contains methods to deserialize data into a SuggestionList object.
+ */
 public class SuggestionDeserializer {
+    /**
+     * Deserializes the provided data into a SuggestionList object.
+     *
+     * @param data     The data to deserialize, represented as an ArrayList of ArrayLists of Strings.
+     * @param userList The UserList containing user information to associate with suggestions.
+     * @param campList The CampList containing camp information to associate with suggestions.
+     * @return A SuggestionList object populated with deserialized suggestion data.
+     */
 
     public static SuggestionList deserialize(ArrayList<ArrayList<String>> data, UserList userList, CampList campList) {
 

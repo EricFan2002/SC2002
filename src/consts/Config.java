@@ -1,11 +1,27 @@
 package consts;
-
+/**
+ * The Config class holds constant values and arrays related to file paths and ASCII art titles.
+ */
 public class Config {
+    /**
+     * Path to the user repository file.
+     */
     public static final String USER_REPOSITORY_PATH = "data/user.csv";
+    /**
+     * Path to the camp repository file.
+     */
     public static final String CAMP_REPOSITORY_PATH = "data/camp.csv";
+    /**
+     * Path to the enquiry repository file.
+     */
     public static final String ENQUIRY_REPOSITORY_PATH = "data/enquiry.csv";
+    /**
+     * Path to the suggestion repository file.
+     */
     public static final String SUGGESTION_REPOSITORY_PATH = "data/suggestion.csv";
-
+    /**
+     * Array containing ASCII art title lines.
+     */
     public static final String[] titleLines = {
             "███    ██ ████████ ██    ██          ██████  █████  ███    ███ ███████ ",
             "████   ██    ██    ██    ██         ██      ██   ██ ████  ████ ██      ",
@@ -13,6 +29,9 @@ public class Config {
             "██  ██ ██    ██    ██    ██         ██      ██   ██ ██  ██  ██      ██ ",
             "██   ████    ██     ██████           ██████ ██   ██ ██      ██ ███████ "
     };
+    /**
+     * Array containing ASCII art lines for goodbye message.
+     */
     public static final String[] titleLinesGoodBye = new String[] {
                     "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠴⠒⠤⣄⡀⠀⠀⠀⠀⢠⣾⠉⠉⠉⠉⠑⠒⠦⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ",
                     "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠋⠀⠀⠀⠀⠀⠉⠲⡄⠀⢠⠏⡏⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -37,6 +56,9 @@ public class Config {
                     "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⢳⣴⣶⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀",
                     "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣦⣿⣿⡿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⣀⠀⠀⠀⠀⠀⠀⠀"
     };
+    /**
+     * Private constructor to prevent instantiation.
+     */
 
     private Config() {
     };

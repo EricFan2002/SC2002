@@ -10,8 +10,18 @@ import entity.user.Staff;
 import entity.user.Student;
 import entity.user.UserList;
 
+/**
+ * The CampDeserializer class contains methods to deserialize data into a CampList object.
+ */
 public class CampDeserializer {
 
+    /**
+     * Deserializes the provided data into a CampList object.
+     *
+     * @param data     The data to deserialize, represented as an ArrayList of ArrayLists of Strings.
+     * @param userList The UserList containing user information to associate with camps.
+     * @return A CampList object populated with deserialized camp data.
+     */
     public static CampList deserialize(ArrayList<ArrayList<String>> data, UserList userList) {
 
         CampList cur = new CampList();
