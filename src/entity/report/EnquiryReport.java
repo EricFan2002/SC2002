@@ -1,6 +1,7 @@
 package entity.report;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import entity.camp.Camp;
 import entity.camp.CampList;
@@ -27,10 +28,7 @@ public class EnquiryReport extends Report {
 
     public final ArrayList<ArrayList<String>> serialize() {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        ArrayList<String> header = new ArrayList<String>();
-        for (String field : fields) {
-            header.add(field);
-        }
+        ArrayList<String> header = new ArrayList<String>(Arrays.asList(fields));
         data.add(header);
 
         for (Camp camp : this.camp) {
@@ -42,8 +40,13 @@ public class EnquiryReport extends Report {
                 row.add(enquiry.getSender().getID());
                 row.add(enquiry.getSender().getName());
                 row.add(enquiry.getQuestion());
-                row.add(enquiry.getAnsweredBy().getID());
-                row.add(enquiry.getAnsweredBy().getName());
+                if(enquiry.getAnsweredBy() != null){
+                    row.add(enquiry.getAnsweredBy().getID());
+                    row.add(enquiry.getAnsweredBy().getName());
+                } else {
+                    row.add("");
+                    row.add("");
+                }
                 row.add(enquiry.getAnswer());
                 data.add(row);
             }
