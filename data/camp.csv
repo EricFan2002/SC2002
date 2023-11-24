@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C001,Soccer Match,Night Soccer Scrimmage,1,1702734600000,1702741800000,1697464267000,SCSE,Camp Nou,staff,att3,com,att2;com;att3,12
 C002,Christmas Party,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,NTU,SCSE Lounge,staff,att1;att4,att2;com,att1;att2;com;att4,15
 C003,Chinese New Year,Official 2024 Chinese New Year Celebration,1,1707534000000,1707541200000,1704862800000,NTU,Gaia,staff,att5;att4,com2,att5;com2;att4,15
@@ -7,5 +8,16 @@ C006,Christmas Party 1st SCSE,Sugar and chocolate drinks party,1,1703512200000,1
 C007,Christmas Party NEWq,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541260000,SCSE,Lee Wee Nam Library,staff,att3,com;att4,att2;com;att3;att4,50
 C008,Christmas Party 2nd Round SCSE New Name,Sugar and chocolate drinks party,1,1703512260000,1703523000000,1707541200000,NTU,1,staff,,att1;com2,att1;att2;com2;att4,10
 C009,Sad Empty Christmas Party,No one is here,1,1703512200000,1703523000000,1707541200000,NTU,1,staff,att5;att4,com2,att5;com2;att4,12
+=======
+C001,Soccer Match,Night Soccer Scrimmage,1,1702734600000,1702741800000,1697464267000,SCSE,Camp Nou,staff,att3;att2,com,att3;com;att2,12
+C002,Christmas Party,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,NTU,SCSE Lounge,staff,att1;att4,com,att1;com;att4,15
+C003,Chinese New Year,Official 2024 Chinese New Year Celebration,1,1707534000000,1707541200000,1704862800000,NTU,Gaia,staff,att4;att5,com2,att4;att5;com2,15
+C004,1792 United States Presidential Election,The second election after we won against those Brits,1,-5587873200000,-5587786800000,-5588132400000,NTU,Washington,staff,att4;att5,com2,att4;att5;com2,1500
+C005,Christmas Party 0th SCSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,SCSE,AIA Canopy,staff,att4;att5,com2,att4;att5;com2,50
+C006,Christmas Party 1st SCSE,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541200000,MSE,Lee Wee Nam Library,staff,,com2,com2,10
+C007,Christmas Party NEWq,Sugar and chocolate drinks party,1,1703512200000,1703523000000,1707541260000,SCSE,Lee Wee Nam Library,staff,att3;att2,com;att4,att3;com;att2;att4,50
+C008,Christmas Party 2nd Round SCSE New Name,Sugar and chocolate drinks party,1,1703512260000,1703523000000,1707541200000,NTU,1,staff,,att1;com2,att1;att2;att4;com2,10
+C009,Sad Empty Christmas Party,No one is here,1,1703512200000,1703523000000,1707541200000,NTU,1,staff,att4;att5,com2,att4;att5;com2,12
+>>>>>>> Stashed changes
 C010,Christmas Party X++ 1,Sugar and chocolate drinks party,1,1103512200000,1103523000000,1107541200000,NTU,1,staff,,com2,com2,10
 1700790991399,1invis,invis,0,1700790960000,1700790960000,1700790960000,SPMS,,staff,,,,0

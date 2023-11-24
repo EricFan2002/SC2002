@@ -8,23 +8,53 @@ import java.util.Set;
 import entity.interfaces.ISerializable;
 import entity.interfaces.ITaggedItem;
 
+<<<<<<< Updated upstream
 public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<T>, ISerializable {
+=======
+/**
+ * The {@code RepositoryList} abstract class provides a generic implementation for managing a list of items
+ * that implement the {@code ITaggedItem} interface. It supports basic operations like add, remove, update, and clear.
+ *
+ * @param <T> The type of items in the repository, which must implement the {@code ITaggedItem} interface.
+ */
+public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<T>, ISerializeable {
+
+    /**
+     * The list containing items of type {@code T}.
+     */
+>>>>>>> Stashed changes
     protected List<T> all;
 
-    // size of List
+    /**
+     * Gets the size of the repository.
+     *
+     * @return The size of the repository.
+     */
     public int size() {
         return all.size();
     }
 
-    // constructors using different parameters
+    /**
+     * Constructs a repository with the specified list of items.
+     *
+     * @param all The list of items to be included in the repository.
+     */
     public RepositoryList(List<T> all) {
         this.all = all;
     }
 
+    /**
+     * Constructs an empty repository.
+     */
     public RepositoryList() {
         this.all = new ArrayList<T>();
     }
 
+    /**
+     * Constructs a repository with items from the specified array.
+     *
+     * @param all The array of items to be included in the repository.
+     */
     public RepositoryList(T[] all) {
         this.all = new ArrayList<T>();
         for (T object : all) {
@@ -32,6 +62,11 @@ public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<
         }
     }
 
+    /**
+     * Constructs a repository with items from the specified set.
+     *
+     * @param all The set of items to be included in the repository.
+     */
     public RepositoryList(Set<T> all) {
         this.all = new ArrayList<T>();
         for (T object : all) {
@@ -39,12 +74,21 @@ public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<
         }
     }
 
-    // iterator
+    /**
+     * Returns an iterator over the items in the repository.
+     *
+     * @return An iterator over the items in the repository.
+     */
     public Iterator<T> iterator() {
         return all.iterator();
     }
 
-    // getter
+    /**
+     * Gets the item at the specified index.
+     *
+     * @param index The index of the item to retrieve.
+     * @return The item at the specified index, or {@code null} if the index is invalid.
+     */
     public T get(int index) {
         if (index >= 0 && index < all.size()) {
             return all.get(index);
@@ -55,7 +99,12 @@ public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<
         }
     }
 
-    // add 1 item to List
+    /**
+     * Adds an item to the repository. If an item with the same ID already exists, it is replaced.
+     *
+     * @param object The item to be added or replaced.
+     * @return {@code true} if the item is added or replaced successfully, {@code false} otherwise.
+     */
     public boolean add(T object) {
         for (T item : all) {
             if (item.getID().equals(object.getID())) {
@@ -67,19 +116,34 @@ public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<
         return all.add(object);
     }
 
-    // remove 1 item from List
+    /**
+     * Removes an item from the repository.
+     *
+     * @param object The item to be removed.
+     * @return {@code true} if the item is removed successfully, {@code false} otherwise.
+     */
     public boolean remove(T object) {
         return all.remove(object);
     }
 
-    // change item at index to input item
+    /**
+     * Updates the item at the specified index with the input item.
+     *
+     * @param object The item to replace the existing item.
+     * @param index  The index of the item to be updated.
+     * @return {@code true} if the item is updated successfully, {@code false} otherwise.
+     */
     public boolean update(T object, int index) {
         all.set(index, object);
         return true;
     }
 
-    // go to List and find item with the same ID as the input item and replace it
-    // with the input item
+    /**
+     * Finds an item in the repository with the same ID as the input item and replaces it with the input item.
+     *
+     * @param object The item to replace the existing item with the same ID.
+     * @return {@code true} if the item is updated successfully, {@code false} otherwise.
+     */
     public boolean update(T object) {
         for (T item : all) {
             if (item.getID().equals(object.getID())) {
@@ -91,14 +155,25 @@ public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<
         return false;
     }
 
-    // remove all items from List
+    /**
+     * Removes all items from the repository.
+     *
+     * @return {@code true} if the repository is cleared successfully, {@code false} otherwise.
+     */
     public boolean clear() {
         all.clear();
         return true;
     }
 
+    /**
+     * Converts the repository to an array of objects.
+     *
+     * @return An array of objects containing all items in the repository.
+     */
     public Object[] toArray() {
         Object[] array = new Object[all.size()];
         return all.toArray(array);
     }
 }
+
+
