@@ -19,6 +19,10 @@ import ui.widgets.WidgetToggle;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a view tailored for students to interact with and manage camps.
+ * Extends the CampListView class, providing functionalities specifically for student users.
+ */
 public class CampListViewStudent extends CampListView {
     protected WidgetToggle toggleJoinedCamp = new WidgetToggle(1, 8, getLenX() / 8 - 1, "Joined");
     protected WidgetToggle toggleCommittee = new WidgetToggle(getLenX() / 8, 8, getLenX() / 8 + 1, "As Committee");
@@ -36,6 +40,10 @@ public class CampListViewStudent extends CampListView {
     protected OverlayCampSuggestionCommitteeView overlayCampSuggestionCommitteeView;
     private int studentMainViewIndex;
 
+    /**
+     * Constructs a CampListViewStudent with a specific student main view index.
+     * @param studentMainViewIndex The index for the main student view.
+     */
     public CampListViewStudent(int studentMainViewIndex) {
         super();
         this.studentMainViewIndex = studentMainViewIndex;
@@ -49,6 +57,12 @@ public class CampListViewStudent extends CampListView {
 
     private WidgetButton buttonPosition;
 
+    /**
+     * Customizes the filter for camps based on student-specific criteria.
+     * Overrides the method in the parent class.
+     * @param list The original list of camps to be filtered.
+     * @return The filtered list of camps based on student-specific criteria.
+     */
     protected CampList CustomFilter(CampList list) {
         if (UserController.getCurrentUser() != null && UserController.getCurrentUser() instanceof Student) {
             CampList list1 = list.filterBySchool(((Student) UserController.getCurrentUser()).getFaculty());
@@ -116,6 +130,10 @@ public class CampListViewStudent extends CampListView {
         return list;
     }
 
+    /**
+     * Handles interactions and actions within the student-specific camp view.
+     * Overrides the messageLoop method in the parent class.
+     */
     @Override
     public void messageLoop() {
         super.messageLoop();
@@ -250,6 +268,13 @@ public class CampListViewStudent extends CampListView {
     private int chose = -1;
     private String choseString = "";
 
+
+    /**
+     * Handles actions and decisions upon completion of specific windows or actions.
+     * Overrides the onWindowFinished method in the parent class.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         super.onWindowFinished(chose, choseString);

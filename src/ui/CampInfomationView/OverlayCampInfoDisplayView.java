@@ -6,6 +6,11 @@ import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
 
+
+/**
+ * OverlayCampInfoDisplayView extends WindowOverlayClass and manages the display of camp information
+ * within an overlay, providing details such as camp name, description, dates, location, slots, and visibility.
+ */
 public class OverlayCampInfoDisplayView extends WindowOverlayClass {
 
     protected Camp camp;
@@ -21,6 +26,16 @@ public class OverlayCampInfoDisplayView extends WindowOverlayClass {
     protected WidgetToggle textBoxVis;
     protected WidgetTextBox textBoxSlots;
 
+    /**
+     * Constructs an OverlayCampInfoDisplayView object.
+     *
+     * @param x          The x-coordinate position.
+     * @param y          The y-coordinate position.
+     * @param offsetY    The y-coordinate offset.
+     * @param offsetX    The x-coordinate offset.
+     * @param windowName The name of the overlay window.
+     * @param camp       The camp entity containing information to be displayed.
+     */
     public OverlayCampInfoDisplayView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp) {
         super(y , x, offsetY, offsetX, windowName);
 
@@ -102,6 +117,10 @@ public class OverlayCampInfoDisplayView extends WindowOverlayClass {
 
     }
 
+    /**
+     * The main message loop that manages interactions within the overlay.
+     * Handles button presses and actions accordingly.
+     */
     public void messageLoop() {
         super.messageLoop();
         if(exitButton.getPressed()){
@@ -109,6 +128,10 @@ public class OverlayCampInfoDisplayView extends WindowOverlayClass {
             setDestroy();
         }
     }
+
+    /**
+     * Performs necessary clean-up tasks upon exiting the overlay.
+     */
     public void onExit(){
         super.onExit();
     }

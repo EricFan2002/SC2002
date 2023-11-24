@@ -14,6 +14,10 @@ import ui.windows.WindowOverlayClass;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an overlay view displaying camp suggestions for the committee.
+ * Extends the WindowOverlayClass and implements ICallBack interface.
+ */
 public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass implements ICallBack {
 
     Camp camp;
@@ -27,6 +31,17 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
     protected OverlayCampSuggestionView overlayCampSuggestionViewToBeAdded;
     protected OverlayCampInfoDisplayWithParticipantsViewSuggestion overlayCampInfoDisplaySuggestionPending;
 
+    /**
+     * Constructs an OverlayCampSuggestionCommitteeView object.
+     * @param x The x-coordinate position of the view.
+     * @param y The y-coordinate position of the view.
+     * @param offsetY The offset value for the y-coordinate.
+     * @param offsetX The offset value for the x-coordinate.
+     * @param windowName The name of the window.
+     * @param camp The camp associated with the suggestions.
+     * @param student The student user interacting with the suggestions.
+     * @param mainWindow The main window where this overlay view is displayed.
+     */
     public OverlayCampSuggestionCommitteeView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
                                               Student student, Window mainWindow) {
         super(y, x, offsetY, offsetX, windowName);
@@ -103,6 +118,9 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
 
     }
 
+    /**
+     * Updates the suggestion list displayed in the view.
+     */
     public void updateSuggestionList() {
         suggestionArrayList = new ArrayList<>();
 
@@ -160,6 +178,9 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
 
     }
 
+    /**
+     * Handles the message loop for interaction with suggestions and buttons in the view.
+     */
     public void messageLoop() {
         super.messageLoop();
         if (exitButton.getPressed()) {
@@ -202,10 +223,19 @@ public class OverlayCampSuggestionCommitteeView extends WindowOverlayClass imple
         }
     }
 
+    /**
+     * Overrides the onExit method from the parent class.
+     * Performs additional actions when the overlay is exited.
+     */
     public void onExit() {
         super.onExit();
     }
 
+    /**
+     * Handles actions triggered upon completion of certain operations in the overlay view.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("View") && selectedSuggestion != null) {

@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents the view for creating a new camp.
+ * Extends the Window class and implements the ICallBack interface.
+ */
 public class CreateCampView extends Window implements ICallBack {
     WidgetLabel IDLabel;
     WidgetLabel nameLabel;
@@ -40,6 +44,11 @@ public class CreateCampView extends Window implements ICallBack {
     WidgetButton confirmButton;
     WidgetButton cancelButton;
     private int campListViewIndex;
+
+    /**
+     * Constructs a CreateCampView with a specific camp list view index.
+     * @param campListViewIndex The index for the camp list view.
+     */
     public CreateCampView(int campListViewIndex){
         super(30, 80, "Create Camp");
         WidgetLabel widgetLabel = new WidgetLabel(3, 3,40, "Create Camp", TEXT_ALIGNMENT.ALIGN_MID);
@@ -88,6 +97,10 @@ public class CreateCampView extends Window implements ICallBack {
         this.campListViewIndex = campListViewIndex;
     }
 
+    /**
+     * Handles the message loop for the creation of a new camp.
+     * Overrides the messageLoop method in the parent class.
+     */
     public void messageLoop() {
         super.messageLoop();
         if (schoolButton.getPressed()) {
@@ -121,10 +134,21 @@ public class CreateCampView extends Window implements ICallBack {
             switchToWindow = campListViewIndex;
         }
     }
+
+    /**
+     * Empty method as part of the ICallBack interface.
+     * Not implemented in this class.
+     */
     public void onExit(){
 
     }
 
+    /**
+     * Handles actions and updates after a window is finished.
+     * Overrides the onWindowFinished method in the ICallBack interface.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         schoolButton.setText(choseString);

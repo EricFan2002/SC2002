@@ -23,6 +23,10 @@ import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
 
+/**
+ * Represents a view specifically designed for staff members to manage camps.
+ * Extends the CampListView class, providing additional functionalities for staff users.
+ */
 public class CampListViewStaff extends CampListView {
     protected WidgetToggle toggleCreated = new WidgetToggle(1, 7, getLenX() / 4 - 1, "Created Camps");
     protected WidgetToggle toggleMySchool = new WidgetToggle(1 + getLenX() / 4, 7, getLenX() / 4 - 1,
@@ -39,6 +43,10 @@ public class CampListViewStaff extends CampListView {
     private int staffMainViewIndex;
     private String sortMethod = "By";
 
+    /**
+     * Constructs a CampListViewStaff with specific staff view index.
+     * @param staffMainViewIndex The index for the main staff view.
+     */
     public CampListViewStaff(int staffMainViewIndex) {
         super();
         this.staffMainViewIndex = staffMainViewIndex;
@@ -51,6 +59,12 @@ public class CampListViewStaff extends CampListView {
 
     private WidgetButton buttonPosition;
 
+    /**
+     * Customizes the filter for camps based on staff-specific criteria.
+     * Overrides the method in the parent class.
+     * @param list The original list of camps to be filtered.
+     * @return The filtered list of camps based on staff-specific criteria.
+     */
     protected CampList CustomFilter(CampList list) {
         if (toggleCreated.getPressed()) {
             if (UserController.getCurrentUser() instanceof Staff) {
@@ -87,6 +101,11 @@ public class CampListViewStaff extends CampListView {
     // options.add("Delete Camp");
     // options.add("Reply Enquiry");
     // options.add("View Suggestions");
+
+    /**
+     * Handles interactions and actions within the staff-specific camp view.
+     * Overrides the messageLoop method in the parent class.
+     */
     @Override
     public void messageLoop() {
         super.messageLoop();
@@ -200,6 +219,12 @@ public class CampListViewStaff extends CampListView {
     private int chose = -1;
     private String choseString = "";
 
+    /**
+     * Handles actions and decisions upon completion of specific windows or actions.
+     * Overrides the onWindowFinished method in the parent class.
+     * @param chose The chosen action identifier.
+     * @param choseString The string representation of the chosen action.
+     */
     @Override
     public void onWindowFinished(int chose, String choseString) {
         super.onWindowFinished(chose, choseString);
