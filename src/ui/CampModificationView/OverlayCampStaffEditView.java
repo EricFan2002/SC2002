@@ -13,14 +13,14 @@ import ui.windows.Window;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class OverlayCampInfoDisplayWithParticipantsViewEdit extends OverlayCampInfoDisplayWithParticipantsView {
+public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticipantsView {
 
     protected Camp camp;
     protected Staff staff;
     protected Window mainWindow;
     protected WidgetButton submitButton;
 
-    public OverlayCampInfoDisplayWithParticipantsViewEdit(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
+    public OverlayCampStaffEditView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
         super(x, y, offsetY, offsetX, windowName, camp);
         this.staff = staff;
         this.mainWindow = mainWindow;
@@ -43,7 +43,7 @@ public class OverlayCampInfoDisplayWithParticipantsViewEdit extends OverlayCampI
         if(!textBoxVis.getPressed()){
             if(camp.getAttendees().size() != 0 || camp.getCommittees().size() != 0){
                 OverlayNotification overlayNotification = new OverlayNotification(40, getY() / 2 - 8,
-                        getX() + getX() / 2 - 20, "Error", "Party Still Have Participants!", OverlayCampInfoDisplayWithParticipantsViewEdit.this);
+                        getX() + getX() / 2 - 20, "Error", "Party Still Have Participants!", OverlayCampStaffEditView.this);
                 mainWindow.addOverlay(overlayNotification);
                 textBoxVis.setPressed();
             }

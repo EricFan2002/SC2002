@@ -8,7 +8,7 @@ import entity.enquiry.EnquiryList;
 import entity.user.Staff;
 import ui.CampInfomationView.OverlayCampInfoDisplayView;
 import ui.OverlayActions.OverlayChooseBox;
-import ui.OverlayActions.OverlayTextInput;
+import ui.OverlayActions.OverlayTextInputAction;
 import ui.widgets.TEXT_ALIGNMENT;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetLabel;
@@ -120,9 +120,9 @@ public class OverlayCampInfoDisplayEnquiriesStaff extends OverlayCampInfoDisplay
         }
         if (replyEnq) {
             replyEnq = false;
-            OverlayTextInput overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
+            OverlayTextInputAction overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
                     "Info", "Reply Enquiry:", OverlayCampInfoDisplayEnquiriesStaff.this);
-            mainWindow.addOverlay(overlayTextInput);
+            mainWindow.addOverlay(overlayTextInputAction);
         }
         if (exitButton.getPressed()) {
             exitButton.clearPressed();

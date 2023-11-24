@@ -13,7 +13,7 @@ import entity.suggestion.Suggestion;
 import entity.suggestion.SuggestionStatus;
 import entity.user.Staff;
 import entity.user.Student;
-import ui.OverlayActions.OverlayTextInput;
+import ui.OverlayActions.OverlayTextInputAction;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -54,7 +54,7 @@ public class CampListView extends Window implements ICallBack {
     protected int filter4Index = 0;
     protected ArrayList<Camp> displayCamps;
     protected WidgetButton backButton = new WidgetButton(1, getY() - 2, 10, "Back");
-    private OverlayTextInput overlayTextInput;
+    private OverlayTextInputAction overlayTextInputAction;
     protected CampList campListForExport;
 
     public CampListView() {
@@ -258,9 +258,9 @@ public class CampListView extends Window implements ICallBack {
     public void messageLoop() {
         super.messageLoop();
         refreshList(false);
-        if(overlayTextInput != null){
-            addOverlay(overlayTextInput);
-            overlayTextInput = null;
+        if(overlayTextInputAction != null){
+            addOverlay(overlayTextInputAction);
+            overlayTextInputAction = null;
         }
         // System.out.println("Message loop");
 
@@ -272,20 +272,20 @@ public class CampListView extends Window implements ICallBack {
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("Camp Report")) {
-            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+            overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Camps Participant Report] to File Name:", CampListView.this, 220);
         } else if (choseString.equals("Performance Report")) {
-            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+            overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Performance Report] to File Name:", CampListView.this, 221);
         } else if (choseString.equals("Enquiries Report")) {
-            overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+            overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Enquiries Report] to File Name:", CampListView.this, 222);
         }
         else if(choseString.equals("Performance Report")){
-            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
+            overlayTextInputAction = new OverlayTextInputAction(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
         }
         else if(choseString.equals("Enquiries Report")){
-            overlayTextInput = new OverlayTextInput(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Enquiries Report] to File Name:", CampListView.this, 222);
+            overlayTextInputAction = new OverlayTextInputAction(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Enquiries Report] to File Name:", CampListView.this, 222);
         }
         if(campListForExport != null) {
             if (chose == 220) {

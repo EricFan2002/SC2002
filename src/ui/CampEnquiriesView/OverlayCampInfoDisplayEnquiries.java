@@ -8,7 +8,7 @@ import entity.user.Student;
 import ui.CampInfomationView.OverlayCampInfoDisplayView;
 import ui.OverlayActions.OverlayChooseBox;
 import ui.OverlayActions.OverlayNotification;
-import ui.OverlayActions.OverlayTextInput;
+import ui.OverlayActions.OverlayTextInputAction;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -156,9 +156,9 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayView 
         }
         if (editEnq) {
             editEnq = false;
-            OverlayTextInput overlayTextInput = new OverlayTextInput(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
+            OverlayTextInputAction overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() + getX() / 2 - 30,
                     "Info", "Change Enquiry To:", OverlayCampInfoDisplayEnquiries.this, selectedEnq.getQuestion());
-            mainWindow.addOverlay(overlayTextInput);
+            mainWindow.addOverlay(overlayTextInputAction);
         }
         if (exitButton.getPressed()) {
             exitButton.clearPressed();

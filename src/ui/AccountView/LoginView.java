@@ -77,17 +77,6 @@ public class LoginView extends Window implements ICallBack { ;
         if(forgetPasswordButton.getPressed()){
             forgetPasswordButton.clearPressed();
             switchToWindow = staffMainViewIndex;
-//            List<String> options = new ArrayList<String>();
-//            options.add("SCSE");
-//            options.add("NBS");
-//            options.add("MAE");
-//            options.add("SSS");
-//            options.add("MSE");
-//            options.add("SBS");
-//            options.add("CEE");
-//            OverlayChooseBox overlayTestClass = new OverlayChooseBox(26,  forgetPasswordButton.getY(), forgetPasswordButton.getX(), "Choose School", options, LoginView.this);
-//            addOverlay(overlayTestClass);
-//            forgetPasswordButton.clearPressed();
         }
     }
     public void onExit(){

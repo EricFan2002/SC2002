@@ -5,7 +5,7 @@ import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampList;
 import entity.user.Staff;
-import ui.CampModificationView.OverlayCampInfoDisplayWithParticipantsViewEdit;
+import ui.CampModificationView.OverlayCampStaffEditView;
 import ui.CampEnquiriesView.OverlayCampInfoDisplayEnquiriesStaff;
 import ui.CampInfomationView.OverlayCampInfoDisplayWithParticipantsViewStudentView;
 import ui.CampSuggestionView.OverlayCampSuggestionCommitteeView;
@@ -102,7 +102,7 @@ public class CampListViewStaff extends CampListView {
                         currentTime, staff.getFaculty(), "", staff, 0);
                 toBeDestroyed = newCamp;
                 RepositoryCollection.getCampRepository().add(newCamp);
-                OverlayCampInfoDisplayWithParticipantsViewEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayWithParticipantsViewEdit(
+                OverlayCampStaffEditView overlayCampInfoDisplayEdit = new OverlayCampStaffEditView(
                         getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Create New Camp", newCamp,
                         (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);
@@ -151,7 +151,7 @@ public class CampListViewStaff extends CampListView {
             choseString = "";
         } else if (chose == 1 && choseString.equals("Edit Camp")) { // join
             if (UserController.getCurrentUser() instanceof Staff) {
-                OverlayCampInfoDisplayWithParticipantsViewEdit overlayCampInfoDisplayEdit = new OverlayCampInfoDisplayWithParticipantsViewEdit(
+                OverlayCampStaffEditView overlayCampInfoDisplayEdit = new OverlayCampStaffEditView(
                         getLenX() / 2 - 2, getY(), 1, getLenX() / 2 + 2, "Edit Camp " + selectedCamp.getName(),
                         selectedCamp, (Staff) UserController.getCurrentUser(), CampListViewStaff.this);
                 addOverlay(overlayCampInfoDisplayEdit);

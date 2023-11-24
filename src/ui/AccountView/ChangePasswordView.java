@@ -62,6 +62,7 @@ public class ChangePasswordView extends Window {
         return specialCharacters.indexOf(ch) != -1;
     }
 
+    @Override
     public void messageLoop() {
         super.messageLoop();
         if(confirmButton.getPressed()){

@@ -9,7 +9,7 @@ import ui.windows.WindowOverlayClass;
 
 import java.util.List;
 
-public class OverlayTextInput extends WindowOverlayClass {
+public class OverlayTextInputAction extends WindowOverlayClass {
     WidgetButton cancelButton;
     private int chose;
     private String choseString;
@@ -21,7 +21,7 @@ public class OverlayTextInput extends WindowOverlayClass {
     private int returnCode = 255;
     private boolean abord = false;
 
-    public OverlayTextInput(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow) {
+    public OverlayTextInputAction(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow) {
         super(12, x, offsetY, offsetX, windowName);
         WidgetLabel widgetLabel = new WidgetLabel(3, 3, x-10, prompt);
         addWidget(widgetLabel);
@@ -34,12 +34,12 @@ public class OverlayTextInput extends WindowOverlayClass {
         this.callbackWindow = callbackWindow;
     }
 
-    public OverlayTextInput(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow, int returnCode) {
+    public OverlayTextInputAction(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow, int returnCode) {
         this(x,offsetY, offsetX,windowName,prompt,callbackWindow);
         this.returnCode = returnCode;
     }
 
-    public OverlayTextInput(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow, String loadText) {
+    public OverlayTextInputAction(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow, String loadText) {
         this(x,offsetY, offsetX,windowName,prompt,callbackWindow);
         textInput.setText(loadText);
     }
