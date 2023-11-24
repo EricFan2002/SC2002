@@ -1,0 +1,9 @@
+Camp ID,Camp Name,Sender ID,Sender Name,Question,Answered by Name,Answered by ID,Answer
+C004,1792 United States Presidential Election,att1,John Doe,Hey What time is it?,,,
+C003,Chinese New Year,att1,John Doe,What is the date today?,staff,John Cena,Hello
+C002,Christmas Party,att3,John Smith,What is the camp schedule?,staff,John Cena,OK
+C007,Christmas Party NEWq,att2,Jane Doe,Hello what time is it,,,
+C001,Soccer Match,att1,John Doe,How much is the camp fee?,,,
+C001,Soccer Match,att2,Jane Doe,What is the camp schedule?,,,
+C001,Soccer Match,att1,John Doe,What time is it 24,,,
+C001,Soccer Match,att2,Jane Doe,What time is it?,,,

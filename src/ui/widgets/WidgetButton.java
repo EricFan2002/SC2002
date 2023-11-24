@@ -8,7 +8,7 @@ import com.googlecode.lanterna.input.KeyType;
  * WidgetButton is a UI widget that represents a button. It extends the Widget class
  * and implements IClickable, ITextInput, and ISelectable interfaces.
  */
-public class WidgetButton extends Widget implements IClickable, ITextInput, ISelectable{
+public class WidgetButton extends Widget implements ITextInput, ISelectable{
     private boolean pressed;
 
     /**

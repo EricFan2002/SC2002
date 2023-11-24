@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>entity.interfaces.ISortableByName</OriginalElement>
+  <nodes>
+    <node x="3916.2391916540364" y="936.6442178170382">entity.enquiry.EnquiryList</node>
+    <node x="5771.387262773786" y="1630.344215718509">entity.report.CampReport</node>
+    <node x="3436.268472815553" y="936.6442178170382">entity.suggestion.SuggestionList</node>
+    <node x="4339.205651341018" y="1379.2245389333957">entity.user.User</node>
+    <node x="3445.268472815553" y="1368.8473582370739">entity.suggestion.Suggestion</node>
+    <node x="5804.356185883113" y="419.0409410900015">entity.interfaces.ISerializeable</node>
+    <node x="2308.095626578763" y="1368.8473582370739">entity.camp.Camp</node>
+    <node x="3436.268472815553" y="537.7548786029707">entity.interfaces.ISortableByStartingDate</node>
+    <node x="2885.122866689827" y="419.0409410900015">entity.interfaces.IFilterableBySchool</node>
+    <node x="5302.505076294337" y="1652.344215718509">entity.report.EnquiryReport</node>
+    <node x="4294.205651341018" y="1002.6442178170382">entity.user.UserList</node>
+    <node x="1633.5732269274838" y="419.0409410900015">entity.interfaces.ISortableByRegistrationCloseDate</node>
+    <node x="4634.386461413784" y="1652.344215718509">entity.user.Student</node>
+    <node x="2282.5355358052952" y="532.9764154700614">entity.interfaces.IFilterableByAttendee</node>
+    <node x="2657.869297841461" y="537.7548786029707">entity.interfaces.IFilterableByDateRange</node>
+    <node x="3444.814320388349" y="2948.256301920185">entity.user.UserFactory</node>
+    <node x="3812.288018694784" y="537.7548786029707">entity.interfaces.IFilterableByCamp</node>
+    <node x="3241.1205139469757" y="419.0409410900015">entity.interfaces.IFilterableByStudent</node>
+    <node x="4202.062526284863" y="537.7548786029707">entity.interfaces.IFilterableByStatus</node>
+    <node x="5771.387262773786" y="1358.6242724832366">entity.report.Report</node>
+    <node x="2997.3652642069464" y="750.3470435151211">entity.camp.CampList</node>
+    <node x="5856.356185883113" y="699.2959157166898">entity.RepositoryList</node>
+    <node x="3075.538449276354" y="537.7548786029707">entity.interfaces.ISortableByEndDate</node>
+    <node x="5536.9465093121935" y="1876.4135940904314">entity.report.PerformanceReport</node>
+    <node x="3636.143398988926" y="419.0409410900015">entity.interfaces.IFilterableByID</node>
+    <node x="2510.608751248302" y="419.0409410900015">entity.interfaces.ISortableByLocation</node>
+    <node x="1371.4126213592235" y="419.0409410900015">entity.interfaces.ISortableByID</node>
+    <node x="3994.0545058549046" y="419.0409410900015">entity.interfaces.IFilterableBySender</node>
+    <node x="1313.8636180224769" y="1564.806267089119">entity.RepositoryCollection</node>
+    <node x="1881.3942443490428" y="532.9764154700614">entity.interfaces.ISortableByName</node>
+    <node x="5539.47363780605" y="537.7548786029707">entity.interfaces.IFilterableByAnsweredBy</node>
+    <node x="3051.465667445971" y="2915.454047998149">entity.suggestion.SuggestionStatus</node>
+    <node x="1459.9750992443985" y="537.7548786029707">entity.interfaces.IFilterableByVisibility</node>
+    <node x="2033.3397549266833" y="419.0409410900015">entity.interfaces.IFilterableByCampCommittee</node>
+    <node x="3046.0757336545585" y="1368.8473582370739">entity.camp.CampDetails</node>
+    <node x="1633.5732269274838" y="217.63470455672024">entity.interfaces.ITaggedItem</node>
+    <node x="3946.7391916540364" y="1368.8473582370739">entity.enquiry.Enquiry</node>
+    <node x="4653.386461413784" y="1434.2245389333957">entity.user.Staff</node>
+    <node x="5247.202169337255" y="419.0409410900015">entity.interfaces.IFilterableByRegistrationDate</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="entity.user.UserList" target="entity.interfaces.IFilterableByID" relationship="REALIZATION">
+      <point x="3.138428955935524E-4" y="59.50001385891892" />
+      <point x="4440.705965183914" y="1173.0" />
+      <point x="3755.6438623104127" y="1173.0" />
+      <point x="-14.999536678513323" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.camp.CampDetails" target="entity.interfaces.ITaggedItem" relationship="REALIZATION">
+      <point x="2.663454415596789E-4" y="-346.0003582370739" />
+      <point x="3182.076" y="1341.0" />
+      <point x="2476.0" y="1341.0" />
+      <point x="2476.0" y="1313.0" />
+      <point x="1278.913" y="1313.0" />
+      <point x="1278.913" y="255.135" />
+      <point x="-78.50022692748371" y="2.9544327975372653E-4" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByCamp" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="2.0814097206312E-4" y="-26.49987860297074" />
+      <point x="3957.288226835756" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByStartingDate" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-4.4230895673535997E-4" y="-26.49987860297074" />
+      <point x="3582.7680305065965" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByLocation" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-1.664063861426257E-4" y="26.500058909998472" />
+      <point x="2644.6085848419157" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.interfaces.IFilterableByAnsweredBy" relationship="REALIZATION">
+      <point x="14.999690055801693" y="-92.50021781703822" />
+      <point x="4077.738881709838" y="912.0" />
+      <point x="5700.974" y="912.0" />
+      <point x="3.6219395042280667E-4" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByEndDate" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-2.257001901853073E-4" y="-26.49987860297074" />
+      <point x="3209.038223576164" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByRegistrationCloseDate" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="3.7864077626181825E-4" y="26.500058909998472" />
+      <point x="1809.07360556826" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="128.8536900558015" y="92.49978218296178" />
+      <point x="4191.5928817098375" y="1250.434378375217" />
+      <point x="5950.856" y="1250.434378375217" />
+      <point x="-1.8588311286293902E-4" y="127.50008428331023" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByDateRange" relationship="REALIZATION">
+      <point x="-157.0" y="30.0" />
+      <point x="1338.9126213592235" y="993.8470435151211" />
+      <point x="1338.9126213592235" y="156.8578066545598" />
+      <point x="2847.8690231014402" y="156.8578066545598" />
+      <point x="14.999725259979186" y="-26.5" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByDateRange" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-2.7474002081362414E-4" y="-26.49987860297074" />
+      <point x="2832.8690231014402" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByRegistrationDate" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-1.6933725510170916E-4" y="26.500058909998472" />
+      <point x="5421.702" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByName" relationship="REALIZATION">
+      <point x="149.49999999999977" y="-213.5" />
+      <point x="3303.8652642069464" y="678.7404893000061" />
+      <point x="1910.8500918972886" y="678.7404893000061" />
+      <point x="-96.04415245175414" y="26.5" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByStudent" relationship="REALIZATION">
+      <point x="-157.0" y="74.99999999999989" />
+      <point x="1293.9126213592235" y="1038.847043515121" />
+      <point x="1293.9126213592235" y="111.8578066545598" />
+      <point x="3398.6205139469757" y="111.8578066545598" />
+      <point x="0.0" y="-26.5" />
+    </edge>
+    <edge source="entity.user.User" target="entity.interfaces.ITaggedItem" relationship="REALIZATION">
+      <point x="3.107604879915016E-4" y="-160.49952576037276" />
+      <point x="4440.705962101506" y="1313.0" />
+      <point x="2983.5" y="1313.0" />
+      <point x="2983.5" y="489.541" />
+      <point x="3118.177" y="489.541" />
+      <point x="3118.177" y="255.13489790216045" />
+      <point x="78.49977307251629" y="1.9334544020921385E-4" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.interfaces.IFilterableByCamp" relationship="REALIZATION">
+      <point x="-3.495115438454377E-4" y="-92.5000999970415" />
+      <point x="3607.7681233040094" y="762.0" />
+      <point x="3957.288226835756" y="762.0" />
+      <point x="2.0814097206312E-4" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.enquiry.Enquiry" target="entity.interfaces.ITaggedItem" relationship="REALIZATION">
+      <point x="1.4392552930075908E-4" y="-215.49967156018033" />
+      <point x="4062.7393355795657" y="1313.0" />
+      <point x="2983.5" y="1313.0" />
+      <point x="2983.5" y="489.541" />
+      <point x="3118.177" y="489.541" />
+      <point x="3118.177" y="255.13489790216045" />
+      <point x="78.49977307251629" y="1.9334544020921385E-4" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByStartingDate" relationship="REALIZATION">
+      <point x="156.99999999999977" y="-132.2260999970414" />
+      <point x="2754.125" y="831.6209435180797" />
+      <point x="2754.125" y="721.7959157166898" />
+      <point x="3582.768472815553" y="721.7959157166898" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByRegistrationCloseDate" relationship="REALIZATION">
+      <point x="-14.999621359223738" y="-213.5" />
+      <point x="3139.3656428477225" y="619.3835205435214" />
+      <point x="1794.07360556826" y="619.3835205435214" />
+      <point x="-14.999621359223738" y="26.5" />
+    </edge>
+    <edge source="entity.RepositoryList" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-1.8588311286293902E-4" y="-127.49991571668977" />
+      <point x="5950.856" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.interfaces.IFilterableByID" relationship="REALIZATION">
+      <point x="-3.0994419830676634E-4" y="92.49978218296178" />
+      <point x="4062.738881709838" y="1173.0" />
+      <point x="3755.6438623104127" y="1173.0" />
+      <point x="-14.999536678513323" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.report.CampReport" target="entity.report.Report" relationship="GENERALIZATION">
+      <point x="-146.50026277378583" y="4.087069012257416E-4" />
+      <point x="5684.0" y="1702.8446244254103" />
+      <point x="5684.0" y="1409.124" />
+      <point x="-146.50026277378583" y="-2.724832365856855E-4" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.interfaces.IFilterableBySender" relationship="REALIZATION">
+      <point x="-139.0003099441983" y="-92.50021781703822" />
+      <point x="3923.738881709838" y="848.0" />
+      <point x="4154.55404620288" y="848.0" />
+      <point x="14.999540347975199" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.user.Student" target="entity.user.User" relationship="GENERALIZATION">
+      <point x="-4.6141378334141336E-4" y="-237.50021571850903" />
+      <point x="4791.386" y="1605.0" />
+      <point x="4664.0" y="1605.0" />
+      <point x="4664.0" y="1548.4698113617924" />
+      <point x="100.06256477333682" y="10.245272428396675" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByID" relationship="REALIZATION">
+      <point x="-157.0" y="0.0" />
+      <point x="1470.913" y="963.8470435151211" />
+      <point x="-14.99962135922351" y="26.5" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByName" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="2.2618902221438475E-4" y="-26.49987860297074" />
+      <point x="2006.894470538065" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.camp.Camp" target="entity.interfaces.ITaggedItem" relationship="REALIZATION">
+      <point x="3.7342123687267303E-4" y="-313.0003582370739" />
+      <point x="2465.096" y="1341.0" />
+      <point x="2476.0" y="1341.0" />
+      <point x="2476.0" y="1313.0" />
+      <point x="1278.913" y="1313.0" />
+      <point x="1278.913" y="255.135" />
+      <point x="-78.50022692748371" y="2.9544327975372653E-4" />
+    </edge>
+    <edge source="entity.suggestion.Suggestion" target="entity.interfaces.ITaggedItem" relationship="REALIZATION">
+      <point x="2.7914850807064795E-4" y="-226.49967156018033" />
+      <point x="3607.7687519640613" y="1313.0" />
+      <point x="2983.5" y="1313.0" />
+      <point x="2983.5" y="489.541" />
+      <point x="3118.177" y="489.541" />
+      <point x="3118.177" y="255.13489790216045" />
+      <point x="78.49977307251629" y="1.9334544020921385E-4" />
+    </edge>
+    <edge source="entity.report.Report" target="entity.interfaces.ISerializeable" relationship="REALIZATION">
+      <point x="-2.6277378583472455E-4" y="-50.500272483236586" />
+      <point x="5917.887" y="1251.2649320983155" />
+      <point x="6070.0" y="1251.2649320983155" />
+      <point x="6070.0" y="915.5" />
+      <point x="6069.898907862305" y="915.5" />
+      <point x="119.04272197919272" y="29.46840273612412" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.interfaces.IFilterableBySender" relationship="REALIZATION">
+      <point x="14.999650488456155" y="-92.5000999970415" />
+      <point x="3622.7681233040094" y="848.0" />
+      <point x="4154.55404620288" y="848.0" />
+      <point x="14.999540347975199" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.user.Staff" target="entity.user.User" relationship="GENERALIZATION">
+      <point x="-4.6141378334141336E-4" y="61.5004610666042" />
+      <point x="4791.386" y="1605.0" />
+      <point x="4664.0" y="1605.0" />
+      <point x="4664.0" y="1549.0521528427905" />
+      <point x="102.39193069732937" y="10.827613909394813" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByVisibility" relationship="REALIZATION">
+      <point x="-120.74239751711957" y="-213.5" />
+      <point x="3033.622866689827" y="678.7404893000061" />
+      <point x="1770.4750992443985" y="678.7404893000061" />
+      <point x="151.5" y="26.5" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByStudent" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-4.668581232181168E-4" y="26.500058909998472" />
+      <point x="3398.6200470888525" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.interfaces.IFilterableByStatus" relationship="REALIZATION">
+      <point x="-34.64630994419849" y="-92.50021781703822" />
+      <point x="4028.092881709838" y="891.0" />
+      <point x="4335.562531722644" y="891.0" />
+      <point x="5.437780600914266E-6" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableBySchool" relationship="REALIZATION">
+      <point x="-157.0" y="44.999999999999886" />
+      <point x="1323.9126213592235" y="1008.847043515121" />
+      <point x="1323.9126213592235" y="141.8578066545598" />
+      <point x="3033.622866689827" y="141.8578066545598" />
+      <point x="0.0" y="-26.5" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.interfaces.IFilterableByID" relationship="REALIZATION">
+      <point x="-3.495115438454377E-4" y="92.49990000295861" />
+      <point x="3607.7681233040094" y="1173.0" />
+      <point x="3755.6438623104127" y="1173.0" />
+      <point x="-14.999536678513323" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByID" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="4.6332148667715956E-4" y="26.500058909998472" />
+      <point x="3770.6438623104127" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="40.161131125546945" y="134.23671233495963" />
+      <point x="3204.6333664264325" y="1098.0837558500807" />
+      <point x="3204.6333664264325" y="1251.4734016007303" />
+      <point x="5950.856" y="1251.4734016007303" />
+      <point x="-1.8588311286293902E-4" y="127.50008428331023" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByCampCommittee" relationship="REALIZATION">
+      <point x="156.99999999999977" y="-162.2260999970414" />
+      <point x="2232.839453955809" y="801.6209435180797" />
+      <point x="14.999699029125622" y="26.5" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByStatus" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="5.437780600914266E-6" y="-26.49987860297074" />
+      <point x="4335.562531722644" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableBySender" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-4.5965202480147127E-4" y="26.500058909998472" />
+      <point x="4139.55404620288" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.interfaces.IFilterableByStatus" relationship="REALIZATION">
+      <point x="-15.000349511543845" y="-92.5000999970415" />
+      <point x="3592.7681233040094" y="891.0" />
+      <point x="4335.562531722644" y="891.0" />
+      <point x="5.437780600914266E-6" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByAttendee" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-3.23779851441941E-4" y="-26.49987860297074" />
+      <point x="2443.535212025444" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.ISortableByID" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="3.786407764891919E-4" y="26.500058909998472" />
+      <point x="1485.913" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByVisibility" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-2.2384210410564265E-4" y="-26.49987860297074" />
+      <point x="1618.9748754022944" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByAnsweredBy" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="3.6219395042280667E-4" y="-26.49987860297074" />
+      <point x="5700.974" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.interfaces.IFilterableByAnsweredBy" relationship="REALIZATION">
+      <point x="29.999650488456155" y="-92.5000999970415" />
+      <point x="3637.7681233040094" y="912.0" />
+      <point x="5700.974" y="912.0" />
+      <point x="3.6219395042280667E-4" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByLocation" relationship="REALIZATION">
+      <point x="-157.0" y="15.0" />
+      <point x="1353.9126213592235" y="978.8470435151211" />
+      <point x="1353.9126213592235" y="401.5409410900015" />
+      <point x="2644.608751248302" y="401.5409410900015" />
+      <point x="0.0" y="-26.5" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableByCampCommittee" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-3.0097087437752634E-4" y="26.500058909998472" />
+      <point x="2217.839453955809" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.report.EnquiryReport" target="entity.report.Report" relationship="GENERALIZATION">
+      <point x="146.4999237056627" y="4.087069012257416E-4" />
+      <point x="5684.0" y="1702.8446244254103" />
+      <point x="5684.0" y="1409.124" />
+      <point x="-146.50026277378583" y="-2.724832365856855E-4" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByID" relationship="REALIZATION">
+      <point x="157.00037864077626" y="-9.999704138863308E-5" />
+      <point x="2328.457" y="963.8469435180797" />
+      <point x="2328.457" y="1173.0" />
+      <point x="3755.6438623104127" y="1173.0" />
+      <point x="-14.999536678513323" y="26.500058909998472" />
+    </edge>
+    <edge source="entity.RepositoryList" target="entity.interfaces.ISerializeable" relationship="REALIZATION">
+      <point x="94.49981411688714" y="8.42833102296936E-5" />
+      <point x="6070.0" y="826.796" />
+      <point x="6070.0" y="915.5" />
+      <point x="6069.898907862305" y="915.5" />
+      <point x="119.04272197919272" y="25.555156131208378" />
+    </edge>
+    <edge source="entity.interfaces.IFilterableBySchool" target="entity.interfaces.ITaggedItem" relationship="DEPENDENCY">
+      <point x="-3.970377338191611E-4" y="26.500058909998472" />
+      <point x="3033.622469652093" y="505.0" />
+      <point x="1712.073" y="505.0" />
+      <point x="-2.2692748370900517E-4" y="37.50019334544021" />
+    </edge>
+    <edge source="entity.camp.CampDetails" target="entity.camp.CampList" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="3182.0757336545585" y="1410.91227078974" />
+      <point x="3143.4380843539025" y="1410.91227078974" />
+      <point x="3143.4380843539025" y="1442.5330987377374" />
+      <point x="3118.566387157768" y="1370.091758057199" />
+      <point x="-35.04121583658343" y="406.244714542078" />
+    </edge>
+    <edge source="entity.report.PerformanceReport" target="entity.report.Report" relationship="GENERALIZATION">
+      <point x="-3.3977813200181117E-4" y="-61.499591293098774" />
+      <point x="5683.4461695340615" y="1639.5" />
+      <point x="5684.0" y="1639.5" />
+      <point x="5684.0" y="1409.124" />
+      <point x="-146.50026277378583" y="-2.724832365856855E-4" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.ISortableByEndDate" relationship="REALIZATION">
+      <point x="-157.0" y="59.999999999999886" />
+      <point x="1308.9126213592235" y="1023.847043515121" />
+      <point x="1308.9126213592235" y="126.8578066545598" />
+      <point x="3224.038223576164" y="126.8578066545598" />
+      <point x="14.999774299809815" y="-26.5" />
+    </edge>
+    <edge source="entity.enquiry.EnquiryList" target="entity.interfaces.IFilterableByCamp" relationship="REALIZATION">
+      <point x="-3.0994419830676634E-4" y="-92.50021781703822" />
+      <point x="4062.738881709838" y="762.0" />
+      <point x="3957.288226835756" y="762.0" />
+      <point x="2.0814097206312E-4" y="26.50012139702926" />
+    </edge>
+    <edge source="entity.camp.CampList" target="entity.interfaces.IFilterableByAttendee" relationship="REALIZATION">
+      <point x="156.99999999999977" y="-147.2260999970414" />
+      <point x="2443.5355358052952" y="816.6209435180797" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="entity.camp.Camp" target="entity.camp.CampDetails" relationship="GENERALIZATION">
+      <point x="157.0" y="33.0" />
+      <point x="-136.0" y="0.0" />
+    </edge>
+    <edge source="entity.suggestion.SuggestionList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="14.999650488456155" y="92.49990000295861" />
+      <point x="3622.7681233040094" y="1250.434378375217" />
+      <point x="5950.856" y="1250.434378375217" />
+      <point x="-1.8588311286293902E-4" y="127.50008428331023" />
+    </edge>
+    <edge source="entity.user.UserList" target="entity.RepositoryList" relationship="GENERALIZATION">
+      <point x="-14.999686157104406" y="59.50001385891892" />
+      <point x="4425.705965183914" y="1250.434378375217" />
+      <point x="5950.856" y="1250.434378375217" />
+      <point x="-1.8588311286293902E-4" y="127.50008428331023" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3901754290434403" showDependencies="false" x="2742.7680317336653" y="1344.9514582390511" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -3,6 +3,7 @@ package controller.deserializer;
 import java.util.ArrayList;
 import java.util.Date;
 
+import controller.camp.CampStatusMonitorController;
 import entity.camp.Camp;
 import entity.camp.CampList;
 
@@ -10,7 +11,7 @@ import entity.user.Staff;
 import entity.user.Student;
 import entity.user.UserList;
 
-public class CampDeserializer {
+public class CampDeserializer extends CampStatusMonitorController {
 
     public static CampList deserialize(ArrayList<ArrayList<String>> data, UserList userList) {
 

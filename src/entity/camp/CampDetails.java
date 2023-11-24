@@ -9,7 +9,7 @@ import entity.interfaces.ITaggedItem;
  * start and end dates, registration closure date, school, location, and the total number of slots.
  * This class implements the ITaggedItem interface.
  */
-public class CampDetails implements ITaggedItem {
+public class CampDetails extends CampList implements ITaggedItem {
     protected String ID;
     protected String name;
     protected String description;
