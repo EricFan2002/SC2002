@@ -10,10 +10,6 @@ public class PerformanceReport extends Report {
     private static String[] fields = { "Camp ID", "Camp", "Student ID", "Student", "Points" };
     private CampList camps;
 
-    public static String[] getFields() {
-        return fields;
-    }
-
     public PerformanceReport(CampList camps) {
         super();
         this.camps = new CampList();
