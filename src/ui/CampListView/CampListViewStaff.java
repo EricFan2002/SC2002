@@ -75,7 +75,7 @@ public class CampListViewStaff extends CampListView {
         if (toggleMySchool.getPressed()) {
             if (UserController.getCurrentUser() instanceof Staff) {
                 Staff staff = (Staff) UserController.getCurrentUser();
-                list = list.filterBySchool(staff.getFaculty());
+                list = list.filterBySchool(staff.getSchool());
             }
         }
         if (sortMethod.equals("By Camp Name")) {
@@ -118,7 +118,7 @@ public class CampListViewStaff extends CampListView {
                 Date currentTime = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
                 createNewCampButton.clearPressed();
                 Camp newCamp = new Camp(String.valueOf(currentTimeMillis()), "", "", true, currentTime, currentTime,
-                        currentTime, staff.getFaculty(), "", staff, 0);
+                        currentTime, staff.getSchool(), "", staff, 0);
                 toBeDestroyed = newCamp;
                 RepositoryCollection.getCampRepository().add(newCamp);
                 OverlayCampStaffEditView overlayCampInfoDisplayEdit = new OverlayCampStaffEditView(

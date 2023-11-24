@@ -5,12 +5,13 @@ import java.util.List;
 
 import entity.RepositoryList;
 import entity.interfaces.IFilterableByID;
+import entity.interfaces.IFilterableBySchool;
 
 /**
  * The {@code UserList} class represents a list of user objects.
  * It extends the {@code RepositoryList} class and implements the {@code IFilterableByID} and {@code ISerializeable} interfaces.
  */
-public class UserList extends RepositoryList<User> implements IFilterableByID<User> {
+public class UserList extends RepositoryList<User> implements IFilterableByID<User>, IFilterableBySchool<User> {
 
     /**
      * Constructs a UserList object with the specified list of users.
@@ -42,6 +43,15 @@ public class UserList extends RepositoryList<User> implements IFilterableByID<Us
             }
         }
         return result;
+    }
+
+    public UserList filterBySchool(String school){
+        UserList result = new UserList();
+        for(User user: super.all){
+            if(user.getSchool() == school){
+                result.add(user);
+            }
+        }
     }
 
     /**
@@ -77,7 +87,7 @@ public class UserList extends RepositoryList<User> implements IFilterableByID<Us
             record.add(user.getID());
             record.add(user.getName());
             record.add(user.getPassword());
-            record.add(user.getFaculty());
+            record.add(user.getSchool());
             record.add(userType);
             record.add(pointString);
 

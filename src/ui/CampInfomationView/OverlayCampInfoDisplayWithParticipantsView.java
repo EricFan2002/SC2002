@@ -29,14 +29,14 @@ public class OverlayCampInfoDisplayWithParticipantsView extends OverlayCampInfoD
         ArrayList<ArrayList<String>> committees = new ArrayList<>();
         for(Student user : camp.getCommittees()){
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add(user.getName() + " [" + user.getID() + ", " + user.getFaculty() + "]");
+            tmp.add(user.getName() + " [" + user.getID() + ", " + user.getSchool() + "]");
             committees.add(tmp);
         }
 
         ArrayList<ArrayList<String>> participants = new ArrayList<>();
         for(Student user : camp.getAttendees()){
             ArrayList<String> tmp = new ArrayList<String>();
-            tmp.add(user.getName() + " [" + user.getID() + ", " + user.getFaculty() + "]");
+            tmp.add(user.getName() + " [" + user.getID() + ", " + user.getSchool() + "]");
             participants.add(tmp);
         }
 

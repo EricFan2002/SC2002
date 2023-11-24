@@ -1,7 +1,6 @@
 package ui.LandingView;
 
 import controller.user.UserController;
-import entity.RepositoryCollection;
 import entity.user.Student;
 import ui.widgets.TEXT_ALIGNMENT;
 import ui.widgets.Widget;
@@ -129,7 +128,7 @@ public class StudentMainView extends Window {
         if (UserController.getCurrentUser() != null) {
             userName = UserController.getCurrentUser().getName();
             widgetLabel.setText("Welcome, " + userName + "!");
-            facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getFaculty());
+            facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getSchool());
             pointLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :
                     "You have " + (((Student) UserController.getCurrentUser()).getPoints()) + " points as a committee member in");
             campLabel.setText(((Student) UserController.getCurrentUser()).getCommitteeCampList().isEmpty() ? "" :

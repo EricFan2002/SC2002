@@ -120,7 +120,7 @@ public class StaffMainView extends Window {
         if (UserController.getCurrentUser() != null) {
             userName = UserController.getCurrentUser().getName();
             widgetLabel.setText("Welcome, " + userName + "!");
-            facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getFaculty());
+            facultyLabel.setText("Faculty: " + UserController.getCurrentUser().getSchool());
             greetingLabel.setText("What would you like to do today?");
         }
         if (logoutButton.getPressed()) {

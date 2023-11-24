@@ -60,7 +60,7 @@ public class UserController {
         // Update the old user with the new user information
         oldUser.setName(newUser.getName());
         oldUser.setPassword(newUser.getPassword());
-        oldUser.setFaculty(newUser.getFaculty());
+        oldUser.setSchool(newUser.getSchool());
     }
 
     /**
