@@ -9,7 +9,6 @@ import entity.interfaces.IFilterableByAnsweredBy;
 import entity.interfaces.IFilterableByCamp;
 import entity.interfaces.IFilterableByID;
 import entity.interfaces.IFilterableByStatus;
-import entity.interfaces.ISerializeable;
 import entity.interfaces.IFilterableBySender;
 import entity.user.User;
 

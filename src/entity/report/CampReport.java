@@ -12,10 +12,6 @@ public class CampReport extends Report {
     private CampList camp;
     private int exportOption; // 0th bit: include committees, 1st bit: include attendees
 
-    public static String[] getFields() {
-        return fields;
-    }
-
     public CampReport(CampList camp, boolean includeCommittees, boolean includeAttendees) {
         super();
         this.camp = new CampList();

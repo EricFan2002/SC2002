@@ -2,14 +2,10 @@ package entity.report;
 
 import java.util.ArrayList;
 
-import entity.interfaces.ISerializeable;
+import entity.interfaces.ISerializable;
 
-public abstract class Report implements ISerializeable {
+public abstract class Report implements ISerializable {
     private static String[] fields;
-
-    public static String[] getFields() {
-        return fields;
-    }
 
     public abstract ArrayList<ArrayList<String>> serialize();
 }

@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import entity.interfaces.ISerializeable;
+import entity.interfaces.ISerializable;
 import entity.interfaces.ITaggedItem;
 
-public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<T>, ISerializeable {
+public abstract class RepositoryList<T extends ITaggedItem> implements Iterable<T>, ISerializable {
     protected List<T> all;
 
     // size of List
