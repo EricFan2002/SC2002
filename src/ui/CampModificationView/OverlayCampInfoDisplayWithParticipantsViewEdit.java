@@ -1,13 +1,11 @@
-package ui;
+package ui.CampModificationView;
 
 import controller.camp.CampModificationController;
-import controller.camp.CampSuggestionController;
-import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
-import entity.suggestion.Suggestion;
 import entity.user.Staff;
-import entity.user.Student;
+import ui.CampInfomationView.OverlayCampInfoDisplayWithParticipantsView;
+import ui.OverlayActions.OverlayNotification;
 import ui.widgets.WidgetButton;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -15,14 +13,14 @@ import ui.windows.Window;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
+public class OverlayCampInfoDisplayWithParticipantsViewEdit extends OverlayCampInfoDisplayWithParticipantsView {
 
     protected Camp camp;
     protected Staff staff;
     protected Window mainWindow;
     protected WidgetButton submitButton;
 
-    public OverlayCampInfoDisplayEdit(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
+    public OverlayCampInfoDisplayWithParticipantsViewEdit(int x, int y, int offsetY, int offsetX, String windowName, Camp camp, Staff staff, Window mainWindow) {
         super(x, y, offsetY, offsetX, windowName, camp);
         this.staff = staff;
         this.mainWindow = mainWindow;
@@ -45,7 +43,7 @@ public class OverlayCampInfoDisplayEdit extends OverlayCampInfoDisplay {
         if(!textBoxVis.getPressed()){
             if(camp.getAttendees().size() != 0 || camp.getCommittees().size() != 0){
                 OverlayNotification overlayNotification = new OverlayNotification(40, getY() / 2 - 8,
-                        getX() + getX() / 2 - 20, "Error", "Party Still Have Participants!", OverlayCampInfoDisplayEdit.this);
+                        getX() + getX() / 2 - 20, "Error", "Party Still Have Participants!", OverlayCampInfoDisplayWithParticipantsViewEdit.this);
                 mainWindow.addOverlay(overlayNotification);
                 textBoxVis.setPressed();
             }

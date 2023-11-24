@@ -1,7 +1,7 @@
-package ui;
+package ui.OverlayActions;
 
 import entity.camp.Camp;
-import entity.user.Staff;
+import entity.user.Student;
 import ui.widgets.WidgetButton;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -10,30 +10,36 @@ import ui.windows.WindowOverlayClass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OverlayCampListViewStaffCampActions extends WindowOverlayClass {
+public class OverlayCampListViewStudentCampActions extends WindowOverlayClass {
     WidgetButton cancelButton;
     private int chose;
     private String choseString;
     List<WidgetButton> choices;
     Window callbackWindow;
+    Student student;
+    Camp camp;
 
-    public final static int optionCount = 5;
-    protected Staff staff;
-    protected Camp camp;
+    public final static int optionCount = 6;
 
-    public OverlayCampListViewStaffCampActions(int x, int offsetY, int offsetX, String windowName, Window callbackWindow, Staff staff, Camp camp) {
+    public OverlayCampListViewStudentCampActions(int x, int offsetY, int offsetX, String windowName, Window callbackWindow, Student student, Camp camp) {
         super(3 + optionCount, x, offsetY, offsetX, windowName);
-        this.staff = staff;
+
+        this.student = student;
         this.camp = camp;
 
         List<String> options = new ArrayList<>();
+
         options.add("View Details");
-        if(camp.getStaffInCharge().equals(staff)) {
-            options.add("Edit Camp");
-            options.add("Delete Camp");
+        if((!camp.getAttendees().contains(student)) && (!camp.getCommittees().contains(student)))
+            options.add("Join Camp");
+        if(camp.getAttendees().contains(student))
+            options.add("Quit Camp");
+        if(!camp.getCommittees().contains(student))
+            options.add("Enquiry");
+        if(camp.getCommittees().contains(student))
             options.add("Reply Enquiry");
-            options.add("View Suggestions");
-        }
+        if(camp.getCommittees().contains(student))
+            options.add("Suggestions");
         options.add("Cancel");
 
         setY(options.size() + 3);

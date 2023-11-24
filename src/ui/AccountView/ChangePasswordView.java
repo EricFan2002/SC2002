@@ -1,9 +1,10 @@
-package ui;
+package ui.AccountView;
 
 import controller.user.UserAccountManagementController;
 import controller.user.UserController;
 import entity.user.Staff;
 import entity.user.Student;
+import ui.OverlayActions.OverlayChooseBox;
 import ui.widgets.*;
 import ui.windows.Window;
 

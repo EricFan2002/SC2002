@@ -1,12 +1,12 @@
-package ui;
+package ui.CampSuggestionView;
 
 import controller.camp.CampSuggestionController;
 import entity.RepositoryCollection;
 import entity.camp.Camp;
 import entity.camp.CampDetails;
 import entity.suggestion.Suggestion;
-import entity.suggestion.SuggestionList;
 import entity.user.Student;
+import ui.CampInfomationView.OverlayCampInfoDisplayWithParticipantsView;
 import ui.widgets.WidgetButton;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -14,7 +14,7 @@ import ui.windows.Window;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
+public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends OverlayCampInfoDisplayWithParticipantsView {
 
     protected Camp camp;
     protected Student student;
@@ -22,8 +22,8 @@ public class OverlayCampInfoDisplaySuggestion extends OverlayCampInfoDisplay {
     protected WidgetButton submitButton;
     protected Suggestion editSuggestion;
 
-    public OverlayCampInfoDisplaySuggestion(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
-            Student student, Window mainWindow, Suggestion suggestion) {
+    public OverlayCampInfoDisplayWithParticipantsViewSuggestion(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
+                                                                Student student, Window mainWindow, Suggestion suggestion) {
         super(x, y, offsetY, offsetX, windowName, camp);
         this.student = student;
         this.mainWindow = mainWindow;

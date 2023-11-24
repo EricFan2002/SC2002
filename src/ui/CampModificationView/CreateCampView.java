@@ -1,7 +1,8 @@
-package ui;
+package ui.CampModificationView;
 
 import controller.camp.CampModificationController;
 import controller.user.UserController;
+import ui.OverlayActions.OverlayChooseBox;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;

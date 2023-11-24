@@ -1,4 +1,4 @@
-package ui;
+package ui.CampSuggestionView;
 
 import controller.camp.CampModificationController;
 import controller.camp.CampSuggestionController;
@@ -8,7 +8,7 @@ import entity.suggestion.Suggestion;
 import entity.suggestion.SuggestionList;
 import entity.suggestion.SuggestionStatus;
 import entity.user.Staff;
-import entity.user.Student;
+import ui.OverlayActions.OverlayChooseBox;
 import ui.widgets.WidgetButton;
 import ui.widgets.WidgetPageSelection;
 import ui.windows.ICallBack;
@@ -26,7 +26,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
     protected Window mainWindow;
     protected ArrayList<Suggestion> suggestionArrayList;
     protected Suggestion selectedSuggestion;
-    protected OverlaySuggestionInfoDisplayRaw overlaySuggestionInfoDisplayRawToBeAdded;
+    protected OverlayCampSuggestionView overlayCampSuggestionViewToBeAdded;
 
     public OverlayCampSuggestionStaffView(int x, int y, int offsetY, int offsetX, String windowName, Camp camp,
             Staff staff, Window mainWindow) {
@@ -131,9 +131,9 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             }
             allSuggestions.clearSelectedOption();
         }
-        if (overlaySuggestionInfoDisplayRawToBeAdded != null) {
-            mainWindow.addOverlay(overlaySuggestionInfoDisplayRawToBeAdded);
-            overlaySuggestionInfoDisplayRawToBeAdded = null;
+        if (overlayCampSuggestionViewToBeAdded != null) {
+            mainWindow.addOverlay(overlayCampSuggestionViewToBeAdded);
+            overlayCampSuggestionViewToBeAdded = null;
         }
     }
 
@@ -144,7 +144,7 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("View") && selectedSuggestion != null) {
-            overlaySuggestionInfoDisplayRawToBeAdded = new OverlaySuggestionInfoDisplayRaw(getX(), getY(), offsetY,
+            overlayCampSuggestionViewToBeAdded = new OverlayCampSuggestionView(getX(), getY(), offsetY,
                     offsetX, "Suggestion For Camp " + selectedSuggestion.getSuggestion().getName(), selectedSuggestion);
             // mainWindow.addOverlay(overlaySuggestionInfoDisplayRaw);
         } else if (choseString.equals("Approve") && selectedSuggestion != null) {

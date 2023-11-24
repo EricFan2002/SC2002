@@ -1,8 +1,9 @@
-package ui;
+package ui.AccountView;
 
 import controller.user.UserController;
 import entity.user.Staff;
 import entity.user.Student;
+import ui.OverlayActions.OverlayChooseBox;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;

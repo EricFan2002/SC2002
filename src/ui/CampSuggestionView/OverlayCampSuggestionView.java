@@ -1,4 +1,4 @@
-package ui;
+package ui.CampSuggestionView;
 
 import entity.camp.Camp;
 import entity.suggestion.Suggestion;
@@ -7,7 +7,7 @@ import ui.windows.WindowOverlayClass;
 
 import java.text.SimpleDateFormat;
 
-public class OverlaySuggestionInfoDisplayRaw extends WindowOverlayClass {
+public class OverlayCampSuggestionView extends WindowOverlayClass {
 
     Suggestion suggestion;
     protected WidgetButton exitButton;
@@ -21,7 +21,7 @@ public class OverlaySuggestionInfoDisplayRaw extends WindowOverlayClass {
     protected WidgetTextBox textBoxSlotsC;
     protected WidgetTextBox textBoxSlots;
 
-    public OverlaySuggestionInfoDisplayRaw(int x, int y, int offsetY, int offsetX, String windowName, Suggestion suggestion) {
+    public OverlayCampSuggestionView(int x, int y, int offsetY, int offsetX, String windowName, Suggestion suggestion) {
         super(y , x, offsetY, offsetX, windowName);
 
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
