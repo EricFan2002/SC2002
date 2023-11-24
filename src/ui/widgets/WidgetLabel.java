@@ -3,6 +3,8 @@ package ui.widgets;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.TextColor.ANSI;
 
+import java.awt.*;
+
 /**
  * WidgetLabel is a UI widget that represents a label. It extends the Widget class.
  */
