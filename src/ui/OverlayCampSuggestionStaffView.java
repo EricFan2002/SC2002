@@ -89,9 +89,15 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
                 changed += "Slots, ";
             }
             if (changed.equals("")) {
-                tmp.add("    Nothing Changed.");
+                if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
+                    tmp.add("    APPROVED.");
+                } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
+                    tmp.add("    REJECTED.");
+                } else {
+                    tmp.add("    Nothing Changed.");
+                }
             } else {
-                changed = changed.substring(0, changed.length() - 3);
+                changed = changed.substring(0, changed.length() - 2);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);
@@ -188,10 +194,16 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
                 changed += "Slots, ";
             }
 
-            if (changed == "") {
-                tmp.add("    Nothing Changed.");
+            if (changed.equals("")) {
+                if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
+                    tmp.add("    APPROVED.");
+                } else if (suggestion.getStatus() == SuggestionStatus.REJECTED) {
+                    tmp.add("    REJECTED.");
+                } else {
+                    tmp.add("    Nothing Changed.");
+                }
             } else {
-                changed = changed.substring(0, changed.length() - 3);
+                changed = changed.substring(0, changed.length() - 2);
                 tmp.add("    Changed " + changed);
             }
             enqList.add(tmp);

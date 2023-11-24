@@ -44,20 +44,20 @@ public class CampRegistrationController {
      * @param camp    The {@link Camp} to which the student is to be registered.
      * @param student The {@link Student} to be registered for the camp.
      */
-    public static boolean checkConflict(Camp camp, Student student) {
+    public static Camp checkConflict(Camp camp, Student student) {
         CampList camps = new CampList(student.getAttendedCampList());
         for (Camp oneCamp : camps) {
             if (oneCamp.getStartDate().getTime() <= camp.getEndDate().getTime()
                     || camp.getStartDate().getTime() <= oneCamp.getEndDate().getTime()) {
-                return false;
+                return oneCamp;
             }
         }
-        return true;
+        return null;
     }
 
     public static OperationResult registerCamp(Camp camp, Student student) {
-        if (checkConflict(camp, student)) {
-            return new OperationResult(false, "Time Conflict!");
+        if (checkConflict(camp, student) != null) {
+            return new OperationResult(false, "Time Conflict with " + checkConflict(camp, student).getName());
         } else if (camp.getAttendees().size() + camp.getCommittees().size() >= camp.getTotalSlots()) {
             return new OperationResult(false, "No More Slots");
         } else if (camp.getAttendees().contains(student)) {
@@ -79,8 +79,8 @@ public class CampRegistrationController {
     }
 
     public static OperationResult registerCampAsCommittee(Camp camp, Student student) {
-        if (checkConflict(camp, student)) {
-            return new OperationResult(false, "Time Conflict!");
+        if (checkConflict(camp, student) != null) {
+            return new OperationResult(false, "Time Conflict with " + checkConflict(camp, student).getName());
         } else if (camp.getCommittees().size() >= 10) {
             return new OperationResult(false, "No More Committee Slots");
         } else if (camp.getAttendees().size() + camp.getCommittees().size() >= camp.getTotalSlots()) {
