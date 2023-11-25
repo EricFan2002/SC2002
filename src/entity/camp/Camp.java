@@ -87,6 +87,13 @@ public class Camp extends CampDetails implements ITaggedItem {
         return attendees;
     }
 
+    public Set<Student> getAttendeesAndCommittees(){
+        Set<Student> res = new HashSet<>();
+        res.addAll(attendees);
+        res.addAll(committees);
+        return res;
+    }
+
     public Set<Student> getCommittees() {
         return committees;
     }

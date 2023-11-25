@@ -40,7 +40,7 @@ public class OverlayCampInfoDisplayWithParticipantsView extends OverlayCampInfoD
             participants.add(tmp);
         }
 
-        WidgetLabel labelParticipants = new WidgetLabel(3, 15, getLenX() - 10, "Participants: " + (camp.getAttendees().size() + camp.getCommittees().size()) + " / " + camp.getTotalSlots() + " (" + camp.getCommittees().size() + " Committees)", TEXT_ALIGNMENT.ALIGN_LEFT);
+        WidgetLabel labelParticipants = new WidgetLabel(3, 15, getLenX() - 10, "Participants: " + (camp.getAttendeesAndCommittees().size()) + " / " + camp.getTotalSlots() + " (" + camp.getCommittees().size() + " Committees)", TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(labelParticipants);
 
         WidgetPageSelection participantsView = new WidgetPageSelection(3, 16, getLenX() - 8, getLenY() / 4, "Participants", participants, OverlayCampInfoDisplayWithParticipantsView.this);

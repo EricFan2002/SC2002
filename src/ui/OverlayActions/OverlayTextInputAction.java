@@ -62,7 +62,7 @@ public class OverlayTextInputAction extends WindowOverlayClass {
     /**
      * Indicates whether the text input is aborted.
      */
-    private boolean abord = false;
+    protected boolean abord = false;
 
     /**
      * Constructs an instance of {@code OverlayTextInputAction}.
@@ -76,13 +76,13 @@ public class OverlayTextInputAction extends WindowOverlayClass {
      */
     public OverlayTextInputAction(int x, int offsetY, int offsetX, String windowName, String prompt, Window callbackWindow) {
         super(12, x, offsetY, offsetX, windowName);
-        WidgetLabel widgetLabel = new WidgetLabel(3, 3, x - 10, prompt);
+        WidgetLabel widgetLabel = new WidgetLabel(3, 2, x - 10, prompt);
         addWidget(widgetLabel);
         exitButton = new WidgetButton(3, 8, getLenX() - 4, "Enter");
         addWidget(exitButton);
         abordButton = new WidgetButton(3, 10, getLenX() - 4, "Cancel");
         addWidget(abordButton);
-        textInput = new WidgetTextBox(3, 5, getLenX() - 4, "");
+        textInput = new WidgetTextBox(3, 4, getLenX() - 4, "");
         addWidget(textInput);
         this.callbackWindow = callbackWindow;
     }

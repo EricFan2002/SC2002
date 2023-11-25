@@ -14,6 +14,7 @@ import entity.suggestion.SuggestionStatus;
 import entity.user.Staff;
 import entity.user.Student;
 import ui.OverlayActions.OverlayTextInputAction;
+import ui.OverlayActions.OverlayTextInputActionToggles;
 import ui.widgets.*;
 import ui.windows.ICallBack;
 import ui.windows.Window;
@@ -114,7 +115,7 @@ public class CampListView extends Window implements ICallBack {
             tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),
                     "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
             tmp.add("    " + formLine(
-                    "Participants: " + (camp.getAttendees().size() + camp.getCommittees().size()) + " / "
+                    "Participants: " + (camp.getAttendeesAndCommittees().size()) + " / "
                             + camp.getTotalSlots(),
                     "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
@@ -314,7 +315,7 @@ public class CampListView extends Window implements ICallBack {
             tmp.add("    " + formLine(ft.format(camp.getStartDate()) + " ─ " + ft.format(camp.getEndDate()),
                     "Registration Close at: " + ft.format(camp.getCloseRegistrationDate()), getX() / 2 - 14));
             tmp.add("    " + formLine(
-                    "Participants: " + (camp.getAttendees().size() + camp.getCommittees().size()) + " / "
+                    "Participants: " + (camp.getAttendeesAndCommittees().size()) + " / "
                             + camp.getTotalSlots(),
                     "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
             String line = "";
@@ -361,23 +362,68 @@ public class CampListView extends Window implements ICallBack {
     @Override
     public void onWindowFinished(int chose, String choseString) {
         if (choseString.equals("Camp Report")) {
-            overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
+            overlayTextInputAction = new OverlayTextInputActionToggles(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
                     "Save [Camps Participant Report] to File Name:", CampListView.this, 220);
         } else if (choseString.equals("Performance Report")) {
             overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
-                    "Save [Performance Report] to File Name:", CampListView.this, 221);
+                    "Save [Performance Report] to File Name:", CampListView.this, 231);
         } else if (choseString.equals("Enquiries Report")) {
             overlayTextInputAction = new OverlayTextInputAction(60, getY() / 2 - 8, getX() / 2 - 30, "File Name Prompt",
-                    "Save [Enquiries Report] to File Name:", CampListView.this, 222);
-        }
-        else if(choseString.equals("Performance Report")){
-            overlayTextInputAction = new OverlayTextInputAction(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Performance Report] to File Name:", CampListView.this, 221);
-        }
-        else if(choseString.equals("Enquiries Report")){
-            overlayTextInputAction = new OverlayTextInputAction(60,  getY()/2 - 8, getX() / 2- 30, "File Name Prompt", "Save [Enquiries Report] to File Name:", CampListView.this, 222);
+                    "Save [Enquiries Report] to File Name:", CampListView.this, 232);
         }
         if(campListForExport != null) {
             if (chose == 220) {
+                // Camp Report
+                if (UserController.getCurrentUser() != null) {
+                    if (UserController.getCurrentUser() instanceof Student) {
+                        Student student = (Student) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByCampCommittee(student);
+                        Report report = new CampReport(forExport, false, false);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                    if (UserController.getCurrentUser() instanceof Staff) {
+                        Staff staff = (Staff) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByStaff(staff);
+                        Report report = new CampReport(forExport, false, false);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                }
+            }
+            else if (chose == 221) {
+                // Camp Report
+                if (UserController.getCurrentUser() != null) {
+                    if (UserController.getCurrentUser() instanceof Student) {
+                        Student student = (Student) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByCampCommittee(student);
+                        Report report = new CampReport(forExport, false, true);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                    if (UserController.getCurrentUser() instanceof Staff) {
+                        Staff staff = (Staff) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByStaff(staff);
+                        Report report = new CampReport(forExport, false, true);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                }
+            }
+            else if (chose == 222) {
+                // Camp Report
+                if (UserController.getCurrentUser() != null) {
+                    if (UserController.getCurrentUser() instanceof Student) {
+                        Student student = (Student) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByCampCommittee(student);
+                        Report report = new CampReport(forExport, true, false);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                    if (UserController.getCurrentUser() instanceof Staff) {
+                        Staff staff = (Staff) UserController.getCurrentUser();
+                        CampList forExport = campListForExport.filterByStaff(staff);
+                        Report report = new CampReport(forExport, true, false);
+                        CSV.exportToCSV(choseString, report);
+                    }
+                }
+            }
+            else if (chose == 223) {
                 // Camp Report
                 if (UserController.getCurrentUser() != null) {
                     if (UserController.getCurrentUser() instanceof Student) {
@@ -393,7 +439,7 @@ public class CampListView extends Window implements ICallBack {
                         CSV.exportToCSV(choseString, report);
                     }
                 }
-            } else if (chose == 221) {
+            }else if (chose == 231) {
                 if (UserController.getCurrentUser() instanceof Staff) {
                     Staff staff = (Staff) UserController.getCurrentUser();
                     CampList forExport = campListForExport.filterByStaff(staff);
@@ -401,7 +447,7 @@ public class CampListView extends Window implements ICallBack {
                     CSV.exportToCSV(choseString, report);
                 }
                 // Performance Report
-            } else if (chose == 222) {
+            } else if (chose == 232) {
                 if (UserController.getCurrentUser() != null) {
                     if (UserController.getCurrentUser() instanceof Student) {
                         Student student = (Student) UserController.getCurrentUser();

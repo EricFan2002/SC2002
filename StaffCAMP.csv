@@ -1,28 +1,4 @@
 Camp ID,Camp,Student ID,Name,Faculty,Role
-C002,CAMP 1 Suggestion1 Edited,att2,Jane Doe,SCSE,Committee
-C002,CAMP 1 Suggestion1 Edited,att6,User 6,SCSE,Committee
-C002,CAMP 1 Suggestion1 Edited,com,Alan Walker,MSE,Committee
-C002,CAMP 1 Suggestion1 Edited,att4,Angela Merkel,SCSE,Attendee
-C002,CAMP 1 Suggestion1 Edited,att1,John Doe,SCSE,Attendee
-C003,CAMP 2,com2,Justin Trudeau,SCSE,Committee
-C003,CAMP 2,att5,Winston Churchill,SCSE,Attendee
-C003,CAMP 2,att4,Angela Merkel,SCSE,Attendee
-C005,CAMP 3,com2,Justin Trudeau,SCSE,Committee
-C005,CAMP 3,att5,Winston Churchill,SCSE,Attendee
-C005,CAMP 3,att4,Angela Merkel,SCSE,Attendee
-C006,CAMP 4,att7,User 7,SCSE,Committee
-C006,CAMP 4,com2,Justin Trudeau,SCSE,Committee
-C004,CAMP 6,com2,Justin Trudeau,SCSE,Committee
-C004,CAMP 6,att5,Winston Churchill,SCSE,Attendee
-C004,CAMP 6,att4,Angela Merkel,SCSE,Attendee
-C008,Christmas Party 2nd Round SCSE New Name,com2,Justin Trudeau,SCSE,Committee
-C008,Christmas Party 2nd Round SCSE New Name,att1,John Doe,SCSE,Committee
-C007,Christmas Party NEWq,att4,Angela Merkel,SCSE,Committee
-C007,Christmas Party NEWq,com,Alan Walker,MSE,Committee
-C007,Christmas Party NEWq,att3,John Smith,SCSE,Attendee
-C010,Christmas Party X++ 1,com2,Justin Trudeau,SCSE,Committee
-C009,Sad Empty Christmas Party,com2,Justin Trudeau,SCSE,Committee
-C009,Sad Empty Christmas Party,att5,Winston Churchill,SCSE,Attendee
-C009,Sad Empty Christmas Party,att4,Angela Merkel,SCSE,Attendee
-C001,Soccer Match,com,Alan Walker,MSE,Committee
-C001,Soccer Match,att3,John Smith,SCSE,Attendee
+1700818772760,1. Normal Camp Created By Other,ychern,CHERN,SCSE,Committee
+1700818282264,3. Clash Test 1 Suggestion,ct113,CALVIN,SCSE,Committee
+1700818282264,3. Clash Test 1 Suggestion,ychern,CHERN,SCSE,Attendee
