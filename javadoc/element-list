@@ -10,7 +10,6 @@ entity.interfaces
 entity.report
 entity.suggestion
 entity.user
-ui
 ui.AccountView
 ui.CampEnquiriesView
 ui.CampInfomationView
