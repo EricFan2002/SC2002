@@ -56,8 +56,8 @@ public class CampRegistrationController {
         for (Camp oneCamp : camps) {
             if (oneCamp.equals(camp))
                 continue;
-            if (!(oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
-                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime())) {
+            if (!(oneCamp.getStartDate().getTime() > camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() > oneCamp.getEndDate().getTime())) {
                 return oneCamp;
             }
         }
@@ -65,8 +65,8 @@ public class CampRegistrationController {
         for (Camp oneCamp : camps) {
             if(oneCamp.equals(camp))
                 continue;
-            if (!(oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
-                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime())) {
+            if (!(oneCamp.getStartDate().getTime() > camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() > oneCamp.getEndDate().getTime())) {
                 return oneCamp;
             }
         }
