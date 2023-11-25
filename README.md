@@ -8,6 +8,8 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 [View the Project Report](./SCSX-grp1.pdf)
 
+[View the Java Documentation](./javadoc/index.html)
+
 ## Team Members
 
 - Wang Yangming (U2222553D)
