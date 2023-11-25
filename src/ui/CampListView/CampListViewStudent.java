@@ -210,6 +210,7 @@ public class CampListViewStudent extends CampListView {
                         "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
             }
+            refreshList(true);
             chose = -1;
             choseString = "";
         } else if (choseString.equals("Join As Committee")) { // join
@@ -220,6 +221,7 @@ public class CampListViewStudent extends CampListView {
                         "Info", result.getComment(), CampListViewStudent.this);
                 addOverlay(overlayNotification);
             }
+            refreshList(true);
             chose = -1;
             choseString = "";
         } else if (choseString.equals("Enquiry")) { // Enquiry

@@ -94,9 +94,7 @@ public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticip
                 suggestion.setVisibility(textBoxVis.getPressed());
             if(!textBoxDescription.getText().equals(camp.getDescription()))
                 suggestion.setDescription(textBoxDescription.getText());
-            if(textBoxVis.getPressed() != camp.isVisible()){
-                suggestion.setVisibility(textBoxVis.getPressed());
-            }
+            suggestion.setVisibility(textBoxVis.getPressed());
             CampModificationController.editCamp(suggestion);
             if(mainWindow instanceof ICallBack){
                 ((ICallBack)mainWindow).onWindowFinished(254, "EDITED");

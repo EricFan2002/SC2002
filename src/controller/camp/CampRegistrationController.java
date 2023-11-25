@@ -49,12 +49,17 @@ public class CampRegistrationController {
         for (Camp oneCamp : camps) {
             if(oneCamp.equals(camp))
                 continue;
-            if (oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
-                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime()) {
-                continue;
-//                    System.out.printf("%d <= %d , %d <= %d, %s vs %s \n", oneCamp.getStartDate().getTime(), camp.getEndDate().getTime(), camp.getStartDate().getTime(), oneCamp.getEndDate().getTime(), camp.getName(), oneCamp.getName());
+            if (!(oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime())) {
+                return oneCamp;
             }
-            else {
+        }
+        camps = new CampList(student.getCommitteeCampList());
+        for (Camp oneCamp : camps) {
+            if(oneCamp.equals(camp))
+                continue;
+            if (!(oneCamp.getStartDate().getTime() >= camp.getEndDate().getTime()
+                    || camp.getStartDate().getTime() >= oneCamp.getEndDate().getTime())) {
                 return oneCamp;
             }
         }
@@ -76,7 +81,7 @@ public class CampRegistrationController {
             return new OperationResult(false, "Registration Already Closed");
         }
         camp.addAttendee(student);
-        camp.addRegisteredStudent(student);
+        student.addAttendedCamp(camp);
         return new OperationResult(true, "Camp Joined");
     }
 
@@ -104,7 +109,6 @@ public class CampRegistrationController {
         }
         camp.addCommittee(student);
         student.addCommitteeCamp(camp);
-
         return new OperationResult(true, "Joined As Committee");
     }
 

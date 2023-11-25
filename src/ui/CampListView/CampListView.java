@@ -53,7 +53,7 @@ public class CampListView extends Window implements ICallBack {
     protected WidgetLabel filter1Comment = new WidgetLabel(20 + getLenX() / 4 - 19, 2, 3 , "-");
     protected WidgetTextBox filter1End = new WidgetTextBox(20 + getLenX() / 4 - 17, 2, getLenX() / 4 - 17, "");
     protected WidgetToggle filter1Enable = new WidgetToggle(getLenX() / 2 - 14, 2, 14, "Enable");
-    protected WidgetLabel filterLabel2 = new WidgetLabel(1, 3, 19, "Location Filter:", TEXT_ALIGNMENT.ALIGN_RIGHT);
+    protected WidgetLabel filterLabel2 = new WidgetLabel(1, 3, 19, "Name Filter:", TEXT_ALIGNMENT.ALIGN_RIGHT);
     protected WidgetTextBox filter2 = new WidgetTextBox(20, 3, getLenX() / 2 - 35, "");
     protected WidgetToggle filter2Enable = new WidgetToggle(getLenX() / 2 - 14, 3, 14, "Enable");
     protected WidgetLabel filterLabel3 = new WidgetLabel(1, 4, 19, "Faculty Filter:", TEXT_ALIGNMENT.ALIGN_RIGHT);
@@ -159,14 +159,13 @@ public class CampListView extends Window implements ICallBack {
                 Date dateEnd = ft.parse(filter1End.getText());
                 camps = camps.filterByDateRange(dateStart, dateEnd);
             } catch (ParseException e) {
-                throw new RuntimeException(e);
             }
         }
         if (filter2Enable.getPressed() && !filter2.getText().equals("")) {
             newFilter += filter2.getText();
             CampList res = new CampList();
             for (Camp camp : camps) {
-                if (camp.getLocation().toLowerCase().contains(filter3.getText().toLowerCase())) {
+                if (camp.getName().toLowerCase().contains(filter2.getText().toLowerCase())) {
                     res.add(camp);
                 }
             }
@@ -194,8 +193,60 @@ public class CampListView extends Window implements ICallBack {
         }
         camps = camps.sortByName();
         camps = CustomFilter(camps);
-        for (Camp c : camps) {
-            newFilter += c.getDescription() + c.getName() + c.getAttendees().toString() + c.getStartDate().toString();
+        for (Camp camp : camps) {
+            String campTitle = "";
+            if (UserController.getCurrentUser() != null) {
+                if (UserController.getCurrentUser() instanceof Student) {
+                    Student student = (Student) UserController.getCurrentUser();
+                    if (camp.getCommittees().contains(student)) {
+                        campTitle += " [Committee]";
+                    } else if (camp.getAttendees().contains(student)) {
+                        campTitle += " [Joined]";
+                    }
+                    if (camp.getCommittees().contains(student)) {
+                        boolean newEnquiries = false;
+                        for (Enquiry s : camp.getEnquiryList()) {
+                            if (s.getAnswer() == null || s.getAnswer().equals("")) {
+                                newEnquiries = true;
+                                break;
+                            }
+                        }
+                        if (newEnquiries) {
+                            campTitle += " [Enquiries]";
+                        }
+                    }
+                }
+                if (UserController.getCurrentUser() instanceof Staff) {
+                    Staff staff = (Staff) UserController.getCurrentUser();
+                    if (camp.getStaffInCharge().equals(staff)) {
+                        campTitle += " [In Charge]";
+                    }
+                    if (!camp.isVisible()) {
+                        campTitle += " [Hidden]";
+                    }
+                    boolean newSuggestion = false;
+                    for (Suggestion s : camp.getSuggestionList()) {
+                        if (s.getStatus() == SuggestionStatus.PENDING) {
+                            newSuggestion = true;
+                            break;
+                        }
+                    }
+                    if (newSuggestion) {
+                        campTitle += " [Suggestions]";
+                    }
+                    boolean newEnquiries = false;
+                    for (Enquiry s : camp.getEnquiryList()) {
+                        if (s.getAnswer() == null || s.getAnswer().equals("")) {
+                            newEnquiries = true;
+                            break;
+                        }
+                    }
+                    if (newEnquiries) {
+                        campTitle += " [Enquiries]";
+                    }
+                }
+            }
+            newFilter += camp.getDescription() + camp.getName() + camp.getAttendees().toString() + camp.getStartDate().toString() + campTitle;
         }
         displayCamps.clear();
         campListForExport.clear();

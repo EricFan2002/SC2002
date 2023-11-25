@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ui.widgets.WidgetPasswordBox</OriginalElement>
+  <nodes>
+    <node x="459.0141525550828" y="756.034162358493">ui.widgets.WidgetTextBox</node>
+    <node x="900.377241593654" y="756.034162358493">ui.widgets.WidgetToggle</node>
+    <node x="295.53211308182154" y="21.485706301864866">ui.widgets.IDrawable</node>
+    <node x="724.5748032202964" y="411.5683247169859">ui.widgets.ISelectable</node>
+    <node x="-133.51057705665335" y="21.485706301864866">ui.widgets.Widget</node>
+    <node x="74.6510635165115" y="762.0">ui.widgets.WidgetLabel</node>
+    <node x="361.03211308182154" y="411.5683247169859">ui.widgets.ITextInput</node>
+    <node x="-366.7120255220598" y="762.0">ui.widgets.WidgetButton</node>
+    <node x="487.5141525550828" y="990.8022681760754">ui.widgets.WidgetPasswordBox</node>
+    <node x="-366.7120255220598" y="1031.7693175663323">ui.widgets.WidgetPageSelection</node>
+    <node x="336.4794408741851" y="166.89937124526193">ui.widgets.TEXT_ALIGNMENT</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ui.widgets.WidgetToggle" target="ui.widgets.ISelectable" relationship="REALIZATION">
+      <point x="99.5" y="-126.0" />
+      <point x="1198.8772415936542" y="697.1644998945906" />
+      <point x="923.5748032202964" y="697.1644998945906" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="ui.widgets.WidgetTextBox" target="ui.widgets.Widget" relationship="GENERALIZATION">
+      <point x="-99.5" y="-70.5" />
+      <point x="558.5141525550828" y="660.7428531509324" />
+      <point x="62.65115340724179" y="660.7428531509324" />
+      <point x="62.65115340724179" y="559.4857063018649" />
+      <point x="0.0" y="269.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetPageSelection" target="ui.widgets.WidgetButton" relationship="TO_ONE">
+      <point x="88.75" y="-214.0" />
+      <point x="-100.46202552205978" y="991.0" />
+      <point x="-167.71202552205978" y="991.0" />
+      <point x="0.0" y="104.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetToggle" target="ui.widgets.Widget" relationship="GENERALIZATION">
+      <point x="-99.5" y="-126.0" />
+      <point x="999.8772415936542" y="660.7428531509324" />
+      <point x="62.65115340724179" y="660.7428531509324" />
+      <point x="62.65115340724179" y="559.4857063018649" />
+      <point x="0.0" y="269.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetTextBox" target="ui.widgets.ITextInput" relationship="REALIZATION">
+      <point x="-1.0744799769453266" y="-70.44148037231673" />
+      <point x="656.9396725781374" y="645.5081778752069" />
+      <point x="658.0141525550828" y="645.5081778752069" />
+      <point x="658.0141525550828" y="611.5" />
+      <point x="466.03211308182154" y="611.5" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="ui.widgets.Widget" target="ui.widgets.IDrawable" relationship="REALIZATION">
+      <point x="15.0" y="-269.0" />
+      <point x="51.98942294334665" y="58.985706301864866" />
+      <point x="170.5" y="-0.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetButton" target="ui.widgets.Widget" relationship="GENERALIZATION">
+      <point x="-99.5" y="-104.0" />
+      <point x="-267.2120255220598" y="660.7428531509324" />
+      <point x="62.65115340724179" y="660.7428531509324" />
+      <point x="62.65115340724179" y="559.4857063018649" />
+      <point x="0.0" y="269.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetButton" target="ui.widgets.ITextInput" relationship="REALIZATION">
+      <point x="99.5" y="-104.0" />
+      <point x="-68.21202552205978" y="613.284162358493" />
+      <point x="466.03211308182154" y="613.284162358493" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="ui.widgets.WidgetToggle" target="ui.widgets.ITextInput" relationship="REALIZATION">
+      <point x="-6.804047308381996" y="-126.02514570379685" />
+      <point x="1092.5731942852722" y="613.284162358493" />
+      <point x="466.03211308182154" y="613.284162358493" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="ui.widgets.WidgetPasswordBox" target="ui.widgets.WidgetTextBox" relationship="GENERALIZATION">
+      <point x="0.0" y="-37.5" />
+      <point x="0.0" y="70.5" />
+    </edge>
+    <edge source="ui.widgets.Widget" target="ui.widgets.TEXT_ALIGNMENT" relationship="TO_ONE">
+      <point x="170.5" y="-52.586335056602934" />
+      <point x="-135.5" y="0.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetButton" target="ui.widgets.ISelectable" relationship="REALIZATION">
+      <point x="-9.170968785828876" y="-106.94631991119422" />
+      <point x="-176.88299430788865" y="697.1644998945906" />
+      <point x="923.5748032202964" y="697.1644998945906" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="ui.widgets.WidgetLabel" target="ui.widgets.Widget" relationship="GENERALIZATION">
+      <point x="0.0" y="-26.5" />
+      <point x="245.1510635165115" y="660.7428531509324" />
+      <point x="62.65115340724179" y="660.7428531509324" />
+      <point x="62.65115340724179" y="559.4857063018649" />
+      <point x="0.0" y="269.0" />
+    </edge>
+    <edge source="ui.widgets.WidgetTextBox" target="ui.widgets.ISelectable" relationship="REALIZATION">
+      <point x="69.49534594258864" y="-76.19614591461573" />
+      <point x="727.5094984976714" y="697.1644998945906" />
+      <point x="923.5748032202964" y="697.1644998945906" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="ui.widgets.WidgetPageSelection" target="ui.widgets.Widget" relationship="GENERALIZATION">
+      <point x="-88.75" y="-214.0" />
+      <point x="-277.9620255220598" y="1002.0" />
+      <point x="-407.201005092434" y="1002.0" />
+      <point x="-407.201005092434" y="660.7428531509324" />
+      <point x="62.65115340724179" y="660.7428531509324" />
+      <point x="62.65115340724179" y="559.4857063018649" />
+      <point x="0.0" y="269.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.4255943215996934" showDependencies="true" x="37.964865674000976" y="851.2316475713969" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

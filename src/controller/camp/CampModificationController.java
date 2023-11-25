@@ -115,6 +115,9 @@ public class CampModificationController {
         if (newCD.isVisible() != campObj.isVisible()){
             campObj.setVisibility(newCD.isVisible());
         }
+        if (newCD.getTotalSlots() != null){
+            campObj.setTotalSlots(newCD.getTotalSlots());
+        }
         RepositoryCollection.getCampRepository().update(campObj);
     }
 }
