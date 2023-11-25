@@ -36,6 +36,12 @@ import entity.user.Student;
 public class CampSuggestionController {
 
     /**
+     * Private constructor to prevent instantiation.
+     */
+    private CampSuggestionController() {
+    }
+
+    /**
      * Creates a new suggestion for a camp and adds it to the suggestion repository.
      * The method awards points to the student who made the suggestion.
      *

@@ -19,6 +19,11 @@ import entity.RepositoryCollection;
  * @see entity.RepositoryCollection
  */
 public class UserAccountManagementController {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private UserAccountManagementController() {
+    }
 
     /**
      * Changes a user's password if the old password provided is correct.

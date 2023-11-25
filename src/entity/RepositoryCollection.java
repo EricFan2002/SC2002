@@ -14,8 +14,10 @@ import utils.CSV;
 import consts.Config;
 
 /**
- * The {@code RepositoryCollection} class provides a central collection of repositories for users, camps, enquiries, and suggestions.
- * It handles loading and saving data to CSV files using deserializers and CSV utilities.
+ * The {@code RepositoryCollection} class provides a central collection of
+ * repositories for users, camps, enquiries, and suggestions.
+ * It handles loading and saving data to CSV files using deserializers and CSV
+ * utilities.
  */
 public class RepositoryCollection {
 
@@ -106,4 +108,3 @@ public class RepositoryCollection {
         return suggestionRepository;
     }
 }
-

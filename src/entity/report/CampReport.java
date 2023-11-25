@@ -91,7 +91,7 @@ public class CampReport extends Report {
                     row.add(camp.getName());
                     row.add(student.getID());
                     row.add(student.getName());
-                    row.add(student.getFaculty());
+                    row.add(student.getSchool());
                     row.add("Committee");
                     data.add(row);
                 }
@@ -104,7 +104,7 @@ public class CampReport extends Report {
                     row.add(camp.getName());
                     row.add(student.getID());
                     row.add(student.getName());
-                    row.add(student.getFaculty());
+                    row.add(student.getSchool());
                     row.add("Attendee");
                     data.add(row);
                 }

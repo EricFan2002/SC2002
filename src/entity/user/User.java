@@ -26,7 +26,7 @@ public abstract class User implements ITaggedItem {
     /**
      * The user's faculty.
      */
-    protected String faculty;
+    protected String school;
 
     /**
      * Constructs a User object with default values.
@@ -35,7 +35,7 @@ public abstract class User implements ITaggedItem {
         this.ID = "";
         this.name = "";
         this.password = "password";
-        this.faculty = "";
+        this.school = "";
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class User implements ITaggedItem {
         this.ID = ID;
         this.name = name;
         this.password = "password";
-        this.faculty = faculty;
+        this.school = faculty;
     }
 
     /**
@@ -82,10 +82,10 @@ public abstract class User implements ITaggedItem {
     /**
      * Sets the faculty of the user.
      *
-     * @param faculty The faculty to be set.
+     * @param school The faculty to be set.
      */
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     /**
@@ -93,8 +93,8 @@ public abstract class User implements ITaggedItem {
      *
      * @return The faculty of the user.
      */
-    public String getFaculty() {
-        return faculty;
+    public String getSchool() {
+        return school;
     }
 
     /**

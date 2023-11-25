@@ -21,6 +21,12 @@ import entity.user.User;
  * @see entity.user.User
  */
 public class UserController {
+    /**
+     * Private constructor to prevent instantiation.
+     */
+    private UserController() {
+    }
+
     private static User currentUser;
 
     /**
@@ -54,7 +60,7 @@ public class UserController {
         // Update the old user with the new user information
         oldUser.setName(newUser.getName());
         oldUser.setPassword(newUser.getPassword());
-        oldUser.setFaculty(newUser.getFaculty());
+        oldUser.setSchool(newUser.getSchool());
     }
 
     /**

@@ -65,7 +65,7 @@ public class CampListViewStudent extends CampListView {
      */
     protected CampList CustomFilter(CampList list) {
         if (UserController.getCurrentUser() != null && UserController.getCurrentUser() instanceof Student) {
-            CampList list1 = list.filterBySchool(((Student) UserController.getCurrentUser()).getFaculty());
+            CampList list1 = list.filterBySchool(((Student) UserController.getCurrentUser()).getSchool());
             list = list.filterBySchool("NTU");
             for (Camp c : list1) {
                 list.add(c);
