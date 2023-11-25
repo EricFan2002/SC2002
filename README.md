@@ -60,22 +60,22 @@ For detailed documentation, refer to the `./javadoc` directory.
 
 ## UML Class Diagrams
 
-Class diagrams can be found in the `./Diagrams` folder:
+Class diagrams can be found in the `./diagrams` folder:
 
 ### Entity Diagram
-![Entity Diagram](./Diagrams/EntityDiagram.png)
+![Entity Diagram](./diagrams/EntityDiagram.png)
 
 ### Boundary Widgets Diagram
-![Boundary Widgets Diagram](./Diagrams/BoundaryWidgets.png)
+![Boundary Widgets Diagram](./diagrams/BoundaryWidgets.png)
 
 ### Boundary Windows Diagram
-![Boundary Windows Diagram](./Diagrams/BoundaryWindows.png)
+![Boundary Windows Diagram](./diagrams/BoundaryWindows.png)
 
 ### Controllers Diagram
-![Controllers Diagram](./Diagrams/Controllers.png)
+![Controllers Diagram](./diagrams/Controllers.png)
 
 ### Interface Segregation Principle Diagram
-![Interface Segregation Principle Diagram](./Diagrams/InterfaceSegregationPrinciple.png)
+![Interface Segregation Principle Diagram](./diagrams/InterfaceSegregationPrinciple.png)
 
 ### Open Close Principle Diagram
-![Open Close Principle Diagram](./Diagrams/OpenClosePrinciple.png)
+![Open Close Principle Diagram](./diagrams/OpenClosePrinciple.png)
