@@ -1,226 +1,266 @@
-import java.lang.reflect.Array;
-import java.util.Date;
-
+import com.googlecode.lanterna.*;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.Terminal;
 import entity.RepositoryCollection;
-import entity.user.UserList;
-import entity.camp.Camp;
-import entity.camp.CampDetails;
-import entity.camp.CampList;
-import entity.enquiry.Enquiry;
-import entity.enquiry.EnquiryList;
-import entity.suggestion.Suggestion;
-import entity.suggestion.SuggestionList;
-import entity.user.Staff;
-import entity.user.Student;
-import entity.user.User;
+import ui.AccountView.ChangePasswordView;
+import ui.AccountView.LoginView;
+import ui.CampModificationView.CreateCampView;
+import ui.CampListView.CampListViewStaff;
+import ui.CampListView.CampListViewStudent;
+import ui.LandingView.StaffMainView;
+import ui.LandingView.StudentMainView;
+import ui.windows.*;
 
+import java.io.IOException;
+import java.util.Arrays;
+
+import static consts.Config.titleLines;
+import static consts.Config.titleLinesGoodBye;
 /**
- * The main class responsible for initializing the application data and entities for testing purposes.
- * It sets up user repositories, camp repositories, enquires, suggestions, and interactions among them.
+ * The main class representing the entry point of the UI application.
+ * Manages terminal screens, displays animated title sequences, and handles user interface components.
  */
 public class Main {
     /**
-     * The main method initializes various entities and interactions for testing purposes within the application.
+     * The main method responsible for initializing the application and managing user interface components.
      * @param args The command line arguments (unused in this context).
      */
     public static void main(String[] args) {
         RepositoryCollection.load();
 
-        UserList userRepository = RepositoryCollection.getUserRepository();
-        CampList campRepository = RepositoryCollection.getCampRepository();
-        EnquiryList enquiryRepository = RepositoryCollection.getEnquiryRepository();
-        SuggestionList suggestionRepository = RepositoryCollection.getSuggestionRepository();
+        DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
+        Screen animationScreen = null;
+        Screen appScreen = null;
 
-        /*
-         * // instantiate users
-         * Student att1 = new Student("1", "John Doe", "NBS");
-         * Student att2 = new Student("2", "Jane Doe", "EEE");
-         * Student att3 = new Student("3", "John Smith", "MAE");
-         * Student com = new Student("4", "Alan Walker", "SPMS");
-         * Staff staff = new Staff("5", "John Cena", "SPMS");
-         * 
-         * // add users to repository
-         * userRepository.add(att1);
-         * userRepository.add(att2);
-         * userRepository.add(att3);
-         * userRepository.add(com);
-         * userRepository.add(staff);
-         * 
-         * // instantiate camp
-         * Camp camp1 = new Camp("abc", "Camp Nou", "Soccer camp for young students!",
-         * true, new Date(1), new Date(1),
-         * new Date(1), "1", "1", staff, 12);
-         * Camp camp2 = new Camp("cde", "Old Trafford", "Summer camp soccer training",
-         * true, new Date(1), new Date(1),
-         * new Date(1), "1", "1", staff, 15);
-         * 
-         * campRepository.add(camp1);
-         * campRepository.add(camp2);
-         * camp1.addAttendee(att3);
-         * camp1.addAttendee(att2);
-         * camp2.addAttendee(att1);
-         * camp1.addCommittee(com);
-         * camp2.addCommittee(com);
-         * 
-         * // instantiate enquiry
-         * Enquiry enquiry1 = new Enquiry("1", att1, "How much is the camp fee?",
-         * camp1);
-         * Enquiry enquiry2 = new Enquiry("2", att2, "What is the camp schedule?",
-         * camp1);
-         * Enquiry enquiry3 = new Enquiry("3", att3, "What is the camp schedule?",
-         * camp2);
-         * 
-         * // insert enquiry
-         * enquiryRepository.add(enquiry1);
-         * enquiryRepository.add(enquiry2);
-         * enquiryRepository.add(enquiry3);
-         * 
-         * // instantiate suggestion
-         * CampDetails suggestionPlan = camp1.createSuggestionPlan();
-         * suggestionPlan.setSchool("SCSE");
-         * Suggestion suggestion1 = new Suggestion(com, suggestionPlan, camp1);
-         * 
-         * // insert suggestion
-         * suggestionRepository.add(suggestion1);
-         * 
-         * // prints suggestion
-         */
+        TextColor greenColor = TextColor.ANSI.GREEN;
+        TextColor redColor = TextColor.ANSI.RED_BRIGHT;
 
-        // RepositoryCollection.setCampRepository(campRepository);
-        // RepositoryCollection.setUserRepository(userRepository);
-        // RepositoryCollection.setEnquiryRepository(enquiryRepository);
-        // RepositoryCollection.setSuggestionRepository(suggestionRepository);
+        try {
+            Terminal terminal = defaultTerminalFactory.createTerminal();
+            animationScreen = new TerminalScreen(terminal);
+            animationScreen.startScreen();
+            animationScreen.setCursorPosition(null);
 
-        // instantiate users
-        Student att1 = new Student("att1", "John Doe", "NBS");
-        Student att2 = new Student("att2", "Jane Doe", "SCSE");
-        Student att3 = new Student("att3", "John Smith", "MSE");
-        Student att4 = new Student("att4", "Angela Merkel", "SCSE");
-        Student att5 = new Student("att5", "Winston Churchill", "SCSE");
+            TextGraphics textGraphics = animationScreen.newTextGraphics();
+            int screenWidth = animationScreen.getTerminalSize().getColumns();
+            int screenHeight = animationScreen.getTerminalSize().getRows();
+            int longestLineLength = Arrays.stream(titleLines).mapToInt(String::length).max().getAsInt();
+            int titleHeight = titleLines.length;
+            int midHorizontalPos = (screenWidth - longestLineLength) / 2;
+            int midVerticalPos = (screenHeight - titleHeight) / 2;
+            int bounceHeight = 8; // Height of the bounce
+            int numBounces = 3; // Number of times the title bounces
 
-        Student com = new Student("com", "Alan Walker", "MSE");
-        Student com2 = new Student("com2", "Justin Trudeau", "SCSE");
-        Student com3 = new Student("com3", "Margaret Thatcher", "NIE");
+            // Animation from top to middle
+            for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.setForegroundColor(greenColor); // Set the text color to green
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
 
-        Staff staff = new Staff("staff", "John Cena", "SPMS");
-        Staff staff2 = new Staff("staff2", "Donald J. Trump", "SSS");
+            // Bounce effect
+            for (int bounce = 0; bounce < numBounces; bounce++) {
+                // Move up
+                for (int vPos = midVerticalPos; vPos > midVerticalPos - bounceHeight; vPos--) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    bounceHeight /= 2;
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+                for (int vPos = midVerticalPos - bounceHeight; vPos <= midVerticalPos; vPos++) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLines.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(100);
+                }
+            }
 
-        // add users to repository
-        userRepository.add(att1);
-        userRepository.add(att2);
-        userRepository.add(att3);
-        userRepository.add(att4);
-        userRepository.add(att5);
-        userRepository.add(com);
-        userRepository.add(com2);
-        userRepository.add(com3);
-        userRepository.add(staff);
-        userRepository.add(staff2);
+            for (int vPos = midVerticalPos; vPos <= screenHeight; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLines.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLines[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
 
-        // instantiate camp
-        Camp camp1 = new Camp("C001", "Soccer Match", "Night Soccer Scrimmage", true, new Date(1702734600000L),
-                new Date(1702741800000L),
-                new Date(1697464267000L), "NTU", "Camp Nou", staff, 12);
-        Camp camp2 = new Camp("C002", "Christmas Party", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "NTU", "SCSE Lounge", staff, 15);
-        Camp camp3 = new Camp("C003", "Chinese New Year", "Official 2024 Chinese New Year Celebration", true,
-                new Date(1707534000000L), new Date(1707541200000L),
-                new Date(1704862800000L), "NTU", "Gaia", staff, 15);
-        Camp camp4 = new Camp("C004", "1792 United States Presidential Election",
-                "The second election after we won against those Brits", true,
-                new Date(-5587873200000L), new Date(-5587786800000L),
-                new Date(-5588132400000L), "NTU", "Washington", staff, 1500);
-        Camp camp5 = new Camp("C005", "Christmas Party 0th SCSE", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "SCSE", "AIA Canopy", staff, 50);
-        Camp camp6 = new Camp("C006", "Christmas Party 1st SCSE", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "MSE", "Lee Wee Nam Library", staff, 10);
-        Camp camp7 = new Camp("C007", "Christmas Party MSE", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "SCSE", "Lee Wee Nam Library", staff, 50);
-        Camp camp8 = new Camp("C008", "Christmas Party 2nd Round SCSE", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "NTU", "1", staff, 10);
-        Camp camp9 = new Camp("C009", "Sad Empty Christmas Party", "No one is here", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "NTU", "1", staff, 12);
-        Camp camp10 = new Camp("C010", "Christmas Party X++", "Sugar and chocolate drinks party", true,
-                new Date(1703512200000L), new Date(1703523000000L),
-                new Date(1707541200000L), "NTU", "1", staff, 10);
+            animationScreen.close();
 
-        campRepository.add(camp1);
-        campRepository.add(camp2);
-        campRepository.add(camp3);
-        campRepository.add(camp4);
-        campRepository.add(camp5);
-        campRepository.add(camp6);
-        campRepository.add(camp7);
-        campRepository.add(camp8);
-        campRepository.add(camp9);
-        campRepository.add(camp10);
+            Terminal appTerminal = defaultTerminalFactory.createTerminal();
+            appScreen = new TerminalScreen(appTerminal);
+            appScreen.startScreen();
+            appScreen.setCursorPosition(null);
 
-        camp1.addAttendee(att3);
-        camp1.addAttendee(att2);
-        camp2.addAttendee(att1);
-        camp1.addCommittee(com);
-        camp2.addCommittee(com);
+            TerminalSize terminalSize = appScreen.getTerminalSize();
+            for (int column = 0; column < terminalSize.getColumns(); column++) {
+                for (int row = 0; row < terminalSize.getRows(); row++) {
+                    appScreen.setCharacter(column, row, new TextCharacter(
+                            ' ',
+                            TextColor.ANSI.DEFAULT,
+                            TextColor.ANSI.DEFAULT));
+                }
+            }
 
-        camp3.addAttendee(att4);
-        camp3.addAttendee(att5);
-        camp3.addCommittee(com2);
+            Window LoginView = new LoginView(20, 54, 1, 2, 3);
+            Window studentMainView = new StudentMainView(0, 5, 3);
+            Window staffMainView = new StaffMainView(0, 4, 3);
+            Window changePasswordView = new ChangePasswordView(0, 1, 2);
+            Window CampListViewStaff = new CampListViewStaff(2);
+            Window CampListViewStudent = new CampListViewStudent(1);
+            Window createCampView = new CreateCampView(5);
+            WindowsManager windows = new WindowsManager(appScreen, 0, 0);
 
-        camp4.addAttendee(att4);
-        camp4.addAttendee(att5);
-        camp4.addCommittee(com2);
+            windows.addWindow(LoginView);
+            windows.addWindow(studentMainView);
+            windows.addWindow(staffMainView);
+            windows.addWindow(changePasswordView);
+            windows.addWindow(CampListViewStaff);
+            windows.addWindow(CampListViewStudent);
+            windows.addWindow(createCampView);
 
-        camp5.addAttendee(att4);
-        camp5.addAttendee(att5);
-        camp5.addCommittee(com2);
+            appScreen.refresh();
 
-        camp6.addAttendee(att4);
-        camp6.addAttendee(att5);
-        camp6.addCommittee(com2);
+            // Main application loop
+            while (true) {
+                KeyStroke keyStroke = appScreen.pollInput();
+                if (keyStroke != null
+                        && (keyStroke.getKeyType() == KeyType.Escape || keyStroke.getKeyType() == KeyType.EOF)) {
+                    break;
+                }
+                if (keyStroke != null)
+                    windows.keyStroke(keyStroke);
 
-        camp7.addAttendee(att3);
-        camp7.addCommittee(com);
+                TerminalSize newSize = appScreen.doResizeIfNecessary();
+                if (newSize != null) {
+                    appScreen.clear();
+                    terminalSize = newSize;
+                }
 
-        camp8.addAttendee(att4);
-        camp8.addAttendee(att5);
-        camp8.addCommittee(com2);
+                String sizeLabel = "Terminal Size: " + terminalSize;
+                TerminalPosition labelBoxTopLeft = new TerminalPosition(1, 1);
+                TerminalSize labelBoxSize = new TerminalSize(sizeLabel.length() + 2, 3);
+                TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft
+                        .withRelativeColumn(labelBoxSize.getColumns() - 1);
+                textGraphics = appScreen.newTextGraphics();
+                textGraphics.fillRectangle(labelBoxTopLeft, labelBoxSize, ' ');
 
-        camp9.addAttendee(att4);
-        camp9.addAttendee(att5);
-        camp9.addCommittee(com2);
+                textGraphics.drawLine(
+                        labelBoxTopLeft.withRelativeColumn(1),
+                        labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns() - 2),
+                        Symbols.DOUBLE_LINE_HORIZONTAL);
+                textGraphics.drawLine(
+                        labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(1),
+                        labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(labelBoxSize.getColumns() - 2),
+                        Symbols.DOUBLE_LINE_HORIZONTAL);
 
-        camp10.addAttendee(att4);
-        camp10.addAttendee(att5);
-        camp10.addCommittee(com2);
+                textGraphics.setCharacter(labelBoxTopLeft, Symbols.DOUBLE_LINE_TOP_LEFT_CORNER);
+                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
+                textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
+                textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER);
+                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
+                textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2),
+                        Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
 
-        // instantiate enquiry
-        Enquiry enquiry1 = new Enquiry("1", att1, "How much is the camp fee?", camp1);
-        Enquiry enquiry2 = new Enquiry("2", att2, "What is the camp schedule?", camp1);
-        Enquiry enquiry3 = new Enquiry("3", att3, "What is the camp schedule?", camp2);
+                textGraphics.putString(labelBoxTopLeft.withRelative(1, 1), sizeLabel);
 
-        // insert enquiry
-        enquiryRepository.add(enquiry1);
-        enquiryRepository.add(enquiry2);
-        enquiryRepository.add(enquiry3);
+                windows.draw(0, 0);
+                appScreen.refresh();
+                Thread.yield();
 
-        // instantiate suggestion
-        CampDetails suggestionPlan = camp1.createSuggestionPlan();
+            }
 
-        suggestionPlan.setSchool("SCSE");
-        Suggestion suggestion1 = new Suggestion("1", com, suggestionPlan, camp1);
+            appScreen.close();
 
-        // insert suggestion
-        System.out.println(suggestion1.getOriginalCamp().getID());
-        suggestionRepository.add(suggestion1);
+            Terminal animeTerminal = defaultTerminalFactory.createTerminal();
+            animationScreen = new TerminalScreen(animeTerminal);
+            animationScreen.startScreen();
+            animationScreen.setCursorPosition(null);
 
-        // prints suggestion
+            textGraphics = animationScreen.newTextGraphics();
+            screenWidth = animationScreen.getTerminalSize().getColumns();
+            screenHeight = animationScreen.getTerminalSize().getRows();
+            longestLineLength = Arrays.stream(titleLinesGoodBye).mapToInt(String::length).max().getAsInt();
+            titleHeight = titleLinesGoodBye.length;
+            midHorizontalPos = (screenWidth - longestLineLength) / 2;
+            midVerticalPos = (screenHeight - titleHeight) / 2;
+            bounceHeight = 2; // Height of the bounce
+            numBounces = 1; // Number of times the title bounces
 
-        RepositoryCollection.save();
+            for (int vPos = -titleHeight; vPos <= midVerticalPos; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLinesGoodBye.length; line++) {
+                    textGraphics.setForegroundColor(redColor); // Set the text color to red
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLinesGoodBye[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
 
+            // Bounce effect
+            for (int bounce = 0; bounce < numBounces; bounce++) {
+                // Move up
+                for (int vPos = midVerticalPos; vPos > midVerticalPos - bounceHeight; vPos--) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLinesGoodBye.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLinesGoodBye[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(50);
+                }
+                // Move down
+                for (int vPos = midVerticalPos - bounceHeight; vPos <= midVerticalPos; vPos++) {
+                    animationScreen.clear();
+                    for (int line = 0; line < titleLinesGoodBye.length; line++) {
+                        textGraphics.putString(midHorizontalPos, vPos + line, titleLinesGoodBye[line]);
+                    }
+                    animationScreen.refresh();
+                    Thread.sleep(50);
+                }
+            }
+
+            // Continue animation to bottom
+            for (int vPos = midVerticalPos; vPos <= screenHeight; vPos++) {
+                animationScreen.clear();
+                for (int line = 0; line < titleLinesGoodBye.length; line++) {
+                    textGraphics.putString(midHorizontalPos, vPos + line, titleLinesGoodBye[line]);
+                }
+                animationScreen.refresh();
+                Thread.sleep(5);
+            }
+
+            animationScreen.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (animationScreen != null) {
+                    animationScreen.close();
+                }
+                if (appScreen != null) {
+                    RepositoryCollection.save();
+                    appScreen.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
