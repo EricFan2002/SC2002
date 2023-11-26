@@ -82,6 +82,10 @@ Class diagrams can be found in the `./diagrams` folder:
 ### Open Close Principle Diagram
 ![Open Close Principle Diagram](./diagrams/OpenClosePrinciple.png)
 
+## Code of Conduct
+
+We are committed to ensuring a welcoming and inclusive environment for everyone. We expect all participants in this project to adhere to our Code of Conduct. Please refer to the [Code of Conduct](CODE_OF_CONDUCT.md) for full details on our expectations and guidelines.
+
 ## License
 
 Copyright (c) SCSX Group 1. All rights reserved.
