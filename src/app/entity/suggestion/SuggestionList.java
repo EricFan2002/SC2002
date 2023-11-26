@@ -171,9 +171,13 @@ public class SuggestionList extends RepositoryList<Suggestion> implements IFilte
             String totalSlotsString = (camp.getSuggestion().getTotalSlots() == null) ? ""
                     : Integer.toString(camp.getSuggestion().getTotalSlots());
 
+            String totalCommitteeSlotsString = (camp.getSuggestion().getTotalCommitteeSlots() == null) ? ""
+                : Integer.toString(camp.getSuggestion().getTotalCommitteeSlots());
+
+
             String[] campSuggestionArray = { idString, nameString,
                     descString, visibilityString, startDateString, endDateString,
-                    closeRegDateString, schoolString, locationString, totalSlotsString };
+                    closeRegDateString, schoolString, locationString, totalSlotsString, totalCommitteeSlotsString };
 
             String campSuggestionString = String.join(";", campSuggestionArray);
 
