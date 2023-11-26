@@ -136,7 +136,6 @@ public class StudentMainView extends Window {
             greetingLabel.setText("What would you like to do today?");
         }
         if (logoutButton.getPressed()) {
-            ((Student) UserController.getCurrentUser()).setPoints(0);
             switchToWindow = loginViewIndex;
         }
         if (changePasswordButton.getPressed()) {
