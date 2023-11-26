@@ -53,7 +53,7 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 ## Running the Application
 
-1. Run the application using the command: `java -jar out/sc2002_test.jar`
+1. Run the application using the command: `java -jar out/artifacts/sc2002_test_jar2/sc2002_test.jar`
 2. Follow the on-screen instructions to interact with the system.
 
 ## Documentation
