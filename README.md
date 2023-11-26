@@ -68,7 +68,9 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 ## Documentation
 
-For detailed documentation, refer to the `./javadoc` directory.
+For detailed documentation, refer to the `./docs` directory.
+
+[View the Java Documentation](https://ericfan2002.github.io/SC2002/)
 
 ## UML Class Diagrams
 
