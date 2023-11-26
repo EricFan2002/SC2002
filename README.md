@@ -3,7 +3,7 @@
 # Camp Application Management System (CAMS) <br/><br/> SC2002 Project
 
 </div>
-<br/><br/><br/>
+<br/>
 
 ## Overview
 
