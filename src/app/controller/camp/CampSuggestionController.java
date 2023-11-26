@@ -55,6 +55,7 @@ public class CampSuggestionController {
     public static boolean createSuggestion(Student sender, CampDetails suggsetion, Camp originalCamp) {
         Suggestion suggestion = new Suggestion(sender, suggsetion, originalCamp);
         RepositoryCollection.getSuggestionRepository().add(suggestion);
+        sender.addPoints(1);
         sender.addSuggestion(suggestion);
         originalCamp.addSuggestion(suggestion);
         return true;
