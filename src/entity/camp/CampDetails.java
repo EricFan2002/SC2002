@@ -35,6 +35,7 @@ public class CampDetails extends CampList implements ITaggedItem {
      * @param school               The school associated with the camp.
      * @param location             The location of the camp.
      * @param totalSlots           The total number of slots available in the camp.
+     * @param totalCommitteeSlots  The total number of committee slots available in the camp.
      */
     public CampDetails(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,

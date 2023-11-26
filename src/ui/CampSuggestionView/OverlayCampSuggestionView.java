@@ -170,7 +170,7 @@ public class OverlayCampSuggestionView extends WindowOverlayClass {
 // Slots Committee
         WidgetLabel labelSlotsC = new WidgetLabel(3, 11, 15, "Committee:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSlotsC);
-        textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, "10"); // Assuming this value doesn't come from 'suggestion'
+        textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, String.valueOf(camp.getTotalCommitteeSlots())); // Assuming this value doesn't come from 'suggestion'
         addWidget(textBoxSlotsC);
         textBoxSlotsC.setSkipSelection(true);
 
