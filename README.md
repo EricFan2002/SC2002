@@ -1,4 +1,9 @@
-# Camp Application Management System (CAMS) - SC2002 Project
+<div align="center">
+
+# Camp Application Management System (CAMS) <br/><br/> SC2002 Project
+
+</div>
+<br/>
 
 ## Overview
 
@@ -10,13 +15,17 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 [View the Java Documentation](https://ericfan2002.github.io/SC2002/)
 
-## Team Members
+## Team Members✨
 
-- Wang Yangming (U2222553D)
-- Liau Zheng Wei (U2222032K)
-- Fan Tianyu (U2222105H)
-- Clayton Fernalo (U2220422E)
-- Christopher Angelo (U2220148L)
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/EricFan2002/SC2002" target="_blank"><img src="https://avatars.githubusercontent.com/u/28054629?v=4?s=150" width="150px;" alt=""/></a><br /><sub><b>Fan Tianyu</b></sub><br /><sub><b>(U2222105H)</b></sub></td>
+    <td align="center"><a href="https://github.com/sanstzu" target="_blank"><img src="https://avatars.githubusercontent.com/u/26087840?v=4?s=150" width="150px;" alt=""/></a><br /><sub><b>Clayton Fernalo</b></sub><br /><sub><b>(U2220422E)</b></sub></td>
+    <td align="center"><a href="https://github.com/lousyway" target="_blank"><img src="https://avatars.githubusercontent.com/u/92497783?v=4?s=150" width="150px;" alt=""/></a><br /><sub><b>Liau Zheng Wei</b></sub><br /><sub><b>(U2222032K)</b></sub></td>
+    <td align="center"><a href="https://github.com/Topheral" target="_blank"><img src="https://avatars.githubusercontent.com/u/96100546?v=4?s=150" width="150px;" alt=""/></a><br /><sub><b>Christopher Angelo</b></sub><br /><sub><b>(U2220148L)</b></sub></td>
+    <td align="center"><a href="https://github.com/Alaneel" target="_blank"><img src="https://avatars.githubusercontent.com/u/96646828?v=4?s=150" width="150px;" alt=""/></a><br /><sub><b>Wang Yangming</b></sub><br /><sub><b>(U2222553D)</b></sub></td>
+  </tr>
+</table>
 
 ## Features
 
@@ -58,7 +67,9 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 ## Documentation
 
-For detailed documentation, refer to the `./javadoc` directory.
+For detailed documentation, refer to the `./docs` directory.
+
+[View the Java Documentation](https://ericfan2002.github.io/SC2002/)
 
 ## UML Class Diagrams
 
