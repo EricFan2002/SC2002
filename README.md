@@ -21,10 +21,10 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 <table>
   <tr>
     <td align="center"><a href="https://github.com/EricFan2002/SC2002" target="_blank"><img src="https://avatars.githubusercontent.com/u/28054629?v=4?s=100" width="100px;" alt=""/></a><br /><sub><b>Fan Tianyu</b></sub><br /></td>
-    <td align="center"><a href="https://github.com/sanstzu" target="_blank"><img src="https://avatars.githubusercontent.com/u/26087840?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Clayton Fernalo</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/lousyway" target="_blank"><img src="https://avatars.githubusercontent.com/u/92497783?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Liau Zheng Wei</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Topheral" target="_blank"><img src="https://avatars.githubusercontent.com/u/96100546?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Christopher Angelo</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Alaneel" target="_blank"><img src="https://avatars.githubusercontent.com/u/96646828?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wang Yangming</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/sanstzu" target="_blank"><img src="https://avatars.githubusercontent.com/u/26087840?v=4?s=100" width="100px;" alt=""/></a><br /><sub><b>Clayton Fernalo</b></sub><br /></td>
+    <td align="center"><a href="https://github.com/lousyway" target="_blank"><img src="https://avatars.githubusercontent.com/u/92497783?v=4?s=100" width="100px;" alt=""/></a><br /><sub><b>Liau Zheng Wei</b></sub><br /></td>
+    <td align="center"><a href="https://github.com/Topheral" target="_blank"><img src="https://avatars.githubusercontent.com/u/96100546?v=4?s=100" width="100px;" alt=""/></a><br /><sub><b>Christopher Angelo</b></sub><br /></td>
+    <td align="center"><a href="https://github.com/Alaneel" target="_blank"><img src="https://avatars.githubusercontent.com/u/96646828?v=4?s=100" width="100px;" alt=""/></a><br /><sub><b>Wang Yangming</b></sub><br /></td>
   </tr>
 </table>
 
