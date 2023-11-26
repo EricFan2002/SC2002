@@ -136,6 +136,7 @@ public class OverlayCampInfoDisplayWithParticipantsViewSuggestion extends Overla
                 CampSuggestionController.updateSuggestion(editSuggestion);
             } else {
                 editSuggestion = new Suggestion(student, suggestion, camp);
+                student.addPoints(1);
                 RepositoryCollection.getSuggestionRepository().add(editSuggestion);
             }
             if (mainWindow instanceof ICallBack) {
