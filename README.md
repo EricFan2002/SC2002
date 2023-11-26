@@ -1,5 +1,6 @@
-# Camp Application Management System (CAMS) - SC2002 Project
-
+<div align="center">
+# Camp Application Management System (CAMS)</br>SC2002 Project
+</div>
 ## Overview
 
 CAMS is a Java console application developed for the SC2002 Object-Oriented Design & Programming course at Nanyang Technological University. The application focuses on reusability, extensibility, and maintainability, streamlining the management of camp applications and user interactions.
