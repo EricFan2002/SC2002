@@ -6,7 +6,11 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 ## Project Report
 
-[View the Project Report](./SCSX-grp1.pdf)
+<a href="./SCSX-grp1.pdf" style="background-color: green; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;">View the Project Report</a>
+
+<a href="https://ericfan2002.github.io/SC2002/" style="background-color: navy; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;">View the Java Documentation</a>
+
+
 
 [View the Java Documentation](https://ericfan2002.github.io/SC2002/)
 
