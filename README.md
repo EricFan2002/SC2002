@@ -5,7 +5,7 @@
 # SC2002 Project
 
 </div>
-
+<br/><br/><br/>
 ## Overview
 
 CAMS is a Java console application developed for the SC2002 Object-Oriented Design & Programming course at Nanyang Technological University. The application focuses on reusability, extensibility, and maintainability, streamlining the management of camp applications and user interactions.
