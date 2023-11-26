@@ -82,7 +82,7 @@ Class diagrams can be found in the `./diagrams` folder:
 ### Open Close Principle Diagram
 ![Open Close Principle Diagram](./diagrams/OpenClosePrinciple.png)
 
-##License
+## License
 
 Copyright (c) SCSX Group 1. All rights reserved.
 
