@@ -10,14 +10,14 @@ entity.interfaces
 entity.report
 entity.suggestion
 entity.user
-ui.AccountView
+ui.account
 ui.CampEnquiriesView
 ui.CampInfomationView
 ui.CampListView
 ui.CampModificationView
 ui.CampSuggestionView
-ui.LandingView
-ui.OverlayActions
+ui.landingview
+ui.overlayactions
 ui.widgets
 ui.windows
 utils

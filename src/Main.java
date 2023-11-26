@@ -8,12 +8,12 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import entity.RepositoryCollection;
-import ui.AccountView.ChangePasswordView;
-import ui.AccountView.LoginView;
-import ui.CampListView.CampListViewStaff;
-import ui.CampListView.CampListViewStudent;
-import ui.LandingView.StaffMainView;
-import ui.LandingView.StudentMainView;
+import ui.account.ChangePasswordView;
+import ui.account.LoginView;
+import ui.camp.listview.CampListViewStaff;
+import ui.camp.listview.CampListViewStudent;
+import ui.landingview.StaffMainView;
+import ui.landingview.StudentMainView;
 import ui.windows.*;
 
 import java.io.IOException;
