@@ -108,7 +108,7 @@ public class CampListViewStudent extends CampListView {
         if (toggleCommitteeAvailableC.getPressed()) {
             CampList newList = new CampList();
             for (Camp c : list) {
-                if (c.getCommittees().size() < 10) {
+                if (c.getCommittees().size() < c.getTotalCommitteeSlots()) {
                     newList.add(c);
                 }
             }

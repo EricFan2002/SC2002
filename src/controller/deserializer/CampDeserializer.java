@@ -61,6 +61,9 @@ public class CampDeserializer {
             String totalSlotsRaw = record.get(13);
             int totalSlots = Integer.parseInt(totalSlotsRaw);
 
+            String totalCommitteeSlotsRaw = record.get(14);
+            int totalCommitteeSlots = Integer.parseInt(totalCommitteeSlotsRaw);
+
             Staff staff;
             if (tempStaff.size() > 0) {
                 staff = (Staff) tempStaff.get(0);
@@ -69,7 +72,7 @@ public class CampDeserializer {
                 // do something if not found
             }
             Camp camp = new Camp(id, name, desc, visibility, startDate, endDate, closeRegDate, school, location,
-                    staff, totalSlots);
+                    staff, totalSlots, totalCommitteeSlots);
 
             String[] attendeeIDsRaw = record.get(10).split(";");
             for (String attendeeIDRaw : attendeeIDsRaw) {

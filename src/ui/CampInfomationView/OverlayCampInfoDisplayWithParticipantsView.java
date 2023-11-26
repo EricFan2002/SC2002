@@ -46,7 +46,7 @@ public class OverlayCampInfoDisplayWithParticipantsView extends OverlayCampInfoD
         WidgetPageSelection participantsView = new WidgetPageSelection(3, 16, getLenX() - 8, getLenY() / 4, "Participants", participants, OverlayCampInfoDisplayWithParticipantsView.this);
         addWidget(participantsView);
 
-        WidgetLabel labelCommittee = new WidgetLabel(3, 17 + getLenY() / 4, getLenX() - 10, "Committees: " + camp.getCommittees().size() + " / 10", TEXT_ALIGNMENT.ALIGN_LEFT);
+        WidgetLabel labelCommittee = new WidgetLabel(3, 17 + getLenY() / 4, getLenX() - 10, "Committees: " + camp.getCommittees().size() + " / " + camp.getTotalCommitteeSlots(), TEXT_ALIGNMENT.ALIGN_LEFT);
         addWidget(labelCommittee);
 
         WidgetPageSelection committeesView = new WidgetPageSelection(3, 18 + getLenY() / 4, getLenX() - 8, getLenY() / 4, "Committees", committees, OverlayCampInfoDisplayWithParticipantsView.this);

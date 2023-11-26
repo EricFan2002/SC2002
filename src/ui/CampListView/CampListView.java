@@ -117,7 +117,7 @@ public class CampListView extends Window implements ICallBack {
             tmp.add("    " + formLine(
                     "Participants: " + (camp.getAttendeesAndCommittees().size()) + " / "
                             + camp.getTotalSlots(),
-                    "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
+                    "Committee: " + camp.getCommittees().size() + " / " + camp.getTotalCommitteeSlots(), getX() / 2 - 14));
             String line = "";
             for (int j = 0; j < getX() / 2 - 3; j++) {
                 line += "─";
@@ -317,7 +317,7 @@ public class CampListView extends Window implements ICallBack {
             tmp.add("    " + formLine(
                     "Participants: " + (camp.getAttendeesAndCommittees().size()) + " / "
                             + camp.getTotalSlots(),
-                    "Committee: " + camp.getCommittees().size() + " / 10", getX() / 2 - 14));
+                    "Committee: " + camp.getCommittees().size() + " / " + camp.getTotalCommitteeSlots(), getX() / 2 - 14));
             String line = "";
             for (int j = 0; j < getX() / 2 - 3; j++) {
                 line += "─";
