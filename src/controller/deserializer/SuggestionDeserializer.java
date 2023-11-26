@@ -69,10 +69,11 @@ public class SuggestionDeserializer {
             String school = campSuggestionArr[7] != "" ? campSuggestionArr[7] : null;
             String location = campSuggestionArr[8] != "" ? campSuggestionArr[8] : null;
             Integer totalSlots = campSuggestionArr[9] != "" ? Integer.parseInt(campSuggestionArr[9]) : null;
+            Integer totalCommitteeSlots = campSuggestionArr[10] != "" ? Integer.parseInt(campSuggestionArr[10]) : null;
 
             CampDetails campDetails = new CampDetails(campSuggestionID, name, desc,
                     visibility, startDate, endDate, closeRegDate, school,
-                    location, totalSlots);
+                    location, totalSlots, totalCommitteeSlots);
 
             String reviewedByID = record.get(3);
             UserList reviewedByTmp = userList.filterByID(reviewedByID);

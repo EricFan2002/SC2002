@@ -84,6 +84,14 @@ public class OverlayCampStaffEditView extends OverlayCampInfoDisplayWithParticip
                 catch (Exception e){
                 }
             }
+            if(!textBoxSlotsC.getText().equals(camp.getTotalCommitteeSlots().toString())){
+                try{
+                    Integer slots = Math.min(Integer.parseInt(textBoxSlotsC.getText()), 10);
+                    suggestion.setTotalCommitteeSlots(slots);
+                }
+                catch (Exception e){
+                }
+            }
             if(!textBoxCName.getText().equals(camp.getName()))
                 suggestion.setName(textBoxCName.getText());
             if(!textBoxSchool.getText().equals(camp.getSchool()))

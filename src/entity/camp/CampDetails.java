@@ -20,6 +20,7 @@ public class CampDetails extends CampList implements ITaggedItem {
     protected String school;
     protected String location;
     protected Integer totalSlots;
+    protected Integer totalCommitteeSlots;
 
     /**
      * Constructs a new CampDetails object with specified details.
@@ -37,7 +38,7 @@ public class CampDetails extends CampList implements ITaggedItem {
      */
     public CampDetails(String ID, String name, String description, boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
-            String school, String location, Integer totalSlots) {
+            String school, String location, Integer totalSlots, Integer totalCommitteeSlots) {
         this.ID = ID;
         this.name = name;
         this.description = description;
@@ -48,6 +49,7 @@ public class CampDetails extends CampList implements ITaggedItem {
         this.school = school;
         this.location = location;
         this.totalSlots = totalSlots;
+        this.totalCommitteeSlots = totalCommitteeSlots;
     }
 
     /**
@@ -63,6 +65,7 @@ public class CampDetails extends CampList implements ITaggedItem {
         this.closeRegistrationDate = null;
         this.school = null;
         this.location = null;
+        this.totalCommitteeSlots = null;
     }
 
     // Getters and setters for each property with appropriate Javadoc comments.
@@ -157,6 +160,25 @@ public class CampDetails extends CampList implements ITaggedItem {
     public Integer getTotalSlots() {
         return totalSlots;
     }
+
+    /**
+     * Returns the total number of committee slots available in the camp.
+     *
+     * @return The camp's total number of committee slots.
+     */
+    public Integer getTotalCommitteeSlots(){
+        return totalCommitteeSlots;
+    }
+
+    /**
+     * Set the total number of committee slots available in the camp.
+     *
+     * @param slots The camp's total number of committee slots.
+     */
+    public void setTotalCommitteeSlots(int slots){
+        this.totalCommitteeSlots = slots;
+    }
+
 
     /**
      * Sets the ID of the camp.

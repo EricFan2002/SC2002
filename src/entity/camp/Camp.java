@@ -59,12 +59,13 @@ public class Camp extends CampDetails implements ITaggedItem {
      * @param location              Location of the camp.
      * @param staffInCharge         Staff member in charge of the camp.
      * @param totalSlots            Total number of slots available in the camp.
+     * @param totalCommitteeSlots   Total number of committee slots available in the camp.
      */
     public Camp(String ID, String name, String description, Boolean visibility, Date startDate, Date endDate,
             Date closeRegistrationDate,
-            String school, String location, Staff staffInCharge, int totalSlots) {
+            String school, String location, Staff staffInCharge, int totalSlots, int totalCommitteeSlots) {
         super(ID, name, description, visibility, startDate, endDate, closeRegistrationDate, school, location,
-                totalSlots);
+                totalSlots, totalCommitteeSlots);
         this.staffInCharge = staffInCharge;
         this.attendees = new HashSet<Student>();
         this.committees = new HashSet<Student>();

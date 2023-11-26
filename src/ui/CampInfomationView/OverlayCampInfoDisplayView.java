@@ -97,7 +97,6 @@ public class OverlayCampInfoDisplayView extends WindowOverlayClass {
         addWidget(labelSlotsC);
         textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, "10");
         addWidget(textBoxSlotsC);
-        textBoxSlotsC.setSkipSelection(true);
 
         // Visibility
         WidgetLabel labelVis = new WidgetLabel(3, 12, 15, "Visibility:", TEXT_ALIGNMENT.ALIGN_RIGHT);

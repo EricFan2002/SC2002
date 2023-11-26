@@ -10,7 +10,6 @@ import com.googlecode.lanterna.terminal.Terminal;
 import entity.RepositoryCollection;
 import ui.AccountView.ChangePasswordView;
 import ui.AccountView.LoginView;
-import ui.CampModificationView.CreateCampView;
 import ui.CampListView.CampListViewStaff;
 import ui.CampListView.CampListViewStudent;
 import ui.LandingView.StaffMainView;
@@ -122,7 +121,6 @@ public class Main {
             Window changePasswordView = new ChangePasswordView(0, 1, 2);
             Window CampListViewStaff = new CampListViewStaff(2);
             Window CampListViewStudent = new CampListViewStudent(1);
-            Window createCampView = new CreateCampView(5);
             WindowsManager windows = new WindowsManager(appScreen, 0, 0);
 
             windows.addWindow(LoginView);
@@ -131,7 +129,6 @@ public class Main {
             windows.addWindow(changePasswordView);
             windows.addWindow(CampListViewStaff);
             windows.addWindow(CampListViewStudent);
-            windows.addWindow(createCampView);
 
             appScreen.refresh();
 
