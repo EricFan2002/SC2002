@@ -95,7 +95,7 @@ public class OverlayCampInfoDisplayView extends WindowOverlayClass {
         // Slots Committee
         WidgetLabel labelSlotsC = new WidgetLabel(3, 11, 15, "Committee:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSlotsC);
-        textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, "10");
+        textBoxSlotsC = new WidgetTextBox(19, 11, getLenX() - 24, String.valueOf(camp.getTotalCommitteeSlots()));
         addWidget(textBoxSlotsC);
 
         // Visibility

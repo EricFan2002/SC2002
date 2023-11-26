@@ -95,7 +95,7 @@ public class OverlayCampInfoDisplayLowRaw extends WindowOverlayClass {
         // Slots Committee
         WidgetLabel labelSlotsC = new WidgetLabel(3, 11 + OFFSET, 15, "Committee Slots:", TEXT_ALIGNMENT.ALIGN_RIGHT);
         addWidget(labelSlotsC);
-        textBoxSlotsC = new WidgetTextBox(19, 11 + OFFSET, getLenX() - 24, camp.getCommittees().size() + " / " + "10");
+        textBoxSlotsC = new WidgetTextBox(19, 11 + OFFSET, getLenX() - 24, camp.getCommittees().size() + " / " + camp.getTotalCommitteeSlots());
         addWidget(textBoxSlotsC);
 
         // Visibility

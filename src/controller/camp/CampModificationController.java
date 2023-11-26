@@ -124,6 +124,9 @@ public class CampModificationController {
         if (newCD.getTotalSlots() != null){
             campObj.setTotalSlots(newCD.getTotalSlots());
         }
+        if(newCD.getTotalCommitteeSlots() != null){
+            campObj.setTotalCommitteeSlots(newCD.getTotalCommitteeSlots());
+        }
         RepositoryCollection.getCampRepository().update(campObj);
     }
 }
