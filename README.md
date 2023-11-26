@@ -8,7 +8,7 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 [View the Project Report](./SCSX-grp1.pdf)
 
-[View the Java Documentation](./javadoc/index.html)
+[View the Java Documentation](https://ericfan2002.github.io/SC2002/)
 
 ## Team Members
 
