@@ -105,6 +105,9 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (suggestion.getSuggestion().getTotalSlots() != null && !suggestion.getSuggestion().getTotalSlots().equals(suggestion.getOriginalCamp().getTotalSlots())) {
                 changed += "Slots, ";
             }
+            if (suggestion.getSuggestion().getTotalCommitteeSlots() != null && !suggestion.getSuggestion().getTotalCommitteeSlots().equals(suggestion.getOriginalCamp().getTotalCommitteeSlots())) {
+                changed += "Comm Slot, ";
+            }
             if (changed.equals("")) {
                 if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
                     tmp.add("    APPROVED.");
@@ -223,7 +226,9 @@ public class OverlayCampSuggestionStaffView extends WindowOverlayClass implement
             if (suggestion.getSuggestion().getTotalSlots() != null && !suggestion.getSuggestion().getTotalSlots().equals(suggestion.getOriginalCamp().getTotalSlots())) {
                 changed += "Slots, ";
             }
-
+            if (suggestion.getSuggestion().getTotalCommitteeSlots() != null && !suggestion.getSuggestion().getTotalCommitteeSlots().equals(suggestion.getOriginalCamp().getTotalCommitteeSlots())) {
+                changed += "Comm Slot, ";
+            }
             if (changed.equals("")) {
                 if (suggestion.getStatus() == SuggestionStatus.APPROVED) {
                     tmp.add("    APPROVED.");
