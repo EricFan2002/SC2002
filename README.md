@@ -1,6 +1,8 @@
 <div align="center">
+
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=30&duration=1000&pause=1000&center=true&vCenter=true&random=false&width=800&height=200&lines=Camp+Application+Management+System+(CAMS)" alt="Typing SVG" /></a>
   
-# Camp Application Management System (CAMS) <br/><br/> SC2002 Project
+# SC2002 Project
 
 </div>
 <br/>
