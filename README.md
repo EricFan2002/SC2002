@@ -54,8 +54,7 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 
 ## Technology Stack
 
-- **Language**:
-<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" >
+- **Language**: Java
 - **Data Storage**: CSV files for data storage
 
 ## Prerequisites
