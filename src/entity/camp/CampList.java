@@ -375,6 +375,7 @@ public class CampList extends RepositoryList<Camp> implements IFilterableByID<Ca
             record.add(committeeIDs);
             record.add(registeredIDs);
             record.add(Integer.toString(camp.getTotalSlots()));
+            record.add(Integer.toString(camp.getTotalCommitteeSlots()));
 
             result.add(record);
 
