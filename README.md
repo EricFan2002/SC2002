@@ -16,7 +16,7 @@ CAMS is a Java console application developed for the SC2002 Object-Oriented Desi
 - Liau Zheng Wei (U2222032K)
 - Fan Tianyu (U2222105H)
 - Clayton Fernalo (U2220422E)
-- Christopher Angelo (U2220148L
+- Christopher Angelo (U2220148L)
 
 <table>
   <tr>
