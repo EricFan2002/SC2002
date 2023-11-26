@@ -1,6 +1,6 @@
 <div align="center">
   
-# Camp Application Management System (CAMS) <br/> SC2002 Project
+# Camp Application Management System (CAMS) <br/><br/> SC2002 Project
 
 </div>
 
