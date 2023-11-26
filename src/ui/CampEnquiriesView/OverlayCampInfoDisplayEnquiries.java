@@ -47,17 +47,19 @@ public class OverlayCampInfoDisplayEnquiries extends OverlayCampInfoDisplayView 
         ArrayList<ArrayList<String>> enqList = new ArrayList<>();
         EnquiryList enquires = RepositoryCollection.getEnquiryRepository().filterByCamp(camp);
         for (Enquiry enquiry : enquires) {
-            ArrayList<String> tmp = new ArrayList<String>();
-            enquiryList.add(enquiry);
-            if(enquiry.getSender().equals(student))
-                tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
-            else
-                tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
-            if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
-                tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
-            else
-                tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
-            enqList.add(tmp);
+            if(camp.getCommittees().contains(student) || enquiry.getSender().equals(student)) {
+                ArrayList<String> tmp = new ArrayList<String>();
+                enquiryList.add(enquiry);
+                if (enquiry.getSender().equals(student))
+                    tmp.add("Question: " + enquiry.getQuestion() + " ( From You )");
+                else
+                    tmp.add("Question: " + enquiry.getQuestion() + " ( From " + enquiry.getSender().getName() + " )");
+                if (enquiry.getAnswer() == null || enquiry.getAnswer().equals(""))
+                    tmp.add("    Not Answer Yet. Our coordinators will answer soon.");
+                else
+                    tmp.add("    : " + enquiry.getAnswer() + " ( Answered By " + enquiry.getAnsweredBy().getName() + ")");
+                enqList.add(tmp);
+            }
         }
 
         WidgetLabel labelParticipants = new WidgetLabel(3, 15, 15, "Your Enquires:", TEXT_ALIGNMENT.ALIGN_RIGHT);
