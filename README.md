@@ -100,3 +100,5 @@ We are committed to ensuring a welcoming and inclusive environment for everyone.
 Copyright (c) SCSX Group 1. All rights reserved.
 
 Licensed under the [MIT](LICENSE.md) license.
+
+[![HitCount](https://hits.dwyl.com/EricFan2002/SC2002.svg?style=flat-square)](http://hits.dwyl.com/EricFan2002/SC2002)
